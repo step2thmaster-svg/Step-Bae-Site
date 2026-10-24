@@ -5,8 +5,8 @@ export default function Precision() {
     <section id="craftsmanship" className="relative overflow-hidden bg-ink-2">
       <div className="absolute inset-y-0 left-0 w-full md:w-[60%]">
         <img
-          src="/images/precision.jpg"
-          alt="Ceramist characterizing a crown with a fine brush"
+          src="/images/precision-preci.jpg"
+          alt="Close-up of ceramic restorations on the upper front teeth, side view"
           className="h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-ink-2/60 md:bg-transparent md:[background:linear-gradient(90deg,rgba(28,25,22,0)_55%,rgba(28,25,22,0.85)_85%,#1c1916_100%)]" />

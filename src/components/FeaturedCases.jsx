@@ -3,9 +3,9 @@ import { ArrowRight } from './Icons.jsx'
 // src: null renders a placeholder until a photo is added
 // position sets which part of the photo stays in view when it's trimmed to the card
 const cases = [
-  { title: 'Anterior Veneers', src: '/images/case-1.jpg', alt: 'Anterior veneers, smile view' },
+  { title: 'Anterior Veneers', src: '/images/case-anterior-veneers.jpg', alt: 'Anterior veneers on the upper central incisors, close-up' },
   { title: 'Posterior Crown & Bridge', src: '/images/case-posterior-bridge.jpg', alt: 'Four-unit posterior ceramic bridge on stone model', position: 'object-right' },
-  { title: 'All-on-X Bridge', src: null, alt: 'All-on-X implant bridge' },
+  { title: 'All-on-X Bridge', src: '/images/case-all-on-x.jpg', alt: 'All-on-X implant bridge with pink ceramic gingiva, close-up' },
 ]
 
 export default function FeaturedCases() {
