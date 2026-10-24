@@ -15,15 +15,15 @@ export default function CallToAction() {
       {/* soft diagonal light sweep */}
       <div className="pointer-events-none absolute -right-20 top-0 h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-gold/10 to-transparent" />
 
-      <div className="relative mx-auto max-w-[1024px] px-6 pb-[14px] pt-[14px]">
-        <h2 className="font-display text-[31px] italic leading-tight text-white">
+      <div className="relative px-6 py-12 lg:px-12">
+        <h2 className="font-display text-[32px] italic leading-tight text-white md:text-[40px]">
           Let’s Create Exceptional Restorations Together
         </h2>
-        <p className="mt-0.5 text-[13.5px] text-white/90">
+        <p className="mt-3 text-[15px] text-white/90">
           Experience the STEPBAE difference — personalized service,
           uncompromising esthetics, and a partner who cares.
         </p>
-        <Button className="mt-[14px] h-[34px] px-[22px]">Partner With Us</Button>
+        <Button className="mt-7 h-10 px-6">Partner With Us</Button>
       </div>
     </section>
   )
