@@ -16,15 +16,16 @@ export default function Header() {
 
   return (
     <header className="absolute inset-x-0 top-0 z-30">
-      <div className="mx-auto flex max-w-[1024px] items-center justify-between px-6 pt-4 lg:px-12">
+      {/* full width with the same side padding as the hero text */}
+      <div className="flex items-center justify-between px-6 pt-4 lg:px-12">
         <Logo />
 
-        <nav className="hidden items-center gap-[27px] lg:flex">
+        <nav className="hidden items-center gap-[27px] lg:ml-14 lg:flex">
           {links.map((l) => (
             <a
               key={l.label}
               href={l.href}
-              className={`relative pb-2 pt-2 text-[12px] transition-colors ${
+              className={`relative pb-2 pt-2 text-[14px] transition-colors ${
                 l.active ? 'text-gold' : 'text-white/90 hover:text-gold'
               }`}
             >
@@ -39,7 +40,7 @@ export default function Header() {
         <Button
           variant="ghost"
           arrow={false}
-          className="hidden h-[31px] px-5 !text-[12px] lg:inline-flex"
+          className="hidden h-[31px] px-5 !text-[12px] lg:ml-auto lg:inline-flex"
         >
           Partner With Us
         </Button>

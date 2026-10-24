@@ -1,10 +1,11 @@
 import { ArrowRight } from './Icons.jsx'
 
+// src: null renders a placeholder until a photo is added
+// position sets which part of the photo stays in view when it's trimmed to the card
 const cases = [
-  { src: '/images/case-1.jpg', alt: 'Anterior veneers, smile view' },
-  { src: '/images/case-2.jpg', alt: 'Single posterior ceramic crown' },
-  { src: '/images/case-3.jpg', alt: 'Upper anterior restorations, close-up' },
-  { src: '/images/case-4.jpg', alt: 'Crown seated on stone model' },
+  { title: 'Anterior Veneers', src: '/images/case-1.jpg', alt: 'Anterior veneers, smile view' },
+  { title: 'Posterior Crown & Bridge', src: '/images/case-posterior-bridge.jpg', alt: 'Four-unit posterior ceramic bridge on stone model', position: 'object-right' },
+  { title: 'All-on-X Bridge', src: null, alt: 'All-on-X implant bridge' },
 ]
 
 export default function FeaturedCases() {
@@ -24,18 +25,25 @@ export default function FeaturedCases() {
           </a>
         </div>
 
-        <div className="mt-[14px] grid grid-cols-2 gap-[10px] md:grid-cols-4">
+        <div className="mt-[14px] grid grid-cols-1 gap-[14px] sm:grid-cols-3">
           {cases.map((c) => (
-            <a
-              key={c.src}
-              href="#work"
-              className="group block aspect-[225/144] overflow-hidden rounded-[2px] bg-ink"
-            >
-              <img
-                src={c.src}
-                alt={c.alt}
-                className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-              />
+            <a key={c.title} href="#work" className="group block">
+              <div className="aspect-[225/144] overflow-hidden rounded-[2px] bg-ink">
+                {c.src ? (
+                  <img
+                    src={c.src}
+                    alt={c.alt}
+                    className={`h-full w-full object-cover ${c.position ?? 'object-center'} transition duration-500 group-hover:scale-105`}
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-[12px] tracking-[0.2em] text-gold/70">
+                    PHOTO COMING SOON
+                  </div>
+                )}
+              </div>
+              <h3 className="mt-2.5 font-display text-[20px] font-medium leading-tight group-hover:text-gold-dark">
+                {c.title}
+              </h3>
             </a>
           ))}
         </div>

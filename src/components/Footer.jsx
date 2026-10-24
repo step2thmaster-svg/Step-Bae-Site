@@ -1,5 +1,5 @@
 import Logo from './Logo.jsx'
-import { Phone, Mail, MapPin, Instagram } from './Icons.jsx'
+import { Mail, MapPin, Instagram } from './Icons.jsx'
 
 export default function Footer() {
   return (
@@ -11,14 +11,11 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-1 flex-col gap-4 text-[13px] text-white/90 sm:flex-row sm:items-center sm:justify-around md:border-x md:border-gold/45 md:py-3">
-            <a href="tel:7045550123" className="flex items-center gap-3 hover:text-gold">
-              <Phone className="h-4 w-4 text-gold" /> 704-555-0123
-            </a>
             <a href="mailto:info@stepbae.com" className="flex items-center gap-3 hover:text-gold">
               <Mail className="h-[18px] w-[22px] text-gold" /> info@stepbae.com
             </a>
             <span className="flex items-center gap-3">
-              <MapPin className="h-[18px] w-[18px] text-gold" /> Charlotte, NC
+              <MapPin className="h-[18px] w-[18px] text-gold" /> Pineville, NC
             </span>
           </div>
 
