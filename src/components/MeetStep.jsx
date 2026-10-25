@@ -5,17 +5,21 @@ const panelFade =
   'linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%),' +
   'linear-gradient(to bottom, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%)'
 
+// fades the case grid into the background: strongly on the left (toward the panel), softly top and bottom
+const gridFade =
+  'linear-gradient(to right, transparent 0, #000 35%, #000 100%),' +
+  'linear-gradient(to bottom, transparent 0, #000 15%, #000 85%, transparent 100%)'
+
 export default function MeetStep() {
   return (
-    <section id="about" className="relative overflow-hidden border-t border-gold/30 bg-black text-white">
-      {/* the case grid fills the whole section behind the text */}
+    <section id="about" className="relative overflow-hidden border-t border-gold/30 bg-ink-2 text-white">
+      {/* the case grid, shown whole across the right two-thirds and centred vertically; the panel overlaps its faded left edge */}
       <img
         src="/images/hero3.jpg"
         alt="A grid of ceramic restoration and smile cases"
-        className="absolute inset-0 h-full w-full object-cover object-center"
+        className="absolute right-0 top-1/2 h-auto w-full -translate-y-1/2 md:w-2/3"
+        style={{ maskImage: gridFade, WebkitMaskImage: gridFade, maskComposite: 'intersect', WebkitMaskComposite: 'source-in' }}
       />
-      {/* strong fade into Precision above; lighter fade toward the call to action below */}
-      <div className="absolute inset-0 [background:linear-gradient(180deg,#1c1916_0%,rgba(28,25,22,0.85)_12%,rgba(28,25,22,0)_38%),linear-gradient(0deg,rgba(26,23,20,0.7)_0%,rgba(26,23,20,0.35)_8%,rgba(26,23,20,0)_22%)]" />
 
       <div className="relative flex min-h-[480px] items-center px-6 py-16 lg:px-12">
         {/* translucent black panel on the left: blurs and darkens the grid behind it so the white text stays clean;
