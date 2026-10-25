@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import Button from './Button.jsx'
-import Lightbox from './Lightbox.jsx'
 
 // add upcoming courses and events here; the list shows them in this order. `image` is optional (in public/images/courses);
 // it's trimmed to the card's shape unless `fit: 'contain'`, which shows it whole (for badges and flyers). `link` is a registration page.
@@ -26,40 +24,7 @@ export const upcoming = [
   },
 ]
 
-// past courses and events, shown as flyers; images live in public/images/courses.
-// `ratio` is the image's width ÷ height: the first two stack in the left column, the rest sit beside them at the same height.
-const past = [
-  { src: '/images/courses/foil-veneer-implant-course.jpg', ratio: 2000 / 767, alt: 'Foil veneer and implant hands-on course flyer, Charlotte, NC, 2016' },
-  { src: '/images/courses/tour-de-korea-foil-mask.jpg', ratio: 2000 / 767, alt: 'Tour de Korea foil mask course flyer' },
-  { src: '/images/courses/gc-hybrid-implant-arch-2024.jpg', ratio: 960 / 960, alt: 'GC America live CE seminar, Mastering the Hybrid Implant Arch Finishing with GC Initial IQ ONE SQIN, March 15–16, 2024' },
-  { src: '/images/courses/ldd-programa.jpg', ratio: 552 / 960, alt: 'Digital Days program listing for TPD. Stepbay Toothmaster: dental 3D printing, modern techniques and new materials' },
-]
-
 export default function Events() {
-  const [open, setOpen] = useState(null) // index into `past` shown in the lightbox, or null
-
-  const stack = past.slice(0, 2)
-  const rest = past.slice(2)
-  const stackHeight = stack.reduce((h, p) => h + 1 / p.ratio, 0) // left column's height per unit of its width
-
-  const thumb = (p, i, style) => (
-    <button
-      key={p.src}
-      type="button"
-      onClick={() => setOpen(i)}
-      aria-label={`View larger: ${p.alt}`}
-      style={style}
-      className={`group block shrink-0 overflow-hidden rounded-[3px] bg-ink-2 ${style ? 'md:w-[var(--w)]' : ''}`}
-    >
-      <img
-        src={p.src}
-        alt={p.alt}
-        loading="lazy"
-        className="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-      />
-    </button>
-  )
-
   return (
     <section id="events" className="bg-ink px-6 py-16 lg:px-12">
       <div className="mx-auto max-w-[1200px]">
@@ -105,19 +70,6 @@ export default function Events() {
             <Button href="#inquiry" variant="ghost" className="mt-6 h-10 px-6">Get in Touch</Button>
           </div>
         )}
-
-        <h3 className="mt-16 font-display text-[28px] font-medium text-white">Past Courses &amp; Lectures</h3>
-        {/* md+: the first two flyers stack in a left column a third of the width; each other flyer gets the width that
-            makes it exactly as tall as that column (column height = sum of the stacked heights + the 1rem gap). Phones stack all. */}
-        <div className="mt-6 flex flex-col gap-4 md:flex-row">
-          <div className="flex flex-col gap-4 md:w-[calc((100%-2rem)/3)] md:shrink-0">
-            {stack.map((p, i) => thumb(p, i))}
-          </div>
-          {rest.map((p, i) => thumb(p, i + stack.length, {
-            '--w': `calc(${p.ratio} * (${stackHeight} * (100% - 2rem) / 3 + 1rem))`,
-          }))}
-        </div>
-        <Lightbox photos={past} index={open} onChange={setOpen} onClose={() => setOpen(null)} />
       </div>
     </section>
   )

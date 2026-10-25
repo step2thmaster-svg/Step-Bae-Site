@@ -13,8 +13,9 @@ export default function HomeConsult() {
         src="/images/home/hands-on-class.jpg"
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover object-[50%_64%]"
+        className="absolute inset-0 h-full w-full object-cover object-[0%_64%] max-md:translate-x-[96px] max-md:[mask-image:linear-gradient(to_right,transparent,#000_80px)] max-md:[-webkit-mask-image:linear-gradient(to_right,transparent,#000_80px)] md:object-[50%_64%]"
       />
+      {/* phones: the photo is shifted 1 inch right (so the raised bills on the right fall off-screen), its left edge fading into the dark */}
       <div className="absolute inset-0 [background:linear-gradient(90deg,rgba(20,18,16,0.92)_0%,rgba(20,18,16,0.82)_45%,rgba(20,18,16,0.55)_100%),linear-gradient(180deg,rgba(20,18,16,0.5)_0%,rgba(20,18,16,0)_25%,rgba(20,18,16,0)_75%,rgba(20,18,16,0.6)_100%)]" />
 
       {/* heading sits in the left column beside the Upcoming card, keeping the section about as tall as About Toothmaster */}

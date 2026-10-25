@@ -15,7 +15,7 @@ export default function PartnershipPage() {
             Send Us Your <em className="font-normal text-gold">Cases</em>
           </h1>
           <p className="mx-auto mt-5 max-w-[580px] text-[15px] leading-[1.6] text-white/90 md:text-[16px]">
-            STEPBAE is listed in the portals most practices already use. Connect
+           Connect
             with us in your scanner's portal, then tell us a little about your
             practice so we can set up your account.
           </p>
