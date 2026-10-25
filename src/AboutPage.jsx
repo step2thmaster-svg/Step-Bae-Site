@@ -8,6 +8,12 @@ const delivered = events.filter(([, , , tag]) => !tag || tag === 'intl')
 const countries = new Set(['United States', ...events.filter(([, , , tag]) => tag === 'intl').map(([, , place]) => place.split(', ').pop())])
 const firstYear = events[0][0].split('/')[1]
 
+// fades the stage photo's own top, bottom and right edges to transparent, so it melts into the page with no border line
+const photoFade =
+  'linear-gradient(to bottom, transparent 0, transparent 4%, rgba(0,0,0,0.45) 20%, #000 38%, #000 68%, transparent 95%),' +
+  'linear-gradient(to left, transparent 0, transparent 2%, #000 14%),' +
+  'linear-gradient(to right, transparent 0, #000 12%)'
+
 const stats = [
   { value: `${Math.floor(delivered.length / 10) * 10}+`, label: 'Lectures & hands-on courses' },
   { value: articles.length, label: 'Published articles' },
@@ -20,33 +26,44 @@ export default function AboutPage() {
     <div className="min-h-screen bg-ink">
       <div className="relative">
         <Header />
-        {/* top padding clears the header, as on the home page hero */}
-        <section className="px-6 pb-14 pt-[138px] lg:px-12">
-          <div className="mx-auto grid max-w-[1100px] items-center gap-10 md:grid-cols-[1fr_auto]">
-            <div className="text-center md:text-left">
+        {/* the stage photo fills the whole section behind the text; top padding clears the header, as on the home page hero.
+            md+: about an inch shorter than the original portrait layout */}
+        <section className="relative overflow-hidden px-6 pb-6 pt-[118px] md:min-h-[484px] lg:px-12">
+          {/* md+: the photo box is about 76% of the section's size, placed so Step sits in the open space right of the text
+              (sized directly rather than with a CSS scale, which left faint lines along the faded edges) */}
+          <div className="absolute inset-0 md:inset-auto md:left-[calc(28.8%+96px)] md:top-[12.2%] md:h-[75.6%] md:w-[75.6%]">
+            <img
+              src="/images/about/stage-digital-days.jpg"
+              alt="Step Toothmaster Bae lecturing on stage at Digital Days, Hablemos de Futuro"
+              className="absolute inset-0 h-full w-full object-cover object-[70%_50%]"
+              style={{ maskImage: photoFade, WebkitMaskImage: photoFade, maskComposite: 'intersect', WebkitMaskComposite: 'source-in' }}
+            />
+          </div>
+          {/* darkens behind the text: all of it on phones, the left side on md+ */}
+          <div className="absolute inset-0 bg-ink/75 md:bg-transparent md:[background:linear-gradient(90deg,#141210_0%,rgba(20,18,16,0.7)_30%,rgba(20,18,16,0.5)_52%,rgba(20,18,16,0.4)_63%,rgba(20,18,16,0.15)_71%,rgba(20,18,16,0)_78%)]" />
+
+          <div className="relative mx-auto max-w-[1100px]">
+            <div className="relative isolate max-w-[820px] text-center [text-shadow:0_1px_14px_rgba(0,0,0,0.9),0_0_3px_rgba(0,0,0,0.6)] md:text-left">
+              {/* md+: a soft blurred shade right behind the text, so the photo can show around it without crossing the words */}
+              <div className="absolute -inset-x-16 -inset-y-8 -z-10 hidden rounded-[64px] bg-ink/75 blur-2xl md:block" />
               <p className="text-[12px] font-semibold tracking-[0.3em] text-gold">ABOUT</p>
-              <h1 className="mt-4 font-display text-[44px] font-medium leading-[1.08] text-white md:text-[58px]">
-                Step Toothmaster Bae, <em className="font-normal text-gold">CDT, DTG</em>
+              <h1 className="mt-3 font-display text-[44px] font-medium leading-[1.08] text-white md:text-[58px]">
+                Step Toothmaster <em className="font-normal text-gold">Bae</em>
               </h1>
-              <p className="mt-5 max-w-[600px] text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
-                Practices and laboratories bring Step in when the details matter: setting up or
+              <p className="mt-4 max-w-[680px] text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
+                Count on Step when the details matter: setting up or
                 refining a digital workflow, planning complex esthetic and implant cases, and
                 training teams to get more from their materials. Step works side by side with your
                 dentist and the team, so the improvements become part of how you work.
               </p>
-              <p className="mt-4 max-w-[600px] text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
+              <p className="mt-3 max-w-[680px] text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
                 That advice is built on experience: since {firstYear}, more than{' '}
                 {Math.floor(delivered.length / 10) * 10} lectures, demonstrations and hands-on courses across
                 the United States, Germany, South Korea and Mexico, including the Morphopsychology course
                 series, along with {articles.length} published articles.
               </p>
-              <Button href="/consultation.html#inquiry" className="mt-7 h-10 px-6">Book a Consultation</Button>
+              <Button href="/consultation.html#inquiry" className="mt-6 h-10 px-6 [text-shadow:none]">Book a Consultation</Button>
             </div>
-            <img
-              src="/images/headshot2.jpg"
-              alt="Step Toothmaster Bae"
-              className="mx-auto h-[300px] w-[225px] rounded-[3px] object-cover object-[50%_35%] md:h-[360px] md:w-[270px]"
-            />
           </div>
         </section>
       </div>

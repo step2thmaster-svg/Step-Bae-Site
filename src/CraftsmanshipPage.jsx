@@ -1,4 +1,5 @@
 import Header from './components/Header.jsx'
+import Button from './components/Button.jsx'
 import Gallery from './components/Gallery.jsx'
 import CallToAction from './components/CallToAction.jsx'
 import Footer from './components/Footer.jsx'
@@ -19,6 +20,9 @@ export default function CraftsmanshipPage() {
             bridges, and implant work, each shaped and characterized to
             meet the clinical requirements and look natural in the smile.
           </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Button href="/partnership.html#partner-form" className="h-10 px-6">Start a Case</Button>
+          </div>
         </section>
       </div>
       <Gallery />

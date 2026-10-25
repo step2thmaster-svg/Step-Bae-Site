@@ -5,7 +5,7 @@ import Lightbox from './Lightbox.jsx'
 // add upcoming courses and events here; the list shows them in this order. `image` is optional (in public/images/courses);
 // it's trimmed to the card's shape unless `fit: 'contain'`, which shows it whole (for badges and flyers). `link` is a registration page.
 // e.g. { date: 'March 14–15, 2027', title: 'Foil Veneer Hands-On', place: 'Charlotte, NC', text: 'Two-day course…', link: 'https://…' }
-const upcoming = [
+export const upcoming = [
   {
     date: 'February 24–25, 2027',
     title: 'American Equilibration Society 72nd Annual Scientific Meeting',
