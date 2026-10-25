@@ -4,9 +4,13 @@ import CvTimeline from './components/CvTimeline.jsx'
 import Footer from './components/Footer.jsx'
 import { events, articles, hosts } from './components/cv.js'
 
-const delivered = events.filter(([, , , tag]) => !tag || tag === 'intl')
 const countries = new Set(['United States', ...events.filter(([, , , tag]) => tag === 'intl').map(([, , place]) => place.split(', ').pop())])
 const firstYear = events[0][0].split('/')[1]
+// cities taught in: places given as "City, State/Country" (state-only places like "Virginia" aren't counted), skipping cancelled and upcoming
+const cities = new Set(events.filter(([, , place, tag]) => place.includes(', ') && tag !== 'cancelled' && tag !== 'upcoming').map(([, , place]) => place))
+
+// headline count of lectures and hands-on courses, set by hand (the CV list in cv.js has 67 delivered entries)
+const lectureCount = 70
 
 // fades the stage photo's own top, bottom and right edges to transparent, so it melts into the page with no border line
 const photoFade =
@@ -15,8 +19,9 @@ const photoFade =
   'linear-gradient(to right, transparent 0, #000 12%)'
 
 const stats = [
-  { value: `${Math.floor(delivered.length / 10) * 10}+`, label: 'Lectures & hands-on courses' },
+  { value: `${lectureCount}+`, label: 'Lectures & hands-on courses' },
   { value: articles.length, label: 'Published articles' },
+  { value: cities.size, label: 'Cities taught in' },
   { value: countries.size, label: 'Countries taught in' },
   { value: firstYear, label: 'Teaching since' },
 ]
@@ -58,7 +63,7 @@ export default function AboutPage() {
               </p>
               <p className="mt-3 max-w-[680px] text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
                 That advice is built on experience: since {firstYear}, more than{' '}
-                {Math.floor(delivered.length / 10) * 10} lectures, demonstrations and hands-on courses across
+                {lectureCount} lectures, demonstrations and hands-on courses across
                 the United States, Germany, South Korea and Mexico, including the Morphopsychology course
                 series, along with {articles.length} published articles.
               </p>
@@ -70,12 +75,12 @@ export default function AboutPage() {
 
       {/* highlights strip */}
       <section className="border-y border-gold/25 bg-ink-2 px-6 py-10 lg:px-12">
-        <dl className="mx-auto grid max-w-[1100px] grid-cols-2 gap-y-8 md:grid-cols-4">
+        {/* label (dt) comes first for screen readers and copying, and flex-col-reverse shows the number above it */}
+        <dl className="mx-auto grid max-w-[1100px] grid-cols-2 gap-y-8 sm:grid-cols-3 md:grid-cols-5">
           {stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <dt className="sr-only">{s.label}</dt>
+            <div key={s.label} className="flex flex-col-reverse text-center">
+              <dt className="mt-2 text-[13px] tracking-[0.08em] text-white/80">{s.label}</dt>
               <dd className="font-display text-[46px] font-medium leading-none text-gold md:text-[54px]">{s.value}</dd>
-              <dd className="mt-2 text-[13px] tracking-[0.08em] text-white/80">{s.label}</dd>
             </div>
           ))}
         </dl>
@@ -102,14 +107,22 @@ export default function AboutPage() {
           </div>
           <div>
             <h2 className="font-display text-[36px] font-medium leading-none md:text-[40px]">Taught For</h2>
-            <p className="mt-4 text-[15px] leading-[1.6] text-ink/80">
-              Lectures, demonstrations and courses for manufacturers, academies and associations, including:
-            </p>
-            <ul className="mt-6 flex flex-wrap gap-2">
-              {hosts.map((h) => (
-                <li key={h} className="rounded-full border border-gold-dark/40 bg-white/60 px-4 py-1.5 text-[14px]">{h}</li>
+            <div className="mt-5 space-y-5 border-t border-gold-dark/30 pt-4">
+              {hosts.map(({ group, names }) => (
+                <div key={group}>
+                  <h3 className="text-[12px] font-semibold tracking-[0.16em] text-gold-dark">{group.toUpperCase()}</h3>
+                  {/* a running list separated by gold dots, wrapping like a line of text */}
+                  <ul className="mt-1.5 flex flex-wrap text-[14px] leading-[1.7] text-ink/85">
+                    {names.map((n, i) => (
+                      <li key={n} className="whitespace-nowrap">
+                        {n}
+                        {i < names.length - 1 && <span className="px-2 text-gold-dark" aria-hidden="true">·</span>}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </section>

@@ -16,9 +16,11 @@ export default function CraftsmanshipPage() {
             The Art <em className="font-normal">of</em> <em className="font-normal text-gold">Precision</em>
           </h1>
           <p className="mx-auto mt-5 max-w-[560px] text-[15px] leading-[1.6] text-white/90 md:text-[16px]">
-            A selection of restorations from the bench: layered ceramics, crowns and
-            bridges, and implant work, each shaped and characterized to
-            meet the clinical requirements and look natural in the smile.
+            A selection of restorations from the bench, each shaped and characterized to meet
+            the clinical requirements and look natural in the smile.
+          </p>
+          <p className="mt-3 text-[13px] tracking-[0.06em] text-gold">
+            Layered Ceramics <span className="px-1.5">·</span> Crowns &amp; Bridges <span className="px-1.5">·</span> Implant Restorations
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Button href="/partnership.html#partner-form" className="h-10 px-6">Start a Case</Button>
