@@ -17,7 +17,7 @@ export default function CallToAction() {
 
       <div className="relative px-6 py-12 lg:px-12">
         <h2 className="font-display text-[32px] italic leading-tight text-white md:text-[40px]">
-          Let’s Create Exceptional Restorations Together
+          Let’s Create Exceptional Smiles Together
         </h2>
         <p className="mt-3 text-[15px] text-white/90">
           Experience the STEPBAE difference — personalized service,
