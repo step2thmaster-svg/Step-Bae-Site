@@ -31,7 +31,7 @@ export default function CallToAction() {
           Personalized service,
           uncompromising esthetics, and a partner you can trust.
         </p>
-        <Button className="mt-7 h-10 px-6">Partner With Us</Button>
+        <Button href="/partnership.html#partner-form" className="mt-7 h-10 px-6">Partner With Us</Button>
       </div>
     </section>
   )

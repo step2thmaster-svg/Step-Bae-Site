@@ -2,8 +2,8 @@ import Button from './Button.jsx'
 
 export default function Precision() {
   return (
-    <section id="craftsmanship" className="bg-ink-2 pb-12">
-      {/* photo on the left half, text on the right half; stacks on phones. Bottom padding leaves dark space before Meet the Toothmaster */}
+    <section id="craftsmanship" className="bg-ink-2">
+      {/* photo on the left half, text on the right half; stacks on phones */}
       <div className="grid md:grid-cols-2">
         {/* md+: the photo reaches 96px (~1 inch) past the middle, under the text column, so its side fade sits further right */}
         <div className="relative min-h-[260px] md:mr-[-96px] md:min-h-[380px]">
@@ -29,7 +29,7 @@ export default function Precision() {
               natural-looking restorations through exceptional materials and
               meticulous technique.
             </p>
-            <Button className="mt-7 h-10 px-6">Our Craftsmanship</Button>
+            <Button href="/craftsmanship.html" className="mt-7 h-10 px-6">Our Craftsmanship</Button>
           </div>
         </div>
       </div>

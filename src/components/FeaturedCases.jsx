@@ -47,7 +47,7 @@ export default function FeaturedCases() {
           </h2>
           <span className="hidden h-px flex-1 bg-gold-dark/40 sm:block" />
           <a
-            href="#work"
+            href="/craftsmanship.html"
             className="ml-auto inline-flex items-center gap-2 text-[14px] font-medium text-gold-dark hover:text-ink sm:ml-0"
           >
             View Our Work <ArrowRight />

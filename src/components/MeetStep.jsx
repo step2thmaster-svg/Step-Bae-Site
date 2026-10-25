@@ -29,12 +29,12 @@ export default function MeetStep() {
               details that make a difference in clinical outcomes. Away from the
               bench, Step shares and lectures for fellow technicians and
               clinicians, and works with practices and laboratories as a digital lab consultant.
-              
+
             </p>
             {/* the button stays centred; the 1.5-inch (144px) headshot hangs off its right side, layered over the photo
                 but behind the text (-z-10 within the text column's stacking context) so the paragraph stays readable */}
             <div className="relative mt-7 inline-block">
-              <Button variant="ghost" className="h-10 px-6">
+              <Button href="/about.html" variant="ghost" className="h-10 px-6">
                 About Step
               </Button>
               <img

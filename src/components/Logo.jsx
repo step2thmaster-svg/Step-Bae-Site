@@ -1,6 +1,6 @@
 export default function Logo({ className = '' }) {
   return (
-    <a href="#" className={`inline-flex flex-col leading-none ${className}`}>
+    <a href="/" className={`inline-flex flex-col leading-none ${className}`}>
       {/* negative margin cancels the trailing letter-spacing so the width ends at the last letter */}
       <span className="mr-[-0.18em] font-display text-[34px] font-medium tracking-[0.18em] text-white">
         STEPBAE

@@ -3,12 +3,11 @@ import Logo from './Logo.jsx'
 import Button from './Button.jsx'
 
 const links = [
-  { label: 'Home', href: '#', active: true },
-  { label: 'Our Work', href: '#work' },
-  { label: 'Craftsmanship', href: '#craftsmanship' },
-  { label: 'About', href: '#about' },
-  { label: 'Dentist Partnership', href: '#partnership' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'about', href: '/about.html' }, 
+  { label: 'Craftsmanship', href: '/craftsmanship.html' },
+  { label: 'Dentist Partnership', href: '/partnership.html' },
+  { label: 'Consultation', href: '/consultation.html' }, 
+  
 ]
 
 export default function Header() {
@@ -38,6 +37,7 @@ export default function Header() {
         </nav>
 
         <Button
+          href="/partnership.html#partner-form"
           variant="ghost"
           arrow={false}
           className="hidden h-[31px] px-5 !text-[12px] lg:ml-auto lg:inline-flex"
@@ -68,7 +68,7 @@ export default function Header() {
               {l.label}
             </a>
           ))}
-          <Button className="mt-3 h-10 px-5">Partner With Us</Button>
+          <Button href="/partnership.html#partner-form" className="mt-3 h-10 px-5">Partner With Us</Button>
         </nav>
       )}
     </header>
