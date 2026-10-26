@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import Lightbox from './Lightbox.jsx'
 
 // photos live in public/images/gallery as work-01.jpg, work-02.jpg, … in display order;
@@ -43,38 +43,39 @@ const alts = [
 
 const photos = alts.map((alt, i) => ({ src: `/images/gallery/work-${String(i + 1).padStart(2, '0')}.jpg`, alt }))
 
-// `children` (e.g. a call-to-action) render between the first and second half of the photos
+// `children` (e.g. a call-to-action) render as a card halfway through the photos, inside the masonry flow
 export default function Gallery({ children }) {
   const [open, setOpen] = useState(null) // index into `photos`, or null when the lightbox is closed
   const half = Math.ceil(photos.length / 2)
 
-  // masonry: photos keep their own shape and stack in columns
-  const grid = (start, end) => (
-    <div className="mx-auto max-w-[1400px] columns-1 gap-4 sm:columns-2 lg:columns-3">
-      {photos.slice(start, end).map((p, j) => (
-        <button
-          key={p.src}
-          type="button"
-          onClick={() => setOpen(start + j)}
-          aria-label={`View larger: ${p.alt}`}
-          className="group relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-[3px] bg-ink-2"
-        >
-          <img
-            src={p.src}
-            alt={p.alt}
-            loading="lazy"
-            className="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-          />
-        </button>
-      ))}
-    </div>
-  )
-
   return (
     <section id="gallery" className="bg-ink px-6 pb-16 lg:px-12">
-      {grid(0, half)}
-      {children && <div className="my-10 flex flex-wrap justify-center gap-3">{children}</div>}
-      {grid(half, photos.length)}
+      {/* masonry: photos keep their own shape and stack in columns */}
+      <div className="mx-auto max-w-[1400px] columns-1 gap-4 sm:columns-2 lg:columns-3">
+        {photos.map((p, i) => (
+          <Fragment key={p.src}>
+            {i === half && children && (
+              <div className="mb-4 flex break-inside-avoid flex-col items-center gap-4 rounded-[3px] border border-gold/25 bg-ink-2 px-6 py-10 text-center">
+                <p className="font-display text-[26px] italic leading-tight text-white">Have a case in mind?</p>
+                {children}
+              </div>
+            )}
+            <button
+              type="button"
+              onClick={() => setOpen(i)}
+              aria-label={`View larger: ${p.alt}`}
+              className="group relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-[3px] bg-ink-2"
+            >
+              <img
+                src={p.src}
+                alt={p.alt}
+                loading="lazy"
+                className="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+              />
+            </button>
+          </Fragment>
+        ))}
+      </div>
 
       <Lightbox photos={photos} index={open} onChange={setOpen} onClose={() => setOpen(null)} />
     </section>
