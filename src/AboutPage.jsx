@@ -36,11 +36,11 @@ export default function AboutPage() {
         <section className="relative overflow-hidden px-6 pb-6 pt-[118px] md:min-h-[484px] lg:px-12">
           {/* md+: the photo fills the section's full height in the open space right of the text, so the stage screen and Step both show
               (sized directly rather than with a CSS scale, which left faint lines along the faded edges) */}
-          <div className="absolute inset-0 md:left-[max(40%,calc(50%+60px))]">
+          <div className="absolute inset-0 md:left-[max(34%,calc(50%-50px))]">
             <img
               src="/images/about/stage-digital-days.jpg"
               alt="Step Toothmaster Bae lecturing on stage at Digital Days, Hablemos de Futuro"
-              className="absolute inset-0 h-full w-full object-cover object-[45%_50%]"
+              className="absolute inset-0 h-full w-full object-cover object-[45%_62%]"
               style={{ maskImage: photoFade, WebkitMaskImage: photoFade, maskComposite: 'intersect', WebkitMaskComposite: 'source-in' }}
             />
           </div>
