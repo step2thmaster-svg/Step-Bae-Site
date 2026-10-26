@@ -6,7 +6,7 @@ export const events = [
   ['8/2014', 'DTG Symposium, Lecture', 'Provo, UT'],
   ['11/2014', 'Renfert lecture & Demo, ECDL', 'Charlotte, NC'],
 
-  ['2/2015', 'GC lecture & hands-on demonstration', 'Chicago, IL'],
+  ['2/2015', 'GC lecture & Demo', 'Chicago, IL'],
   ['3/2015', 'Ivoclar lecture & hands-on demonstration', 'Cologne, Germany', 'intl'],
   ['5/2015', 'GC hands-on course', 'Alsip, IL'],
   ['6/2015', 'Morphopsychology 1', 'Charlotte, NC'],
