@@ -22,12 +22,11 @@ export default function CraftsmanshipPage() {
           <p className="mt-3 text-[13px] tracking-[0.06em] text-gold">
             Layered Ceramics <span className="px-1.5">·</span> Crowns &amp; Bridges <span className="px-1.5">·</span> Implant Restorations
           </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button href="/partnership.html#partner-form" className="h-10 px-6">Start a Case</Button>
-          </div>
         </section>
       </div>
-      <Gallery />
+      <Gallery>
+        <Button href="/partnership.html#partner-form" className="h-10 px-6">Start a Case</Button>
+      </Gallery>
       <CallToAction />
       <Footer />
     </div>

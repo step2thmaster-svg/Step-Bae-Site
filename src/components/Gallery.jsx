@@ -43,8 +43,32 @@ const alts = [
 
 const photos = alts.map((alt, i) => ({ src: `/images/gallery/work-${String(i + 1).padStart(2, '0')}.jpg`, alt }))
 
-export default function Gallery() {
+// `children` (e.g. a call-to-action) render between the first and second half of the photos
+export default function Gallery({ children }) {
   const [open, setOpen] = useState(null) // index into `photos`, or null when the lightbox is closed
+  const half = Math.ceil(photos.length / 2)
+
+  // masonry: photos keep their own shape and stack in columns
+  const grid = (start, end) => (
+    <div className="mx-auto max-w-[1400px] columns-1 gap-4 sm:columns-2 lg:columns-3">
+      {photos.slice(start, end).map((p, j) => (
+        <button
+          key={p.src}
+          type="button"
+          onClick={() => setOpen(start + j)}
+          aria-label={`View larger: ${p.alt}`}
+          className="group relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-[3px] bg-ink-2"
+        >
+          <img
+            src={p.src}
+            alt={p.alt}
+            loading="lazy"
+            className="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          />
+        </button>
+      ))}
+    </div>
+  )
 
   return (
     <section id="gallery" className="bg-ink px-6 pb-16 lg:px-12">
@@ -54,25 +78,9 @@ export default function Gallery() {
         until 2024, when it changed back to Bae. Same hands, same work.
       </p>
 
-      {/* masonry: photos keep their own shape and stack in columns */}
-      <div className="mx-auto max-w-[1400px] columns-1 gap-4 sm:columns-2 lg:columns-3">
-        {photos.map((p, i) => (
-          <button
-            key={p.src}
-            type="button"
-            onClick={() => setOpen(i)}
-            aria-label={`View larger: ${p.alt}`}
-            className="group relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-[3px] bg-ink-2"
-          >
-            <img
-              src={p.src}
-              alt={p.alt}
-              loading="lazy"
-              className="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-            />
-          </button>
-        ))}
-      </div>
+      {grid(0, half)}
+      {children && <div className="my-10 flex flex-wrap justify-center gap-3">{children}</div>}
+      {grid(half, photos.length)}
 
       <Lightbox photos={photos} index={open} onChange={setOpen} onClose={() => setOpen(null)} />
     </section>
