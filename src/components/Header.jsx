@@ -68,7 +68,7 @@ export default function Header() {
               {l.label}
             </a>
           ))}
-          <Button href="/partnership.html#partner-form" className="mt-3 h-10 px-5">Partner With Us</Button>
+          <Button href="/partnership.html#partner-form" className="mt-3 h-10 px-5">Start Here</Button>
         </nav>
       )}
     </header>
