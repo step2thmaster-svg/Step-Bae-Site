@@ -1,4 +1,4 @@
-import { Palette, Diamond, Handshake } from './Icons.jsx'
+import { Palette, Education, Speaker, Consulting } from './Icons.jsx'
 
 const items = [
   {
@@ -7,27 +7,33 @@ const items = [
     text: 'Thoughtful layering and lifelike detail.',
   },
   {
-    Icon: Diamond,
-    title: 'Esthetic Precision',
-    text: 'Attention to shade, form, and translucency.',
+    Icon: Education,
+    title: 'Education',
+    text: 'Hands-on training and continuous education for dental professionals.',
   },
   {
-    Icon: Handshake,
-    title: 'Personal Service',
-    text: 'Direct collaboration with dental professionals.',
+    Icon: Speaker,
+    title: 'International Speaker',
+    text: 'Keynote speaker at international dental conferences and author of numerous publications.',
+  },
+  {
+    Icon: Consulting,
+    title: 'Consulting',
+    text: 'Case planning and digital workflow guidance for dental practices and laboratories.',
   },
 ]
 
 export default function Features() {
   return (
     <section className="border-y border-gold/25 bg-ink-3">
-      <div className="mx-auto grid max-w-[1024px] gap-6 px-6 py-[18px] md:grid-cols-3 md:gap-0 lg:px-12">
+      {/* full width like the header and hero; 2 columns on tablets, 4 in a row on desktop; dividers only between items in the same row */}
+      <div className="grid gap-6 px-6 py-[18px] md:grid-cols-2 md:gap-y-5 lg:grid-cols-4 lg:gap-0 lg:px-12">
         {items.map(({ Icon, title, text }, i) => (
           <div
             key={title}
-            className={`flex items-center gap-4 md:justify-center ${
-              i > 0 ? 'md:border-l md:border-gold/45' : ''
-            } md:py-1`}
+            className={`flex items-center gap-4 md:justify-center md:px-4 ${
+              i % 2 ? 'md:border-l md:border-gold/45' : ''
+            } ${i > 0 ? 'lg:border-l lg:border-gold/45' : ''} md:py-1`}
           >
             <Icon className="h-[46px] w-[50px] shrink-0 text-gold" />
             <div>

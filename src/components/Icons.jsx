@@ -22,20 +22,36 @@ export const Palette = ({ className }) => (
   </svg>
 )
 
-export const Diamond = ({ className }) => (
+// graduation cap
+export const Education = ({ className }) => (
   <svg viewBox="0 0 48 48" className={className} {...base} strokeWidth="1.6">
-    <path d="M13 8h22l9 11-20 22L4 19z" />
-    <path d="M4 19h40M18 8l-5 11 11 22 11-22-5-11M13 19l5-11M24 8l-6 11h12z" />
+    <path d="M24 9 45 18 24 27 3 18z" />
+    <path d="M12 22v9c0 3 5.5 6 12 6s12-3 12-6v-9" />
+    <path d="M45 18v10M43 32l2-4 2 4z" />
   </svg>
 )
 
-export const Handshake = ({ className }) => (
-  <svg viewBox="0 0 56 48" className={className} {...base} strokeWidth="1.6">
-    <path d="M3 14l8-5 7 4M53 14l-8-5-8 4" />
-    <path d="M3 14l3 18 5 2M53 14l-3 18-5 2" />
-    <path d="M37 13H27l-8 7c-1.5 1.4-1 3.6 1 4 2 .5 4-.6 6-2l4-3 12 11c1.5 1.5 1 3.6-.6 4.2" />
-    <path d="M41.4 34.2c-1 1.5-3 1.7-4.4.5l-3-2.7M37 34.7c-.8 1.6-2.8 2-4.2.8l-3-2.6M32.8 35.5c-.8 1.4-2.6 1.8-3.8.8l-2.4-2M18 13l-3 3M11 34l3 2.5c1.3 1 3 .8 4-.4l.3-.4c1-1.3.8-3-.4-4l-2.4-2c-1.2-1-3-.8-4 .4l-.3.4c-1 1.3-.8 3 .4 4Z" />
-    <path d="m17 30 2-2.4c1-1.2 2.8-1.4 4-.4l2 1.7c1.2 1 1.4 2.8.4 4l-2 2.4c-1 1.2-2.8 1.4-4 .4" />
+// speaker at a lectern with a globe on its front, sound waves either side
+export const Speaker = ({ className }) => (
+  <svg viewBox="0 0 48 48" className={className} {...base} strokeWidth="1.6">
+    <circle cx="24" cy="9" r="4.5" />
+    <path d="M14.5 23c.5-5 4.5-8 9.5-8s9 3 9.5 8" />
+    <path d="M33 5.5c1.6 1.8 1.6 5.2 0 7M36.5 3c3 3.2 3 8.8 0 12M15 5.5c-1.6 1.8-1.6 5.2 0 7M11.5 3c-3 3.2-3 8.8 0 12" />
+    <path d="M9 23h30l-2 4H11z" />
+    <path d="M13 27l2 16h18l2-16M11 44h26" />
+    <circle cx="24" cy="35" r="5.5" />
+    <path d="M24 29.5c-2.2 1.6-2.2 9.4 0 11M24 29.5c2.2 1.6 2.2 9.4 0 11M18.5 35h11" />
+  </svg>
+)
+
+// two people in conversation
+export const Consulting = ({ className }) => (
+  <svg viewBox="0 0 48 48" className={className} {...base} strokeWidth="1.6">
+    <circle cx="13" cy="24" r="4.5" />
+    <circle cx="35" cy="24" r="4.5" />
+    <path d="M4 41c0-6 4-9.5 9-9.5s9 3.5 9 9.5M26 41c0-6 4-9.5 9-9.5s9 3.5 9 9.5" />
+    <path d="M18 5h12a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3h-4l-2 3-2-3h-4a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3Z" />
+    <path d="M21 10.5h6" />
   </svg>
 )
 
