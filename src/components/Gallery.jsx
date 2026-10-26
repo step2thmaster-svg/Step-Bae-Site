@@ -74,8 +74,7 @@ export default function Gallery({ children }) {
     <section id="gallery" className="bg-ink px-6 pb-16 lg:px-12">
       {/* some photos carry the name Bay, the spelling Step used from about 2012 to 2024 */}
       <p className="mx-auto mb-10 max-w-[640px] text-center text-[15px] italic leading-relaxed text-white/60">
-        A note on the name: some of these photos credit “Step Bay.” Step’s surname was spelled Bay from around 2012
-        until 2024, when it changed back to Bae. Same hands, same work.
+        Some photos credit “Step Bay,” the spelling of Step’s surname from 2012 to 2024.
       </p>
 
       {grid(0, half)}
