@@ -2,7 +2,7 @@
 // tag is 'intl' (international meeting), 'cancelled' (cancelled for COVID-19) or 'upcoming', or left off.
 export const events = [
   ['3/2014', 'CEREC study group hands-on training', 'Shelby, NC'],
-  ['4/2014', 'AACD, Ivoclar lecture', 'Orlando, FL'],
+  ['4/2014', 'AACD, Ivoclar lecture & Demo', 'Orlando, FL'],
   ['8/2014', 'DTG Symposium, Lecture', 'Provo, UT'],
   ['11/2014', 'Renfert lecture, ECDL', 'Charlotte, NC'],
 
