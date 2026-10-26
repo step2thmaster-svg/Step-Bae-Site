@@ -74,13 +74,13 @@ export default function AboutPage() {
       </div>
 
       {/* highlights the strip */}
-      <section className="border-y border-gold/25 bg-ink-2 px-6 py-10 lg:px-12">
+      <section className="border-y border-gold/25 bg-ink-2 px-4 py-7 sm:px-6 sm:py-10 lg:px-12">
         {/* label (dt) comes first for screen readers and copying, and flex-col-reverse shows the number above it */}
-        <dl className="mx-auto grid max-w-[1100px] grid-cols-2 gap-y-8 sm:grid-cols-3 md:grid-cols-5">
+        <dl className="mx-auto flex max-w-[1100px] flex-wrap justify-center gap-y-6 sm:gap-y-8">
           {stats.map((s) => (
-            <div key={s.label} className="flex flex-col-reverse text-center">
-              <dt className="mt-2 text-[13px] tracking-[0.08em] text-white/80">{s.label}</dt>
-              <dd className="font-display text-[46px] font-medium leading-none text-gold md:text-[54px]">{s.value}</dd>
+            <div key={s.label} className="flex basis-1/3 flex-col-reverse px-1 text-center md:basis-1/5">
+              <dt className="mt-1.5 text-[11px] leading-snug tracking-[0.04em] text-white/80 sm:mt-2 sm:text-[13px] sm:tracking-[0.08em]">{s.label}</dt>
+              <dd className="font-display text-[46px] font-medium leading-none text-gold max-sm:text-[32px] md:text-[54px]">{s.value}</dd>
             </div>
           ))}
         </dl>
