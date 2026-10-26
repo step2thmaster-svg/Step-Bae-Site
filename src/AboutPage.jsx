@@ -14,7 +14,7 @@ const lectureCount = 70
 
 // fades the stage photo's own top, bottom and right edges to transparent, so it melts into the page with no border line
 const photoFade =
-  'linear-gradient(to bottom, transparent 0, transparent 4%, rgba(0,0,0,0.45) 20%, #000 38%, #000 68%, transparent 95%),' +
+  'linear-gradient(to bottom, transparent 0, #000 16%, #000 80%, transparent 100%),' +
   'linear-gradient(to left, transparent 0, transparent 2%, #000 14%),' +
   'linear-gradient(to right, transparent 0, #000 12%)'
 
@@ -34,18 +34,18 @@ export default function AboutPage() {
         {/* the stage photo fills the whole section behind the text; top padding clears the header, as on the home page hero.
             md+: about an inch shorter than the original portrait layout */}
         <section className="relative overflow-hidden px-6 pb-6 pt-[118px] md:min-h-[484px] lg:px-12">
-          {/* md+: the photo box is about 76% of the section's size, placed so Step sits in the open space right of the text
+          {/* md+: the photo fills the section's full height in the open space right of the text, so the stage screen and Step both show
               (sized directly rather than with a CSS scale, which left faint lines along the faded edges) */}
-          <div className="absolute inset-0 md:inset-auto md:left-[calc(28.8%+96px)] md:top-[12.2%] md:h-[75.6%] md:w-[75.6%]">
+          <div className="absolute inset-0 md:left-[max(40%,calc(50%+60px))]">
             <img
               src="/images/about/stage-digital-days.jpg"
               alt="Step Toothmaster Bae lecturing on stage at Digital Days, Hablemos de Futuro"
-              className="absolute inset-0 h-full w-full object-cover object-[70%_50%]"
+              className="absolute inset-0 h-full w-full object-cover object-[45%_50%]"
               style={{ maskImage: photoFade, WebkitMaskImage: photoFade, maskComposite: 'intersect', WebkitMaskComposite: 'source-in' }}
             />
           </div>
           {/* darkens behind the text: all of it on phones, the left side on md+ */}
-          <div className="absolute inset-0 bg-ink/75 md:bg-transparent md:[background:linear-gradient(90deg,#141210_0%,rgba(20,18,16,0.7)_30%,rgba(20,18,16,0.5)_52%,rgba(20,18,16,0.4)_63%,rgba(20,18,16,0.15)_71%,rgba(20,18,16,0)_78%)]" />
+          <div className="absolute inset-0 bg-ink/75 md:bg-transparent md:[background:linear-gradient(90deg,#141210_0%,rgba(20,18,16,0.7)_30%,rgba(20,18,16,0.4)_48%,rgba(20,18,16,0)_60%)]" />
 
           <div className="relative mx-auto max-w-[1100px]">
             <div className="relative isolate max-w-[820px] text-center [text-shadow:0_1px_14px_rgba(0,0,0,0.9),0_0_3px_rgba(0,0,0,0.6)] md:text-left">
@@ -56,6 +56,9 @@ export default function AboutPage() {
                 Step <em className="font-normal text-gold">Toothmaster</em> Bae
               </h1>
               <p className="mt-4 max-w-[680px] text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
+                Toothmaster is the legal middle name, not a nickname.
+              </p>
+              <p className="mt-3 max-w-[680px] text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
                 Count on Step when the details matter: setting up or
                 refining a digital workflow, planning complex esthetic and implant cases, and
                 training teams to get more from their materials. Step works side by side with your
