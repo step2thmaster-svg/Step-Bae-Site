@@ -72,11 +72,6 @@ export default function Gallery({ children }) {
 
   return (
     <section id="gallery" className="bg-ink px-6 pb-16 lg:px-12">
-      {/* some photos carry the name Bay, the spelling Step used from about 2012 to 2024 */}
-      <p className="mx-auto mb-10 max-w-[640px] text-center text-[15px] italic leading-relaxed text-white/60">
-        Some photos credit “Step Bay,” the spelling of Step’s surname from 2012 to 2024.
-      </p>
-
       {grid(0, half)}
       {children && <div className="my-10 flex flex-wrap justify-center gap-3">{children}</div>}
       {grid(half, photos.length)}

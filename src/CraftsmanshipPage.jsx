@@ -19,6 +19,10 @@ export default function CraftsmanshipPage() {
             A selection of restorations from the bench, each shaped and characterized to meet
             the clinical requirements and look natural in the smile.
           </p>
+          {/* some gallery photos carry the name Bay, the spelling Step used from about 2012 to 2024 */}
+          <p className="mx-auto mt-3 max-w-[560px] text-[14px] italic leading-relaxed text-white/60">
+            Some photos credit “Step Bay,” the spelling of Step’s surname from 2012 to 2024.
+          </p>
           <p className="mt-3 text-[13px] tracking-[0.06em] text-gold">
             Layered Ceramics <span className="px-1.5">·</span> Crowns &amp; Bridges <span className="px-1.5">·</span> Implant Restorations
           </p>
