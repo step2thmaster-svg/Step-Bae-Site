@@ -14,7 +14,7 @@ const services = [
   {
     Icon: Palette,
     title: 'Hands-On Courses',
-    text: 'Small-group courses for technicians and clinicians on ceramic layering, cutback, foil veneers and characterization.',
+    text: 'Small-group courses for technicians and clinicians on ceramic layering, cutback, foil veneers and stain & glaze characterization.',
   },
   {
     Icon: Speaker,
