@@ -9,7 +9,7 @@ const items = [
   {
     Icon: Education,
     title: 'Education',
-    text: 'Hands-on training and continuous education for dental professionals.',
+    text: 'KOL Hands-on training and continuous education for dental professionals.',
   },
   {
     Icon: Speaker,
