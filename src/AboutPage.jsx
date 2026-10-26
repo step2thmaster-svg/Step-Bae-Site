@@ -53,7 +53,7 @@ export default function AboutPage() {
               <div className="absolute -inset-x-16 -inset-y-8 -z-10 hidden rounded-[64px] bg-ink/75 blur-2xl md:block" />
               <p className="text-[12px] font-semibold tracking-[0.3em] text-gold">ABOUT</p>
               <h1 className="mt-3 font-display text-[44px] font-medium leading-[1.08] text-white md:text-[58px]">
-                Step Toothmaster <em className="font-normal text-gold">Bae</em>
+                Step <em className="font-normal text-gold">Toothmaster</em> Bae
               </h1>
               <p className="mt-4 max-w-[680px] text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
                 Count on Step when the details matter: setting up or
