@@ -8,7 +8,7 @@ export default function PartnershipPage() {
     <div className="min-h-screen bg-ink">
       <div className="relative">
         <Header />
-        {/* top padding clears the header, as on the home page hero */}
+    
         <section className="px-6 pb-12 pt-[138px] text-center lg:px-12">
           <p className="text-[12px] font-semibold tracking-[0.3em] text-gold">DENTIST PARTNERSHIP</p>
           <h1 className="mt-4 font-display text-[44px] font-medium leading-[1.08] text-white md:text-[58px]">

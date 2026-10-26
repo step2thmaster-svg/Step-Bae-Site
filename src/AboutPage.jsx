@@ -73,7 +73,7 @@ export default function AboutPage() {
         </section>
       </div>
 
-      {/* highlights strip */}
+      {/* highlights the strip */}
       <section className="border-y border-gold/25 bg-ink-2 px-6 py-10 lg:px-12">
         {/* label (dt) comes first for screen readers and copying, and flex-col-reverse shows the number above it */}
         <dl className="mx-auto grid max-w-[1100px] grid-cols-2 gap-y-8 sm:grid-cols-3 md:grid-cols-5">
