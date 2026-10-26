@@ -1,8 +1,8 @@
-import { Fragment, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Lightbox from './Lightbox.jsx'
 
 // photos live in public/images/gallery as work-01.jpg, work-02.jpg, … in display order;
-// to add one, drop it in that folder and add its description here
+// to add one, drop it in that folder and add its description here and its shape to `ratios` below
 const alts = [
   'Upper anterior ceramic restorations on a stone model, with a row of lower arch wax-ups below',
   'Full-arch implant prosthesis with pink ceramic gingiva, upper and lower',
@@ -41,41 +41,90 @@ const alts = [
   'From final preview design to final e.max Ceram design with anaxGUM tissue',
 ]
 
-const photos = alts.map((alt, i) => ({ src: `/images/gallery/work-${String(i + 1).padStart(2, '0')}.jpg`, alt }))
+// width ÷ height of each photo, in the same order, so columns can be balanced and levelled;
+// a photo without an entry is treated as 2.6, the shape most of them share
+const ratios = [
+  2.611, 1.333, 3.101, 2.606, 2.608, 2.611, 2.611, 2.27, 2.608, 2.616, 2.608, 2.608, 2.608, 2.608, 1.0, 2.608, 2.608, 2.608,
+  2.608, 2.608, 2.611, 2.608, 2.608, 2.608, 2.608, 3.03, 2.608, 3.03, 2.608, 1.504, 2.035, 2.608, 2.215, 2.608, 2.611,
+]
 
-// `children` (e.g. a call-to-action) render as a card halfway through the photos, inside the masonry flow
+const photos = alts.map((alt, i) => ({
+  src: `/images/gallery/work-${String(i + 1).padStart(2, '0')}.jpg`,
+  alt,
+  ratio: ratios[i] ?? 2.6,
+}))
+
+// 1 column on phones, 2 from 640px, 3 from 1024px (Tailwind's sm and lg)
+function useColumnCount() {
+  const count = () => (window.matchMedia('(min-width: 1024px)').matches ? 3 : window.matchMedia('(min-width: 640px)').matches ? 2 : 1)
+  const [n, setN] = useState(count)
+  useEffect(() => {
+    const update = () => setN(count())
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+  return n
+}
+
+// masonry: each photo goes into the currently shortest column
+function toColumns(items, n) {
+  const cols = Array.from({ length: n }, () => ({ items: [], height: 0 }))
+  for (const item of items) {
+    const col = cols.reduce((a, b) => (b.height < a.height ? b : a))
+    col.items.push(item)
+    col.height += 1 / item.ratio
+  }
+  return cols.map((c) => c.items)
+}
+
+// `children` (e.g. a call-to-action) get a row of their own halfway through the photos
 export default function Gallery({ children }) {
   const [open, setOpen] = useState(null) // index into `photos`, or null when the lightbox is closed
+  const n = useColumnCount()
+  const indexed = photos.map((p, i) => ({ ...p, i }))
   const half = Math.ceil(photos.length / 2)
 
-  return (
-    <section id="gallery" className="bg-ink px-6 pb-16 lg:px-12">
-      {/* masonry: photos keep their own shape and stack in columns */}
-      <div className="mx-auto max-w-[1400px] columns-1 gap-4 sm:columns-2 lg:columns-3">
-        {photos.map((p, i) => (
-          <Fragment key={p.src}>
-            {i === half && children && (
-              <div className="mb-4 flex break-inside-avoid flex-col items-center gap-4 rounded-[3px] border border-gold/25 bg-ink-2 px-6 py-10 text-center">
-                <p className="font-display text-[26px] italic leading-tight text-white">Have a case in mind?</p>
-                {children}
-              </div>
-            )}
+  // photos in the shorter columns stretch (trimming their edges a little) so every column ends flush
+  const block = (items) => (
+    <div className="mx-auto flex max-w-[1400px] gap-4">
+      {toColumns(items, n).map((col, c) => (
+        <div key={c} className="flex min-w-0 flex-1 flex-col gap-4">
+          {col.map((p) => (
             <button
+              key={p.src}
               type="button"
-              onClick={() => setOpen(i)}
+              onClick={() => setOpen(p.i)}
               aria-label={`View larger: ${p.alt}`}
-              className="group relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-[3px] bg-ink-2"
+              style={{ aspectRatio: p.ratio, flexGrow: 1 / p.ratio }}
+              className="group relative block w-full overflow-hidden rounded-[3px] bg-ink-2"
             >
               <img
                 src={p.src}
                 alt={p.alt}
                 loading="lazy"
-                className="block w-full transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
               />
             </button>
-          </Fragment>
-        ))}
-      </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+
+  return (
+    <section id="gallery" className="bg-ink px-6 pb-16 lg:px-12">
+      {children ? (
+        <>
+          {block(indexed.slice(0, half))}
+          <div className="mx-auto my-4 flex max-w-[1400px] flex-col items-center justify-center gap-5 rounded-[3px] border border-gold/25 bg-ink-2 px-6 py-8 text-center sm:flex-row sm:gap-8">
+            <p className="font-display text-[26px] italic leading-tight text-white">Have a case in mind?</p>
+            {children}
+          </div>
+          {block(indexed.slice(half))}
+        </>
+      ) : (
+        block(indexed)
+      )}
 
       <Lightbox photos={photos} index={open} onChange={setOpen} onClose={() => setOpen(null)} />
     </section>
