@@ -42,7 +42,7 @@ export default function Header() {
           arrow={false}
           className="hidden h-[31px] px-5 !text-[12px] lg:ml-auto lg:inline-flex"
         >
-          Start
+          Start a Case
         </Button>
 
         <button
