@@ -1,6 +1,6 @@
 import Button from './Button.jsx'
 
-// fades the group photo's edges out evenly into the background
+// fades the headshot's edges out evenly into the background
 const headshotFade = 'radial-gradient(ellipse 70% 70% at 50% 50%, #000 55%, transparent 100%)'
 
 export default function MeetStep() {
@@ -31,16 +31,16 @@ export default function MeetStep() {
               clinicians, and works with practices and laboratories as a digital lab consultant.
 
             </p>
-            {/* the button stays centred; the 1.5-inch-tall (144px; 72px on phones so it stays on screen) 4:3 group photo hangs off its right side, layered over the photo
+            {/* the button stays centred; the 1.5-inch (144px; 96px on phones so it stays on screen) headshot hangs off its right side, layered over the photo
                 but behind the text (-z-10 within the text column's stacking context) so the paragraph stays readable */}
             <div className="relative mt-7 inline-block">
               <Button href="/about.html" variant="ghost" className="h-10 px-6">
                 About Step
               </Button>
               <img
-                src="/images/dentisthappy.jpg"
-                alt="Step Toothmaster Bae with a group of dentists, smiling together in front of a screen showing a smile case"
-                className="absolute left-full top-1/2 -z-10 ml-3 h-[72px] w-24 max-w-none -translate-y-1/2 sm:ml-4 sm:h-36 sm:w-48 object-cover object-center"
+                src="/images/headshot2.jpg"
+                alt="Headshot of Step Toothmaster Bae"
+                className="absolute left-full top-1/2 -z-10 ml-3 h-24 w-24 -translate-y-1/2 sm:ml-4 sm:h-36 sm:w-36 object-cover object-[50%_40%]"
                 style={{ maskImage: headshotFade, WebkitMaskImage: headshotFade }}
               />
             </div>
