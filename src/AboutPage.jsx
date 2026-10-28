@@ -66,10 +66,10 @@ export default function AboutPage() {
                 dentist and the team, so the improvements become part of how you work.
               </p>
               <p className="mt-4 max-w-[640px] text-pretty text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
-                That advice is built on experience: since {firstYear}, more than{' '}
-                {lectureCount} lectures, demonstrations and hands-on courses across
-                the United States, Germany, South Korea and Mexico, including the Morphopsychology course
-                series, along with {articles.length} published articles.
+                Away from the bench, you might catch Step riding an electric unicycle. It’s
+                one wheel, no handlebars, and every small shift of weight counts. It turns out
+                that’s not so different from shaping a tooth: stay balanced, stay focused, and
+                let the small adjustments do the work.
               </p>
               <Button href="/consultation.html#inquiry" className="mt-6 h-10 px-6 [text-shadow:none]">Book a Consultation</Button>
             </div>
