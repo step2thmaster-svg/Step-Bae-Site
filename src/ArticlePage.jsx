@@ -4,6 +4,7 @@ import Button from './components/Button.jsx'
 import Footer from './components/Footer.jsx'
 import { topics, getPost, formatDate } from './components/insights.js'
 import AudienceTag, { audienceColor } from './components/AudienceTag.jsx'
+import { events, articles } from './components/cv.js'
 
 // which post to show comes from the address, e.g. /article.html?p=natural-looking-ceramic-restorations
 const post = getPost(new URLSearchParams(window.location.search).get('p'))
@@ -38,6 +39,48 @@ function Credit({ block, className = '' }) {
       )}
     </p>
   )
+}
+
+// who wrote the post, shown at the end of every article; the same details go to search engines as Article structured data below
+const author = {
+  name: 'Step Toothmaster Bae',
+  credentials: 'CDT, DTG',
+  photo: '/images/headshot2.jpg',
+  url: 'https://stepbae.com/about.html',
+  sameAs: [
+    'https://www.threads.com/@step2thmaster',
+    'https://www.facebook.com/step2thmaster/',
+    'https://www.tiktok.com/@boynamedbae',
+    'https://www.youtube.com/@boynamedbae',
+  ],
+}
+
+function AuthorBox() {
+  return (
+    <aside className="mt-12 flex flex-col items-center gap-5 border-t border-gold-dark/30 pt-8 text-center sm:flex-row sm:items-start sm:text-left">
+      <img src={author.photo} alt={`Headshot of ${author.name}`} loading="lazy" className="h-20 w-20 shrink-0 rounded-full object-cover object-[50%_40%]" />
+      <div>
+        <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-dark">ABOUT THE AUTHOR</p>
+        <p className="mt-1 font-display text-[22px] font-medium leading-tight text-ink">
+          {author.name}, {author.credentials}
+        </p>
+        <p className="mt-2 text-[15px] leading-[1.6] text-ink/80">
+          Step is a dental technician who handcrafts esthetic and implant restorations. Since {events[0][0].split('/')[1]}, Step
+          has given more than 70 lectures and hands-on courses internationally and published {articles.length} articles in
+          dental trade journals.
+        </p>
+        <a href="/about.html" className="mt-2 inline-block text-[14px] font-medium text-gold-dark underline underline-offset-4 hover:text-ink">
+          More about Step
+        </a>
+      </div>
+    </aside>
+  )
+}
+
+// M/YYYY, as posts store it, to an ISO date (the 1st of the month) for structured data
+const isoDate = (date) => {
+  const [m, y] = date.split('/')
+  return `${y}-${m.padStart(2, '0')}-01`
 }
 
 function Block({ block }) {
@@ -123,7 +166,32 @@ function Block({ block }) {
 
 export default function ArticlePage() {
   useEffect(() => {
-    if (post) document.title = `${post.title} · STEPBAE Insights`
+    if (!post) return
+    document.title = `${post.title} · STEPBAE Insights`
+    // Article structured data, so search engines can tell who wrote the post and when
+    const script = document.createElement('script')
+    script.type = 'application/ld+json'
+    script.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: post.title,
+      description: post.excerpt,
+      ...(post.image && { image: `https://stepbae.com${post.image}` }),
+      datePublished: isoDate(post.date),
+      author: {
+        '@type': 'Person',
+        name: author.name,
+        honorificSuffix: author.credentials,
+        jobTitle: 'Dental Technician',
+        image: `https://stepbae.com${author.photo}`,
+        url: author.url,
+        sameAs: author.sameAs,
+      },
+      publisher: { '@type': 'Organization', name: 'STEPBAE', url: 'https://stepbae.com' },
+      mainEntityOfPage: `https://stepbae.com${post.href}`,
+    })
+    document.head.appendChild(script)
+    return () => script.remove()
   }, [])
 
   if (!post) {
@@ -190,6 +258,7 @@ export default function ArticlePage() {
             .map((block, i) => (
               <Block key={i} block={block} />
             ))}
+          <AuthorBox />
         </div>
       </article>
 
