@@ -1,4 +1,3 @@
-// photos from Wikimedia Commons; CC BY-SA images are credited with author, source and license as their licenses require
 export default {
   slug: 'shade-matching-for-dental-crowns',
   title: 'Shade Matching for Dental Crowns: A Guide for Dentists',
@@ -7,7 +6,9 @@ export default {
   date: '10/2026',
   excerpt:
     'Most shade problems don’t start in the ceramic. They start with how the shade was taken, the light it was taken in, and what reached the lab with the case.',
-  image: '/images/insights/shade-guide-value.jpg',
+  image: '/images/insights/shade-toothguide-3d-master.jpg',
+  imageAlt: 'A VITA Toothguide 3D-MASTER shade guide with its tabs arranged by value group',
+  nameNote: true, // the stump shade case is credited to Step Bay
   cta: {
     title: 'Sending a case digitally?',
     text: 'Connect your scanner to STEPBAE and attach your shade photos to the order. Our step-by-step instructions cover iTero, 3Shape TRIOS, Medit and Primescan.',
@@ -23,13 +24,10 @@ export default {
     },
     { h2: '1. Shade tabs: use them the way the lab reads them' },
     {
-      figure: '/images/insights/shade-guide-value.jpg',
-      alt: 'A VITA classical shade guide with its tabs arranged in order of value, from lightest to darkest',
-      caption: 'A VITA classical shade guide arranged by value, lightest to darkest. Value is the first thing to get right.',
-      credit: 'Matthew Ferguson 57 / Wikimedia Commons',
-      creditHref: 'https://commons.wikimedia.org/wiki/File:VITA_shade_guide.jpg',
-      license: 'CC BY-SA 4.0',
-      licenseHref: 'https://creativecommons.org/licenses/by-sa/4.0',
+      figure: '/images/insights/shade-denture-tabs.jpg',
+      alt: 'Hands holding shade tabs against the teeth of a denture, with a shade guide in the background',
+      caption: 'Whatever the restoration, the tab goes right beside the tooth, in the same plane, so the two are seen together.',
+      small: true,
     },
     {
       list: [
@@ -45,11 +43,10 @@ export default {
     },
     { h2: '2. Lighting: the operatory light is for treatment, not shade' },
     {
-      figure: '/images/insights/shade-operatory-light.jpg',
-      alt: 'A dentist and dental nurse treating a patient under the operatory light in a dental clinic',
-      caption: 'The operatory light is bright and warm, which makes teeth look lighter and more yellow. Turn it away before choosing a tab.',
-      credit: 'Leeds City Council / Wikimedia Commons',
-      creditHref: 'https://commons.wikimedia.org/wiki/File:Dentistry.jpg',
+      figure: '/images/insights/shade-chairside.jpg',
+      alt: 'A dentist holding a shade tab beside a smiling patient’s teeth, with the patient sitting upright',
+      caption: 'Take the shade with the patient upright and at eye level, in neutral light rather than under the operatory lamp.',
+      small: true,
     },
     {
       list: [
@@ -60,16 +57,6 @@ export default {
       ],
     },
     { h2: '3. Photography: show the lab the tooth, not just the number' },
-    {
-      figure: '/images/insights/shade-retracted-views.jpg',
-      alt: 'Retracted frontal views of the anterior teeth before and after treatment with ceramic crowns',
-      caption:
-        'Retracted frontal views taken the same way before and after treatment. Consistent framing and settings make photos comparable across a case.',
-      credit: 'AmirAttallah / Wikimedia Commons',
-      creditHref: 'https://commons.wikimedia.org/wiki/File:Anterior_crowns_of_Emax.jpg',
-      license: 'CC BY-SA 4.0',
-      licenseHref: 'https://creativecommons.org/licenses/by-sa/4.0',
-    },
     {
       p: 'Photographs carry what a shade number can’t: translucency, the incisal halo, white spots, craze lines and how color changes from cervical to incisal. For a crown, the most useful set is:',
     },
@@ -87,13 +74,10 @@ export default {
     },
     { h2: '4. Stump shade: what the crown sits on changes its color' },
     {
-      figure: '/images/insights/shade-metal-cores.jpg',
-      alt: 'Lateral retracted view showing metal post-and-cores on upper teeth before crowns are placed',
-      caption: 'Metal post-and-cores are a dark substrate. A translucent crown placed over them will look grey unless the lab knows to mask them.',
-      credit: 'JASFUS / Wikimedia Commons',
-      creditHref: 'https://commons.wikimedia.org/wiki/File:Preparaci%C3%B3n1soluci%C3%B3n.jpg',
-      license: 'CC BY-SA 3.0',
-      licenseHref: 'https://creativecommons.org/licenses/by-sa/3.0/',
+      figure: '/images/insights/shade-stump-case.jpg',
+      alt: 'A sequence from one central incisor crown case: the smile before, the stump shade tab at the preparation, two crowns that did not blend, and the final crown',
+      caption:
+        'One of Step’s own cases, start to finish: the stump shade recorded at the prep, two attempts that didn’t blend, and the final crown.',
     },
     {
       p: 'Lithium disilicate and multilayer zirconia are chosen for their translucency, and that translucency means the preparation shows through. Two crowns made in the same shade can look completely different on a light stump and a dark one.',

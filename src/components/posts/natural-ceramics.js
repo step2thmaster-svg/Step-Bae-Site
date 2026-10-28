@@ -1,5 +1,5 @@
-// body blocks: { h2 }, { p }, { list: [...] }, { figure, alt, caption, credit?, creditHref?, license?, licenseHref? }
-// optional: nameNote (shows the Bay/Bae note), cta: { title, text, label, href }
+// body blocks: { h2 }, { p }, { list: [...] }, { figure, alt, caption, small?, credit?, creditHref?, license?, licenseHref? }
+// optional: imageAlt (when the main photo isn't also a figure), nameNote (shows the Bay/Bae note), cta: { title, text, label, href }
 export default {
   slug: 'natural-looking-ceramic-restorations',
   title: 'How to Get More Natural-Looking Ceramic Restorations',

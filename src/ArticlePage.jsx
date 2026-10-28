@@ -52,7 +52,8 @@ function Block({ block }) {
     )
   if (block.figure)
     return (
-      <figure className="mt-8">
+      // small photos are shown near their own size rather than stretched to the column
+      <figure className={`mt-8 ${block.small ? 'mx-auto max-w-[420px]' : ''}`}>
         <img src={block.figure} alt={block.alt} loading="lazy" className="w-full rounded-[3px]" />
         {block.caption && <figcaption className="mt-2.5 text-[14px] italic leading-[1.5] text-ink/65">{block.caption}</figcaption>}
         <Credit block={block} className="mt-1 text-ink/50" />
@@ -102,7 +103,7 @@ export default function ArticlePage() {
             </p>
           </div>
           {post.image && (
-            <img src={post.image} alt={heroFigure?.alt ?? ''} className="mx-auto mt-10 w-full max-w-[1000px] rounded-[3px]" />
+            <img src={post.image} alt={heroFigure?.alt ?? post.imageAlt ?? ''} className="mx-auto mt-10 w-full max-w-[1000px] rounded-[3px]" />
           )}
           <Credit block={heroFigure} className="mx-auto mt-2 max-w-[1000px] text-center text-white/50" />
           {/* posts with Step's own photos (nameNote) may show the name Bay, the spelling Step used from about 2012 to 2023 */}
