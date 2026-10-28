@@ -1,7 +1,7 @@
 // photos are Step's own: GC Initial ZR-FS layered over zirconia, anterior and posterior, and layering by hand
 export default {
   slug: 'zirconia-vs-layered-ceramic',
-  title: 'Zirconia vs. Layered Zirconia: What Dentists Should Consider',
+  title: 'Zirconia Crown vs. Layered Zirconia Crown: What Dentists Should Consider',
   audience: 'dentists',
   topic: 'zirconia',
   date: '10/2026',
