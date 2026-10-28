@@ -1,5 +1,5 @@
 // scanner photos: 3Shape, iTero and Medit images are the makers' own product and press photos
-// (the main photo is 3Shape's, labelled by them as AI-generated);
+// (the main photo is iTero's);
 // the Primescan photo is from Wikimedia Commons under CC BY 4.0
 export default {
   slug: 'how-to-submit-a-digital-case',
@@ -9,10 +9,10 @@ export default {
   date: '10/2026',
   excerpt:
     'A practical checklist for sending a digital case: the scan files, the prescription, shade information, photographs and the notes that help us get it right the first time.',
-  image: '/images/insights/submit-patient-smile.jpg',
-  imageAlt: 'A smiling patient relaxing in a dental chair',
-  imageCredit: { credit: '3Shape / 3shape.com (AI-generated image)', creditHref: 'https://www.3shape.com/en/scanners/trios-6' },
-  imagePosition: '60% 40%', // keeps the smile in the Insights card
+  image: '/images/insights/submit-dentist-patient.jpg',
+  imageAlt: 'A smiling dentist talking with a relaxed patient beside an iTero scanner',
+  imageCredit: { credit: 'Align Technology / itero.com', creditHref: 'https://itero.com/our-solutions/itero-lumina-for-general-dentists' },
+  imageSmall: true, // only available at about 550px wide
   cta: {
     title: 'Ready to send your first digital case?',
     text: 'Connect your scanner to STEPBAE in a few minutes. Our step-by-step instructions cover iTero, 3Shape TRIOS, Medit and Primescan.',

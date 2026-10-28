@@ -1,5 +1,5 @@
 // body blocks: { h2 }, { p }, { list: [...] }, { gallery: [{ src, alt, caption }] }, { figure, alt, caption, small?, repeat?, credit?, creditHref?, license?, licenseHref? }
-// optional: imageAlt (when the main photo isn't also a figure), imagePosition (CSS object-position for the Insights card), imageCredit ({ credit, creditHref, license?, licenseHref? } for that photo), nameNote (shows the Bay/Bae note), cta: { title, text, label, href }
+// optional: imageAlt (when the main photo isn't also a figure), imagePosition (CSS object-position for the Insights card), imageCredit ({ credit, creditHref, license?, licenseHref? } for that photo), imageSmall (show a low-resolution main photo near its own size), nameNote (shows the Bay/Bae note), cta: { title, text, label, href }
 export default {
   slug: 'natural-looking-ceramic-restorations',
   title: 'How to Get More Natural-Looking Ceramic Restorations',
