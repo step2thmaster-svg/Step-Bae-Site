@@ -3,6 +3,7 @@ import Header from './components/Header.jsx'
 import Button from './components/Button.jsx'
 import Footer from './components/Footer.jsx'
 import { topics, getPost, formatDate, audienceLabel } from './components/insights.js'
+import AudienceTag, { audienceColor } from './components/AudienceTag.jsx'
 
 // which post to show comes from the address, e.g. /article.html?p=natural-looking-ceramic-restorations
 const post = getPost(new URLSearchParams(window.location.search).get('p'))
@@ -152,9 +153,10 @@ export default function ArticlePage() {
         {/* top padding clears the header, as on the other pages */}
         <section className="px-6 pb-10 pt-[138px] lg:px-12">
           <div className="mx-auto max-w-[760px] text-center">
-            <a href={insightsHref} className="text-[12px] font-semibold tracking-[0.3em] text-gold hover:text-gold-light">
-              {audienceLabel(post.audience).toUpperCase()}
-              {topic && ` · ${topic.label.toUpperCase()}`}
+            {/* who the article is for, color coded as on the Insights page */}
+            <a href={insightsHref} className="inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-2 hover:opacity-85">
+              <AudienceTag audience={post.audience} />
+              {topic && <span className="text-[12px] font-semibold tracking-[0.3em] text-gold">{topic.label.toUpperCase()}</span>}
             </a>
             <h1 className="mt-4 font-display text-[38px] font-medium leading-[1.1] text-white md:text-[52px]">{post.title}</h1>
             <p className="mt-5 text-[14px] text-white/70">
@@ -178,7 +180,8 @@ export default function ArticlePage() {
         </section>
       </div>
 
-      <article className="bg-cream px-6 py-12 text-ink lg:px-12">
+      <article className="relative bg-cream px-6 py-12 text-ink lg:px-12">
+        <span className={`absolute inset-x-0 top-0 h-1 ${audienceColor[post.audience]}`} />
         <div className="mx-auto max-w-[700px] text-[17px] leading-[1.7] text-ink/90">
           <p className="font-display text-[22px] italic leading-[1.45] text-ink">{post.excerpt}</p>
           {/* the post's main photo is already shown above the article, so it isn't repeated in the text unless marked `repeat` */}
