@@ -5,24 +5,6 @@ import Footer from './components/Footer.jsx'
 import { ArrowRight } from './components/Icons.jsx'
 import { audiences, topics, insights, formatDate } from './components/insights.js'
 
-const cases = [
-  {
-    title: 'Anterior Veneers',
-    src: '/images/case-anterior-veneers.jpg',
-    text: 'Veneers on the upper central incisors, characterized to blend with the natural teeth beside them.',
-  },
-  {
-    title: 'Posterior Crown & Bridge',
-    src: '/images/case-posterior-bridge.jpg',
-    text: 'A four-unit posterior ceramic bridge, shaped for function and finished by hand.',
-  },
-  {
-    title: 'All-on-X Bridge',
-    src: '/images/case-all-on-x.jpg',
-    text: 'An implant bridge with pink ceramic gingiva, built to look natural from the gumline down.',
-  },
-]
-
 const topicLabel = (id) => topics.find((t) => t.id === id)?.label
 
 // the audience comes from the address (#dentists or #patients) so each half of the library can be linked to directly
@@ -204,42 +186,7 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      {/* 5. signature case studies */}
-      <section className="bg-cream px-6 py-14 text-ink lg:px-12">
-        <div className="mx-auto max-w-[1200px]">
-          <div className="flex items-center gap-6">
-            <h2 className="whitespace-nowrap font-display text-[36px] font-medium leading-none md:text-[40px]">Signature Case Studies</h2>
-            <span className="hidden h-px flex-1 bg-gold-dark/40 sm:block" />
-          </div>
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            {cases.map((c) => (
-              <a
-                key={c.title}
-                href="/craftsmanship.html"
-                className="group overflow-hidden rounded-[3px] border border-gold-dark/30 bg-white/60 transition-colors hover:border-gold-dark/70"
-              >
-                <div className="overflow-hidden">
-                  <img
-                    src={c.src}
-                    alt={c.title}
-                    loading="lazy"
-                    className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="font-display text-[24px] font-medium leading-tight">{c.title}</h3>
-                  <p className="mt-2 text-[14px] leading-[1.55] text-ink/80">{c.text}</p>
-                  <span className="mt-4 inline-flex items-center gap-2 text-[13px] font-semibold text-gold-dark">
-                    See more work <ArrowRight />
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. conversion: one next step for each audience */}
+      {/* 5. conversion: one next step for each audience */}
       <section className="border-t border-gold/30 px-6 py-14 lg:px-12">
         <div className="mx-auto grid max-w-[1000px] gap-4 md:grid-cols-2">
           <div className="rounded-[3px] border border-gold/30 bg-ink-2 p-8 text-center">
