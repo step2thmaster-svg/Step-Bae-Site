@@ -42,13 +42,13 @@ export default function FeaturedCases() {
     <section id="work" className="bg-cream text-ink">
       <div className="px-6 py-12 lg:px-12">
         <div className="flex items-center gap-6">
-          <h2 className="font-display text-[36px] font-medium leading-none whitespace-nowrap md:text-[40px]">
+          <h2 className="font-display text-[36px] font-medium leading-none sm:whitespace-nowrap md:text-[40px]">
             Featured Cases
           </h2>
           <span className="hidden h-px flex-1 bg-gold-dark/40 sm:block" />
           <a
             href="/craftsmanship.html"
-            className="ml-auto inline-flex items-center gap-2 text-[14px] font-medium text-gold-dark hover:text-ink sm:ml-0"
+            className="ml-auto inline-flex shrink-0 items-center gap-2 whitespace-nowrap text-[14px] font-medium text-gold-dark hover:text-ink sm:ml-0"
           >
             View Our Work <ArrowRight />
           </a>
@@ -115,7 +115,7 @@ export default function FeaturedCases() {
                   onClick={() => go(i)}
                   aria-label={`Show ${c.title}`}
                   aria-current={i === active}
-                  className={`h-2 rounded-full transition-all ${i === active ? 'w-6 bg-gold-dark' : 'w-2 bg-gold-dark/30 hover:bg-gold-dark/60'}`}
+                  className={`relative h-2 rounded-full transition-all after:absolute after:-inset-3 after:content-[''] ${i === active ? 'w-6 bg-gold-dark' : 'w-2 bg-gold-dark/30 hover:bg-gold-dark/60'}`}
                 />
               ))}
             </div>

@@ -28,7 +28,7 @@ export default function Hero() {
             restorations, thoughtful craftsmanship, and personalized service
             for dental professionals.
           </p>
-          <Button className="mt-7 h-10 px-[25px] lg:mt-9 lg:h-12 lg:px-8 lg:text-[15px]">Submit a Case</Button>
+          <Button href="/partnership.html#partner-form" className="mt-7 h-10 px-[25px] lg:mt-9 lg:h-12 lg:px-8 lg:text-[15px]">Submit a Case</Button>
         </div>
       </div>
     </section>

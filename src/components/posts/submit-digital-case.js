@@ -61,7 +61,7 @@ export default {
         'Make sure every margin is clearly captured: retract and control bleeding first, and rescan any area where the margin is unclear.',
         'For anterior and esthetic work, include a scan of the provisionals or the pre-op teeth if they show the length and form the patient approved.',
         'For implants, scan with the scan body fully seated and tell us the implant system and platform size.',
-        'If your scanner isn’t connected yet, export STL or PLY files and email them to info@stepbae.com.',
+        'If your scanner isn’t connected yet, export STL or PLY files and email them to step2thmaster@gmail.com.',
       ],
     },
     {

@@ -5,7 +5,7 @@ const headshotFade = 'radial-gradient(ellipse 70% 70% at 50% 50%, #000 55%, tran
 
 export default function MeetStep() {
   return (
-    <section id="about" className="border-t border-gold/30 bg-ink-2 text-white">
+    <section id="about" className="overflow-x-clip border-t border-gold/30 bg-ink-2 text-white">
       {/* mirror of The Art of Precision: text on the left half, photo on the right half; stacks on phones (photo first, as in Precision) */}
       <div className="grid md:grid-cols-2">
         {/* md+: the photo reaches 96px (~1 inch) past the middle, under the text column, so its side fade sits further left */}
@@ -31,7 +31,7 @@ export default function MeetStep() {
               clinicians, and works with practices and laboratories as a digital lab consultant.
 
             </p>
-            {/* the button stays centred; the 1.5-inch (144px) headshot hangs off its right side, layered over the photo
+            {/* the button stays centred; the 1.5-inch (144px; 96px on phones so it stays on screen) headshot hangs off its right side, layered over the photo
                 but behind the text (-z-10 within the text column's stacking context) so the paragraph stays readable */}
             <div className="relative mt-7 inline-block">
               <Button href="/about.html" variant="ghost" className="h-10 px-6">
@@ -40,7 +40,7 @@ export default function MeetStep() {
               <img
                 src="/images/headshot2.jpg"
                 alt="Headshot of Step Toothmaster Bae"
-                className="absolute left-full top-1/2 -z-10 ml-4 h-36 w-36 -translate-y-1/2 object-cover object-[50%_40%]"
+                className="absolute left-full top-1/2 -z-10 ml-3 h-24 w-24 -translate-y-1/2 sm:ml-4 sm:h-36 sm:w-36 object-cover object-[50%_40%]"
                 style={{ maskImage: headshotFade, WebkitMaskImage: headshotFade }}
               />
             </div>

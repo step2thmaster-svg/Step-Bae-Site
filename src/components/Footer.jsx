@@ -1,39 +1,96 @@
 import Logo from './Logo.jsx'
-import { Mail, MapPin, Instagram } from './Icons.jsx'
+import { Mail, MapPin, Threads, Facebook, TikTok, YouTube } from './Icons.jsx'
+import { EMAIL } from './sendForm.js'
+
+const explore = [
+  { label: 'About', href: '/about.html' },
+  { label: 'Craftsmanship', href: '/craftsmanship.html' },
+  { label: 'Insights', href: '/insights.html' },
+]
+
+const work = [
+  { label: 'Dentist Partnership', href: '/partnership.html' },
+  { label: 'Consultation', href: '/consultation.html' },
+]
+
+const social = [
+  { label: 'Threads', href: 'https://www.threads.com/@step2thmaster', Icon: Threads },
+  { label: 'Facebook', href: 'https://www.facebook.com/step2thmaster/', Icon: Facebook },
+  { label: 'TikTok', href: 'https://www.tiktok.com/@boynamedbae', Icon: TikTok },
+  { label: 'YouTube', href: 'https://www.youtube.com/@boynamedbae', Icon: YouTube },
+]
+
+function Column({ title, children }) {
+  return (
+    <div>
+      <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold">{title}</h3>
+      <ul className="mt-3 space-y-2 text-[14px] text-white/75">{children}</ul>
+    </div>
+  )
+}
+
+function LinkList({ links }) {
+  return links.map((l) => (
+    <li key={l.label}>
+      <a href={l.href} className="transition-colors hover:text-gold">{l.label}</a>
+    </li>
+  ))
+}
 
 export default function Footer() {
   return (
     <footer id="contact" className="border-t border-gold/20 bg-ink">
-      {/* full width with the same side margins as the header; logo left, contact centre, social right */}
+      {/* same side margins as the header */}
       <div className="px-6 lg:px-12">
-        <div className="grid gap-8 py-8 md:grid-cols-3 md:items-center md:gap-0">
-          <div>
+        <div className="grid gap-8 py-9 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] lg:gap-12">
+          <div className="max-w-[320px]">
             <Logo />
+            <p className="mt-4 text-[14px] leading-relaxed text-white/65">
+              A private dental laboratory dedicated to esthetic restorations,
+              thoughtful craftsmanship, and personalized service for dental professionals.
+            </p>
+            <div className="mt-4 flex items-center gap-2.5">
+              {social.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors hover:border-gold hover:text-gold"
+                >
+                  <Icon className="h-[17px] w-[17px]" />
+                </a>
+              ))}
+            </div>
           </div>
 
-          <div className="flex flex-col gap-4 text-[14px] text-white/90 sm:flex-row sm:items-center sm:justify-around md:border-x md:border-gold/45 md:py-3">
-            <a href="mailto:info@stepbae.com" className="flex items-center gap-3 hover:text-gold">
-              <Mail className="h-[18px] w-[22px] text-gold" /> info@stepbae.com
-            </a>
-            <span className="flex items-center gap-3">
-              <MapPin className="h-[18px] w-[18px] text-gold" /> Pineville, NC
-            </span>
-          </div>
+          <Column title="Explore">
+            <LinkList links={explore} />
+          </Column>
 
-          <div className="flex flex-col items-start gap-2 md:items-end">
-            <span className="text-[14px] text-white/90">Follow Our Work</span>
-            <a href="#" aria-label="Instagram" className="text-white/90 hover:text-gold">
-              <Instagram className="h-[22px] w-[22px]" />
-            </a>
-          </div>
+          <Column title="Work With Us">
+            <LinkList links={work} />
+          </Column>
+
+          <Column title="Contact">
+            <li>
+              <a href={`mailto:${EMAIL}`} className="flex items-center gap-3 transition-colors hover:text-gold">
+                <Mail className="h-[15px] w-[18px] shrink-0 text-gold" /> {EMAIL}
+              </a>
+            </li>
+            <li className="flex items-center gap-3">
+              <MapPin className="h-[16px] w-[16px] shrink-0 text-gold" /> Pineville, NC
+            </li>
+          </Column>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-x-2 border-t border-white/20 py-5 text-[12px] text-white/80">
-          <span>© {new Date().getFullYear()} STEPBAE. All rights reserved.</span>
-          <span className="text-gold">|</span>
-          <a href="#" className="text-gold hover:text-gold-light">Privacy Policy</a>
-          <span className="text-gold">|</span>
-          <a href="#" className="text-gold hover:text-gold-light">Terms of Service</a>
+        <div className="flex flex-col gap-3 border-t border-white/10 py-4 text-[12px] text-white/50 sm:flex-row sm:items-center sm:justify-between">
+          <span>© {new Date().getFullYear()} STEPBAE Dental Laboratory. All rights reserved.</span>
+          <div className="flex gap-6">
+            <a href="#" className="transition-colors hover:text-gold">Privacy Policy</a>
+            <a href="#" className="transition-colors hover:text-gold">Terms of Service</a>
+          </div>
         </div>
       </div>
     </footer>

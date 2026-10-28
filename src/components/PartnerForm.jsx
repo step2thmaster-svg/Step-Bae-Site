@@ -17,7 +17,7 @@ export default function PartnerForm() {
     const form = e.currentTarget
     setStatus('sending')
     try {
-      if (await sendForm(form, 'New dentist partnership')) {
+      if (await sendForm(form, 'New dentist partnership', 'partnership')) {
         form.reset()
         setStatus('sent')
       } else {

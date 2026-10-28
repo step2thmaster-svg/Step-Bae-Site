@@ -17,7 +17,7 @@ export default function ConsultForm() {
     const form = e.currentTarget
     setStatus('sending')
     try {
-      if (await sendForm(form, 'New consultation inquiry')) {
+      if (await sendForm(form, 'New consultation inquiry', 'consultation')) {
         form.reset()
         setStatus('sent')
       } else {

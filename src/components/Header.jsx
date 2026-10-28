@@ -3,7 +3,7 @@ import Logo from './Logo.jsx'
 import Button from './Button.jsx'
 
 const links = [
-  { label: 'about', href: '/about.html' }, 
+  { label: 'About', href: '/about.html' }, 
   { label: 'Craftsmanship', href: '/craftsmanship.html' },
   { label: 'Dentist Partnership', href: '/partnership.html' },
   { label: 'Consultation', href: '/consultation.html' }, 
@@ -41,7 +41,7 @@ export default function Header() {
           href="/partnership.html#partner-form"
           variant="ghost"
           arrow={false}
-          className="hidden h-[31px] px-5 !text-[12px] lg:ml-auto lg:inline-flex"
+          className="h-[31px] whitespace-nowrap px-4 !text-[12px] max-[379px]:!hidden lg:ml-auto lg:px-5"
         >
           Start a Case
         </Button>

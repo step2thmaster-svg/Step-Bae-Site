@@ -47,7 +47,7 @@ export default function PortalGuide() {
     <section id="portals" className="bg-cream px-6 py-14 text-ink lg:px-12">
       <div className="mx-auto max-w-[1200px]">
         <div className="flex items-center gap-6">
-          <h2 className="font-display text-[36px] font-medium leading-none whitespace-nowrap md:text-[40px]">
+          <h2 className="font-display text-[36px] font-medium leading-none sm:whitespace-nowrap md:text-[40px]">
             Find Us in Your Portal
           </h2>
           <span className="hidden h-px flex-1 bg-gold-dark/40 sm:block" />

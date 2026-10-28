@@ -81,3 +81,28 @@ export const Instagram = ({ className }) => (
     <circle cx="17.3" cy="6.7" r="0.6" fill="currentColor" />
   </svg>
 )
+
+export const Threads = ({ className }) => (
+  <svg viewBox="0 0 24 24" className={className} {...base} strokeWidth="1.8">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M8.5 9.5c1-1 2.1-1.5 3.4-1.5 2.6 0 4.1 1.6 4.1 4.2v2.1c0 2.2-1.7 3.7-3.9 3.7-2.3 0-4-1.5-4-3.5 0-2.1 1.9-3.5 4.4-3.5h3.2" />
+  </svg>
+)
+
+export const Facebook = ({ className }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+    <path d="M13.4 21v-7.6H16l.4-3h-3V8.5c0-.9.2-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 4v2.2H8v3h2.4V21h3Z" />
+  </svg>
+)
+
+export const TikTok = ({ className }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+    <path d="M14.8 4c.2 1.4 1.1 2.8 2.6 3.6.9.5 1.8.7 2.6.7v3.1a8.2 8.2 0 0 1-3.8-1V15a5.3 5.3 0 1 1-5.3-5.3h.3v3.1H11a2.2 2.2 0 1 0 2.2 2.2V4h1.6Z" />
+  </svg>
+)
+
+export const YouTube = ({ className }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+    <path d="M21.6 8.3a2.8 2.8 0 0 0-2-2c-1.7-.5-7.6-.5-7.6-.5s-5.9 0-7.6.5a2.8 2.8 0 0 0-2 2A30 30 0 0 0 2 12a30 30 0 0 0 .4 3.7 2.8 2.8 0 0 0 2 2c1.7.5 7.6.5 7.6.5s5.9 0 7.6-.5a2.8 2.8 0 0 0 2-2A30.1 30.1 0 0 0 22 12a30.1 30.1 0 0 0-.4-3.7ZM10.2 15.2V8.8l5.6 3.2-5.6 3.2Z" />
+  </svg>
+)
