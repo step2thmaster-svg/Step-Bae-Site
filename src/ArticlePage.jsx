@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import Header from './components/Header.jsx'
 import Button from './components/Button.jsx'
 import Footer from './components/Footer.jsx'
-import { audiences, topics, getPost, formatDate } from './components/insights.js'
+import { topics, getPost, formatDate, audienceLabel } from './components/insights.js'
 
 // which post to show comes from the address, e.g. /article.html?p=natural-looking-ceramic-restorations
 const post = getPost(new URLSearchParams(window.location.search).get('p'))
@@ -49,6 +49,18 @@ function Block({ block }) {
           <li key={item} className="pl-1">{item}</li>
         ))}
       </ul>
+    )
+  // two small photos side by side with one shared caption
+  if (block.pair)
+    return (
+      <figure className="mx-auto mt-8 max-w-[560px]">
+        <div className="grid grid-cols-2 items-end gap-3">
+          {block.pair.map((photo) => (
+            <img key={photo.src} src={photo.src} alt={photo.alt} loading="lazy" className="w-full rounded-[3px]" />
+          ))}
+        </div>
+        {block.caption && <figcaption className="mt-2.5 text-[14px] italic leading-[1.5] text-ink/65">{block.caption}</figcaption>}
+      </figure>
     )
   // a numbered sequence of photos, two to a row from sm up, in the order given
   if (block.gallery)
@@ -101,7 +113,8 @@ export default function ArticlePage() {
 
   const topic = topics.find((t) => t.id === post.topic)
   const heroFigure = post.body.find((block) => block.figure === post.image)
-  const cta = post.cta ?? defaultCtas[post.audience]
+  const cta = post.cta ?? defaultCtas[post.audience] ?? defaultCtas.dentists
+  const insightsHref = post.audience === 'both' ? '/insights.html' : `/insights.html#${post.audience}`
 
   return (
     <div className="min-h-screen bg-ink">
@@ -110,8 +123,8 @@ export default function ArticlePage() {
         {/* top padding clears the header, as on the other pages */}
         <section className="px-6 pb-10 pt-[138px] lg:px-12">
           <div className="mx-auto max-w-[760px] text-center">
-            <a href={`/insights.html#${post.audience}`} className="text-[12px] font-semibold tracking-[0.3em] text-gold hover:text-gold-light">
-              {audiences[post.audience].label.toUpperCase()}
+            <a href={insightsHref} className="text-[12px] font-semibold tracking-[0.3em] text-gold hover:text-gold-light">
+              {audienceLabel(post.audience).toUpperCase()}
               {topic && ` · ${topic.label.toUpperCase()}`}
             </a>
             <h1 className="mt-4 font-display text-[38px] font-medium leading-[1.1] text-white md:text-[52px]">{post.title}</h1>
@@ -152,10 +165,15 @@ export default function ArticlePage() {
         <div className="mx-auto max-w-[640px]">
           <h2 className="font-display text-[32px] italic leading-tight text-white md:text-[38px]">{cta.title}</h2>
           <p className="mt-3 text-[15px] leading-[1.6] text-white/85">{cta.text}</p>
-          <Button href={cta.href} className="mt-7 h-10 px-6">{cta.label}</Button>
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            <Button href={cta.href} className="h-10 px-6">{cta.label}</Button>
+            {cta.secondary && (
+              <Button href={cta.secondary.href} variant="ghost" className="h-10 px-6">{cta.secondary.label}</Button>
+            )}
+          </div>
           <p className="mt-8">
-            <a href={`/insights.html#${post.audience}`} className="text-[14px] text-white/70 underline underline-offset-4 hover:text-gold">
-              More insights {audiences[post.audience].label.toLowerCase()}
+            <a href={insightsHref} className="text-[14px] text-white/70 underline underline-offset-4 hover:text-gold">
+              More insights {post.audience === 'both' ? '' : audienceLabel(post.audience).toLowerCase()}
             </a>
           </p>
         </div>

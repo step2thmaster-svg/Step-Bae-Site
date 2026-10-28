@@ -4,8 +4,10 @@ import shadeMatching from './posts/shade-matching.js'
 import refractoryLayering from './posts/refractory-layering.js'
 import zirconiaVsLayered from './posts/zirconia-vs-layered.js'
 import submitDigitalCase from './posts/submit-digital-case.js'
+import naturalCrowns from './posts/natural-crowns.js'
 
-// the two audiences the Insights library is split by; every post and topic belongs to one
+// the two audiences the Insights library is split by; every topic belongs to one,
+// and a post belongs to one or to 'both' (it then appears under each)
 export const audiences = {
   dentists: {
     label: 'For Dentists',
@@ -16,6 +18,11 @@ export const audiences = {
     text: 'What your crown, veneer or implant is, how it is made, and how to look after it.',
   },
 }
+
+export const forAudience = (post, audience) => post.audience === audience || post.audience === 'both'
+
+export const audienceLabel = (audience) =>
+  audience === 'both' ? 'For Dentists & Patients' : audiences[audience].label
 
 export const topics = [
   { id: 'veneers', audience: 'dentists', label: 'Veneers & Esthetics', text: 'Preparation, layering and smile design for anterior cases.' },
@@ -32,7 +39,7 @@ export const topics = [
 
 // blog posts, each in its own file in ./posts (see natural-ceramics.js for the shape), newest first;
 // to add one, create the file and import it here. Each post is read at /article.html?p=<slug>
-export const posts = [submitDigitalCase, zirconiaVsLayered, refractoryLayering, shadeMatching, naturalCeramics].map((post) => ({ ...post, href: `/article.html?p=${post.slug}` }))
+export const posts = [naturalCrowns, submitDigitalCase, zirconiaVsLayered, refractoryLayering, shadeMatching, naturalCeramics].map((post) => ({ ...post, href: `/article.html?p=${post.slug}` }))
 
 export const getPost = (slug) => posts.find((post) => post.slug === slug)
 

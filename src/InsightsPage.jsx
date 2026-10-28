@@ -3,7 +3,7 @@ import Header from './components/Header.jsx'
 import Button from './components/Button.jsx'
 import Footer from './components/Footer.jsx'
 import { ArrowRight } from './components/Icons.jsx'
-import { audiences, topics, insights, formatDate } from './components/insights.js'
+import { audiences, topics, insights, formatDate, forAudience } from './components/insights.js'
 
 const topicLabel = (id) => topics.find((t) => t.id === id)?.label
 
@@ -34,7 +34,7 @@ export default function InsightsPage() {
     document.getElementById('latest')?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const shown = insights.filter((p) => p.audience === audience && (!topic || p.topic === topic))
+  const shown = insights.filter((p) => forAudience(p, audience) && (!topic || p.topic === topic))
   const audienceTopics = topics.filter((t) => t.audience === audience)
   const count = (id) => insights.filter((p) => p.topic === id).length
 
