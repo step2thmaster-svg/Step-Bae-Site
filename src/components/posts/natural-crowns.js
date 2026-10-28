@@ -100,8 +100,7 @@ export default {
     { h2: 'For patients: what you can ask' },
     {
       list: [
-        'Can I have my veneers made by Step Bae? We will make that work for you.',
-        'Can I see photos of crowns or veneers the lab has made? We are happy to share our pictures of the process.',
+        'Can I see photos of crowns or veneers the lab has made?',
         'Will my shade be matched to my own teeth, and will photos be taken?',
         'Are my crowns being made to match my neighboring teeth, or just a shade number?',
       ],
