@@ -36,7 +36,7 @@ export default {
         },
       ],
       caption:
-        'Restorations finished without life-like detail: one flat color from gumline to edge, no translucency, smooth glassy surfaces and teeth that are all the same shape.',
+        'Restorations finished without life-like detail: one flat color from gumline to edge, no translucency, an inaccurate amateur model, and a lateral in the veneer case that is too long and will fracture because it ignores the envelope of function.',
     },
     {
       figure: '/images/insights/natural-crowns-detail.jpg',
