@@ -1,6 +1,7 @@
 import { articles } from './cv.js'
 import naturalCeramics from './posts/natural-ceramics.js'
 import shadeMatching from './posts/shade-matching.js'
+import refractoryLayering from './posts/refractory-layering.js'
 
 // the two audiences the Insights library is split by; every post and topic belongs to one
 export const audiences = {
@@ -29,7 +30,7 @@ export const topics = [
 
 // blog posts, each in its own file in ./posts (see natural-ceramics.js for the shape), newest first;
 // to add one, create the file and import it here. Each post is read at /article.html?p=<slug>
-export const posts = [shadeMatching, naturalCeramics].map((post) => ({ ...post, href: `/article.html?p=${post.slug}` }))
+export const posts = [refractoryLayering, shadeMatching, naturalCeramics].map((post) => ({ ...post, href: `/article.html?p=${post.slug}` }))
 
 export const getPost = (slug) => posts.find((post) => post.slug === slug)
 

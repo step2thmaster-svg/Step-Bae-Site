@@ -50,6 +50,23 @@ function Block({ block }) {
         ))}
       </ul>
     )
+  // a numbered sequence of photos, two to a row from sm up, in the order given
+  if (block.gallery)
+    return (
+      <ol className="mt-8 grid gap-x-5 gap-y-6 sm:grid-cols-2">
+        {block.gallery.map((photo, i) => (
+          <li key={photo.src}>
+            <figure>
+              <img src={photo.src} alt={photo.alt} loading="lazy" className="w-full rounded-[3px]" />
+              <figcaption className="mt-2 text-[14px] leading-[1.5] text-ink/70">
+                <span className="mr-1.5 font-semibold text-gold-dark">{i + 1}.</span>
+                {photo.caption}
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ol>
+    )
   if (block.figure)
     return (
       // small photos are shown near their own size rather than stretched to the column
