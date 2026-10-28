@@ -122,7 +122,7 @@ export default function ArticlePage() {
           {post.image && (
             <img src={post.image} alt={heroFigure?.alt ?? post.imageAlt ?? ''} className="mx-auto mt-10 w-full max-w-[1000px] rounded-[3px]" />
           )}
-          <Credit block={heroFigure} className="mx-auto mt-2 max-w-[1000px] text-center text-white/50" />
+          <Credit block={heroFigure ?? post.imageCredit} className="mx-auto mt-2 max-w-[1000px] text-center text-white/50" />
           {/* posts with Step's own photos (nameNote) may show the name Bay, the spelling Step used from about 2012 to 2023 */}
           {post.nameNote && (
             <p className="mx-auto mt-3 max-w-[1000px] text-center text-[13px] italic leading-relaxed text-white/55">
