@@ -65,18 +65,12 @@ export default {
       p: 'Only your dentist can tell you why your crown looks the way it does. They can check the crown, the tooth beneath it and your gums, and explain whether anything needs attention. Sometimes the answer is simple, like professional cleaning or whitening the natural teeth. Sometimes a crown can be replaced to match better. And sometimes the color change is a sign worth checking, such as a change in the tooth underneath.',
     },
     {
-      figure: '/images/insights/color-step-bench.jpg',
-      alt: 'Step in the lab beside his workbench',
-      caption: 'Your dentist and the lab work together. The more we know about your smile, the better we can match it.',
-      small: true,
+      figure: '/images/insights/dentisthappy.jpg',
+      alt: 'Step with a group of dentists and colleagues smiling together, with smile photos on the TV behind them',
+      caption: 'Dentists and technicians reviewing smiles together. Great results come from the whole team talking.',
     },
     {
       p: 'If your crown doesn’t look right to you, mention it at your next visit. It’s a common question, and your dentist will be glad you asked.',
-    },
-    {
-      figure: '/images/insights/color-team-evening.jpg',
-      alt: 'Step with a group of dentists and colleagues smiling together, with smile photos on the TV behind them',
-      caption: 'Dentists and technicians reviewing smiles together. Great results come from the whole team talking.',
     },
   ],
 }
