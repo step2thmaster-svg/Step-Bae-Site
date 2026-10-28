@@ -7,6 +7,7 @@ const links = [
   { label: 'Craftsmanship', href: '/craftsmanship.html' },
   { label: 'Dentist Partnership', href: '/partnership.html' },
   { label: 'Consultation', href: '/consultation.html' }, 
+  { label: 'Insights', href: '/insights.html' },
   
 ]
 

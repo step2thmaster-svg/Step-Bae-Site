@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  // five pages: home, About, the Craftsmanship gallery, Dentist Partnership and Consultation
+  // six pages: home, About, the Craftsmanship gallery, Dentist Partnership, Consultation and Insights
   build: {
     rollupOptions: {
       input: {
@@ -14,6 +14,7 @@ export default defineConfig({
         partnership: resolve(import.meta.dirname, 'partnership.html'),
         consultation: resolve(import.meta.dirname, 'consultation.html'),
         about: resolve(import.meta.dirname, 'about.html'),
+        insights: resolve(import.meta.dirname, 'insights.html'),
       },
     },
   },
