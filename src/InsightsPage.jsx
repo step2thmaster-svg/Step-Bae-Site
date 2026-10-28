@@ -87,10 +87,10 @@ export default function InsightsPage() {
       </div>
 
       {/* 3. latest insights for the chosen audience */}
-      <section id="latest" className="scroll-mt-6 bg-cream px-6 py-14 text-ink lg:px-12">
+      <section id="latest" className="scroll-mt-6 bg-cream px-6 py-10 text-ink lg:px-12">
         <div className="mx-auto max-w-[1200px]">
           <div className="flex items-center gap-6">
-            <h2 className="whitespace-nowrap font-display text-[36px] font-medium leading-none md:text-[40px]">Latest Insights</h2>
+            <h2 className="whitespace-nowrap font-display text-[28px] font-medium leading-none md:text-[32px]">Latest Insights</h2>
             <span className="hidden h-px flex-1 bg-gold-dark/40 sm:block" />
           </div>
           <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[14px] text-ink/70">
@@ -107,7 +107,7 @@ export default function InsightsPage() {
           </p>
 
           {shown.length > 0 ? (
-            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {shown.map((p) => {
                 const Card = p.href ? 'a' : 'article'
                 return (
@@ -117,13 +117,13 @@ export default function InsightsPage() {
                     className="flex flex-col overflow-hidden rounded-[3px] border border-gold-dark/30 bg-white/60 transition-colors hover:border-gold-dark/70"
                   >
                     {p.image && <img src={p.image} alt="" loading="lazy" className="aspect-[16/9] w-full object-cover" />}
-                    <div className="flex flex-1 flex-col p-6">
+                    <div className="flex flex-1 flex-col px-5 py-4">
                       <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-dark">
                         {(p.topic ? topicLabel(p.topic) : p.source ? 'Published Article' : 'Article').toUpperCase()}
                       </p>
-                      <h3 className="mt-3 font-display text-[24px] font-medium leading-tight">{p.title}</h3>
-                      {p.excerpt && <p className="mt-3 text-[14px] leading-[1.55] text-ink/80">{p.excerpt}</p>}
-                      <p className="mt-auto pt-5 text-[13px] text-ink/60">
+                      <h3 className="mt-2 font-display text-[20px] font-medium leading-tight">{p.title}</h3>
+                      {p.excerpt && <p className="mt-2 text-[13px] leading-[1.55] text-ink/80">{p.excerpt}</p>}
+                      <p className="mt-auto pt-3 text-[12px] text-ink/60">
                         {p.source && <>Published in <span className="text-ink/85">{p.source}</span> · </>}
                         {formatDate(p.date)}
                       </p>
@@ -154,13 +154,13 @@ export default function InsightsPage() {
       </section>
 
       {/* 4. topic categories for the chosen audience; picking one filters the list above */}
-      <section className="px-6 py-14 lg:px-12">
+      <section className="px-6 py-10 lg:px-12">
         <div className="mx-auto max-w-[1200px]">
           <div className="flex items-center gap-6">
-            <h2 className="whitespace-nowrap font-display text-[36px] font-medium leading-none text-white md:text-[40px]">Browse by Topic</h2>
+            <h2 className="whitespace-nowrap font-display text-[28px] font-medium leading-none text-white md:text-[32px]">Browse by Topic</h2>
             <span className="hidden h-px flex-1 bg-gold/30 sm:block" />
           </div>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {audienceTopics.map((t) => {
               const n = count(t.id)
               return (
@@ -168,17 +168,17 @@ export default function InsightsPage() {
                   key={t.id}
                   type="button"
                   onClick={() => pickTopic(t.id)}
-                  className={`group rounded-[3px] border p-6 text-left transition-colors ${
+                  className={`group rounded-[3px] border px-5 py-4 text-left transition-colors ${
                     topic === t.id ? 'border-gold bg-ink-3' : 'border-gold/25 bg-ink-2 hover:border-gold/60'
                   }`}
                 >
                   <span className="flex items-baseline justify-between gap-4">
-                    <span className="font-display text-[23px] font-medium leading-tight text-white">{t.label}</span>
+                    <span className="font-display text-[19px] font-medium leading-tight text-white">{t.label}</span>
                     <span className="shrink-0 text-[12px] tracking-[0.06em] text-gold">
                       {n ? `${n} article${n > 1 ? 's' : ''}` : 'Coming soon'}
                     </span>
                   </span>
-                  <span className="mt-2 block text-[14px] leading-[1.55] text-white/70">{t.text}</span>
+                  <span className="mt-1.5 block text-[13px] leading-[1.55] text-white/70">{t.text}</span>
                 </button>
               )
             })}
