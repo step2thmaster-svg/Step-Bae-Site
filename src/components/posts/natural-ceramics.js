@@ -91,7 +91,6 @@ export default {
         'The photo set above.',
         'Approved provisionals: a scan or model of them, or photos, if the patient is happy with their length and form.',
         'What the patient wants, in their words: “natural”, “bright”, “like my old teeth”. These mean very different things.',
-        'For critical anterior cases, a try-in before final glaze, so texture, form and value can still be adjusted chairside.',
       ],
     },
     {
