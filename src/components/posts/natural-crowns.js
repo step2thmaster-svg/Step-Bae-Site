@@ -25,25 +25,38 @@ export default {
     },
     { h2: 'See the difference' },
     {
-      pair: [
+      compare: [
         {
-          src: '/images/insights/natural-crowns-flat-model.jpg',
-          alt: 'A full set of crowns on a model, all one uniform color with flat, identical shapes',
+          label: 'Without life-like detail',
+          photos: [
+            {
+              src: '/images/insights/natural-crowns-flat-model.jpg',
+              alt: 'A full set of crowns on a model, all one uniform color with flat, identical shapes',
+              ratio: 238 / 182,
+            },
+            {
+              src: '/images/insights/natural-crowns-flat-smile.jpg',
+              alt: 'A smile before and after crowns, the new crowns bright, opaque and uniform',
+              ratio: 231 / 298,
+            },
+          ],
+          caption:
+            'One flat color from gumline to edge, no translucency, an inaccurate amateur model, and a lateral in the veneer case that is too long and will fracture because it ignores the envelope of function.',
         },
         {
-          src: '/images/insights/natural-crowns-flat-smile.jpg',
-          alt: 'A smile before and after crowns, the new crowns bright, opaque and uniform',
+          label: 'With life-like detail',
+          good: true,
+          photos: [
+            {
+              src: '/images/insights/natural-crowns-detail.jpg',
+              alt: 'A finished anterior arch of lithium disilicate restorations, with the layering, design and pencil-mapping stages shown below',
+              ratio: 960 / 367,
+            },
+          ],
+          caption:
+            'Internal color layered in, forms designed and mapped tooth by tooth, and a finished arch where every tooth has its own character.',
         },
       ],
-      caption:
-        'Restorations finished without life-like detail: one flat color from gumline to edge, no translucency, an inaccurate amateur model, and a lateral in the veneer case that is too long and will fracture because it ignores the envelope of function.',
-    },
-    {
-      figure: '/images/insights/natural-crowns-detail.jpg',
-      alt: 'A finished anterior arch of lithium disilicate restorations, with the layering, design and pencil-mapping stages shown below',
-      caption:
-        'The same kind of case done with care: internal color layered in, forms designed and mapped tooth by tooth, and a finished arch where every tooth has its own character.',
-      repeat: true, // also the main photo at the top
     },
     { h2: 'Color: depth, not a single shade' },
     {

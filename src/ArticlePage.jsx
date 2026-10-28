@@ -50,6 +50,35 @@ function Block({ block }) {
         ))}
       </ul>
     )
+  // labelled comparison panels; photos in a panel share one height (each grows by its width ÷ height) so none is cropped
+  if (block.compare)
+    return (
+      <div className="mt-8 space-y-4">
+        {block.compare.map((panel) => (
+          <figure
+            key={panel.label}
+            className={`rounded-[3px] border p-4 ${panel.good ? 'border-gold-dark/50 bg-white/70' : 'border-ink/15 bg-white/40'}`}
+          >
+            <p className={`mb-3 text-[11px] font-semibold tracking-[0.2em] ${panel.good ? 'text-gold-dark' : 'text-ink/55'}`}>
+              {panel.label.toUpperCase()}
+            </p>
+            <div className="flex gap-3">
+              {panel.photos.map((photo) => (
+                <img
+                  key={photo.src}
+                  src={photo.src}
+                  alt={photo.alt}
+                  loading="lazy"
+                  style={{ flex: `${photo.ratio} 1 0%` }}
+                  className="min-w-0 rounded-[3px]"
+                />
+              ))}
+            </div>
+            <figcaption className="mt-3 text-[14px] italic leading-[1.5] text-ink/70">{panel.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    )
   // two small photos side by side with one shared caption
   if (block.pair)
     return (
