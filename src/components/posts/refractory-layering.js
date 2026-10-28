@@ -87,9 +87,6 @@ export default {
       alt: 'The finished veneers on a reflective black surface, seen from the side to show their thinness',
       caption: 'From the side, the shells are thin enough to let the natural tooth beneath contribute to the color.',
     },
-    {
-      p: 'Seated back on the master model, the finished veneers show what the process is for: ten units that read as one natural smile, each with its own character, and none of them looking like it was made in a lab.',
-    },
     { h2: 'What it means for the dentist' },
     {
       list: [
@@ -104,6 +101,13 @@ export default {
     { h2: 'The right tool for the case' },
     {
       p: 'Most anterior cases don’t need a refractory model, and I won’t suggest one when pressed ceramics will do the job. But when a smile calls for the thinnest possible veneers and color built from the inside out, this is the technique I trust. If you have a case like that, send it over and we can decide together which approach will serve it best.',
+    },
+    {
+      figure: '/images/insights/refractory-final.jpg',
+      alt: 'Ten finished feldspathic veneers seated on the master model, against a black background',
+      caption:
+        'Seated back on the master model: ten units that read as one natural smile, each with its own character.',
+      repeat: true, // also shown as the main photo at the top
     },
   ],
 }

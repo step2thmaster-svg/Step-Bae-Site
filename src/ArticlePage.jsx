@@ -135,9 +135,9 @@ export default function ArticlePage() {
       <article className="bg-cream px-6 py-12 text-ink lg:px-12">
         <div className="mx-auto max-w-[700px] text-[17px] leading-[1.7] text-ink/90">
           <p className="font-display text-[22px] italic leading-[1.45] text-ink">{post.excerpt}</p>
-          {/* the post's main photo is already shown above the article, so it isn't repeated in the text */}
+          {/* the post's main photo is already shown above the article, so it isn't repeated in the text unless marked `repeat` */}
           {post.body
-            .filter((block) => block.figure !== post.image)
+            .filter((block) => block.figure !== post.image || block.repeat)
             .map((block, i) => (
               <Block key={i} block={block} />
             ))}
