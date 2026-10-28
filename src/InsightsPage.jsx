@@ -114,16 +114,19 @@ export default function InsightsPage() {
                   <Card
                     key={`${p.date}${p.title}`}
                     {...(p.href ? { href: p.href } : {})}
-                    className="flex flex-col overflow-hidden rounded-[3px] border border-gold-dark/30 bg-white/60 transition-colors hover:border-gold-dark/70"
+                    // posts with a photo are featured across the full row, photo beside the text from sm up
+                    className={`flex flex-col overflow-hidden rounded-[3px] border border-gold-dark/30 bg-white/60 transition-colors hover:border-gold-dark/70 ${
+                      p.image ? 'sm:col-span-2 sm:flex-row lg:col-span-4' : ''
+                    }`}
                   >
-                    {p.image && <img src={p.image} alt="" loading="lazy" className="aspect-[16/9] w-full object-cover" />}
-                    <div className="flex flex-1 flex-col px-5 py-4">
+                    {p.image && <img src={p.image} alt="" loading="lazy" className="aspect-[16/9] w-full object-cover sm:w-1/2 sm:self-stretch" />}
+                    <div className={`flex flex-1 flex-col ${p.image ? 'px-6 py-5 sm:justify-center md:px-8' : 'px-5 py-4'}`}>
                       <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-dark">
                         {(p.topic ? topicLabel(p.topic) : p.source ? 'Published Article' : 'Article').toUpperCase()}
                       </p>
-                      <h3 className="mt-2 font-display text-[20px] font-medium leading-tight">{p.title}</h3>
-                      {p.excerpt && <p className="mt-2 text-[13px] leading-[1.55] text-ink/80">{p.excerpt}</p>}
-                      <p className="mt-auto pt-3 text-[12px] text-ink/60">
+                      <h3 className={`mt-2 font-display font-medium leading-tight ${p.image ? 'text-[24px] md:text-[28px]' : 'text-[20px]'}`}>{p.title}</h3>
+                      {p.excerpt && <p className="mt-2 text-[14px] leading-[1.55] text-ink/80">{p.excerpt}</p>}
+                      <p className={`pt-3 text-[12px] text-ink/60 ${p.image ? '' : 'mt-auto'}`}>
                         {p.source && <>Published in <span className="text-ink/85">{p.source}</span> · </>}
                         {formatDate(p.date)}
                       </p>

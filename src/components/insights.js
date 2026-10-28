@@ -1,4 +1,5 @@
 import { articles } from './cv.js'
+import naturalCeramics from './posts/natural-ceramics.js'
 
 // the two audiences the Insights library is split by; every post and topic belongs to one
 export const audiences = {
@@ -25,9 +26,11 @@ export const topics = [
   { id: 'full-arch', audience: 'patients', label: 'Implants & Full-Arch Smiles', text: 'How implant teeth are made, explained simply.' },
 ]
 
-// blog posts, newest anywhere in the list; to add one:
-// { title, audience: 'dentists' | 'patients', topic: <topic id>, date: 'M/YYYY', excerpt, image (optional), href (optional) }
-export const posts = []
+// blog posts, each in its own file in ./posts (see natural-ceramics.js for the shape), in any order;
+// to add one, create the file and import it here. Each post is read at /article.html?p=<slug>
+export const posts = [naturalCeramics].map((post) => ({ ...post, href: `/article.html?p=${post.slug}` }))
+
+export const getPost = (slug) => posts.find((post) => post.slug === slug)
 
 // Step's published trade-journal articles, filed for dentists; the topic is set where the subject makes it clear
 const articleTopics = {
