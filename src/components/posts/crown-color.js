@@ -18,7 +18,7 @@ export default {
     {
       figure: '/images/insights/color-natural-stain.jpg',
       alt: 'Close-up of natural front teeth with yellowing, staining near the gums and wear on the edges',
-      caption: 'Natural teeth with years of staining and wear. A new crown matched to them today will stay the same color as they keep changing.',
+      caption: 'Natural teeth with years of staining and wear. A new crown on #7 to match the natural teeth.',
     },
     {
       p: 'Natural teeth slowly darken and yellow with age, and they pick up stains from coffee, tea, red wine and tobacco. Porcelain and zirconia don’t stain the same way. A crown that matched perfectly years ago can stand out today simply because the teeth around it have changed.',
