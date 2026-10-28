@@ -69,6 +69,10 @@ export default function ArticlePage() {
           {post.image && (
             <img src={post.image} alt="" className="mx-auto mt-10 w-full max-w-[1000px] rounded-[3px]" />
           )}
+          {/* article photos may carry the name Bay, the spelling Step used from about 2012 to 2023 */}
+          <p className="mx-auto mt-3 max-w-[1000px] text-center text-[13px] italic leading-relaxed text-white/55">
+            Some photos credit “Step Bay,” the spelling of Step’s surname from 2012 to 2023.
+          </p>
         </section>
       </div>
 

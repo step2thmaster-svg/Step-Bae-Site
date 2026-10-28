@@ -53,6 +53,10 @@ export default function InsightsPage() {
             Articles from Step Toothmaster Bae, CDT, DTG: practical lab insight for dentists, and clear
             answers for patients about the restorations in their smile.
           </p>
+          {/* some article photos carry the name Bay, the spelling Step used from about 2012 to 2023 */}
+          <p className="mx-auto mt-3 max-w-[560px] text-[14px] italic leading-relaxed text-white/60">
+            Some photos credit “Step Bay,” the spelling of Step’s surname from 2012 to 2023.
+          </p>
         </section>
 
         {/* 2. audience navigation: the two ways into the library */}
