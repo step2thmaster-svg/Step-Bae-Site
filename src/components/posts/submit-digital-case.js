@@ -1,4 +1,5 @@
-// scanner photos: 3Shape, iTero and Medit images are the makers' own product and press photos;
+// scanner photos: 3Shape, iTero and Medit images are the makers' own product and press photos
+// (the main photo is 3Shape's, labelled by them as AI-generated);
 // the Primescan photo is from Wikimedia Commons under CC BY 4.0
 export default {
   slug: 'how-to-submit-a-digital-case',
@@ -8,9 +9,10 @@ export default {
   date: '10/2026',
   excerpt:
     'A practical checklist for sending a digital case: the scan files, the prescription, shade information, photographs and the notes that help us get it right the first time.',
-  image: '/images/insights/submit-3shape-trios.jpg',
-  imageAlt: 'A 3Shape TRIOS intraoral scanner wand',
-  imageCredit: { credit: '3Shape / 3shape.com', creditHref: 'https://www.3shape.com/en/scanners/trios-6' },
+  image: '/images/insights/submit-patient-smile.jpg',
+  imageAlt: 'A smiling patient relaxing in a dental chair',
+  imageCredit: { credit: '3Shape / 3shape.com (AI-generated image)', creditHref: 'https://www.3shape.com/en/scanners/trios-6' },
+  imagePosition: '60% 40%', // keeps the smile in the Insights card
   cta: {
     title: 'Ready to send your first digital case?',
     text: 'Connect your scanner to STEPBAE in a few minutes. Our step-by-step instructions cover iTero, 3Shape TRIOS, Medit and Primescan.',
@@ -35,6 +37,13 @@ export default {
     },
     {
       p: 'The full steps for each portal are on our Dentist Partnership page.',
+    },
+    {
+      figure: '/images/insights/submit-3shape-trios.jpg',
+      alt: 'A 3Shape TRIOS intraoral scanner wand',
+      caption: '3Shape TRIOS. Cases go to STEPBAE through 3Shape Unite or Communicate.',
+      credit: '3Shape / 3shape.com',
+      creditHref: 'https://www.3shape.com/en/scanners/trios-6',
     },
     {
       figure: '/images/insights/submit-primescan.jpg',
