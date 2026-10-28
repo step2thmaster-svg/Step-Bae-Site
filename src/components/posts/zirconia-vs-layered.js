@@ -69,12 +69,6 @@ export default {
     {
       p: 'Two patients can present with the same tooth, the same preparation and the same shade, and still be right for different materials. One is a bruxer who wants a crown that will never chip; the other is a patient whose priority is a central incisor no one can pick out. The clinical requirements are identical, but the trade-off each patient is willing to make is not. That is why the conversation with the patient matters as much as the chart.',
     },
-    {
-      figure: '/images/insights/zirconia-posterior-model.jpg',
-      alt: 'A molar crown seated on a stone model, checked for fit and contacts against the neighboring teeth',
-      caption: 'A molar crown checked on the model. Fit, contacts and form are confirmed before the material is finished.',
-      small: true,
-    },
     { h2: 'Making the choice together' },
     {
       p: 'Layered ceramic gives the most natural result, at the cost of strength. Zirconia gives the most durable result, at some cost to esthetics. Most cases fall somewhere in between, and that is where a conversation with your lab helps most. Tell me about the tooth, the bite and the patient, and we can choose the material that serves that case best.',
