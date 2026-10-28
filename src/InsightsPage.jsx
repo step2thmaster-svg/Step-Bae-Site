@@ -123,7 +123,7 @@ export default function InsightsPage() {
                       p.image ? 'sm:col-span-2 sm:flex-row' : ''
                     }`}
                   >
-                    {p.image && <img src={p.image} alt="" loading="lazy" className="aspect-[16/9] w-full object-cover sm:aspect-auto sm:w-2/5 sm:self-stretch" />}
+                    {p.image && <img src={p.image} alt="" loading="lazy" style={{ objectPosition: p.imagePosition }} className="aspect-[16/9] w-full object-cover sm:aspect-auto sm:w-2/5 sm:self-stretch" />}
                     <div className={`flex flex-1 flex-col ${p.image ? 'px-5 py-4 sm:justify-center' : 'px-5 py-4'}`}>
                       <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-dark">
                         {(p.topic ? topicLabel(p.topic) : p.source ? 'Published Article' : 'Article').toUpperCase()}
