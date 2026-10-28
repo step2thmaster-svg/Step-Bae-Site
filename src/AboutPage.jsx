@@ -55,16 +55,17 @@ export default function AboutPage() {
               <h1 className="mt-3 font-display text-[44px] font-medium leading-[1.08] text-white md:text-[58px]">
                 Step <em className="font-normal text-gold">Toothmaster</em> Bae
               </h1>
-              <p className="mt-4 max-w-[680px] text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
+              {/* the name note reads as an aside; text-pretty keeps the last lines of each paragraph from ending on a lone word */}
+              <p className="mt-4 max-w-[640px] text-[15px] italic leading-[1.65] text-white/70 md:text-[16px]">
                 Toothmaster is the legal middle name, not a nickname.
               </p>
-              <p className="mt-3 max-w-[680px] text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
-                Count on Step when the details matter: setting up or
+              <p className="mt-4 max-w-[640px] text-pretty text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
+                Step specializes in setting up or
                 refining a digital workflow, planning complex esthetic and implant cases, and
-                training teams to get more from their materials. Step works side by side with your
+                training teams to get more from their potential. Step works side by side with your
                 dentist and the team, so the improvements become part of how you work.
               </p>
-              <p className="mt-3 max-w-[680px] text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
+              <p className="mt-4 max-w-[640px] text-pretty text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
                 That advice is built on experience: since {firstYear}, more than{' '}
                 {lectureCount} lectures, demonstrations and hands-on courses across
                 the United States, Germany, South Korea and Mexico, including the Morphopsychology course
