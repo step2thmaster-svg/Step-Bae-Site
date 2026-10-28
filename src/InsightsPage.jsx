@@ -62,7 +62,7 @@ export default function InsightsPage() {
                     {...(p.href ? { href: p.href } : {})}
                     // posts with a photo are featured wider than the rest (two to a row on large screens), photo beside the text from sm up;
                     // the band across the top shows who the article is for
-                    className={`relative flex flex-col overflow-hidden rounded-[3px] border border-ink/15 bg-white/60 pt-1 transition-colors hover:border-ink/40 ${
+                    className={`relative flex flex-col overflow-hidden rounded-[3px] border border-ink/15 bg-white/60 pt-1 transition-colors ${p.href ? 'hover:border-ink/40' : ''} ${
                       p.image ? 'sm:col-span-2 sm:flex-row' : ''
                     }`}
                   >
@@ -81,6 +81,8 @@ export default function InsightsPage() {
                         {p.source && <>Published in <span className="text-ink/85">{p.source}</span> · </>}
                         {formatDate(p.date)}
                       </p>
+                      {/* published articles without a page here yet; they get one (and a link) once uploaded */}
+                      {!p.href && <p className="pt-1 text-[12px] italic text-gold-dark">Coming soon to the site</p>}
                     </div>
                   </Card>
                 )
