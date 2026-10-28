@@ -41,7 +41,7 @@ function Credit({ block, className = '' }) {
   )
 }
 
-// who wrote the post: Step by default, or the STEPBAE team for general, less technical posts (`author: 'team'`);
+// who wrote the post: Step by default, or STEPBAE.COM for general, less technical posts (`author: 'stepbae'`);
 // shown in the byline and in a box at the end, and sent to search engines as Article structured data below
 const authors = {
   step: {
@@ -58,24 +58,23 @@ const authors = {
       'https://www.youtube.com/@boynamedbae',
     ],
   },
-  team: {
+  stepbae: {
     type: 'Organization',
-    name: 'STEPBAE Team',
-    byline: 'STEPBAE Team',
+    name: 'STEPBAE.COM',
+    byline: 'STEPBAE.COM',
     url: 'https://stepbae.com',
   },
 }
 
 function AuthorBox({ author }) {
-  if (author === authors.team)
+  if (author === authors.stepbae)
     return (
       <aside className="mt-12 border-t border-gold-dark/30 pt-8 text-center sm:text-left">
         <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-dark">ABOUT THE AUTHOR</p>
         <p className="mt-1 font-display text-[22px] font-medium leading-tight text-ink">{author.name}</p>
         <p className="mt-2 text-[15px] leading-[1.6] text-ink/80">
-          This article was written by the team at STEPBAE, the dental laboratory of Step Toothmaster Bae, CDT, DTG. We
-          make crowns, veneers and implant restorations by hand for dentists, and write these guides to help patients
-          understand the work in their smile.
+          STEPBAE.COM is the dental laboratory of Step Toothmaster Bae, CDT, DTG. We make crowns, veneers and implant
+          restorations by hand for dentists, and write these guides to help patients understand the work in their smile.
         </p>
         <a href="/about.html" className="mt-2 inline-block text-[14px] font-medium text-gold-dark underline underline-offset-4 hover:text-ink">
           More about STEPBAE

@@ -6,7 +6,7 @@ export default {
   slug: 'veneers-vs-braces-or-clear-aligners',
   title: 'Veneers vs. Braces or Clear Aligners: What’s the Difference?',
   audience: 'patients',
-  author: 'team',
+  author: 'stepbae',
   topic: 'choosing',
   date: '10/2026',
   excerpt:
