@@ -1,4 +1,5 @@
-// body blocks: { h2 }, { p }, { list: [...] }, { figure, alt, caption }
+// body blocks: { h2 }, { p }, { list: [...] }, { figure, alt, caption, credit?, creditHref?, license?, licenseHref? }
+// optional: nameNote (shows the Bay/Bae note), cta: { title, text, label, href }
 export default {
   slug: 'natural-looking-ceramic-restorations',
   title: 'How to Get More Natural-Looking Ceramic Restorations',
@@ -8,6 +9,7 @@ export default {
   excerpt:
     'Shade is only the start. Translucency, texture, form, good photographs and clear communication are what make a restoration disappear in the smile.',
   image: '/images/insights/natural-ceramics-texture.jpg',
+  nameNote: true, // photos carry Step's old “bay” watermark
   body: [
     {
       p: 'When an anterior restoration looks “fake”, the shade is rarely the only problem. More often the value is a little high, the translucency is in the wrong place, the surface is too smooth, or the form doesn’t belong to that patient. The good news is that every one of these can be controlled, and most of them start in the operatory, before the case ever reaches the lab.',
