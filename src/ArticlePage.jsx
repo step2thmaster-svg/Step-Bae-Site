@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import Header from './components/Header.jsx'
 import Button from './components/Button.jsx'
 import Footer from './components/Footer.jsx'
-import { topics, getPost, formatDate, audienceLabel } from './components/insights.js'
+import { topics, getPost, formatDate } from './components/insights.js'
 import AudienceTag, { audienceColor } from './components/AudienceTag.jsx'
 
 // which post to show comes from the address, e.g. /article.html?p=natural-looking-ceramic-restorations
@@ -144,7 +144,7 @@ export default function ArticlePage() {
   const topic = topics.find((t) => t.id === post.topic)
   const heroFigure = post.body.find((block) => block.figure === post.image)
   const cta = post.cta ?? defaultCtas[post.audience] ?? defaultCtas.dentists
-  const insightsHref = post.audience === 'both' ? '/insights.html' : `/insights.html#${post.audience}`
+  const insightsHref = '/insights.html'
 
   return (
     <div className="min-h-screen bg-ink">
@@ -205,7 +205,7 @@ export default function ArticlePage() {
           </div>
           <p className="mt-8">
             <a href={insightsHref} className="text-[14px] text-white/70 underline underline-offset-4 hover:text-gold">
-              More insights {post.audience === 'both' ? '' : audienceLabel(post.audience).toLowerCase()}
+              More insights
             </a>
           </p>
         </div>
