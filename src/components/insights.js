@@ -7,6 +7,7 @@ import submitDigitalCase from './posts/submit-digital-case.js'
 import naturalCrowns from './posts/natural-crowns.js'
 import crownVsVeneer from './posts/crown-vs-veneer.js'
 import crownColor from './posts/crown-color.js'
+import veneersVsOrtho from './posts/veneers-vs-orthodontics.js'
 
 // the two audiences the Insights library is split by; every topic belongs to one,
 // and a post belongs to one or to 'both' (it then appears under each)
@@ -41,7 +42,7 @@ export const topics = [
 
 // blog posts, each in its own file in ./posts (see natural-ceramics.js for the shape), newest first;
 // to add one, create the file and import it here. Each post is read at /article.html?p=<slug>
-export const posts = [crownColor, crownVsVeneer, naturalCrowns, submitDigitalCase, zirconiaVsLayered, refractoryLayering, shadeMatching, naturalCeramics].map((post) => ({ ...post, href: `/article.html?p=${post.slug}` }))
+export const posts = [veneersVsOrtho, crownColor, crownVsVeneer, naturalCrowns, submitDigitalCase, zirconiaVsLayered, refractoryLayering, shadeMatching, naturalCeramics].map((post) => ({ ...post, href: `/article.html?p=${post.slug}` }))
 
 export const getPost = (slug) => posts.find((post) => post.slug === slug)
 
