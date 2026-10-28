@@ -73,5 +73,10 @@ export default {
     {
       p: 'If your crown doesn’t look right to you, mention it at your next visit. It’s a common question, and your dentist will be glad you asked.',
     },
+    {
+      figure: '/images/insights/color-team-evening.jpg',
+      alt: 'Step with a group of dentists and colleagues smiling together, with smile photos on the TV behind them',
+      caption: 'Dentists and technicians reviewing smiles together. Great results come from the whole team talking.',
+    },
   ],
 }
