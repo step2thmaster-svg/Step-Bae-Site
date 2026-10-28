@@ -4,7 +4,7 @@ export default {
   title: 'Zirconia Crown vs. Layered Zirconia Crown: What Dentists Should Consider',
   audience: 'dentists',
   topic: 'zirconia',
-  date: '10/2026',
+  date: '11/2025',
   excerpt:
     'Layered ceramic looks more natural; zirconia is far stronger. The right choice depends on the case in front of you, not on which material is “best”.',
   image: '/images/insights/zirconia-layered-anterior.jpg',

@@ -4,7 +4,7 @@ export default {
   title: 'Why Is My Dental Crown a Different Color From My Other Teeth?',
   audience: 'patients',
   topic: 'care',
-  date: '10/2026',
+  date: '8/2026',
   excerpt:
     'A crown that doesn’t quite match can be frustrating. There are several possible reasons, and your dentist is the best person to tell you which one applies to yours.',
   image: '/images/insights/color-matched-centrals.jpg',

@@ -3,7 +3,7 @@ export default {
   title: 'Shade Matching for Dental Crowns: A Guide for Dentists',
   audience: 'dentists',
   topic: 'shade',
-  date: '10/2026',
+  date: '6/2025',
   excerpt:
     'Most shade problems don’t start in the ceramic. They start with how the shade was taken, the light it was taken in, and what reached the lab with the case.',
   image: '/images/insights/shade-toothguide-3d-master.jpg',

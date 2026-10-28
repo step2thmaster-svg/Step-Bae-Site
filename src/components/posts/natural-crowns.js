@@ -5,7 +5,7 @@ export default {
   title: 'Why Do Some Dental Crowns Look More Natural Than Others?',
   audience: 'both',
   topic: 'veneers',
-  date: '10/2026',
+  date: '3/2026',
   excerpt:
     'Two crowns can share the same shade on paper and look nothing alike in the mouth. The difference is color, shape and surface detail, and the care taken by the dentist and the lab.',
   image: '/images/insights/natural-crowns-detail.jpg',

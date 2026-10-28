@@ -4,7 +4,7 @@ export default {
   title: 'Ceramic Layering on a Refractory Model: Technique and Considerations',
   audience: 'dentists',
   topic: 'ceramics',
-  date: '10/2026',
+  date: '9/2025',
   excerpt:
     'When pressed ceramics and platinum foil can’t deliver what a case needs, I layer feldspathic ceramic directly on a refractory model. Here is how it works, and what it asks of the dentist.',
   image: '/images/insights/refractory-final.jpg',

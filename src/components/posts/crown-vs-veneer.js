@@ -4,7 +4,7 @@ export default {
   title: 'What Is the Difference Between a Dental Crown and a Veneer?',
   audience: 'patients',
   topic: 'choosing',
-  date: '10/2026',
+  date: '6/2026',
   excerpt:
     'Crowns and veneers can both give you a beautiful smile, but they are made for different jobs. Here is what each one is, how they differ, and why your dentist is the one who decides.',
   image: '/images/insights/crown-veneer-front-crowns.jpg',

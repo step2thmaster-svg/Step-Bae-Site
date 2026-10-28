@@ -6,7 +6,7 @@ export default {
   title: 'How to Submit a Digital Dental Case to STEPBAE',
   audience: 'dentists',
   topic: 'digital',
-  date: '10/2026',
+  date: '1/2026',
   excerpt:
     'A practical checklist for sending a digital case: the scan files, the prescription, shade information, photographs and the notes that help us get it right the first time.',
   image: '/images/insights/submit-dentist-patient.jpg',

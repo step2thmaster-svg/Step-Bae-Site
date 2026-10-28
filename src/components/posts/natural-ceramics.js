@@ -5,7 +5,7 @@ export default {
   title: 'How to Get More Natural-Looking Ceramic Restorations',
   audience: 'dentists',
   topic: 'shade',
-  date: '10/2026',
+  date: '4/2025',
   excerpt:
     'Shade is only the start. Translucency, texture, form, good photographs and clear communication are what make a restoration disappear in the smile.',
   image: '/images/insights/natural-ceramics-texture.jpg',
