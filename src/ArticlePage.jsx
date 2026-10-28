@@ -41,29 +41,53 @@ function Credit({ block, className = '' }) {
   )
 }
 
-// who wrote the post, shown at the end of every article; the same details go to search engines as Article structured data below
-const author = {
-  name: 'Step Toothmaster Bae',
-  credentials: 'CDT, DTG',
-  photo: '/images/headshot2.jpg',
-  url: 'https://stepbae.com/about.html',
-  sameAs: [
-    'https://www.threads.com/@step2thmaster',
-    'https://www.facebook.com/step2thmaster/',
-    'https://www.tiktok.com/@boynamedbae',
-    'https://www.youtube.com/@boynamedbae',
-  ],
+// who wrote the post: Step by default, or the STEPBAE team for general, less technical posts (`author: 'team'`);
+// shown in the byline and in a box at the end, and sent to search engines as Article structured data below
+const authors = {
+  step: {
+    type: 'Person',
+    name: 'Step Toothmaster Bae',
+    byline: 'Step Toothmaster Bae, CDT, DTG',
+    credentials: 'CDT, DTG',
+    photo: '/images/headshot2.jpg',
+    url: 'https://stepbae.com/about.html',
+    sameAs: [
+      'https://www.threads.com/@step2thmaster',
+      'https://www.facebook.com/step2thmaster/',
+      'https://www.tiktok.com/@boynamedbae',
+      'https://www.youtube.com/@boynamedbae',
+    ],
+  },
+  team: {
+    type: 'Organization',
+    name: 'STEPBAE Team',
+    byline: 'STEPBAE Team',
+    url: 'https://stepbae.com',
+  },
 }
 
-function AuthorBox() {
+function AuthorBox({ author }) {
+  if (author === authors.team)
+    return (
+      <aside className="mt-12 border-t border-gold-dark/30 pt-8 text-center sm:text-left">
+        <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-dark">ABOUT THE AUTHOR</p>
+        <p className="mt-1 font-display text-[22px] font-medium leading-tight text-ink">{author.name}</p>
+        <p className="mt-2 text-[15px] leading-[1.6] text-ink/80">
+          This article was written by the team at STEPBAE, the dental laboratory of Step Toothmaster Bae, CDT, DTG. We
+          make crowns, veneers and implant restorations by hand for dentists, and write these guides to help patients
+          understand the work in their smile.
+        </p>
+        <a href="/about.html" className="mt-2 inline-block text-[14px] font-medium text-gold-dark underline underline-offset-4 hover:text-ink">
+          More about STEPBAE
+        </a>
+      </aside>
+    )
   return (
     <aside className="mt-12 flex flex-col items-center gap-5 border-t border-gold-dark/30 pt-8 text-center sm:flex-row sm:items-start sm:text-left">
       <img src={author.photo} alt={`Headshot of ${author.name}`} loading="lazy" className="h-20 w-20 shrink-0 rounded-full object-cover object-[50%_40%]" />
       <div>
         <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-dark">ABOUT THE AUTHOR</p>
-        <p className="mt-1 font-display text-[22px] font-medium leading-tight text-ink">
-          {author.name}, {author.credentials}
-        </p>
+        <p className="mt-1 font-display text-[22px] font-medium leading-tight text-ink">{author.byline}</p>
         <p className="mt-2 text-[15px] leading-[1.6] text-ink/80">
           Step is a dental technician who handcrafts esthetic and implant restorations. Since {events[0][0].split('/')[1]}, Step
           has given more than 70 lectures and hands-on courses internationally and published {articles.length} articles in
@@ -76,6 +100,8 @@ function AuthorBox() {
     </aside>
   )
 }
+
+const author = authors[post?.author] ?? authors.step
 
 // M/YYYY, as posts store it, to an ISO date (the 1st of the month) for structured data
 const isoDate = (date) => {
@@ -178,15 +204,18 @@ export default function ArticlePage() {
       description: post.excerpt,
       ...(post.image && { image: `https://stepbae.com${post.image}` }),
       datePublished: isoDate(post.date),
-      author: {
-        '@type': 'Person',
-        name: author.name,
-        honorificSuffix: author.credentials,
-        jobTitle: 'Dental Technician',
-        image: `https://stepbae.com${author.photo}`,
-        url: author.url,
-        sameAs: author.sameAs,
-      },
+      author:
+        author.type === 'Person'
+          ? {
+              '@type': 'Person',
+              name: author.name,
+              honorificSuffix: author.credentials,
+              jobTitle: 'Dental Technician',
+              image: `https://stepbae.com${author.photo}`,
+              url: author.url,
+              sameAs: author.sameAs,
+            }
+          : { '@type': 'Organization', name: author.name, url: author.url },
       publisher: { '@type': 'Organization', name: 'STEPBAE', url: 'https://stepbae.com' },
       mainEntityOfPage: `https://stepbae.com${post.href}`,
     })
@@ -228,7 +257,7 @@ export default function ArticlePage() {
             </a>
             <h1 className="mt-4 font-display text-[38px] font-medium leading-[1.1] text-white md:text-[52px]">{post.title}</h1>
             <p className="mt-5 text-[14px] text-white/70">
-              Step Toothmaster Bae, CDT, DTG <span className="px-1.5">·</span> {formatDate(post.date)}
+              {author.byline} <span className="px-1.5">·</span> {formatDate(post.date)}
             </p>
           </div>
           {post.image && (
@@ -258,7 +287,7 @@ export default function ArticlePage() {
             .map((block, i) => (
               <Block key={i} block={block} />
             ))}
-          <AuthorBox />
+          <AuthorBox author={author} />
         </div>
       </article>
 

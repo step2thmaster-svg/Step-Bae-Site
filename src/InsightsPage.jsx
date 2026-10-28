@@ -26,7 +26,7 @@ export default function InsightsPage() {
             Notes <em className="font-normal">from the</em> <em className="font-normal text-gold">Bench</em>
           </h1>
           <p className="mx-auto mt-5 max-w-[600px] text-[15px] leading-[1.6] text-white/90 md:text-[16px]">
-            Articles from Step Toothmaster Bae, CDT, DTG: practical lab insight for dentists, and clear
+            Articles from Step Toothmaster Bae, CDT, DTG, and the STEPBAE team: practical lab insight for dentists, and clear
             answers for patients about the restorations in their smile.
           </p>
           {/* some article photos carry the name Bay, the spelling Step used from about 2012 to 2023 */}

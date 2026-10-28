@@ -6,6 +6,7 @@ export default {
   slug: 'veneers-vs-braces-or-clear-aligners',
   title: 'Veneers vs. Braces or Clear Aligners: What’s the Difference?',
   audience: 'patients',
+  author: 'team',
   topic: 'choosing',
   date: '10/2026',
   excerpt:
@@ -32,7 +33,7 @@ export default {
       p: 'The tooth itself doesn’t move. Veneers create the appearance of straighter teeth by adding ceramic where it is needed, and sometimes by removing a little enamel where a tooth sits too far forward. Treatment usually takes a few appointments over a few weeks.',
     },
     {
-      p: 'In my lab, each veneer is shaped and layered by hand so that it matches the teeth around it, with the same subtle color changes and surface texture as natural enamel.',
+      p: 'In our lab, each veneer is shaped and layered by hand so that it matches the teeth around it, with the same subtle color changes and surface texture as natural enamel.',
     },
     { h2: 'Braces and clear aligners: moving the teeth' },
     {
@@ -100,7 +101,7 @@ export default {
       p: 'Many beautiful smiles use both. Orthodontic treatment first brings the teeth into a better position, and veneers then refine their shape and color. Because the teeth are already well aligned, the veneers often need much less tooth reduction, and sometimes very little. It can take longer overall, but it usually protects more of your natural teeth.',
     },
     {
-      p: 'From the lab’s side, this makes a real difference. When the teeth are in a good position, I can make veneers that are thin, natural and well supported, instead of building thick ceramic to disguise teeth that sit out of line.',
+      p: 'From the lab’s side, this makes a real difference. When the teeth are in a good position, we can make veneers that are thin, natural and well supported, instead of building thick ceramic to disguise teeth that sit out of line.',
     },
     { h2: 'Talk to your dentist' },
     {
