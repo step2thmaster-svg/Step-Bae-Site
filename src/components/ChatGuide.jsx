@@ -81,7 +81,7 @@ const steps = {
   start: {
     say: [
       'Hi, we’re the Mini Steps, welcome to STEPBAE! We help dentists deliver natural, beautiful restorations!',
-      'We’re here to help, so ask us anything! What brings you here today?',
+      'What brings you here today?',
     ],
     options: [
       { label: 'I’m a dentist: send a case', next: 'case-start' },
@@ -344,7 +344,7 @@ const steps = {
     ],
   },
   unknown: {
-    say: ['We’re here to help, though we’re simple guides and may not understand everything. Here’s what we can do for you:'],
+    say: ['We’re simple guides, so we may not understand everything. Here’s what we can help with:'],
     options: [
       { label: 'Send a case', next: 'case-start' },
       { label: 'Find my way around', next: 'browse' },
