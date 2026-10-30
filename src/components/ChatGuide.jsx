@@ -5,6 +5,7 @@ import { portals } from './PortalGuide.jsx'
 import { EMAIL, sendForm, prefill } from './sendForm.js'
 import { articles } from './cv.js'
 import { unitOptions } from './PartnerForm.jsx'
+import { inquiryOptions, orgOptions } from './ConsultForm.jsx'
 
 // The Mini Steps, the site's guide and sales rep: a scripted conversation (no AI, no server) that helps visitors
 // find their way, makes the case for STEPBAE, answers the usual questions (price, turnaround, "I already have a lab")
@@ -186,6 +187,22 @@ const steps = {
       { label: 'Maybe later', next: 'start' },
     ],
   },
+  'lead-consult': {
+    say: ['Wonderful! Let’s get your inquiry to Step. Just a few quick questions.'],
+    lead: 'consult',
+    options: [
+      { label: 'Start my inquiry', next: 'lead-consult' },
+      { label: 'Maybe later', next: 'start' },
+    ],
+  },
+  'consult-thanks': {
+    say: ['Thank you! Your inquiry is on its way, and Step will be in touch shortly to set up a conversation.', 'In the meantime, take a look at what’s coming up:'],
+    options: [
+      { label: 'Upcoming courses & events', href: '/consultation.html#events' },
+      { label: 'About Step', href: '/about.html' },
+      { label: 'Start over', next: 'start' },
+    ],
+  },
   'lead-thanks': {
     say: ['Thank you! We’ve got your details, and Step will be in touch shortly.', 'While you wait, would you like to see some of Step’s work?'],
     options: [
@@ -201,9 +218,9 @@ const steps = {
       'What would you like to do?',
     ],
     options: [
+      { label: 'Plan it with us here', next: 'lead-consult' },
       { label: 'See consulting services', href: '/consultation.html#services' },
       { label: 'Upcoming courses & events', href: '/consultation.html#events' },
-      { label: 'Book a consultation', href: '/consultation.html#inquiry' },
     ],
   },
   insights: {
@@ -301,16 +318,51 @@ const leadFields = {
     choices: unitOptions,
   },
   message: { key: 'Message', ask: () => 'What would you like to ask Step? Tell us a little about your case or question.' },
+  // the consultation inquiry, the same questions as the form on the Consultation page
+  role: { key: 'Role', ask: (a) => `Nice to meet you, ${a.Name}! What’s your title or role?`, optional: true, autoComplete: 'organization-title' },
+  organization: { key: 'Organization', ask: () => 'Which company or organization are you with?', autoComplete: 'organization' },
+  orgType: { key: 'Organization type', ask: (a) => `And what kind of organization is ${a.Organization}?`, choices: orgOptions },
+  website: { key: 'Website', ask: () => 'Do you have a website we can look at?', optional: true, autoComplete: 'url' },
+  inquiry: { key: 'Inquiry', ask: () => 'What are you reaching out about?', choices: inquiryOptions },
+  timeline: { key: 'Timeline', ask: () => 'Any preferred dates or timeline? (For example, spring 2027, or flexible.)', optional: true },
+  details: {
+    key: 'Message',
+    label: 'Tell us more',
+    ask: () => 'Last one! Tell us more: your goals, audience or team size, location and budget, whatever helps Step prepare.',
+  },
 }
 const leadFlows = {
   price: {
+    formName: 'partnership',
+    thanks: 'lead-thanks',
     subject: 'Price list request (Mini Steps chat)',
     fields: ['name', 'practice', 'email', 'phone', 'units'],
     fixed: { Message: 'Please send me your price list.' },
   },
-  talk: { subject: 'Question for Step (Mini Steps chat)', fields: ['name', 'practice', 'email', 'phone', 'message'], fixed: {} },
+  talk: {
+    formName: 'partnership',
+    thanks: 'lead-thanks',
+    subject: 'Question for Step (Mini Steps chat)',
+    fields: ['name', 'practice', 'email', 'phone', 'message'],
+    fixed: {},
+  },
+  consult: {
+    formName: 'consultation',
+    thanks: 'consult-thanks',
+    subject: 'New consultation inquiry (Mini Steps chat)',
+    fields: ['name', 'role', 'organization', 'orgType', 'email', 'website', 'inquiry', 'timeline', 'details'],
+    fixed: {},
+  },
 }
 const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
+// the summary is kept on the message, so it still reads correctly after the lead is sent
+const reviewMessage = (flow, answers) => ({
+  from: 'bot',
+  lead: 'review',
+  summary: leadFlows[flow].fields
+    .map((id) => [leadFields[id].label ?? leadFields[id].key, answers[leadFields[id].key]])
+    .filter(([, v]) => v),
+})
 const askMessage = (answers, field, note = '') => ({
   from: 'bot',
   lead: 'ask',
@@ -334,6 +386,7 @@ const keywordRules = [
   [/talk|speak|human|person|call me|step bae/, 'lead-talk'],
   [/case|send|submit|start|partner|account/, 'case-start'],
   [/patient|my teeth|my dentist|my crown|my veneer/, 'patient'],
+  [/book|hire|invite|speaker|sponsor/, 'lead-consult'],
   [/course|lecture|consult|training|event|class/, 'consulting'],
   [/article|blog|insight|read/, 'insights'],
   [/work|gallery|photos|cases you/, 'browse'],
@@ -458,7 +511,7 @@ export default function ChatGuide() {
     const next = { ...lead, answers: { ...lead.answers, [field.key]: value }, editing: null }
     next.i = lead.editing ? fields.length : lead.i + 1
     setLead(next)
-    say(reply, next.i < fields.length ? askMessage(next.answers, fields[next.i]) : { from: 'bot', lead: 'review' })
+    say(reply, next.i < fields.length ? askMessage(next.answers, fields[next.i]) : reviewMessage(lead.flow, next.answers))
   }
   const changeField = (id) => {
     setLead({ ...lead, editing: id })
@@ -471,15 +524,15 @@ export default function ChatGuide() {
     data.append('Source', `Mini Steps chat, ${window.location.pathname}`)
     setLead({ ...lead, sending: true })
     try {
-      if (await sendForm(data, flow.subject, 'partnership')) {
+      if (await sendForm(data, flow.subject, flow.formName)) {
         const a = lead.answers
-        prefill.add(
+        if (flow.formName === 'partnership') prefill.add(
           Object.fromEntries(
             Object.entries({ 'Dentist name': a.Name, 'Practice name': a.Practice, email: a.email, 'Units per month': a['Units per month'] }).filter(([, v]) => v),
           ),
         )
         setLead(null)
-        say(botMessage('lead-thanks'))
+        say(botMessage(flow.thanks))
       } else setLead({ ...lead, sending: false })
     } catch {
       setLead({ ...lead, sending: false })
@@ -619,20 +672,16 @@ function LeadTurn({ message, lead, active, onAnswer, onChange, onChangeField, on
       <Avatar crew size="h-8 w-8" still className="mt-0.5 ring-1" />
       <div className="min-w-0 space-y-2">
         {message.lead === 'ask' && <Bubble>{message.text}</Bubble>}
-        {message.lead === 'review' && flow && (
+        {message.lead === 'review' && (
           <>
             <Bubble>Here’s what we’ll send Step. Does everything look right?</Bubble>
             <dl className="space-y-1 rounded-[12px] bg-cream px-3 py-2.5 text-[13px] leading-snug text-ink/90">
-              {flow.fields.map((id) => {
-                const f = leadFields[id]
-                const v = lead.answers[f.key]
-                return v ? (
-                  <div key={id} className="flex gap-2">
-                    <dt className="shrink-0 font-semibold text-gold-dark">{f.label ?? f.key}:</dt>
-                    <dd className="min-w-0 break-words">{v}</dd>
-                  </div>
-                ) : null
-              })}
+              {message.summary.map(([label, value]) => (
+                <div key={label} className="flex gap-2">
+                  <dt className="shrink-0 font-semibold text-gold-dark">{label}:</dt>
+                  <dd className="min-w-0 break-words">{value}</dd>
+                </div>
+              ))}
             </dl>
           </>
         )}

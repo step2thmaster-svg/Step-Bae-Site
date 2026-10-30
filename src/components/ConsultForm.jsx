@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { ArrowRight } from './Icons.jsx'
 import { EMAIL, sendForm } from './sendForm.js'
 
-const inquiryOptions = ['Consulting', 'Course or workshop', 'Lecture or speaking', 'Sponsorship or collaboration', 'Something else']
-const orgOptions = ['Dental practice', 'Dental laboratory', 'Manufacturer or supplier', 'Study club or school', 'Event organizer', 'Other']
+// also offered by the Mini Steps chat, which can take the same inquiry one question at a time
+export const inquiryOptions = ['Consulting', 'Course or workshop', 'Lecture or speaking', 'Sponsorship or collaboration', 'Something else']
+export const orgOptions = ['Dental practice', 'Dental laboratory', 'Manufacturer or supplier', 'Study club or school', 'Event organizer', 'Other']
 
 const labelClass = 'block text-[13px] font-semibold text-white/90'
 const inputClass =
