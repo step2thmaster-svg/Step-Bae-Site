@@ -700,7 +700,7 @@ export default function ChatGuide() {
         {/* an offer of help beside the button, out of the way while the chat or the hello bubble is showing */}
         {!open && !teaser && (
           <span className="rounded-full border border-gold/50 bg-ink-2/95 px-4 py-2 text-[14px] font-medium text-white shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] group-hover:border-gold group-hover:text-gold">
-            How can we help?
+            We are here to assist
           </span>
         )}
         <span className="relative rounded-full shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] transition-transform group-hover:scale-105">
