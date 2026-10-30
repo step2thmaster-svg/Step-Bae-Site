@@ -246,7 +246,7 @@ function Avatar({ size, still, className = '' }) {
       className={`relative block shrink-0 overflow-hidden rounded-full ring-2 ring-gold ${size} ${className}`}
       style={{ background: 'radial-gradient(circle at 50% 40%, #8fb0c4 0%, #5b7c91 45%, #2e4250 100%)' }}
     >
-      <MiniStep still={still} className="absolute left-1/2 top-[7%] w-[82%] -translate-x-[47%]" />
+      <MiniStep still={still} className="absolute left-1/2 top-[6%] w-[76%] -translate-x-[47%]" />
     </span>
   )
 }

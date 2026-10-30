@@ -1,32 +1,41 @@
 // "Mini Step": a K-pop style chibi (SD) version of Step for the site assistant: short wavy hair, V-line jaw,
-// a small body in a white suit and sky-blue shirt, holding a big paint brush.
+// dressed like a fashion model in an open white blazer and sky-blue shirt, holding a big paint brush.
 // It gently bobs, blinks and waves (see the mini-step keyframes in index.css); `still` turns the motion off.
 export default function MiniStep({ className = '', still = false }) {
   const anim = (name) => (still ? undefined : name)
   return (
-    <svg viewBox="0 4 120 120" className={className} aria-hidden="true">
+    <svg viewBox="0 4 120 130" className={className} aria-hidden="true">
       <g className={anim('mini-step-bob')}>
         {/* hair, back: short, fluffy and wavy, flicking out at the ends */}
         <path d="M28 50 C27 30 42 15 60 15 C78 15 93 28 92 50 C93 59 93 66 91 71 C93 72 95.5 71 97 68.5 C96.8 73.5 93 77 88 76 L32 76 C27 77 23.2 73.5 23 68.5 C24.5 71 27 72 29 71 C27 66 27 59 28 50 Z" fill="#2a1f1b" />
 
-        {/* legs: white trousers and dark shoes */}
-        <rect x="49" y="110" width="8.5" height="9" rx="2" fill="#fbf8f2" stroke="#cfc6b8" strokeWidth="0.8" />
-        <rect x="62.5" y="110" width="8.5" height="9" rx="2" fill="#fbf8f2" stroke="#cfc6b8" strokeWidth="0.8" />
-        <ellipse cx="53" cy="120" rx="5" ry="2.4" fill="#2a1f1b" />
-        <ellipse cx="67" cy="120" rx="5" ry="2.4" fill="#2a1f1b" />
+        {/* legs: slim white trousers with a crease, and brown loafers */}
+        <path d="M49.5 109 H58.6 L58 129 H50.4 Z" fill="#fbf8f2" stroke="#cfc6b8" strokeWidth="0.8" strokeLinejoin="round" />
+        <path d="M61.4 109 H70.5 L69.6 129 H62 Z" fill="#fbf8f2" stroke="#cfc6b8" strokeWidth="0.8" strokeLinejoin="round" />
+        <path d="M54.2 118 V128 M65.8 118 V128" stroke="#e2dbcf" strokeWidth="0.6" />
+        <path d="M48.5 131.5 C48.5 129 51 128.4 54.2 128.6 C57 128.8 58.6 129.6 58.6 131.5 Z" fill="#5a3b28" />
+        <path d="M61.4 131.5 C61.4 129.6 63 128.8 65.8 128.6 C69 128.4 71.5 129 71.5 131.5 Z" fill="#5a3b28" />
 
-        {/* body: small and chibi, a white suit over a sky-blue shirt */}
-        <path d="M44 93 C44 87 51 84 60 84 C69 84 76 87 76 93 L77.5 111 C77.5 114 75.5 115 72.5 115 L47.5 115 C44.5 115 42.5 114 42.5 111 Z" fill="#fbf8f2" stroke="#cfc6b8" strokeWidth="0.8" />
-        <path d="M55 85 L60 96 L65 85 Z" fill="#8fcdee" />
-        {/* lapels */}
-        <path d="M54.5 85 L60 96 L56.5 92 L52 88.5 Z M65.5 85 L60 96 L63.5 92 L68 88.5 Z" fill="#f1ece3" stroke="#cfc6b8" strokeWidth="0.7" strokeLinejoin="round" />
-        <circle cx="60" cy="102" r="1.1" fill="#c9b48a" />
-        <circle cx="60" cy="107.5" r="1.1" fill="#c9b48a" />
+        {/* body: a tailored, cutaway white blazer worn open over a sky-blue shirt, collar open, with a thin gold chain */}
+        <path d="M43.5 92 C43.5 86.5 51 84 60 84 C69 84 76.5 86.5 76.5 92 C77 97 76 101.5 74.6 105 C76 108.5 77 111.5 76.6 114 L63.6 115.5 L60 111.5 L56.4 115.5 L43.4 114 C43 111.5 44 108.5 45.4 105 C44 101.5 43 97 43.5 92 Z" fill="#fbf8f2" stroke="#cfc6b8" strokeWidth="0.8" strokeLinejoin="round" />
+        {/* tailoring: a little shadow where the waist is nipped in */}
+        <path d="M46.5 99 C47.5 102 47.2 104 46.4 106 M73.5 99 C72.5 102 72.8 104 73.6 106" stroke="#e4dccf" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+        <path d="M55.5 85 H64.5 L63.6 112 L60 111.5 L56.4 112 Z" fill="#8fcdee" />
+        <path d="M57.4 85 L60 89.5 L62.6 85 Z" fill="#f2cfae" />
+        <path d="M56.6 86 C58 89.6 62 89.6 63.4 86" stroke="#d4a868" strokeWidth="0.7" fill="none" />
+        <path d="M55.5 85 L57.6 90.5 L60 87.5 M64.5 85 L62.4 90.5 L60 87.5" stroke="#6fb4d8" strokeWidth="0.7" strokeLinejoin="round" fill="none" />
+        {/* long notch lapels down to the waist, and the open front edges */}
+        <path d="M55.5 85 L50.8 89.2 L53 91 L51.8 93.6 L56.4 107 Z M64.5 85 L69.2 89.2 L67 91 L68.2 93.6 L63.6 107 Z" fill="#f1ece3" stroke="#cfc6b8" strokeWidth="0.7" strokeLinejoin="round" />
+        <path d="M56.4 107 L56.4 115.5 M63.6 107 L63.6 115.5" stroke="#cfc6b8" strokeWidth="0.7" />
+        <circle cx="57.6" cy="108.5" r="0.9" fill="#c9b48a" />
+        {/* a sky-blue pocket square */}
+        <path d="M66.5 99 H72" stroke="#cfc6b8" strokeWidth="0.7" />
+        <path d="M67.2 99 L68.6 96.2 L69.6 97.8 L70.8 96 L71.4 99 Z" fill="#8fcdee" />
 
-        {/* left arm resting */}
-        <path d="M45 91 C41 95 40 100 41.5 104" stroke="#cfc6b8" strokeWidth="7.6" strokeLinecap="round" fill="none" />
-        <path d="M45 91 C41 95 40 100 41.5 104" stroke="#fbf8f2" strokeWidth="6" strokeLinecap="round" fill="none" />
-        <circle cx="41.8" cy="105" r="3.4" fill="#f2cfae" />
+        {/* left arm: hand on the hip, a model's pose */}
+        <path d="M45 90.5 C39.5 95 38.5 101 44.5 106" stroke="#cfc6b8" strokeWidth="7.6" strokeLinecap="round" fill="none" />
+        <path d="M45 90.5 C39.5 95 38.5 101 44.5 106" stroke="#fbf8f2" strokeWidth="6" strokeLinecap="round" fill="none" />
+        <circle cx="45.5" cy="106.5" r="3.1" fill="#f2cfae" />
 
         {/* right arm raised, holding a big ceramist's paint brush; it waves */}
         <g className={anim('mini-step-wave')} style={{ transformOrigin: '75px 90px' }}>
@@ -67,6 +76,14 @@ export default function MiniStep({ className = '', still = false }) {
         <path d="M58 33 C62 30 66 31 69 35" stroke="#4a3830" strokeWidth="1.2" strokeLinecap="round" fill="none" />
         <path d="M84 36 C87 40 88 44 87 49" stroke="#4a3830" strokeWidth="1.2" strokeLinecap="round" fill="none" />
         <path d="M35 37 C33 41 32 45 33 49" stroke="#4a3830" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+
+        {/* sunglasses pushed up on his hair */}
+        <g transform="rotate(-4 60 22)">
+          <path d="M53.6 21.6 C55.5 20.6 58 20.6 60 21.4 C62 20.6 64.5 20.6 66.4 21.6" stroke="#d4a868" strokeWidth="0.9" fill="none" />
+          <path d="M44.5 22.5 C44.5 19.6 47 18.6 50 18.8 C53 19 54.6 20.4 54 23.2 C53.4 26 50.8 27 48 26.6 C45.6 26.2 44.5 24.8 44.5 22.5 Z" fill="#1f2430" stroke="#d4a868" strokeWidth="0.7" />
+          <path d="M75.5 22.5 C75.5 19.6 73 18.6 70 18.8 C67 19 65.4 20.4 66 23.2 C66.6 26 69.2 27 72 26.6 C74.4 26.2 75.5 24.8 75.5 22.5 Z" fill="#1f2430" stroke="#d4a868" strokeWidth="0.7" />
+          <path d="M46.5 21 C47.5 20 49 19.8 50.2 20.1 M67.8 20.1 C69 19.8 70.5 20 71.5 21" stroke="#5c6b80" strokeWidth="0.8" strokeLinecap="round" fill="none" />
+        </g>
 
         {/* eyes: bright, slightly almond, with a lash line and sparkles; they blink */}
         <g className={anim('mini-step-blink')} style={{ transformOrigin: '60px 61px' }}>
