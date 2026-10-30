@@ -34,14 +34,15 @@ body {
 @keyframes mini-step-arm-l { 0%, 40%, 100% { transform: rotate(0deg); } 55% { transform: rotate(48deg); } 70% { transform: rotate(30deg); } 85% { transform: rotate(48deg); } }
 @keyframes mini-step-leg-l { 0%, 50%, 100% { transform: translateY(0); } 25% { transform: translateY(-2.5px); } }
 @keyframes mini-step-leg-r { 0%, 50%, 100% { transform: translateY(0); } 75% { transform: translateY(-2.5px); } }
-/* every 7.2s (six dance loops) a somersault: crouch, jump, a full backward flip, land with a little squash */
+/* every 7.2s (six dance loops) a somersault: crouch, jump, a full flip spinning left to right (clockwise), land with
+   a little squash; --spin: -1 reverses it for a mirrored dancer so the whole group still spins left to right */
 @keyframes mini-step-flip {
   0%, 80% { transform: translateY(0) rotate(0deg) scale(1, 1); }
   83% { transform: translateY(5px) rotate(0deg) scale(1.04, 0.9); }
-  88% { transform: translateY(-24px) rotate(-180deg) scale(1, 1); }
-  93% { transform: translateY(-6px) rotate(-345deg) scale(1, 1); }
-  96% { transform: translateY(4px) rotate(-360deg) scale(1.05, 0.9); }
-  100% { transform: translateY(0) rotate(-360deg) scale(1, 1); }
+  88% { transform: translateY(-24px) rotate(calc(var(--spin, 1) * 180deg)) scale(1, 1); }
+  93% { transform: translateY(-6px) rotate(calc(var(--spin, 1) * 345deg)) scale(1, 1); }
+  96% { transform: translateY(4px) rotate(calc(var(--spin, 1) * 360deg)) scale(1.05, 0.9); }
+  100% { transform: translateY(0) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
 }
 @keyframes mini-step-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
 .mini-step-dance { animation: mini-step-dance 1.2s ease-in-out infinite; }

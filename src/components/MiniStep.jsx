@@ -22,12 +22,13 @@ const outfits = {
   },
 }
 
-// `flipDelay` staggers the somersault, so in a group the members flip one after another
-function Dancer({ look, anim, flipDelay = 0 }) {
+// `flipDelay` staggers the somersault, so in a group the members flip one after another;
+// `mirrored` reverses the spin for a mirrored dancer, so everyone spins left to right
+function Dancer({ look, anim, flipDelay = 0, mirrored = false }) {
   const h = looks[look]
   const o = outfits[h.outfit]
   return (
-    <g className={anim('mini-step-flip')} style={{ transformOrigin: '60px 80px', animationDelay: `${flipDelay}s` }}>
+    <g className={anim('mini-step-flip')} style={{ transformOrigin: '60px 80px', animationDelay: `${flipDelay}s`, '--spin': mirrored ? -1 : 1 }}>
       <g className={anim('mini-step-dance')} style={{ transformOrigin: '60px 131px' }}>
         <g className={anim('mini-step-head')} style={{ transformOrigin: '60px 86px' }}>
           {/* hair, back: short, fluffy and wavy, flicking out at the ends */}
@@ -153,7 +154,7 @@ export default function MiniStep({ className = '', still = false, crew = false }
     <svg viewBox="-46 0 212 136" className={className} overflow="visible" aria-hidden="true">
       <svg x="-44" y="8" width="96" height="104" viewBox="0 4 120 130" overflow="visible">
         <g transform="translate(120 0) scale(-1 1)">
-          <Dancer look="pink" anim={anim} flipDelay={0.25} />
+          <Dancer look="pink" anim={anim} flipDelay={0.25} mirrored />
         </g>
       </svg>
       <svg x="68" y="8" width="96" height="104" viewBox="0 4 120 130" overflow="visible">
