@@ -34,91 +34,109 @@ body {
 @keyframes mini-step-arm-l { 0%, 40%, 100% { transform: rotate(0deg); } 55% { transform: rotate(48deg); } 70% { transform: rotate(30deg); } 85% { transform: rotate(48deg); } }
 @keyframes mini-step-leg-l { 0%, 50%, 100% { transform: translateY(0); } 25% { transform: translateY(-2.5px); } }
 @keyframes mini-step-leg-r { 0%, 50%, 100% { transform: translateY(0); } 75% { transform: translateY(-2.5px); } }
-/* the show, on a 14.4s cycle (twelve dance loops); each member has their own timeline (-0, -1, -2 = pink, Mini Step,
+/* the show, on a 16.8s cycle (fourteen dance loops); each member has their own timeline (-0, -1, -2 = pink, Mini Step,
    silver) so cascades and the group finish can be timed exactly:
-   0.6s  a slide in unison: glide left leaning into it, glide right, back to centre
-   2.4s  a somersault cascade: crouch, jump, a full flip left to right (clockwise), land with a little squash
-   5.4s  a turn cascade to face the back (narrowing as if side-on; mini-step-back swaps in the back view), and they
+   0.6s  the glide routine, twice, in unison: glide left leaning into it, glide right, back to centre
+   4.2s  a somersault cascade: crouch, jump, a full flip left to right (clockwise), land with a little squash
+   7.2s  a turn cascade to face the back (narrowing as if side-on; mini-step-back swaps in the back view), and they
          keep dancing facing away
-   7.0s  the stage fades to dark (mini-step-dark), then pin lights drop one by one: pink 8.0s, silver 8.8s,
-         Mini Step last at 9.6s (mini-step-spot-0/1/2)
-   10.6s everyone turns to face front together, to end the performance
-   12.0s the lights come back up, and the dancing carries on
+   8.8s  the stage fades to dark (mini-step-dark), then pin lights drop one by one: pink 9.8s, silver 10.6s,
+         Mini Step last at 11.4s (mini-step-spot-0/1/2)
+   12.4s everyone turns to face front together, to end the performance
+   13.8s the lights come back up, and the dancing carries on
    --spin: -1 reverses the flip and the slide for a mirrored dancer so the whole group moves the same way.
    Generated timings; keep them in step with each other if one changes */
 @keyframes mini-step-moves-0 {
   0% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
-  4.17% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
-  7.29% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
-  8.68% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
-  11.81% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
-  13.19% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
-  15.97% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
-  16.67% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
-  18.17% { transform: translateX(0px) translateY(5px) rotate(0deg) scale(1.04, 0.9); }
-  20.67% { transform: translateX(0px) translateY(-24px) rotate(calc(var(--spin, 1) * 180deg)) scale(1, 1); }
-  23.17% { transform: translateX(0px) translateY(-6px) rotate(calc(var(--spin, 1) * 345deg)) scale(1, 1); }
-  24.67% { transform: translateX(0px) translateY(4px) rotate(calc(var(--spin, 1) * 360deg)) scale(1.05, 0.9); }
-  26.67% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
-  37.5% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
-  40.97% { transform: translateX(0px) translateY(-3px) rotate(calc(var(--spin, 1) * 360deg)) scale(0.72, 1); }
-  44.44% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
-  73.61% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
-  77.08% { transform: translateX(0px) translateY(-3px) rotate(calc(var(--spin, 1) * 360deg)) scale(0.72, 1); }
-  80.56% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  3.57% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  6.25% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
+  7.44% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
+  10.12% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
+  11.31% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
+  13.69% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  14.29% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  16.96% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
+  18.15% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
+  20.83% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
+  22.02% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
+  24.4% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  25% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  26.29% { transform: translateX(0px) translateY(5px) rotate(0deg) scale(1.04, 0.9); }
+  28.43% { transform: translateX(0px) translateY(-24px) rotate(calc(var(--spin, 1) * 180deg)) scale(1, 1); }
+  30.57% { transform: translateX(0px) translateY(-6px) rotate(calc(var(--spin, 1) * 345deg)) scale(1, 1); }
+  31.86% { transform: translateX(0px) translateY(4px) rotate(calc(var(--spin, 1) * 360deg)) scale(1.05, 0.9); }
+  33.57% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  42.86% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  45.83% { transform: translateX(0px) translateY(-3px) rotate(calc(var(--spin, 1) * 360deg)) scale(0.72, 1); }
+  48.81% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  73.81% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  76.79% { transform: translateX(0px) translateY(-3px) rotate(calc(var(--spin, 1) * 360deg)) scale(0.72, 1); }
+  79.76% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
   100% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
 }
-@keyframes mini-step-back-0 { 0%, 40.9% { transform: scale(0); } 40.97%, 77.01% { transform: scale(1); } 77.08%, 100% { transform: scale(0); } }
+@keyframes mini-step-back-0 { 0%, 45.77% { transform: scale(0); } 45.83%, 76.73% { transform: scale(1); } 76.79%, 100% { transform: scale(0); } }
 @keyframes mini-step-moves-1 {
   0% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
-  4.17% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
-  7.29% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
-  8.68% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
-  11.81% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
-  13.19% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
-  15.97% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
-  18.4% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
-  19.9% { transform: translateX(0px) translateY(5px) rotate(0deg) scale(1.04, 0.9); }
-  22.4% { transform: translateX(0px) translateY(-24px) rotate(calc(var(--spin, 1) * 180deg)) scale(1, 1); }
-  24.9% { transform: translateX(0px) translateY(-6px) rotate(calc(var(--spin, 1) * 345deg)) scale(1, 1); }
-  26.4% { transform: translateX(0px) translateY(4px) rotate(calc(var(--spin, 1) * 360deg)) scale(1.05, 0.9); }
-  28.4% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
-  39.24% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
-  42.71% { transform: translateX(0px) translateY(-3px) rotate(calc(var(--spin, 1) * 360deg)) scale(0.72, 1); }
-  46.18% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
-  73.61% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
-  77.08% { transform: translateX(0px) translateY(-3px) rotate(calc(var(--spin, 1) * 360deg)) scale(0.72, 1); }
-  80.56% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  3.57% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  6.25% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
+  7.44% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
+  10.12% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
+  11.31% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
+  13.69% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  14.29% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  16.96% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
+  18.15% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
+  20.83% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
+  22.02% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
+  24.4% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  26.49% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  27.77% { transform: translateX(0px) translateY(5px) rotate(0deg) scale(1.04, 0.9); }
+  29.92% { transform: translateX(0px) translateY(-24px) rotate(calc(var(--spin, 1) * 180deg)) scale(1, 1); }
+  32.06% { transform: translateX(0px) translateY(-6px) rotate(calc(var(--spin, 1) * 345deg)) scale(1, 1); }
+  33.35% { transform: translateX(0px) translateY(4px) rotate(calc(var(--spin, 1) * 360deg)) scale(1.05, 0.9); }
+  35.06% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  44.35% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  47.32% { transform: translateX(0px) translateY(-3px) rotate(calc(var(--spin, 1) * 360deg)) scale(0.72, 1); }
+  50.3% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  73.81% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  76.79% { transform: translateX(0px) translateY(-3px) rotate(calc(var(--spin, 1) * 360deg)) scale(0.72, 1); }
+  79.76% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
   100% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
 }
-@keyframes mini-step-back-1 { 0%, 42.64% { transform: scale(0); } 42.71%, 77.01% { transform: scale(1); } 77.08%, 100% { transform: scale(0); } }
+@keyframes mini-step-back-1 { 0%, 47.26% { transform: scale(0); } 47.32%, 76.73% { transform: scale(1); } 76.79%, 100% { transform: scale(0); } }
 @keyframes mini-step-moves-2 {
   0% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
-  4.17% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
-  7.29% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
-  8.68% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
-  11.81% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
-  13.19% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
-  15.97% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
-  20.14% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
-  21.64% { transform: translateX(0px) translateY(5px) rotate(0deg) scale(1.04, 0.9); }
-  24.14% { transform: translateX(0px) translateY(-24px) rotate(calc(var(--spin, 1) * 180deg)) scale(1, 1); }
-  26.64% { transform: translateX(0px) translateY(-6px) rotate(calc(var(--spin, 1) * 345deg)) scale(1, 1); }
-  28.14% { transform: translateX(0px) translateY(4px) rotate(calc(var(--spin, 1) * 360deg)) scale(1.05, 0.9); }
-  30.14% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
-  40.97% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
-  44.44% { transform: translateX(0px) translateY(-3px) rotate(calc(var(--spin, 1) * 360deg)) scale(0.72, 1); }
-  47.92% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
-  73.61% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
-  77.08% { transform: translateX(0px) translateY(-3px) rotate(calc(var(--spin, 1) * 360deg)) scale(0.72, 1); }
-  80.56% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  3.57% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  6.25% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
+  7.44% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
+  10.12% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
+  11.31% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
+  13.69% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  14.29% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  16.96% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
+  18.15% { transform: translateX(calc(var(--spin, 1) * -12px)) translateY(0px) rotate(calc(var(--spin, 1) * -4deg)) scale(1, 1); }
+  20.83% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
+  22.02% { transform: translateX(calc(var(--spin, 1) * 12px)) translateY(0px) rotate(calc(var(--spin, 1) * 4deg)) scale(1, 1); }
+  24.4% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  27.98% { transform: translateX(0px) translateY(0px) rotate(0deg) scale(1, 1); }
+  29.26% { transform: translateX(0px) translateY(5px) rotate(0deg) scale(1.04, 0.9); }
+  31.4% { transform: translateX(0px) translateY(-24px) rotate(calc(var(--spin, 1) * 180deg)) scale(1, 1); }
+  33.55% { transform: translateX(0px) translateY(-6px) rotate(calc(var(--spin, 1) * 345deg)) scale(1, 1); }
+  34.83% { transform: translateX(0px) translateY(4px) rotate(calc(var(--spin, 1) * 360deg)) scale(1.05, 0.9); }
+  36.55% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  45.83% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  48.81% { transform: translateX(0px) translateY(-3px) rotate(calc(var(--spin, 1) * 360deg)) scale(0.72, 1); }
+  51.79% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  73.81% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
+  76.79% { transform: translateX(0px) translateY(-3px) rotate(calc(var(--spin, 1) * 360deg)) scale(0.72, 1); }
+  79.76% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
   100% { transform: translateX(0px) translateY(0px) rotate(calc(var(--spin, 1) * 360deg)) scale(1, 1); }
 }
-@keyframes mini-step-back-2 { 0%, 44.38% { transform: scale(0); } 44.44%, 77.01% { transform: scale(1); } 77.08%, 100% { transform: scale(0); } }
-@keyframes mini-step-dark { 0%, 48.61% { fill-opacity: 0; } 54.17%, 83.33% { fill-opacity: 0.86; } 88.89%, 100% { fill-opacity: 0; } }
-@keyframes mini-step-spot-0 { 0%, 55.56% { transform: scaleY(0); } 58.33%, 83.33% { transform: scaleY(1); } 86.81%, 100% { transform: scaleY(0); } }
-@keyframes mini-step-spot-1 { 0%, 61.11% { transform: scaleY(0); } 63.89%, 83.33% { transform: scaleY(1); } 86.81%, 100% { transform: scaleY(0); } }
-@keyframes mini-step-spot-2 { 0%, 66.67% { transform: scaleY(0); } 69.44%, 83.33% { transform: scaleY(1); } 86.81%, 100% { transform: scaleY(0); } }
+@keyframes mini-step-back-2 { 0%, 48.75% { transform: scale(0); } 48.81%, 76.73% { transform: scale(1); } 76.79%, 100% { transform: scale(0); } }
+@keyframes mini-step-dark { 0%, 52.38% { fill-opacity: 0; } 57.14%, 82.14% { fill-opacity: 0.86; } 86.9%, 100% { fill-opacity: 0; } }
+@keyframes mini-step-spot-0 { 0%, 58.33% { transform: scaleY(0); } 60.71%, 82.14% { transform: scaleY(1); } 85.12%, 100% { transform: scaleY(0); } }
+@keyframes mini-step-spot-1 { 0%, 63.1% { transform: scaleY(0); } 65.48%, 82.14% { transform: scaleY(1); } 85.12%, 100% { transform: scaleY(0); } }
+@keyframes mini-step-spot-2 { 0%, 67.86% { transform: scaleY(0); } 70.24%, 82.14% { transform: scaleY(1); } 85.12%, 100% { transform: scaleY(0); } }
 @keyframes mini-step-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
 .mini-step-dance { animation: mini-step-dance 1.2s ease-in-out infinite; }
 .mini-step-head { animation: mini-step-head 1.2s ease-in-out infinite; }
@@ -126,16 +144,16 @@ body {
 .mini-step-arm-l { animation: mini-step-arm-l 2.4s ease-in-out infinite; }
 .mini-step-leg-l { animation: mini-step-leg-l 1.2s ease-in-out infinite; }
 .mini-step-leg-r { animation: mini-step-leg-r 1.2s ease-in-out infinite; }
-.mini-step-moves-0 { animation: mini-step-moves-0 14.4s ease-in-out infinite; }
-.mini-step-back-0 { animation: mini-step-back-0 14.4s infinite; }
-.mini-step-moves-1 { animation: mini-step-moves-1 14.4s ease-in-out infinite; }
-.mini-step-back-1 { animation: mini-step-back-1 14.4s infinite; }
-.mini-step-moves-2 { animation: mini-step-moves-2 14.4s ease-in-out infinite; }
-.mini-step-back-2 { animation: mini-step-back-2 14.4s infinite; }
-.mini-step-dark { animation: mini-step-dark 14.4s ease-in-out infinite; }
-.mini-step-spot-0 { animation: mini-step-spot-0 14.4s ease-out infinite; }
-.mini-step-spot-1 { animation: mini-step-spot-1 14.4s ease-out infinite; }
-.mini-step-spot-2 { animation: mini-step-spot-2 14.4s ease-out infinite; }
+.mini-step-moves-0 { animation: mini-step-moves-0 16.8s ease-in-out infinite; }
+.mini-step-back-0 { animation: mini-step-back-0 16.8s infinite; }
+.mini-step-moves-1 { animation: mini-step-moves-1 16.8s ease-in-out infinite; }
+.mini-step-back-1 { animation: mini-step-back-1 16.8s infinite; }
+.mini-step-moves-2 { animation: mini-step-moves-2 16.8s ease-in-out infinite; }
+.mini-step-back-2 { animation: mini-step-back-2 16.8s infinite; }
+.mini-step-dark { animation: mini-step-dark 16.8s ease-in-out infinite; }
+.mini-step-spot-0 { animation: mini-step-spot-0 16.8s ease-out infinite; }
+.mini-step-spot-1 { animation: mini-step-spot-1 16.8s ease-out infinite; }
+.mini-step-spot-2 { animation: mini-step-spot-2 16.8s ease-out infinite; }
 .mini-step-blink { animation: mini-step-blink 4.5s infinite; }
 @media (prefers-reduced-motion: reduce) {
   .mini-step-moves-0, .mini-step-moves-1, .mini-step-moves-2, .mini-step-back-0, .mini-step-back-1, .mini-step-back-2,
