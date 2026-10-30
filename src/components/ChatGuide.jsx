@@ -241,7 +241,11 @@ const botMessage = (id) => ({ from: 'bot', step: id })
 // Mini Step in a round frame: the chat button, the chat header and beside each answer
 function Avatar({ size, still, className = '' }) {
   return (
-    <span className={`relative block shrink-0 overflow-hidden rounded-full bg-cream ring-2 ring-gold ${size} ${className}`}>
+    // a dark backdrop with a soft warm glow behind him, so his dark hair still stands out
+    <span
+      className={`relative block shrink-0 overflow-hidden rounded-full ring-2 ring-gold ${size} ${className}`}
+      style={{ background: 'radial-gradient(circle at 50% 42%, #6b5a48 0%, #3a3129 45%, #1c1916 100%)' }}
+    >
       <MiniStep still={still} className="absolute left-1/2 top-[8%] w-[84%] -translate-x-[47%]" />
     </span>
   )
