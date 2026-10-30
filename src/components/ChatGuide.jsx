@@ -45,20 +45,28 @@ const patientAsk = [
   'STEPBAE works with iTero, 3Shape TRIOS, Medit and Primescan, or physical impressions, so your dentist can send the case the way they usually do',
   'Connecting takes just a few minutes, and STEPBAE will talk with them about your case',
 ]
-// a ready-to-send email the patient fills in with their dentist's address
-const dentistNote = `mailto:?subject=${encodeURIComponent('Could my case go to STEPBAE?')}&body=${encodeURIComponent(
-  [
-    'Hi Doctor,',
-    '',
-    'For my upcoming crowns or veneers, I’d love for them to be made by STEPBAE Dental Lab.',
-    '',
-    'STEPBAE works with iTero, 3Shape TRIOS, Medit and Primescan, as well as physical impressions, and connecting only takes a few minutes: https://stepbae.com/partnership.html',
-    '',
-    'You can see STEPBAE’s work at https://stepbae.com/craftsmanship.html',
-    '',
-    'Could you send my case to STEPBAE? Thank you!',
-  ].join('\n'),
-)}`
+// ready-to-send emails the patient fills in with their dentist's address
+const mailNote = (subject, lines) => `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`
+const dentistNote = mailNote('Could my case go to STEPBAE?', [
+  'Hi Doctor,',
+  '',
+  'For my upcoming crowns or veneers, I’d love for them to be made by STEPBAE Dental Lab.',
+  '',
+  'STEPBAE works with iTero, 3Shape TRIOS, Medit and Primescan, as well as physical impressions, and connecting only takes a few minutes: https://stepbae.com/partnership.html',
+  '',
+  'You can see STEPBAE’s work at https://stepbae.com/craftsmanship.html',
+  '',
+  'Could you send my case to STEPBAE? Thank you!',
+])
+const workNote = mailNote('Have you seen STEPBAE’s work?', [
+  'Hi Doctor,',
+  '',
+  'I came across STEPBAE Dental Lab and love their work. Here’s their gallery: https://stepbae.com/craftsmanship.html',
+  '',
+  'Would you consider sending my crowns or veneers to them? STEPBAE works with iTero, 3Shape TRIOS, Medit and Primescan, as well as physical impressions: https://stepbae.com/partnership.html',
+  '',
+  'Thank you!',
+])
 
 // why dentists choose STEPBAE: the strengths the rest of the site already shows
 const strengths = [
@@ -302,7 +310,7 @@ const steps = {
     list: patientAsk,
     options: [
       { label: 'Write a note to my dentist', href: dentistNote },
-      { label: 'Show my dentist STEPBAE’s work', href: '/craftsmanship.html' },
+      { label: 'Show my dentist STEPBAE’s work', href: workNote },
       { label: 'What if my dentist has questions?', next: 'patient-questions' },
     ],
   },
