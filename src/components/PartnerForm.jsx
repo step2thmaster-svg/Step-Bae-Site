@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ArrowRight } from './Icons.jsx'
-import { EMAIL, sendForm } from './sendForm.js'
+import { EMAIL, sendForm, prefill } from './sendForm.js'
 
 const portalOptions = ['iTero', '3Shape TRIOS', 'Medit', 'Primescan / CEREC', 'Other scanner', 'No scanner (physical impressions)']
 // also asked by the Mini Steps chat when a dentist requests the price list
@@ -12,6 +12,8 @@ const inputClass =
 
 export default function PartnerForm() {
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
+  // anything the dentist already told the Mini Steps chat
+  const [known] = useState(prefill.get)
 
   async function onSubmit(e) {
     e.preventDefault()
@@ -20,6 +22,7 @@ export default function PartnerForm() {
     try {
       if (await sendForm(form, 'New dentist partnership', 'partnership')) {
         form.reset()
+        prefill.clear()
         setStatus('sent')
       } else {
         setStatus('idle')
@@ -48,15 +51,15 @@ export default function PartnerForm() {
           <form onSubmit={onSubmit} className="mt-10 grid gap-5 sm:grid-cols-2">
             <label className={labelClass}>
               Dentist name *
-              <input name="Dentist name" required autoComplete="name" className={inputClass} />
+              <input name="Dentist name" required autoComplete="name" defaultValue={known['Dentist name']} className={inputClass} />
             </label>
             <label className={labelClass}>
               Practice name *
-              <input name="Practice name" required autoComplete="organization" className={inputClass} />
+              <input name="Practice name" required autoComplete="organization" defaultValue={known['Practice name']} className={inputClass} />
             </label>
             <label className={labelClass}>
               Email *
-              <input name="email" type="email" required autoComplete="email" className={inputClass} />
+              <input name="email" type="email" required autoComplete="email" defaultValue={known.email} className={inputClass} />
             </label>
             <label className={labelClass}>
               Practice address
@@ -68,7 +71,7 @@ export default function PartnerForm() {
             </label>
             <label className={labelClass}>
               Scanner / portal you use *
-              <select name="Portal" required defaultValue="" className={inputClass}>
+              <select name="Portal" required defaultValue={known.Portal ?? ''} className={inputClass}>
                 <option value="" disabled>Choose one</option>
                 {portalOptions.map((o) => (
                   <option key={o}>{o}</option>
@@ -81,7 +84,7 @@ export default function PartnerForm() {
             </label>
             <label className={labelClass}>
               Units per month for the lab *
-              <select name="Units per month" required defaultValue="" className={inputClass}>
+              <select name="Units per month" required defaultValue={known['Units per month'] ?? ''} className={inputClass}>
                 <option value="" disabled>Choose a range</option>
                 {unitOptions.map((o) => (
                   <option key={o}>{o}</option>

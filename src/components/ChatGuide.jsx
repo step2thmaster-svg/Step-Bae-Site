@@ -2,15 +2,15 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowRight } from './Icons.jsx'
 import MiniStep from './MiniStep.jsx'
 import { portals } from './PortalGuide.jsx'
-import { EMAIL, sendForm } from './sendForm.js'
+import { EMAIL, sendForm, prefill } from './sendForm.js'
 import { articles } from './cv.js'
 import { unitOptions } from './PartnerForm.jsx'
 
 // The Mini Steps, the site's guide and sales rep: a scripted conversation (no AI, no server) that helps visitors
 // find their way, makes the case for STEPBAE, answers the usual questions (price, turnaround, "I already have a lab")
 // and walks dentists through sending a case or leaving their details. Each step says something and offers choices;
-// a choice either goes to another step (`next`) or opens a page (`href`), and a step with `form` collects a lead
-// right in the chat. Typed questions are matched to a step by keywords. Only facts the site already states are used:
+// a choice either goes to another step (`next`) or opens a page (`href`), and a step with `lead` starts collecting
+// a lead right in the chat, one question at a time, with a review before anything is sent. Typed questions are matched to a step by keywords. Only facts the site already states are used:
 // no prices, turnaround times or offers are promised here; those go to Step.
 
 const caseChecklist = [
@@ -26,6 +26,7 @@ const portalSteps = Object.fromEntries(
   portals.map((p) => [
     `portal-${p.name}`,
     {
+      portal: p.name,
       say: [`Here’s how to connect STEPBAE in ${p.where}:`],
       list: p.steps,
       options: [
@@ -86,6 +87,7 @@ const steps = {
   },
   ...portalSteps,
   'scanner-other': {
+    portal: 'Other scanner',
     say: [
       'No problem. Most scanners can export STL or PLY files.',
       `You can email the files to ${EMAIL}, or fill out the partnership form and we’ll help you set up the best way to send cases.`,
@@ -106,6 +108,7 @@ const steps = {
     ],
   },
   'case-physical': {
+    portal: 'No scanner (physical impressions)',
     say: [
       'Of course. Please fill out the partnership form and mention that you’ll send physical impressions or models. We’ll reply with shipping details and our Rx form.',
     ],
@@ -165,15 +168,23 @@ const steps = {
       { label: 'Send a case', next: 'case-start' },
     ],
   },
+  // these two start a lead: the questions come from leadFlows below (the options only show if the visitor
+  // comes back to the chat mid-way, since unsent answers aren't kept)
   'lead-price': {
-    say: ['We’d be happy to send you our current price list! Just leave your details, and roughly how many units your practice sends a month, and we’ll email it to you.'],
-    form: { subject: 'Price list request (Mini Steps chat)', message: 'Please send me your price list.', units: true },
-    options: [{ label: 'Maybe later', next: 'start' }],
+    say: ['We’d be happy to send you our current price list! We just need a few quick details.'],
+    lead: 'price',
+    options: [
+      { label: 'Get the price list', next: 'lead-price' },
+      { label: 'Maybe later', next: 'start' },
+    ],
   },
   'lead-talk': {
-    say: ['Tell us a little about your case or question, and Step will get back to you personally.'],
-    form: { subject: 'Question for Step (Mini Steps chat)', message: '' },
-    options: [{ label: 'Maybe later', next: 'start' }],
+    say: ['Step would love to hear from you! A few quick questions, and Step will get back to you personally.'],
+    lead: 'talk',
+    options: [
+      { label: 'Leave a message', next: 'lead-talk' },
+      { label: 'Maybe later', next: 'start' },
+    ],
   },
   'lead-thanks': {
     say: ['Thank you! We’ve got your details, and Step will be in touch shortly.', 'While you wait, would you like to see some of Step’s work?'],
@@ -273,6 +284,40 @@ const steps = {
   },
 }
 
+// the questions the Mini Steps ask, one at a time, before sending a lead to Step; `key` is the field name in the email
+const leadFields = {
+  name: { key: 'Name', ask: () => 'Lovely! First, what’s your name?', autoComplete: 'name' },
+  practice: {
+    key: 'Practice',
+    ask: (a) => `Nice to meet you, ${a.Name}! Which practice are you with?`,
+    optional: true,
+    autoComplete: 'organization',
+  },
+  email: { key: 'email', label: 'Email', ask: () => 'What’s the best email to reach you?', type: 'email', autoComplete: 'email' },
+  phone: { key: 'Phone', ask: () => 'And a phone number, in case a quick call is easier?', type: 'tel', optional: true, autoComplete: 'tel' },
+  units: {
+    key: 'Units per month',
+    ask: () => 'Roughly how many units does your practice send a month? It helps Step quote the right pricing.',
+    choices: unitOptions,
+  },
+  message: { key: 'Message', ask: () => 'What would you like to ask Step? Tell us a little about your case or question.' },
+}
+const leadFlows = {
+  price: {
+    subject: 'Price list request (Mini Steps chat)',
+    fields: ['name', 'practice', 'email', 'phone', 'units'],
+    fixed: { Message: 'Please send me your price list.' },
+  },
+  talk: { subject: 'Question for Step (Mini Steps chat)', fields: ['name', 'practice', 'email', 'phone', 'message'], fixed: {} },
+}
+const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
+const askMessage = (answers, field, note = '') => ({
+  from: 'bot',
+  lead: 'ask',
+  field,
+  text: `${note}${leadFields[field].ask(answers)}`,
+})
+
 // typed questions: the first rule whose word appears in the message picks the step
 const keywordRules = [
   [/itero/, 'portal-iTero'],
@@ -297,7 +342,8 @@ const keywordRules = [
 ]
 const matchStep = (text) => keywordRules.find(([re]) => re.test(text.toLowerCase()))?.[1] ?? 'unknown'
 
-// the conversation is kept for the visit, so it carries over as the visitor moves between pages
+// the conversation is kept for the visit, so it carries over as the visitor moves between pages; a lead's questions
+// and answers are left out, so personal details aren't stored before they're sent
 const STORE = 'stepbae-chat'
 const load = () => {
   try {
@@ -344,60 +390,6 @@ const pitches = {
 }
 const defaultPitch = 'We do more than dancing. Sending a case or just curious? Tap us and we’ll show you around.'
 
-// a short lead form inside the chat: what Step needs to follow up, sent with the partnership form's Formspree
-function LeadForm({ form, onSent }) {
-  const [status, setStatus] = useState('idle') // idle | sending | error
-  const input =
-    'w-full rounded-[3px] border border-white/15 bg-ink px-3 py-2 text-[14px] text-white placeholder:text-white/40 focus:border-gold focus:outline-none'
-
-  async function onSubmit(e) {
-    e.preventDefault()
-    setStatus('sending')
-    try {
-      if (await sendForm(e.currentTarget, form.subject, 'partnership')) onSent()
-      else setStatus('idle')
-    } catch {
-      setStatus('error')
-    }
-  }
-
-  return (
-    <form onSubmit={onSubmit} className="space-y-2 rounded-[12px] border border-gold/30 bg-ink-3 p-3">
-      <input type="hidden" name="Source" value={`Mini Steps chat, ${window.location.pathname}`} />
-      <input name="Name" required autoComplete="name" placeholder="Your name *" aria-label="Your name" className={input} />
-      <input name="Practice" autoComplete="organization" placeholder="Practice name" aria-label="Practice name" className={input} />
-      <input name="email" type="email" required autoComplete="email" placeholder="Email *" aria-label="Email" className={input} />
-      <input name="Phone" type="tel" autoComplete="tel" placeholder="Phone (optional)" aria-label="Phone" className={input} />
-      {/* for a price list request: the practice's monthly volume, so Step can quote the right pricing */}
-      {form.units && (
-        <select name="Units per month" required defaultValue="" aria-label="Units per month" className={`${input} invalid:text-white/40`}>
-          <option value="" disabled>
-            Units per month *
-          </option>
-          {unitOptions.map((u) => (
-            <option key={u} value={u} className="text-white">
-              {u}
-            </option>
-          ))}
-        </select>
-      )}
-      <textarea name="Message" rows="2" defaultValue={form.message} placeholder="Your case or question" aria-label="Your case or question" className={input} />
-      <button
-        type="submit"
-        disabled={status === 'sending'}
-        className="inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-gold px-3 py-2 text-[13px] font-semibold text-ink hover:bg-gold-light disabled:opacity-60"
-      >
-        {status === 'sending' ? 'Sending…' : 'Send to Step'} <ArrowRight className="h-3 w-3" />
-      </button>
-      {status === 'error' && (
-        <p role="alert" className="text-[12px] text-white/75">
-          Sorry, that didn’t go through. Please try again or email us at {EMAIL}.
-        </p>
-      )}
-    </form>
-  )
-}
-
 export default function ChatGuide() {
   const saved = load()
   const [open, setOpen] = useState(saved?.open ?? false)
@@ -406,9 +398,14 @@ export default function ChatGuide() {
   // a friendly hello pops up beside the button a few seconds into the visit, once, until it's opened or closed
   const [greeted, setGreeted] = useState(saved?.greeted ?? false)
   const [teaser, setTeaser] = useState(false)
+  // a lead in progress: which flow, the answers so far, the question number, a field being changed, sending
+  const [lead, setLead] = useState(null)
   const listRef = useRef(null)
 
-  useEffect(() => save({ open, messages, greeted }), [open, messages, greeted])
+  useEffect(
+    () => save({ open, messages: messages.filter((m) => !m.lead && !m.private), greeted }),
+    [open, messages, greeted],
+  )
   useEffect(() => {
     if (greeted || open) return
     const t = setTimeout(() => setTeaser(true), 4000)
@@ -432,16 +429,76 @@ export default function ChatGuide() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
-  const go = (label, next) => setMessages((m) => [...m, { from: 'user', text: label }, botMessage(next)])
+  const say = (...msgs) => setMessages((m) => [...m, ...msgs])
+  const go = (label, next) => {
+    const step = steps[next]
+    const msgs = [{ from: 'user', text: label }, botMessage(next)]
+    if (step?.portal) prefill.add({ Portal: step.portal })
+    if (step?.lead) {
+      const fresh = { flow: step.lead, answers: {}, i: 0, editing: null, sending: false }
+      setLead(fresh)
+      msgs.push(askMessage({}, leadFlows[step.lead].fields[0]))
+    } else setLead(null)
+    say(...msgs)
+  }
+
+  // the field the Mini Steps are waiting on, if any
+  const lastMessage = messages[messages.length - 1]
+  const waitingOn = lead && lastMessage?.lead === 'ask' ? lastMessage.field : null
+
+  const answer = (raw) => {
+    const field = leadFields[waitingOn]
+    const value = raw.trim()
+    const reply = { from: 'user', text: value || 'Skip', private: true }
+    if (field.type === 'email' && !validEmail(value))
+      return say(reply, askMessage(lead.answers, waitingOn, 'Hmm, that email doesn’t look quite right. '))
+    if (field.choices && !field.choices.includes(value))
+      return say(reply, askMessage(lead.answers, waitingOn, 'Please pick one of the ranges below. '))
+    const fields = leadFlows[lead.flow].fields
+    const next = { ...lead, answers: { ...lead.answers, [field.key]: value }, editing: null }
+    next.i = lead.editing ? fields.length : lead.i + 1
+    setLead(next)
+    say(reply, next.i < fields.length ? askMessage(next.answers, fields[next.i]) : { from: 'bot', lead: 'review' })
+  }
+  const changeField = (id) => {
+    setLead({ ...lead, editing: id })
+    say({ from: 'user', text: leadFields[id].label ?? leadFields[id].key }, askMessage(lead.answers, id))
+  }
+  const sendLead = async () => {
+    const flow = leadFlows[lead.flow]
+    const data = new FormData()
+    for (const [k, v] of Object.entries({ ...lead.answers, ...flow.fixed })) if (v) data.append(k, v)
+    data.append('Source', `Mini Steps chat, ${window.location.pathname}`)
+    setLead({ ...lead, sending: true })
+    try {
+      if (await sendForm(data, flow.subject, 'partnership')) {
+        const a = lead.answers
+        prefill.add(
+          Object.fromEntries(
+            Object.entries({ 'Dentist name': a.Name, 'Practice name': a.Practice, email: a.email, 'Units per month': a['Units per month'] }).filter(([, v]) => v),
+          ),
+        )
+        setLead(null)
+        say(botMessage('lead-thanks'))
+      } else setLead({ ...lead, sending: false })
+    } catch {
+      setLead({ ...lead, sending: false })
+      say({ from: 'bot', lead: 'error' })
+    }
+  }
+
   const send = (e) => {
     e.preventDefault()
     const t = text.trim()
     if (!t) return
     setText('')
-    go(t, matchStep(t))
+    if (waitingOn) answer(t)
+    else go(t, matchStep(t))
   }
-  const restart = () => setMessages([botMessage('start')])
-  const leadSent = () => setMessages((m) => [...m, botMessage('lead-thanks')])
+  const restart = () => {
+    setLead(null)
+    setMessages([botMessage('start')])
+  }
   const pitch = pitches[window.location.pathname] ?? defaultPitch
 
   const last = messages.length - 1
@@ -478,18 +535,32 @@ export default function ChatGuide() {
                 <p key={i} className="ml-auto w-fit max-w-[80%] rounded-[12px] rounded-br-[3px] bg-gold px-3 py-2 text-[14px] leading-snug text-ink">
                   {m.text}
                 </p>
+              ) : m.lead ? (
+                <LeadTurn
+                  key={i}
+                  message={m}
+                  lead={lead}
+                  active={i === last}
+                  onAnswer={answer}
+                  onChange={() => say({ from: 'bot', lead: 'change' })}
+                  onChangeField={changeField}
+                  onSend={sendLead}
+                  onLater={() => go('Maybe later', 'start')}
+                />
               ) : (
-                <BotTurn key={i} step={steps[m.step] ?? steps.unknown} active={i === last} onChoose={go} onLeadSent={leadSent} />
+                <BotTurn key={i} step={steps[m.step] ?? steps.unknown} active={i === last} onChoose={go} />
               ),
             )}
           </div>
 
-          <form onSubmit={send} className="flex gap-2 border-t border-gold/25 p-3">
+          <form onSubmit={send} noValidate className="flex gap-2 border-t border-gold/25 p-3">
             <input
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Type a question…"
-              aria-label="Type a question"
+              type={leadFields[waitingOn]?.type ?? 'text'}
+              autoComplete={leadFields[waitingOn]?.autoComplete ?? 'off'}
+              placeholder={waitingOn ? 'Type your answer…' : 'Type a question…'}
+              aria-label={waitingOn ? 'Type your answer' : 'Type a question'}
               className="min-w-0 flex-1 rounded-[3px] border border-white/15 bg-ink px-3 py-2 text-[14px] text-white placeholder:text-white/40 focus:border-gold focus:outline-none"
             />
             <button type="submit" aria-label="Send" className="rounded-[3px] bg-gold px-3 text-ink hover:bg-gold-light">
@@ -530,16 +601,91 @@ export default function ChatGuide() {
   )
 }
 
-// one turn from the assistant: its lines, an optional list, and (on the latest turn only) a lead form and the choices
-function BotTurn({ step, active, onChoose, onLeadSent }) {
+// a bubble from the Mini Steps, with their faces beside it
+function Bubble({ children }) {
+  return <p className="w-fit rounded-[12px] rounded-bl-[3px] bg-cream px-3 py-2 text-[14px] leading-snug text-ink">{children}</p>
+}
+const chip = 'rounded-full border border-gold/60 px-3 py-1.5 text-[13px] text-white/90 hover:border-gold hover:bg-gold/10 hover:text-gold'
+const solidChip =
+  'inline-flex items-center gap-1.5 rounded-full bg-gold px-3 py-1.5 text-[13px] font-medium text-ink hover:bg-gold-light disabled:opacity-60'
+
+// a turn while collecting a lead: a question (with choices, Skip for optional ones), the review before sending,
+// the list of answers to change, or a sending error; buttons only on the latest turn
+function LeadTurn({ message, lead, active, onAnswer, onChange, onChangeField, onSend, onLater }) {
+  const flow = lead && leadFlows[lead.flow]
+  const field = leadFields[message.field]
+  return (
+    <div className="flex max-w-[96%] gap-2">
+      <Avatar crew size="h-8 w-8" still className="mt-0.5 ring-1" />
+      <div className="min-w-0 space-y-2">
+        {message.lead === 'ask' && <Bubble>{message.text}</Bubble>}
+        {message.lead === 'review' && flow && (
+          <>
+            <Bubble>Here’s what we’ll send Step. Does everything look right?</Bubble>
+            <dl className="space-y-1 rounded-[12px] bg-cream px-3 py-2.5 text-[13px] leading-snug text-ink/90">
+              {flow.fields.map((id) => {
+                const f = leadFields[id]
+                const v = lead.answers[f.key]
+                return v ? (
+                  <div key={id} className="flex gap-2">
+                    <dt className="shrink-0 font-semibold text-gold-dark">{f.label ?? f.key}:</dt>
+                    <dd className="min-w-0 break-words">{v}</dd>
+                  </div>
+                ) : null
+              })}
+            </dl>
+          </>
+        )}
+        {message.lead === 'change' && <Bubble>Sure! What would you like to change?</Bubble>}
+        {message.lead === 'error' && <Bubble>Sorry, that didn’t go through. Please try again, or email us at {EMAIL}.</Bubble>}
+
+        {active && lead && (
+          <div className="flex flex-wrap gap-2 pt-1">
+            {message.lead === 'ask' &&
+              field.choices?.map((c) => (
+                <button key={c} onClick={() => onAnswer(c)} className={chip}>
+                  {c}
+                </button>
+              ))}
+            {message.lead === 'ask' && field.optional && (
+              <button onClick={() => onAnswer('')} className={chip}>
+                Skip
+              </button>
+            )}
+            {(message.lead === 'review' || message.lead === 'error') && (
+              <>
+                <button onClick={onSend} disabled={lead.sending} className={solidChip}>
+                  {lead.sending ? 'Sending…' : 'Send to Step'} <ArrowRight className="h-3 w-3" />
+                </button>
+                <button onClick={onChange} className={chip}>
+                  Change something
+                </button>
+              </>
+            )}
+            {message.lead === 'change' &&
+              flow.fields.map((id) => (
+                <button key={id} onClick={() => onChangeField(id)} className={chip}>
+                  {leadFields[id].label ?? leadFields[id].key}
+                </button>
+              ))}
+            <button onClick={onLater} className={chip}>
+              Maybe later
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// one turn from the assistant: its lines, an optional list, and (on the latest turn only) the choices
+function BotTurn({ step, active, onChoose }) {
   return (
     <div className="flex max-w-[96%] gap-2">
       <Avatar crew size="h-8 w-8" still className="mt-0.5 ring-1" />
       <div className="min-w-0 space-y-2">
         {step.say.map((line) => (
-          <p key={line} className="w-fit rounded-[12px] rounded-bl-[3px] bg-cream px-3 py-2 text-[14px] leading-snug text-ink">
-            {line}
-          </p>
+          <Bubble key={line}>{line}</Bubble>
         ))}
         {step.list && (
           <ol className="space-y-1.5 rounded-[12px] bg-cream px-3 py-2.5 text-[13px] leading-snug text-ink/90">
@@ -551,7 +697,6 @@ function BotTurn({ step, active, onChoose, onLeadSent }) {
             ))}
           </ol>
         )}
-        {active && step.form && <LeadForm form={step.form} onSent={onLeadSent} />}
         {active && (
           <div className="flex flex-wrap gap-2 pt-1">
             {step.options.map((o) =>
