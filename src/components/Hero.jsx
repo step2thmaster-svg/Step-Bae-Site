@@ -24,7 +24,7 @@ export default function Hero() {
             Esthetic Dentistry
           </h1>
           <p className="mt-6 max-w-[325px] text-[15px] leading-[1.35] text-white/90 md:max-w-[min(34vw,500px)] md:text-[clamp(15px,1.35vw,20px)] md:leading-[1.45]">
-            StepBae.com is a private dental laboratory dedicated to esthetic
+            STEPBAE is a private dental laboratory dedicated to esthetic
             restorations, thoughtful craftsmanship, and personalized service
             for dental professionals.
           </p>
