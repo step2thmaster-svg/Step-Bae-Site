@@ -41,7 +41,7 @@ const portalSteps = Object.fromEntries(
 
 // patients can't send us a case themselves, so the Mini Steps help them ask their dentist to
 const patientAsk = [
-  'That you’d like your crowns or veneers made by Step Toothmaster Bae at STEPBAE (stepbae.com)',
+  'That you’d like your crowns or veneers made by STEPBAE Dental Lab',
   'STEPBAE works with iTero, 3Shape TRIOS, Medit and Primescan, or physical impressions, so your dentist can send the case the way they usually do',
   'Connecting takes just a few minutes, and Step will talk with them about your case',
 ]
