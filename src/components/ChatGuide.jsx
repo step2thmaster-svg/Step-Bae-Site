@@ -238,7 +238,7 @@ const save = (state) => {
 
 const botMessage = (id) => ({ from: 'bot', step: id })
 
-// the Mini Steps in a round frame: Mini Step with his backup dancers on the chat button and in the header, on his own beside each answer
+// the Mini Steps in a round frame: Mini Step with his backup dancers, on the chat button, in the header and (standing still) beside each answer
 function Avatar({ size, still, crew, className = '' }) {
   return (
     // a deep sky-blue backdrop: dark enough for the white suit to pop, light enough that his dark hair stands out
@@ -389,7 +389,7 @@ export default function ChatGuide() {
 function BotTurn({ step, active, onChoose }) {
   return (
     <div className="flex max-w-[96%] gap-2">
-      <Avatar size="h-7 w-7" still className="mt-0.5 ring-1" />
+      <Avatar crew size="h-8 w-8" still className="mt-0.5 ring-1" />
       <div className="min-w-0 space-y-2">
         {step.say.map((line) => (
           <p key={line} className="w-fit rounded-[12px] rounded-bl-[3px] bg-cream px-3 py-2 text-[14px] leading-snug text-ink">
