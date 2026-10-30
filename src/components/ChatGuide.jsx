@@ -4,6 +4,7 @@ import MiniStep from './MiniStep.jsx'
 import { portals } from './PortalGuide.jsx'
 import { EMAIL, sendForm } from './sendForm.js'
 import { articles } from './cv.js'
+import { unitOptions } from './PartnerForm.jsx'
 
 // The Mini Steps, the site's guide and sales rep: a scripted conversation (no AI, no server) that helps visitors
 // find their way, makes the case for STEPBAE, answers the usual questions (price, turnaround, "I already have a lab")
@@ -165,8 +166,8 @@ const steps = {
     ],
   },
   'lead-price': {
-    say: ['We’d be happy to send you our current price list! Just leave your details and we’ll email it to you.'],
-    form: { subject: 'Price list request (Mini Steps chat)', message: 'Please send me your price list.' },
+    say: ['We’d be happy to send you our current price list! Just leave your details, and roughly how many units your practice sends a month, and we’ll email it to you.'],
+    form: { subject: 'Price list request (Mini Steps chat)', message: 'Please send me your price list.', units: true },
     options: [{ label: 'Maybe later', next: 'start' }],
   },
   'lead-talk': {
@@ -367,6 +368,19 @@ function LeadForm({ form, onSent }) {
       <input name="Practice" autoComplete="organization" placeholder="Practice name" aria-label="Practice name" className={input} />
       <input name="email" type="email" required autoComplete="email" placeholder="Email *" aria-label="Email" className={input} />
       <input name="Phone" type="tel" autoComplete="tel" placeholder="Phone (optional)" aria-label="Phone" className={input} />
+      {/* for a price list request: the practice's monthly volume, so Step can quote the right pricing */}
+      {form.units && (
+        <select name="Units per month" required defaultValue="" aria-label="Units per month" className={`${input} invalid:text-white/40`}>
+          <option value="" disabled>
+            Units per month *
+          </option>
+          {unitOptions.map((u) => (
+            <option key={u} value={u} className="text-white">
+              {u}
+            </option>
+          ))}
+        </select>
+      )}
       <textarea name="Message" rows="2" defaultValue={form.message} placeholder="Your case or question" aria-label="Your case or question" className={input} />
       <button
         type="submit"

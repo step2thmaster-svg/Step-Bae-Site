@@ -3,7 +3,8 @@ import { ArrowRight } from './Icons.jsx'
 import { EMAIL, sendForm } from './sendForm.js'
 
 const portalOptions = ['iTero', '3Shape TRIOS', 'Medit', 'Primescan / CEREC', 'Other scanner', 'No scanner (physical impressions)']
-const unitOptions = ['1–10', '11–25', '26–50', '51–100', 'More than 100']
+// also asked by the Mini Steps chat when a dentist requests the price list
+export const unitOptions = ['1–10', '11–25', '26–50', '51–100', 'More than 100']
 
 const labelClass = 'block text-[13px] font-semibold text-white/90'
 const inputClass =
