@@ -20,13 +20,27 @@ body {
   @apply bg-ink font-serif text-white antialiased;
 }
 
-/* Mini Step, the site assistant's character (MiniStep.jsx): a gentle bob, a blink every few seconds, a wave now and then */
-@keyframes mini-step-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+/* Mini Step, the site assistant's character (MiniStep.jsx), dancing like a K-pop idol on a 1.2s loop:
+   the body bounces and sways, the head tilts against it, the right arm points to the beat,
+   the left arm swings out from the hip and the feet step in turn; he also blinks every few seconds */
+@keyframes mini-step-dance {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  25%, 75% { transform: translateY(-3px) rotate(0deg); }
+  50% { transform: translateY(0) rotate(3deg); }
+}
+@keyframes mini-step-head { 0%, 100% { transform: rotate(4deg); } 50% { transform: rotate(-4deg); } }
+@keyframes mini-step-arm-r { 0%, 50%, 100% { transform: rotate(14deg); } 25%, 75% { transform: rotate(-12deg); } }
+@keyframes mini-step-arm-l { 0%, 40%, 100% { transform: rotate(0deg); } 55% { transform: rotate(48deg); } 70% { transform: rotate(30deg); } 85% { transform: rotate(48deg); } }
+@keyframes mini-step-leg-l { 0%, 50%, 100% { transform: translateY(0); } 25% { transform: translateY(-2.5px); } }
+@keyframes mini-step-leg-r { 0%, 50%, 100% { transform: translateY(0); } 75% { transform: translateY(-2.5px); } }
 @keyframes mini-step-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
-@keyframes mini-step-wave { 0%, 60%, 100% { transform: rotate(0); } 68% { transform: rotate(-14deg); } 76% { transform: rotate(8deg); } 84% { transform: rotate(-10deg); } 92% { transform: rotate(4deg); } }
-.mini-step-bob { animation: mini-step-bob 3s ease-in-out infinite; }
+.mini-step-dance { animation: mini-step-dance 1.2s ease-in-out infinite; }
+.mini-step-head { animation: mini-step-head 1.2s ease-in-out infinite; }
+.mini-step-arm-r { animation: mini-step-arm-r 1.2s ease-in-out infinite; }
+.mini-step-arm-l { animation: mini-step-arm-l 2.4s ease-in-out infinite; }
+.mini-step-leg-l { animation: mini-step-leg-l 1.2s ease-in-out infinite; }
+.mini-step-leg-r { animation: mini-step-leg-r 1.2s ease-in-out infinite; }
 .mini-step-blink { animation: mini-step-blink 4.5s infinite; }
-.mini-step-wave { animation: mini-step-wave 5s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) {
-  .mini-step-bob, .mini-step-blink, .mini-step-wave { animation: none; }
+  .mini-step-dance, .mini-step-head, .mini-step-arm-r, .mini-step-arm-l, .mini-step-leg-l, .mini-step-leg-r, .mini-step-blink { animation: none; }
 }
