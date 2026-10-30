@@ -39,6 +39,27 @@ const portalSteps = Object.fromEntries(
   ]),
 )
 
+// patients can't send us a case themselves, so the Mini Steps help them ask their dentist to
+const patientAsk = [
+  'That you’d like your crowns or veneers made by Step Toothmaster Bae at STEPBAE (stepbae.com)',
+  'STEPBAE works with iTero, 3Shape TRIOS, Medit and Primescan, or physical impressions, so your dentist can send the case the way they usually do',
+  'Connecting takes just a few minutes, and Step will talk with them about your case',
+]
+// a ready-to-send email the patient fills in with their dentist's address
+const dentistNote = `mailto:?subject=${encodeURIComponent('Could my case go to STEPBAE?')}&body=${encodeURIComponent(
+  [
+    'Hi Doctor,',
+    '',
+    'For my upcoming crowns or veneers, I’d love for them to be made by Step Toothmaster Bae, CDT, DTG at STEPBAE.',
+    '',
+    'STEPBAE works with iTero, 3Shape TRIOS, Medit and Primescan, as well as physical impressions, and connecting only takes a few minutes: https://stepbae.com/partnership.html',
+    '',
+    'You can see Step’s work at https://stepbae.com/craftsmanship.html',
+    '',
+    'Could you send my case to STEPBAE? Thank you!',
+  ].join('\n'),
+)}`
+
 // why dentists choose STEPBAE: the strengths the rest of the site already shows
 const strengths = [
   'Every case is handcrafted and layered by Step Toothmaster Bae, CDT, DTG',
@@ -249,6 +270,7 @@ const steps = {
       { label: 'Crown or veneer?', href: '/article.html?p=crown-vs-veneer' },
       { label: 'Veneers vs. braces or aligners', href: '/article.html?p=veneers-vs-braces-or-clear-aligners' },
       { label: 'All articles', href: '/insights.html#latest' },
+      { label: 'Ask my dentist for Step', next: 'patient-ask' },
     ],
   },
   dentist: {
@@ -264,12 +286,35 @@ const steps = {
   patient: {
     say: [
       'Welcome! STEPBAE makes crowns, veneers and implant teeth for dentists, so we work with you through your dentist.',
-      'If you’d like Step to make your restoration, just ask your dentist to send your case to STEPBAE. You can also read our articles for patients or ask us a question.',
+      'Want Step to make yours? Just ask your dentist to send your case to STEPBAE. It’s easier than you might think, and we can show you how.',
     ],
     options: [
-      { label: 'Articles for patients', next: 'insights-patients' },
+      { label: 'How do I ask my dentist?', next: 'patient-ask' },
+      { label: 'Write a note to my dentist', href: dentistNote },
       { label: 'See Step’s work', href: '/craftsmanship.html' },
-      { label: 'Ask a question', href: '/consultation.html#inquiry' },
+      { label: 'Articles for patients', next: 'insights-patients' },
+    ],
+  },
+  'patient-ask': {
+    say: [
+      'It’s simple, and dentists hear requests like this all the time. Ideally before your teeth are prepared, tell your dentist:',
+    ],
+    list: patientAsk,
+    options: [
+      { label: 'Write a note to my dentist', href: dentistNote },
+      { label: 'Show my dentist Step’s work', href: '/craftsmanship.html' },
+      { label: 'What if my dentist has questions?', next: 'patient-questions' },
+    ],
+  },
+  'patient-questions': {
+    say: [
+      `Step is happy to talk with your dentist directly. They can email us at ${EMAIL}, or chat with us here, and we’ll walk them through sending the case.`,
+      'Our page for dentists has everything they need to get started:',
+    ],
+    options: [
+      { label: 'Page for dentists', href: '/partnership.html' },
+      { label: 'Write a note to my dentist', href: dentistNote },
+      { label: 'Ask Step a question', href: '/consultation.html#inquiry' },
     ],
   },
   browse: {
@@ -372,6 +417,7 @@ const askMessage = (answers, field, note = '') => ({
 
 // typed questions: the first rule whose word appears in the message picks the step
 const keywordRules = [
+  [/ask (my )?dentist|tell (my )?dentist|my dentist (to|send)/, 'patient-ask'],
   [/itero/, 'portal-iTero'],
   [/trios|3shape/, 'portal-3Shape TRIOS'],
   [/medit/, 'portal-Medit'],
