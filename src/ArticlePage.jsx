@@ -52,7 +52,7 @@ const authors = {
     photo: '/images/headshot2.jpg',
     url: 'https://stepbae.com/about.html',
     sameAs: [
-      'https://www.threads.com/@step2thmaster',
+      'https://www.instagram.com/step2thmaster/',
       'https://www.facebook.com/step2thmaster/',
       'https://www.tiktok.com/@boynamedbae',
       'https://www.youtube.com/@boynamedbae',

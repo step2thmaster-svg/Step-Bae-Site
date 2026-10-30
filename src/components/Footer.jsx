@@ -1,5 +1,5 @@
 import Logo from './Logo.jsx'
-import { Mail, MapPin, Threads, Facebook, TikTok, YouTube } from './Icons.jsx'
+import { Mail, MapPin, Instagram, Facebook, TikTok, YouTube } from './Icons.jsx'
 import { EMAIL } from './sendForm.js'
 
 const explore = [
@@ -14,7 +14,7 @@ const work = [
 ]
 
 const social = [
-  { label: 'Threads', href: 'https://www.threads.com/@step2thmaster', Icon: Threads },
+  { label: 'Instagram', href: 'https://www.instagram.com/step2thmaster/', Icon: Instagram },
   { label: 'Facebook', href: 'https://www.facebook.com/step2thmaster/', Icon: Facebook },
   { label: 'TikTok', href: 'https://www.tiktok.com/@boynamedbae', Icon: TikTok },
   { label: 'YouTube', href: 'https://www.youtube.com/@boynamedbae', Icon: YouTube },
