@@ -72,7 +72,7 @@ const strengths = [
 const steps = {
   start: {
     say: [
-      'Hi, we’re the Mini Steps, welcome to STEPBAE! We help dentists deliver natural, beautiful restorations, handcrafted by Step Toothmaster Bae, CDT, DTG.',
+      'Hi, we’re the Mini Steps, welcome to STEPBAE! We help dentists deliver natural, beautiful restorations!',
       'What brings you here today?',
     ],
     options: [
