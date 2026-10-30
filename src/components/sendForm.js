@@ -4,8 +4,7 @@ export const FORMSPREE_IDS = {
   consultation: 'xbggybbd',
   partnership: 'maeejkkb',
 }
-// temporary until info@stepbae.com is set up
-export const EMAIL = 'step2thmaster@gmail.com'
+export const EMAIL = 'info@stepbae.com'
 
 // resolves true once Formspree has the submission, false when it fell back to opening an email
 export async function sendForm(form, subject, formName) {
