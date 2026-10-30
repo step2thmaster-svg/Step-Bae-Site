@@ -314,7 +314,7 @@ export default function ChatGuide() {
               <Avatar crew size="h-11 w-11" />
               <div>
                 <p className="font-display text-[20px] font-medium leading-tight text-white">Mini Steps</p>
-                <p className="text-[12px] text-white/55">Your guides to STEPBAE</p>
+                <p className="text-[12px] text-white/55">Your adorable dancing guides</p>
               </div>
             </div>
             <div className="flex items-center gap-1">
