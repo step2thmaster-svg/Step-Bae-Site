@@ -115,7 +115,7 @@ const steps = {
 
   consulting: {
     say: [
-      'Step works with practices and labs on digital workflow, esthetic and implant case planning, and hands-on training for your team, and lectures for study clubs and events.',
+      'Step works with practices and labs on digital workflow, esthetic and implant case planning, and hands-on training for your team, and lectures for study clubs and corporate events.',
       'What would you like to do?',
     ],
     options: [
