@@ -1,4 +1,5 @@
 import Logo from './Logo.jsx'
+import ChatGuide from './ChatGuide.jsx'
 import { Mail, MapPin, Instagram, Facebook, TikTok, YouTube } from './Icons.jsx'
 import { EMAIL } from './sendForm.js'
 
@@ -40,6 +41,8 @@ function LinkList({ links }) {
 export default function Footer() {
   return (
     <footer id="contact" className="border-t border-gold/20 bg-ink">
+      {/* the site assistant floats in the corner; it lives here because every page has this footer */}
+      <ChatGuide />
       {/* same side margins as the header */}
       <div className="px-6 lg:px-12">
         <div className="grid gap-8 py-9 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] lg:gap-12">

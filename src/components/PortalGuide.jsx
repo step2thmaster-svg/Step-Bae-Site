@@ -1,5 +1,6 @@
 // how a practice finds STEPBAE in each scanner's portal; menu names follow each portal's own wording
-const portals = [
+// (also used by the site assistant, ChatGuide.jsx)
+export const portals = [
   {
     name: 'iTero',
     where: 'MyiTero',

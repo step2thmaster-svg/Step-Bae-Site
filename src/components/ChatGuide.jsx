@@ -1,0 +1,344 @@
+import { useEffect, useRef, useState } from 'react'
+import { ArrowRight } from './Icons.jsx'
+import { portals } from './PortalGuide.jsx'
+import { EMAIL } from './sendForm.js'
+
+// A guided site assistant: a scripted conversation (no AI, no server) that helps visitors find their way
+// and walks dentists through sending a case. Each step says something and offers choices; a choice either
+// goes to another step (`next`) or opens a page (`href`). Typed questions are matched to a step by keywords.
+
+const caseChecklist = [
+  'Both full arches and a bite scan, even for a single crown',
+  'Clear margins on every prep',
+  'Tooth numbers, restoration type and material (or ask us to recommend one)',
+  'Shade map with stump shade, plus a photo with shade tabs in frame',
+  'The date you need the case back',
+]
+
+// one step per scanner portal, built from the same steps the Dentist Partnership page shows
+const portalSteps = Object.fromEntries(
+  portals.map((p) => [
+    `portal-${p.name}`,
+    {
+      say: [`Here’s how to connect STEPBAE in ${p.where}:`],
+      list: p.steps,
+      options: [
+        { label: 'Done, what’s next?', next: 'after-connect' },
+        { label: 'See all portal steps', href: '/partnership.html#portals' },
+        { label: 'A different scanner', next: 'scanner' },
+      ],
+    },
+  ]),
+)
+
+const steps = {
+  start: {
+    say: ['Hi, welcome to STEPBAE! I can help you find your way around or walk you through sending us a case.', 'What brings you here today?'],
+    options: [
+      { label: 'I’m a dentist: send a case', next: 'case-start' },
+      { label: 'I’m a dentist: other questions', next: 'dentist' },
+      { label: 'I’m a patient', next: 'patient' },
+      { label: 'Just looking around', next: 'browse' },
+    ],
+  },
+
+  'case-start': {
+    say: ['Wonderful, we’d love to work with you. Have you sent a case to STEPBAE before?'],
+    options: [
+      { label: 'This is my first case', next: 'case-new' },
+      { label: 'Yes, I’ve sent cases before', next: 'case-returning' },
+    ],
+  },
+  'case-new': {
+    say: ['Welcome! How will you be sending the case?'],
+    options: [
+      { label: 'Digital scan', next: 'scanner' },
+      { label: 'Physical impression or models', next: 'case-physical' },
+    ],
+  },
+  scanner: {
+    say: ['Which scanner do you use? I’ll show you how to connect us in its portal. It only takes a few minutes, and you only do it once.'],
+    options: [
+      ...portals.map((p) => ({ label: p.name, next: `portal-${p.name}` })),
+      { label: 'Another scanner', next: 'scanner-other' },
+    ],
+  },
+  ...portalSteps,
+  'scanner-other': {
+    say: [
+      'No problem. Most scanners can export STL or PLY files.',
+      `You can email the files to ${EMAIL}, or fill out the partnership form and we’ll help you set up the best way to send cases.`,
+    ],
+    options: [
+      { label: 'Fill out the partnership form', href: '/partnership.html#partner-form' },
+      { label: 'What should I include?', next: 'checklist' },
+    ],
+  },
+  'after-connect': {
+    say: [
+      'Next, please fill out the short partnership form: your practice details and your portal account. That way we can find and accept your connection right away.',
+    ],
+    options: [
+      { label: 'Go to the partnership form', href: '/partnership.html#partner-form' },
+      { label: 'What should I include with a case?', next: 'checklist' },
+    ],
+  },
+  'case-physical': {
+    say: [
+      'Of course. Please fill out the partnership form and mention that you’ll send physical impressions or models. We’ll reply with shipping details and our Rx form.',
+    ],
+    options: [
+      { label: 'Go to the partnership form', href: '/partnership.html#partner-form' },
+      { label: 'What should I include?', next: 'checklist' },
+    ],
+  },
+  'case-returning': {
+    say: ['Welcome back! Just choose STEPBAE as the lab in your portal’s order form. A quick checklist so the case comes out right the first time:'],
+    list: caseChecklist,
+    options: [
+      { label: 'Read the full guide', href: '/article.html?p=how-to-submit-a-digital-case' },
+      { label: 'Discuss a case with Step first', href: '/partnership.html#partner-form' },
+      { label: 'Something else', next: 'start' },
+    ],
+  },
+  checklist: {
+    say: ['Here’s what helps us get a case right the first time:'],
+    list: caseChecklist,
+    options: [
+      { label: 'Read the full guide', href: '/article.html?p=how-to-submit-a-digital-case' },
+      { label: 'Go to the partnership form', href: '/partnership.html#partner-form' },
+      { label: 'Start over', next: 'start' },
+    ],
+  },
+
+  dentist: {
+    say: ['Happy to help. What would you like to know about?'],
+    options: [
+      { label: 'Send a case', next: 'case-start' },
+      { label: 'See Step’s work', href: '/craftsmanship.html' },
+      { label: 'Consulting & courses', href: '/consultation.html' },
+      { label: 'Articles for dentists', href: '/insights.html#latest' },
+    ],
+  },
+  patient: {
+    say: [
+      'Welcome! STEPBAE makes crowns, veneers and implant teeth for dentists, so we work with you through your dentist.',
+      'If you’d like Step to make your restoration, just ask your dentist to send your case to STEPBAE. You can also read our articles for patients or ask us a question.',
+    ],
+    options: [
+      { label: 'Articles for patients', href: '/insights.html#latest' },
+      { label: 'See Step’s work', href: '/craftsmanship.html' },
+      { label: 'Ask a question', href: '/consultation.html#inquiry' },
+    ],
+  },
+  browse: {
+    say: ['Enjoy your visit! Here’s where you can go:'],
+    options: [
+      { label: 'Craftsmanship gallery', href: '/craftsmanship.html' },
+      { label: 'About Step', href: '/about.html' },
+      { label: 'Consulting & courses', href: '/consultation.html' },
+      { label: 'Insights articles', href: '/insights.html' },
+      { label: 'Send a case', next: 'case-start' },
+    ],
+  },
+  contact: {
+    say: [`You can reach us at ${EMAIL}, or send a message with the question form and we’ll get back to you.`],
+    options: [
+      { label: 'Ask a question', href: '/consultation.html#inquiry' },
+      { label: 'Start over', next: 'start' },
+    ],
+  },
+  unknown: {
+    say: ['I’m a simple guide, so I may not understand everything. Here’s what I can help with:'],
+    options: [
+      { label: 'Send a case', next: 'case-start' },
+      { label: 'Find my way around', next: 'browse' },
+      { label: 'I’m a patient', next: 'patient' },
+      { label: 'Contact STEPBAE', next: 'contact' },
+    ],
+  },
+}
+
+// typed questions: the first rule whose word appears in the message picks the step
+const keywordRules = [
+  [/itero/, 'portal-iTero'],
+  [/trios|3shape/, 'portal-3Shape TRIOS'],
+  [/medit/, 'portal-Medit'],
+  [/primescan|cerec|dentsply|sirona/, 'portal-Primescan / CEREC'],
+  [/scanner|portal|connect/, 'scanner'],
+  [/impression|model|ship|mail in|physical/, 'case-physical'],
+  [/checklist|include|shade|photo|prescription|\brx\b/, 'checklist'],
+  [/case|send|submit|start|partner|account/, 'case-start'],
+  [/patient|my teeth|my dentist|my crown|my veneer/, 'patient'],
+  [/course|lecture|consult|training|event/, 'dentist'],
+  [/work|gallery|photos|cases you/, 'browse'],
+  [/contact|email|phone|call|reach|question/, 'contact'],
+  [/hi\b|hello|hey|help|menu|start over/, 'start'],
+]
+const matchStep = (text) => keywordRules.find(([re]) => re.test(text.toLowerCase()))?.[1] ?? 'unknown'
+
+// the conversation is kept for the visit, so it carries over as the visitor moves between pages
+const STORE = 'stepbae-chat'
+const load = () => {
+  try {
+    return JSON.parse(sessionStorage.getItem(STORE))
+  } catch {
+    return null
+  }
+}
+const save = (state) => {
+  try {
+    sessionStorage.setItem(STORE, JSON.stringify(state))
+  } catch {
+    /* private browsing: the chat still works, it just starts fresh on each page */
+  }
+}
+
+const botMessage = (id) => ({ from: 'bot', step: id })
+
+function ChatIcon({ className }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v9a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z" />
+      <path d="M8 9h8M8 12h5" />
+    </svg>
+  )
+}
+
+export default function ChatGuide() {
+  const saved = load()
+  const [open, setOpen] = useState(saved?.open ?? false)
+  const [messages, setMessages] = useState(saved?.messages ?? [botMessage('start')])
+  const [text, setText] = useState('')
+  const listRef = useRef(null)
+
+  useEffect(() => save({ open, messages }), [open, messages])
+  useEffect(() => {
+    listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: 'smooth' })
+  }, [messages, open])
+  useEffect(() => {
+    const onKey = (e) => e.key === 'Escape' && setOpen(false)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
+  const go = (label, next) => setMessages((m) => [...m, { from: 'user', text: label }, botMessage(next)])
+  const send = (e) => {
+    e.preventDefault()
+    const t = text.trim()
+    if (!t) return
+    setText('')
+    go(t, matchStep(t))
+  }
+  const restart = () => setMessages([botMessage('start')])
+
+  const last = messages.length - 1
+
+  return (
+    <>
+      {open && (
+        <div
+          role="dialog"
+          aria-label="STEPBAE assistant"
+          className="fixed inset-x-3 bottom-20 z-50 flex max-h-[min(560px,calc(100dvh-110px))] flex-col overflow-hidden rounded-[6px] border border-gold/40 bg-ink-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] sm:inset-x-auto sm:right-6 sm:w-[370px]"
+        >
+          <div className="flex items-center justify-between border-b border-gold/25 px-4 py-3">
+            <div>
+              <p className="font-display text-[19px] font-medium leading-tight text-white">STEPBAE Assistant</p>
+              <p className="text-[12px] text-white/55">Find your way or send us a case</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <button onClick={restart} className="rounded px-2 py-1 text-[12px] text-white/60 hover:text-gold">
+                Start over
+              </button>
+              <button onClick={() => setOpen(false)} aria-label="Close assistant" className="rounded px-2 py-1 text-[20px] leading-none text-white/60 hover:text-gold">
+                ×
+              </button>
+            </div>
+          </div>
+
+          <div ref={listRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4" aria-live="polite">
+            {messages.map((m, i) =>
+              m.from === 'user' ? (
+                <p key={i} className="ml-auto w-fit max-w-[80%] rounded-[12px] rounded-br-[3px] bg-gold px-3 py-2 text-[14px] leading-snug text-ink">
+                  {m.text}
+                </p>
+              ) : (
+                <BotTurn key={i} step={steps[m.step] ?? steps.unknown} active={i === last} onChoose={go} />
+              ),
+            )}
+          </div>
+
+          <form onSubmit={send} className="flex gap-2 border-t border-gold/25 p-3">
+            <input
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Type a question…"
+              aria-label="Type a question"
+              className="min-w-0 flex-1 rounded-[3px] border border-white/15 bg-ink px-3 py-2 text-[14px] text-white placeholder:text-white/40 focus:border-gold focus:outline-none"
+            />
+            <button type="submit" aria-label="Send" className="rounded-[3px] bg-gold px-3 text-ink hover:bg-gold-light">
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </form>
+        </div>
+      )}
+
+      <button
+        onClick={() => setOpen((o) => !o)}
+        aria-label={open ? 'Close assistant' : 'Open assistant'}
+        aria-expanded={open}
+        className="fixed bottom-5 right-5 z-50 flex h-12 items-center gap-2 rounded-full bg-gold px-4 text-[14px] font-semibold text-ink shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] transition-colors hover:bg-gold-light sm:right-6"
+      >
+        {open ? <span className="px-1 text-[22px] leading-none">×</span> : <ChatIcon className="h-5 w-5" />}
+        {!open && <span className="max-sm:hidden">Need help?</span>}
+      </button>
+    </>
+  )
+}
+
+// one turn from the assistant: its lines, an optional list, and (on the latest turn only) the choices
+function BotTurn({ step, active, onChoose }) {
+  return (
+    <div className="max-w-[92%] space-y-2">
+      {step.say.map((line) => (
+        <p key={line} className="w-fit rounded-[12px] rounded-bl-[3px] bg-cream px-3 py-2 text-[14px] leading-snug text-ink">
+          {line}
+        </p>
+      ))}
+      {step.list && (
+        <ol className="space-y-1.5 rounded-[12px] bg-cream px-3 py-2.5 text-[13px] leading-snug text-ink/90">
+          {step.list.map((item, i) => (
+            <li key={item} className="flex gap-2">
+              <span className="font-semibold text-gold-dark">{i + 1}.</span>
+              {item}
+            </li>
+          ))}
+        </ol>
+      )}
+      {active && (
+        <div className="flex flex-wrap gap-2 pt-1">
+          {step.options.map((o) =>
+            o.href ? (
+              <a
+                key={o.label}
+                href={o.href}
+                className="inline-flex items-center gap-1.5 rounded-full bg-gold px-3 py-1.5 text-[13px] font-medium text-ink hover:bg-gold-light"
+              >
+                {o.label} <ArrowRight className="h-3 w-3" />
+              </a>
+            ) : (
+              <button
+                key={o.label}
+                onClick={() => onChoose(o.label, o.next)}
+                className="rounded-full border border-gold/60 px-3 py-1.5 text-[13px] text-white/90 hover:border-gold hover:bg-gold/10 hover:text-gold"
+              >
+                {o.label}
+              </button>
+            ),
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
