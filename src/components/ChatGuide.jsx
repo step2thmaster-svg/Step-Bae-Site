@@ -38,6 +38,8 @@ const steps = {
       { label: 'I’m a dentist: send a case', next: 'case-start' },
       { label: 'I’m a dentist: other questions', next: 'dentist' },
       { label: 'I’m a patient', next: 'patient' },
+      { label: 'Consulting & courses', next: 'consulting' },
+      { label: 'Read our insights', next: 'insights' },
       { label: 'Just looking around', next: 'browse' },
     ],
   },
@@ -111,13 +113,51 @@ const steps = {
     ],
   },
 
+  consulting: {
+    say: [
+      'Step works with practices and labs on digital workflow, esthetic and implant case planning, and hands-on training for your team, and lectures for study clubs and events.',
+      'What would you like to do?',
+    ],
+    options: [
+      { label: 'See consulting services', href: '/consultation.html#services' },
+      { label: 'Upcoming courses & events', href: '/consultation.html#events' },
+      { label: 'Book a consultation', href: '/consultation.html#inquiry' },
+    ],
+  },
+  insights: {
+    say: [
+      'Our Insights page has articles from the bench, color coded so you can spot yours: gold for dentists, teal for patients.',
+      'Who are you reading for?',
+    ],
+    options: [
+      { label: 'Articles for dentists', next: 'insights-dentists' },
+      { label: 'Articles for patients', next: 'insights-patients' },
+      { label: 'See all articles', href: '/insights.html#latest' },
+    ],
+  },
+  'insights-dentists': {
+    say: ['Here are a few good places to start:'],
+    options: [
+      { label: 'How to submit a digital case', href: '/article.html?p=how-to-submit-a-digital-case' },
+      { label: 'Zirconia vs. layered zirconia crowns', href: '/article.html?p=zirconia-vs-layered-ceramic' },
+      { label: 'All articles', href: '/insights.html#latest' },
+    ],
+  },
+  'insights-patients': {
+    say: ['Here are a few good places to start:'],
+    options: [
+      { label: 'Crown or veneer?', href: '/article.html?p=crown-vs-veneer' },
+      { label: 'Veneers vs. braces or aligners', href: '/article.html?p=veneers-vs-braces-or-clear-aligners' },
+      { label: 'All articles', href: '/insights.html#latest' },
+    ],
+  },
   dentist: {
     say: ['Happy to help. What would you like to know about?'],
     options: [
       { label: 'Send a case', next: 'case-start' },
       { label: 'See Step’s work', href: '/craftsmanship.html' },
-      { label: 'Consulting & courses', href: '/consultation.html' },
-      { label: 'Articles for dentists', href: '/insights.html#latest' },
+      { label: 'Consulting & courses', next: 'consulting' },
+      { label: 'Articles for dentists', next: 'insights-dentists' },
     ],
   },
   patient: {
@@ -126,7 +166,7 @@ const steps = {
       'If you’d like Step to make your restoration, just ask your dentist to send your case to STEPBAE. You can also read our articles for patients or ask us a question.',
     ],
     options: [
-      { label: 'Articles for patients', href: '/insights.html#latest' },
+      { label: 'Articles for patients', next: 'insights-patients' },
       { label: 'See Step’s work', href: '/craftsmanship.html' },
       { label: 'Ask a question', href: '/consultation.html#inquiry' },
     ],
@@ -170,7 +210,8 @@ const keywordRules = [
   [/checklist|include|shade|photo|prescription|\brx\b/, 'checklist'],
   [/case|send|submit|start|partner|account/, 'case-start'],
   [/patient|my teeth|my dentist|my crown|my veneer/, 'patient'],
-  [/course|lecture|consult|training|event/, 'dentist'],
+  [/course|lecture|consult|training|event|class/, 'consulting'],
+  [/article|blog|insight|read/, 'insights'],
   [/work|gallery|photos|cases you/, 'browse'],
   [/contact|email|phone|call|reach|question/, 'contact'],
   [/hi\b|hello|hey|help|menu|start over/, 'start'],
