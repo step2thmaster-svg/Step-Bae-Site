@@ -12,7 +12,7 @@ import { inquiryOptions, orgOptions } from './ConsultForm.jsx'
 // and walks dentists through sending a case or leaving their details. Each step says something and offers choices;
 // a choice either goes to another step (`next`) or opens a page (`href`), and a step with `lead` starts collecting
 // a lead right in the chat, one question at a time, with a review before anything is sent. Typed questions are matched to a step by keywords. Only facts the site already states are used:
-// no prices, turnaround times or offers are promised here; those go to Step.
+// no prices, turnaround times or offers are promised here; those go to STEPBAE.
 
 const caseChecklist = [
   'Both full arches and a bite scan, even for a single crown',
@@ -43,18 +43,18 @@ const portalSteps = Object.fromEntries(
 const patientAsk = [
   'That you’d like your crowns or veneers made by STEPBAE Dental Lab',
   'STEPBAE works with iTero, 3Shape TRIOS, Medit and Primescan, or physical impressions, so your dentist can send the case the way they usually do',
-  'Connecting takes just a few minutes, and Step will talk with them about your case',
+  'Connecting takes just a few minutes, and STEPBAE will talk with them about your case',
 ]
 // a ready-to-send email the patient fills in with their dentist's address
 const dentistNote = `mailto:?subject=${encodeURIComponent('Could my case go to STEPBAE?')}&body=${encodeURIComponent(
   [
     'Hi Doctor,',
     '',
-    'For my upcoming crowns or veneers, I’d love for them to be made by Step Toothmaster Bae, CDT, DTG at STEPBAE.',
+    'For my upcoming crowns or veneers, I’d love for them to be made by STEPBAE Dental Lab.',
     '',
     'STEPBAE works with iTero, 3Shape TRIOS, Medit and Primescan, as well as physical impressions, and connecting only takes a few minutes: https://stepbae.com/partnership.html',
     '',
-    'You can see Step’s work at https://stepbae.com/craftsmanship.html',
+    'You can see STEPBAE’s work at https://stepbae.com/craftsmanship.html',
     '',
     'Could you send my case to STEPBAE? Thank you!',
   ].join('\n'),
@@ -62,7 +62,7 @@ const dentistNote = `mailto:?subject=${encodeURIComponent('Could my case go to S
 
 // why dentists choose STEPBAE: the strengths the rest of the site already shows
 const strengths = [
-  'Every case is handcrafted and layered by Step Toothmaster Bae, CDT, DTG',
+  'Every case is handcrafted and layered in house at STEPBAE by a CDT, DTG master ceramist',
   'You talk directly with the technician making your case',
   'Shade matched to your patient’s natural teeth, not just a shade tab',
   `An educator dentists learn from: more than 70 lectures and hands-on courses internationally, and ${articles.length} published articles`,
@@ -145,7 +145,7 @@ const steps = {
     list: caseChecklist,
     options: [
       { label: 'Read the full guide', href: '/article.html?p=how-to-submit-a-digital-case' },
-      { label: 'Discuss a case with Step first', next: 'lead-talk' },
+      { label: 'Discuss a case with STEPBAE first', next: 'lead-talk' },
       { label: 'Something else', next: 'start' },
     ],
   },
@@ -163,7 +163,7 @@ const steps = {
     say: ['Great question! Here’s why dentists send their esthetic cases to STEPBAE:'],
     list: strengths,
     options: [
-      { label: 'See Step’s work', href: '/craftsmanship.html' },
+      { label: 'See STEPBAE’s work', href: '/craftsmanship.html' },
       { label: 'Send my first case', next: 'case-start' },
       { label: 'Get our price list', next: 'lead-price' },
       { label: 'I already have a lab', next: 'switching' },
@@ -176,14 +176,14 @@ const steps = {
     ],
     options: [
       { label: 'Try one case', next: 'case-start' },
-      { label: 'See Step’s work', href: '/craftsmanship.html' },
-      { label: 'Talk to Step', next: 'lead-talk' },
+      { label: 'See STEPBAE’s work', href: '/craftsmanship.html' },
+      { label: 'Talk to STEPBAE', next: 'lead-talk' },
     ],
   },
   turnaround: {
     say: [
       'It depends on the restoration and how much characterization the case needs, and layered esthetic work takes a little longer than a monolithic crown.',
-      'Tell us what you’re planning and Step will give you a timeline before you prep, so you can book your patient with confidence.',
+      'Tell us what you’re planning and STEPBAE will give you a timeline before you prep, so you can book your patient with confidence.',
     ],
     options: [
       { label: 'Ask about my case', next: 'lead-talk' },
@@ -201,7 +201,7 @@ const steps = {
     ],
   },
   'lead-talk': {
-    say: ['Step would love to hear from you! A few quick questions, and Step will get back to you personally.'],
+    say: ['STEPBAE would love to hear from you! A few quick questions, and we’ll get back to you personally.'],
     lead: 'talk',
     options: [
       { label: 'Leave a message', next: 'lead-talk' },
@@ -209,7 +209,7 @@ const steps = {
     ],
   },
   'lead-consult': {
-    say: ['Wonderful! Let’s get your inquiry to Step. Just a few quick questions.'],
+    say: ['Wonderful! Let’s get your inquiry to STEPBAE. Just a few quick questions.'],
     lead: 'consult',
     options: [
       { label: 'Start my inquiry', next: 'lead-consult' },
@@ -217,17 +217,17 @@ const steps = {
     ],
   },
   'consult-thanks': {
-    say: ['Thank you! Your inquiry is on its way, and Step will be in touch shortly to set up a conversation.', 'In the meantime, take a look at what’s coming up:'],
+    say: ['Thank you! Your inquiry is on its way, and STEPBAE will be in touch shortly to set up a conversation.', 'In the meantime, take a look at what’s coming up:'],
     options: [
       { label: 'Upcoming courses & events', href: '/consultation.html#events' },
-      { label: 'About Step', href: '/about.html' },
+      { label: 'About STEPBAE', href: '/about.html' },
       { label: 'Start over', next: 'start' },
     ],
   },
   'lead-thanks': {
-    say: ['Thank you! We’ve got your details, and Step will be in touch shortly.', 'While you wait, would you like to see some of Step’s work?'],
+    say: ['Thank you! We’ve got your details, and STEPBAE will be in touch shortly.', 'While you wait, would you like to see some of STEPBAE’s work?'],
     options: [
-      { label: 'See Step’s work', href: '/craftsmanship.html' },
+      { label: 'See STEPBAE’s work', href: '/craftsmanship.html' },
       { label: 'Connect my scanner', next: 'scanner' },
       { label: 'Start over', next: 'start' },
     ],
@@ -235,7 +235,7 @@ const steps = {
 
   consulting: {
     say: [
-      'Step works with practices and labs on digital workflow, esthetic and implant case planning, and hands-on training for your team, and lectures for study clubs and corporate events.',
+      'STEPBAE works with practices and labs on digital workflow, esthetic and implant case planning, and hands-on training for your team, and lectures for study clubs and corporate events.',
       'What would you like to do?',
     ],
     options: [
@@ -270,7 +270,7 @@ const steps = {
       { label: 'Crown or veneer?', href: '/article.html?p=crown-vs-veneer' },
       { label: 'Veneers vs. braces or aligners', href: '/article.html?p=veneers-vs-braces-or-clear-aligners' },
       { label: 'All articles', href: '/insights.html#latest' },
-      { label: 'Ask my dentist for Step', next: 'patient-ask' },
+      { label: 'Ask my dentist for STEPBAE', next: 'patient-ask' },
     ],
   },
   dentist: {
@@ -291,7 +291,7 @@ const steps = {
     options: [
       { label: 'How do I ask my dentist?', next: 'patient-ask' },
       { label: 'Write a note to my dentist', href: dentistNote },
-      { label: 'See Step’s work', href: '/craftsmanship.html' },
+      { label: 'See STEPBAE’s work', href: '/craftsmanship.html' },
       { label: 'Articles for patients', next: 'insights-patients' },
     ],
   },
@@ -302,26 +302,26 @@ const steps = {
     list: patientAsk,
     options: [
       { label: 'Write a note to my dentist', href: dentistNote },
-      { label: 'Show my dentist Step’s work', href: '/craftsmanship.html' },
+      { label: 'Show my dentist STEPBAE’s work', href: '/craftsmanship.html' },
       { label: 'What if my dentist has questions?', next: 'patient-questions' },
     ],
   },
   'patient-questions': {
     say: [
-      `Step is happy to talk with your dentist directly. They can email us at ${EMAIL}, or chat with us here, and we’ll walk them through sending the case.`,
+      `STEPBAE is happy to talk with your dentist directly. They can email us at ${EMAIL}, or chat with us here, and we’ll walk them through sending the case.`,
       'Our page for dentists has everything they need to get started:',
     ],
     options: [
       { label: 'Page for dentists', href: '/partnership.html' },
       { label: 'Write a note to my dentist', href: dentistNote },
-      { label: 'Ask Step a question', href: '/consultation.html#inquiry' },
+      { label: 'Ask STEPBAE a question', href: '/consultation.html#inquiry' },
     ],
   },
   browse: {
     say: ['Enjoy your visit! Here’s where you can go:'],
     options: [
       { label: 'Craftsmanship gallery', href: '/craftsmanship.html' },
-      { label: 'About Step', href: '/about.html' },
+      { label: 'About STEPBAE', href: '/about.html' },
       { label: 'Consulting & courses', href: '/consultation.html' },
       { label: 'Insights articles', href: '/insights.html' },
       { label: 'Why dentists choose STEPBAE', next: 'why' },
@@ -329,7 +329,7 @@ const steps = {
     ],
   },
   contact: {
-    say: [`You can reach us at ${EMAIL}, or leave a message right here and Step will get back to you.`],
+    say: [`You can reach us at ${EMAIL}, or leave a message right here and STEPBAE will get back to you.`],
     options: [
       { label: 'Leave a message', next: 'lead-talk' },
       { label: 'Start over', next: 'start' },
@@ -341,7 +341,7 @@ const steps = {
       { label: 'Send a case', next: 'case-start' },
       { label: 'Find my way around', next: 'browse' },
       { label: 'I’m a patient', next: 'patient' },
-      { label: 'Talk to Step', next: 'lead-talk' },
+      { label: 'Talk to STEPBAE', next: 'lead-talk' },
     ],
   },
 }
@@ -359,10 +359,10 @@ const leadFields = {
   phone: { key: 'Phone', ask: () => 'And a phone number, in case a quick call is easier?', type: 'tel', optional: true, autoComplete: 'tel' },
   units: {
     key: 'Units per month',
-    ask: () => 'Roughly how many units does your practice send a month? It helps Step quote the right pricing.',
+    ask: () => 'Roughly how many units does your practice send a month? It helps STEPBAE quote the right pricing.',
     choices: unitOptions,
   },
-  message: { key: 'Message', ask: () => 'What would you like to ask Step? Tell us a little about your case or question.' },
+  message: { key: 'Message', ask: () => 'What would you like to ask STEPBAE? Tell us a little about your case or question.' },
   // the consultation inquiry, the same questions as the form on the Consultation page
   role: { key: 'Role', ask: (a) => `Nice to meet you, ${a.Name}! What’s your title or role?`, optional: true, autoComplete: 'organization-title' },
   organization: { key: 'Organization', ask: () => 'Which company or organization are you with?', autoComplete: 'organization' },
@@ -373,7 +373,7 @@ const leadFields = {
   details: {
     key: 'Message',
     label: 'Tell us more',
-    ask: () => 'Last one! Tell us more: your goals, audience or team size, location and budget, whatever helps Step prepare.',
+    ask: () => 'Last one! Tell us more: your goals, audience or team size, location and budget, whatever helps STEPBAE prepare.',
   },
 }
 const leadFlows = {
@@ -485,7 +485,7 @@ const pitches = {
   '/insights.html': 'Enjoying the read? Ask us anything, or send a case and see the difference for yourself.',
   '/article.html': 'Enjoying the read? Ask us anything, or send a case and see the difference for yourself.',
   '/consultation.html': 'Planning a course or consultation? We’ll point you to the right one.',
-  '/about.html': 'Want Step on your next case? We can set that up in a minute.',
+  '/about.html': 'Want STEPBAE on your next case? We can set that up in a minute.',
 }
 const defaultPitch = 'We do more than dancing. Sending a case or just curious? Tap us and we’ll show you around.'
 
@@ -722,7 +722,7 @@ function LeadTurn({ message, lead, active, onAnswer, onChange, onChangeField, on
         {message.lead === 'ask' && <Bubble>{message.text}</Bubble>}
         {message.lead === 'review' && (
           <>
-            <Bubble>Here’s what we’ll send Step. Does everything look right?</Bubble>
+            <Bubble>Here’s what we’ll send STEPBAE. Does everything look right?</Bubble>
             <dl className="space-y-1 rounded-[12px] bg-cream px-3 py-2.5 text-[13px] leading-snug text-ink/90">
               {message.summary.map(([label, value]) => (
                 <div key={label} className="flex gap-2">
@@ -752,7 +752,7 @@ function LeadTurn({ message, lead, active, onAnswer, onChange, onChangeField, on
             {(message.lead === 'review' || message.lead === 'error') && (
               <>
                 <button onClick={onSend} disabled={lead.sending} className={solidChip}>
-                  {lead.sending ? 'Sending…' : 'Send to Step'} <ArrowRight className="h-3 w-3" />
+                  {lead.sending ? 'Sending…' : 'Send to STEPBAE'} <ArrowRight className="h-3 w-3" />
                 </button>
                 <button onClick={onChange} className={chip}>
                   Change something
