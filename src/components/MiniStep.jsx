@@ -151,13 +151,13 @@ export default function MiniStep({ className = '', still = false, crew = false }
   // group's moves are symmetrical; each sits in its own nested svg so its animations keep their own coordinates
   // (overflow visible, so a somersault isn't clipped); they flip in order: pink, Mini Step, then silver
   return (
-    <svg viewBox="-46 0 212 136" className={className} overflow="visible" aria-hidden="true">
-      <svg x="-44" y="8" width="96" height="104" viewBox="0 4 120 130" overflow="visible">
+    <svg viewBox="-32 0 184 136" className={className} overflow="visible" aria-hidden="true">
+      <svg x="-28" y="28" width="78" height="84.5" viewBox="0 4 120 130" overflow="visible">
         <g transform="translate(120 0) scale(-1 1)">
           <Dancer look="pink" anim={anim} mirrored />
         </g>
       </svg>
-      <svg x="68" y="8" width="96" height="104" viewBox="0 4 120 130" overflow="visible">
+      <svg x="70" y="28" width="78" height="84.5" viewBox="0 4 120 130" overflow="visible">
         <Dancer look="silver" anim={anim} flipDelay={0.5} />
       </svg>
       <svg x="0" y="4" width="120" height="130" viewBox="0 4 120 130" overflow="visible">

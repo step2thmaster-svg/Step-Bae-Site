@@ -247,7 +247,7 @@ function Avatar({ size, still, crew, className = '' }) {
       style={{ background: 'radial-gradient(circle at 50% 40%, #8fb0c4 0%, #5b7c91 45%, #2e4250 100%)' }}
     >
       {crew ? (
-        <MiniStep crew still={still} className="absolute left-1/2 top-[17%] w-[118%] -translate-x-1/2" />
+        <MiniStep crew still={still} className="absolute left-1/2 top-[17%] w-[102%] -translate-x-1/2" />
       ) : (
         <MiniStep still={still} className="absolute left-1/2 top-[6%] w-[76%] -translate-x-[47%]" />
       )}
