@@ -34,7 +34,7 @@ const portalSteps = Object.fromEntries(
 
 const steps = {
   start: {
-    say: ['Hi, welcome to STEPBAE! I can help you find your way around or walk you through sending us a case.', 'What brings you here today?'],
+    say: ['Hi, we’re the Mini Steps, welcome to STEPBAE! We can help you find your way around or walk you through sending us a case.', 'What brings you here today?'],
     options: [
       { label: 'I’m a dentist: send a case', next: 'case-start' },
       { label: 'I’m a dentist: other questions', next: 'dentist' },
@@ -60,7 +60,7 @@ const steps = {
     ],
   },
   scanner: {
-    say: ['Which scanner do you use? I’ll show you how to connect us in its portal. It only takes a few minutes, and you only do it once.'],
+    say: ['Which scanner do you use? We’ll show you how to connect us in its portal. It only takes a few minutes, and you only do it once.'],
     options: [
       ...portals.map((p) => ({ label: p.name, next: `portal-${p.name}` })),
       { label: 'Another scanner', next: 'scanner-other' },
@@ -190,7 +190,7 @@ const steps = {
     ],
   },
   unknown: {
-    say: ['I’m a simple guide, so I may not understand everything. Here’s what I can help with:'],
+    say: ['We’re simple guides, so we may not understand everything. Here’s what we can help with:'],
     options: [
       { label: 'Send a case', next: 'case-start' },
       { label: 'Find my way around', next: 'browse' },
@@ -238,7 +238,7 @@ const save = (state) => {
 
 const botMessage = (id) => ({ from: 'bot', step: id })
 
-// Mini Step in a round frame: with his backup dancers on the chat button and in the header, on his own beside each answer
+// the Mini Steps in a round frame: Mini Step with his backup dancers on the chat button and in the header, on his own beside each answer
 function Avatar({ size, still, crew, className = '' }) {
   return (
     // a deep sky-blue backdrop: dark enough for the white suit to pop, light enough that his dark hair stands out
@@ -306,15 +306,15 @@ export default function ChatGuide() {
       {open && (
         <div
           role="dialog"
-          aria-label="Mini Step, the STEPBAE assistant"
+          aria-label="The Mini Steps, the STEPBAE assistants"
           className="fixed inset-x-3 bottom-28 z-50 flex max-h-[min(560px,calc(100dvh-130px))] flex-col overflow-hidden rounded-[6px] border border-gold/40 bg-ink-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] sm:inset-x-auto sm:right-6 sm:w-[370px]"
         >
           <div className="flex items-center justify-between border-b border-gold/25 px-4 py-3">
             <div className="flex items-center gap-3">
               <Avatar crew size="h-11 w-11" />
               <div>
-                <p className="font-display text-[20px] font-medium leading-tight text-white">Mini Step</p>
-                <p className="text-[12px] text-white/55">Your guide to STEPBAE</p>
+                <p className="font-display text-[20px] font-medium leading-tight text-white">Mini Steps</p>
+                <p className="text-[12px] text-white/55">Your guides to STEPBAE</p>
               </div>
             </div>
             <div className="flex items-center gap-1">
@@ -357,9 +357,9 @@ export default function ChatGuide() {
       {teaser && !open && (
         <div className="fixed bottom-28 right-5 z-50 w-[260px] rounded-[12px] rounded-br-[3px] border border-gold/40 bg-cream py-3 pl-4 pr-8 text-ink shadow-[0_18px_40px_-14px_rgba(0,0,0,0.7)] sm:right-6">
           <button onClick={toggle} className="text-left">
-            <span className="block font-display text-[18px] font-medium leading-tight">Hi, I’m Mini Step!</span>
+            <span className="block font-display text-[18px] font-medium leading-tight">Hi, we’re the Mini Steps!</span>
             <span className="mt-1 block text-[14px] leading-snug text-ink/80">
-              Sending a case or just curious? Tap me and I’ll show you around.
+              We do more than dancing. Sending a case or just curious? Tap us and we’ll show you around.
             </span>
           </button>
           <button onClick={dismissTeaser} aria-label="Dismiss" className="absolute right-2 top-1.5 px-1 text-[18px] leading-none text-ink/50 hover:text-ink">
@@ -370,12 +370,12 @@ export default function ChatGuide() {
 
       <button
         onClick={toggle}
-        aria-label={open ? 'Close Mini Step' : 'Chat with Mini Step'}
+        aria-label={open ? 'Close the Mini Steps' : 'Chat with the Mini Steps'}
         aria-expanded={open}
         className="fixed bottom-4 right-4 z-50 rounded-full shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] transition-transform hover:scale-105 sm:right-6"
       >
         <Avatar crew size="h-20 w-20" />
-        {/* a small live dot, so Mini Step reads as ready to talk */}
+        {/* a small live dot, so the Mini Steps read as ready to talk */}
         <span className="absolute left-1 top-1 flex h-3.5 w-3.5">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75 motion-reduce:animate-none" />
           <span className="relative inline-flex h-3.5 w-3.5 rounded-full border-2 border-ink bg-teal" />
