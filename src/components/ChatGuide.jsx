@@ -238,15 +238,19 @@ const save = (state) => {
 
 const botMessage = (id) => ({ from: 'bot', step: id })
 
-// Mini Step in a round frame: the chat button, the chat header and beside each answer
-function Avatar({ size, still, className = '' }) {
+// Mini Step in a round frame: with his backup dancers on the chat button and in the header, on his own beside each answer
+function Avatar({ size, still, crew, className = '' }) {
   return (
     // a deep sky-blue backdrop: dark enough for the white suit to pop, light enough that his dark hair stands out
     <span
       className={`relative block shrink-0 overflow-hidden rounded-full ring-2 ring-gold ${size} ${className}`}
       style={{ background: 'radial-gradient(circle at 50% 40%, #8fb0c4 0%, #5b7c91 45%, #2e4250 100%)' }}
     >
-      <MiniStep still={still} className="absolute left-1/2 top-[6%] w-[76%] -translate-x-[47%]" />
+      {crew ? (
+        <MiniStep crew still={still} className="absolute left-1/2 top-[17%] w-[118%] -translate-x-1/2" />
+      ) : (
+        <MiniStep still={still} className="absolute left-1/2 top-[6%] w-[76%] -translate-x-[47%]" />
+      )}
     </span>
   )
 }
@@ -307,7 +311,7 @@ export default function ChatGuide() {
         >
           <div className="flex items-center justify-between border-b border-gold/25 px-4 py-3">
             <div className="flex items-center gap-3">
-              <Avatar size="h-11 w-11" />
+              <Avatar crew size="h-11 w-11" />
               <div>
                 <p className="font-display text-[20px] font-medium leading-tight text-white">Mini Step</p>
                 <p className="text-[12px] text-white/55">Your guide to STEPBAE</p>
@@ -370,7 +374,7 @@ export default function ChatGuide() {
         aria-expanded={open}
         className="fixed bottom-4 right-4 z-50 rounded-full shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] transition-transform hover:scale-105 sm:right-6"
       >
-        <Avatar size="h-20 w-20" />
+        <Avatar crew size="h-20 w-20" />
         {/* a small live dot, so Mini Step reads as ready to talk */}
         <span className="absolute left-1 top-1 flex h-3.5 w-3.5">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75 motion-reduce:animate-none" />
