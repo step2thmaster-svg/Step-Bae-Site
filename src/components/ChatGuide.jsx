@@ -695,13 +695,21 @@ export default function ChatGuide() {
         onClick={toggle}
         aria-label={open ? 'Close the Mini Steps' : 'Chat with the Mini Steps'}
         aria-expanded={open}
-        className="fixed bottom-4 right-4 z-50 rounded-full shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] transition-transform hover:scale-105 sm:right-6"
+        className="group fixed bottom-4 right-4 z-50 flex items-center gap-2 sm:right-6"
       >
-        <Avatar crew size="h-20 w-20" />
-        {/* a small live dot, so the Mini Steps read as ready to talk */}
-        <span className="absolute left-1 top-1 flex h-3.5 w-3.5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75 motion-reduce:animate-none" />
-          <span className="relative inline-flex h-3.5 w-3.5 rounded-full border-2 border-ink bg-teal" />
+        {/* an offer of help beside the button, out of the way while the chat or the hello bubble is showing */}
+        {!open && !teaser && (
+          <span className="rounded-full border border-gold/50 bg-ink-2/95 px-4 py-2 text-[14px] font-medium text-white shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] group-hover:border-gold group-hover:text-gold">
+            How can we help?
+          </span>
+        )}
+        <span className="relative rounded-full shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] transition-transform group-hover:scale-105">
+          <Avatar crew size="h-20 w-20" />
+          {/* a small live dot, so the Mini Steps read as ready to talk */}
+          <span className="absolute left-1 top-1 flex h-3.5 w-3.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75 motion-reduce:animate-none" />
+            <span className="relative inline-flex h-3.5 w-3.5 rounded-full border-2 border-ink bg-teal" />
+          </span>
         </span>
       </button>
     </>
