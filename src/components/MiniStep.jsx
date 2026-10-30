@@ -1,20 +1,19 @@
 // "Mini Step": a K-pop style chibi (SD) version of Step for the site assistant: short wavy hair, V-line jaw,
-// dressed like a fashion model in an open white blazer and sky-blue shirt.
+// dressed in wine-coloured scrubs, as a dental technician.
 // He dances like a K-pop idol and blinks (see the mini-step keyframes in index.css); `still` turns the motion off.
 // With `crew`, two backup dancers in matching black-and-gold stage outfits dance behind him, Mini Step at centre.
 
 // hair colours and outfit for each member
 const looks = {
-  step: { hair: '#2a1f1b', rim: '#7a6052', shine: '#6b5246', wave: '#4a3830', brow: '#2a1f1b', outfit: 'blazer' },
+  step: { hair: '#2a1f1b', rim: '#7a6052', shine: '#6b5246', wave: '#4a3830', brow: '#2a1f1b', outfit: 'scrubs' },
   pink: { hair: '#f0a6c2', rim: '#ffd3e3', shine: '#ffd9e7', wave: '#d888a7', brow: '#6a4a4a', outfit: 'stage' },
   silver: { hair: '#c5d0dd', rim: '#eef3f8', shine: '#f6f9fc', wave: '#a3b1c3', brow: '#5a5560', outfit: 'stage' },
 }
 
-// the lead's white blazer, and the backup dancers' black stage jackets with gold piping
+// Mini Step's wine scrubs, and the backup dancers' black stage jackets with gold piping
 const outfits = {
-  blazer: {
-    fill: '#fbf8f2', line: '#cfc6b8', shade: '#e4dccf', shirt: '#8fcdee', shirtLine: '#6fb4d8', lapel: '#f1ece3',
-    pants: '#fbf8f2', pantsLine: '#cfc6b8', crease: '#e2dbcf', shoes: '#5a3b28', button: '#c9b48a', chain: '#d4a868',
+  scrubs: {
+    fill: '#7d2b3f', line: '#5c1d2d', shade: '#6c2536', pants: '#7d2b3f', pantsLine: '#5c1d2d', crease: '#6c2536', shoes: '#f4f1ea',
   },
   stage: {
     fill: '#24222c', line: '#d4a868', shade: '#1a1820', shirt: '#f4f1ea', shirtLine: '#d9d3c8', lapel: '#2f2c38',
@@ -44,40 +43,68 @@ function Dancer({ look, anim }) {
         <path d="M61.4 131.5 C61.4 129.6 63 128.8 65.8 128.6 C69 128.4 71.5 129 71.5 131.5 Z" fill={o.shoes} />
       </g>
 
-      {/* body: a tailored, cutaway jacket worn open over a shirt, collar open, with a thin chain */}
-      <path d="M43.5 92 C43.5 86.5 51 84 60 84 C69 84 76.5 86.5 76.5 92 C77 97 76 101.5 74.6 105 C76 108.5 77 111.5 76.6 114 L63.6 115.5 L60 111.5 L56.4 115.5 L43.4 114 C43 111.5 44 108.5 45.4 105 C44 101.5 43 97 43.5 92 Z" fill={o.fill} stroke={o.line} strokeWidth="0.8" strokeLinejoin="round" />
-      {/* tailoring: a little shadow where the waist is nipped in */}
-      <path d="M46.5 99 C47.5 102 47.2 104 46.4 106 M73.5 99 C72.5 102 72.8 104 73.6 106" stroke={o.shade} strokeWidth="1.2" strokeLinecap="round" fill="none" />
-      <path d="M55.5 85 H64.5 L63.6 112 L60 111.5 L56.4 112 Z" fill={o.shirt} />
-      <path d="M57.4 85 L60 89.5 L62.6 85 Z" fill="#f2cfae" />
-      <path d="M56.6 86 C58 89.6 62 89.6 63.4 86" stroke={o.chain} strokeWidth="0.7" fill="none" />
-      <path d="M55.5 85 L57.6 90.5 L60 87.5 M64.5 85 L62.4 90.5 L60 87.5" stroke={o.shirtLine} strokeWidth="0.7" strokeLinejoin="round" fill="none" />
-      {/* long notch lapels down to the waist, and the open front edges */}
-      <path d="M55.5 85 L50.8 89.2 L53 91 L51.8 93.6 L56.4 107 Z M64.5 85 L69.2 89.2 L67 91 L68.2 93.6 L63.6 107 Z" fill={o.lapel} stroke={o.line} strokeWidth="0.7" strokeLinejoin="round" />
-      <path d="M56.4 107 L56.4 115.5 M63.6 107 L63.6 115.5" stroke={o.line} strokeWidth="0.7" />
-      <circle cx="57.6" cy="108.5" r="0.9" fill={o.button} />
-      {h.outfit === 'blazer' ? (
+      {h.outfit === 'scrubs' ? (
         <>
-          {/* a sky-blue pocket square */}
-          <path d="M66.5 99 H72" stroke={o.line} strokeWidth="0.7" />
-          <path d="M67.2 99 L68.6 96.2 L69.6 97.8 L70.8 96 L71.4 99 Z" fill="#8fcdee" />
+          {/* scrubs top: a straight tunic with a V-neck, and a chest pocket holding a little gold pen */}
+          <path d="M43.5 92 C43.5 86.5 51 84 60 84 C69 84 76.5 86.5 76.5 92 L77 113 C77 114.4 76.2 115 74.8 115 L45.2 115 C43.8 115 43 114.4 43 113 Z" fill={o.fill} stroke={o.line} strokeWidth="0.8" strokeLinejoin="round" />
+          <path d="M55 84.4 L60 93.5 L65 84.4 Z" fill="#f2cfae" />
+          <path d="M54.2 84.6 L60 95 L65.8 84.6" stroke={o.line} strokeWidth="1.4" strokeLinejoin="round" fill="none" />
+          <path d="M46.5 99 C47.2 103 47 107 46.4 111 M73.5 99 C72.8 103 73 107 73.6 111" stroke={o.shade} strokeWidth="1.2" strokeLinecap="round" fill="none" />
+          <rect x="65.5" y="97" width="7" height="6" rx="1" fill={o.fill} stroke={o.line} strokeWidth="0.7" />
+          <rect x="67" y="94.2" width="1.4" height="4.6" rx="0.6" fill="#d4a868" />
         </>
       ) : (
-        /* gold epaulettes on the stage jacket */
-        <path d="M44.4 88.6 L50 86.2 L50.6 88.4 L45.2 90.8 Z M75.6 88.6 L70 86.2 L69.4 88.4 L74.8 90.8 Z" fill="#d4a868" />
+        <>
+          {/* body: a tailored, cutaway jacket worn open over a shirt, collar open, with a thin chain */}
+          <path d="M43.5 92 C43.5 86.5 51 84 60 84 C69 84 76.5 86.5 76.5 92 C77 97 76 101.5 74.6 105 C76 108.5 77 111.5 76.6 114 L63.6 115.5 L60 111.5 L56.4 115.5 L43.4 114 C43 111.5 44 108.5 45.4 105 C44 101.5 43 97 43.5 92 Z" fill={o.fill} stroke={o.line} strokeWidth="0.8" strokeLinejoin="round" />
+          {/* tailoring: a little shadow where the waist is nipped in */}
+          <path d="M46.5 99 C47.5 102 47.2 104 46.4 106 M73.5 99 C72.5 102 72.8 104 73.6 106" stroke={o.shade} strokeWidth="1.2" strokeLinecap="round" fill="none" />
+          <path d="M55.5 85 H64.5 L63.6 112 L60 111.5 L56.4 112 Z" fill={o.shirt} />
+          <path d="M57.4 85 L60 89.5 L62.6 85 Z" fill="#f2cfae" />
+          <path d="M56.6 86 C58 89.6 62 89.6 63.4 86" stroke={o.chain} strokeWidth="0.7" fill="none" />
+          <path d="M55.5 85 L57.6 90.5 L60 87.5 M64.5 85 L62.4 90.5 L60 87.5" stroke={o.shirtLine} strokeWidth="0.7" strokeLinejoin="round" fill="none" />
+          {/* long notch lapels down to the waist, and the open front edges */}
+          <path d="M55.5 85 L50.8 89.2 L53 91 L51.8 93.6 L56.4 107 Z M64.5 85 L69.2 89.2 L67 91 L68.2 93.6 L63.6 107 Z" fill={o.lapel} stroke={o.line} strokeWidth="0.7" strokeLinejoin="round" />
+          <path d="M56.4 107 L56.4 115.5 M63.6 107 L63.6 115.5" stroke={o.line} strokeWidth="0.7" />
+          <circle cx="57.6" cy="108.5" r="0.9" fill={o.button} />
+          {/* gold epaulettes */}
+          <path d="M44.4 88.6 L50 86.2 L50.6 88.4 L45.2 90.8 Z M75.6 88.6 L70 86.2 L69.4 88.4 L74.8 90.8 Z" fill="#d4a868" />
+        </>
       )}
 
       {/* left arm: hand on the hip, swinging out on the second half of each move */}
       <g className={anim('mini-step-arm-l')} style={{ transformOrigin: '45px 90.5px' }}>
-        <path d="M45 90.5 C39.5 95 38.5 101 44.5 106" stroke={o.line} strokeWidth="7.6" strokeLinecap="round" fill="none" />
-        <path d="M45 90.5 C39.5 95 38.5 101 44.5 106" stroke={o.fill} strokeWidth="6" strokeLinecap="round" fill="none" />
+        {h.outfit === 'scrubs' ? (
+          <>
+            <path d="M45 90.5 C39.5 95 38.5 101 44.5 106" stroke="#e0b48f" strokeWidth="5.6" strokeLinecap="round" fill="none" />
+            <path d="M45 90.5 C39.5 95 38.5 101 44.5 106" stroke="#f2cfae" strokeWidth="4.4" strokeLinecap="round" fill="none" />
+            <path d="M45 90.5 C43 92.2 41.5 94.2 40.8 96.4" stroke={o.line} strokeWidth="7.8" strokeLinecap="round" fill="none" />
+            <path d="M45 90.5 C43 92.2 41.5 94.2 40.8 96.4" stroke={o.fill} strokeWidth="6.2" strokeLinecap="round" fill="none" />
+          </>
+        ) : (
+          <>
+            <path d="M45 90.5 C39.5 95 38.5 101 44.5 106" stroke={o.line} strokeWidth="7.6" strokeLinecap="round" fill="none" />
+            <path d="M45 90.5 C39.5 95 38.5 101 44.5 106" stroke={o.fill} strokeWidth="6" strokeLinecap="round" fill="none" />
+          </>
+        )}
         <circle cx="45.5" cy="106.5" r="3.1" fill="#f2cfae" />
       </g>
 
       {/* right arm up, finger pointing to the sky; it pumps to the beat */}
       <g className={anim('mini-step-arm-r')} style={{ transformOrigin: '75px 90.5px' }}>
-        <path d="M75 91 C81 89.5 86 86 88.6 81" stroke={o.line} strokeWidth="7.6" strokeLinecap="round" fill="none" />
-        <path d="M75 91 C81 89.5 86 86 88.6 81" stroke={o.fill} strokeWidth="6" strokeLinecap="round" fill="none" />
+        {h.outfit === 'scrubs' ? (
+          <>
+            <path d="M75 91 C81 89.5 86 86 88.6 81" stroke="#e0b48f" strokeWidth="5.6" strokeLinecap="round" fill="none" />
+            <path d="M75 91 C81 89.5 86 86 88.6 81" stroke="#f2cfae" strokeWidth="4.4" strokeLinecap="round" fill="none" />
+            <path d="M75 91 C77.4 90.4 79.4 89.5 81.2 88.3" stroke={o.line} strokeWidth="7.8" strokeLinecap="round" fill="none" />
+            <path d="M75 91 C77.4 90.4 79.4 89.5 81.2 88.3" stroke={o.fill} strokeWidth="6.2" strokeLinecap="round" fill="none" />
+          </>
+        ) : (
+          <>
+            <path d="M75 91 C81 89.5 86 86 88.6 81" stroke={o.line} strokeWidth="7.6" strokeLinecap="round" fill="none" />
+            <path d="M75 91 C81 89.5 86 86 88.6 81" stroke={o.fill} strokeWidth="6" strokeLinecap="round" fill="none" />
+          </>
+        )}
         <circle cx="89.4" cy="79" r="3.3" fill="#f2cfae" />
         <path d="M90.6 76.6 L92.4 72.6" stroke="#f2cfae" strokeWidth="2" strokeLinecap="round" />
       </g>

@@ -241,7 +241,7 @@ const botMessage = (id) => ({ from: 'bot', step: id })
 // Mini Step in a round frame: with his backup dancers on the chat button and in the header, on his own beside each answer
 function Avatar({ size, still, crew, className = '' }) {
   return (
-    // a deep sky-blue backdrop: dark enough for the white suit to pop, light enough that his dark hair stands out
+    // a deep sky-blue backdrop: dark enough for the outfits to pop, light enough that dark hair stands out
     <span
       className={`relative block shrink-0 overflow-hidden rounded-full ring-2 ring-gold ${size} ${className}`}
       style={{ background: 'radial-gradient(circle at 50% 40%, #8fb0c4 0%, #5b7c91 45%, #2e4250 100%)' }}
