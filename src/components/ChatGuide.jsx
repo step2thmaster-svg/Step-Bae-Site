@@ -286,7 +286,7 @@ const steps = {
   patient: {
     say: [
       'Welcome! STEPBAE makes crowns, veneers and implant teeth for dentists, so we work with you through your dentist.',
-      'Want Step to make yours? Just ask your dentist to send your case to STEPBAE. It’s easier than you might think, and we can show you how.',
+      'Want StepBae Dental lab to make yours? Just ask your dentist to send your case to STEPBAE. It’s easier than you might think, and we can show you how.',
     ],
     options: [
       { label: 'How do I ask my dentist?', next: 'patient-ask' },
