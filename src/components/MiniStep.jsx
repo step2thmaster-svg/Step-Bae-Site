@@ -1,7 +1,10 @@
+import { useId } from 'react'
+
 // "Mini Step": a K-pop style chibi (SD) version of Step for the site assistant: short wavy hair, V-line jaw,
 // dressed like a fashion model in an open white blazer and sky-blue shirt.
 // He dances like a K-pop idol, throws in a turn and a somersault every few seconds, and blinks (see the mini-step keyframes in index.css); `still` turns the motion off.
-// With `crew`, two backup dancers in matching black-and-gold stage outfits dance behind him, Mini Step at centre.
+// With `crew`, two backup dancers in matching black-and-gold stage outfits dance behind him, Mini Step at centre,
+// and the show ends with a lights-down, pin-light finale.
 
 // hair colours and outfit for each member
 const looks = {
@@ -22,14 +25,14 @@ const outfits = {
   },
 }
 
-// `flipDelay` staggers the turn and somersault, so in a group the members go one after another (the back-view
-// layers, scaled to nothing unless the turn animation shows them, share the delay);
+// `order` picks the dancer's own show timeline in index.css (0 pink, 1 Mini Step, 2 silver), which times their
+// somersault, turns and back view (the back-view layers are scaled to nothing unless the timeline shows them);
 // `mirrored` reverses the spin for a mirrored dancer, so everyone spins left to right
-function Dancer({ look, anim, flipDelay = 0, mirrored = false }) {
+function Dancer({ look, anim, order = 1, mirrored = false }) {
   const h = looks[look]
   const o = outfits[h.outfit]
   return (
-    <g className={anim('mini-step-moves')} style={{ transformOrigin: '60px 80px', animationDelay: `${flipDelay}s`, '--spin': mirrored ? -1 : 1 }}>
+    <g className={anim(`mini-step-moves-${order}`)} style={{ transformOrigin: '60px 80px', '--spin': mirrored ? -1 : 1 }}>
       <g className={anim('mini-step-dance')} style={{ transformOrigin: '60px 131px' }}>
         <g className={anim('mini-step-head')} style={{ transformOrigin: '60px 86px' }}>
           {/* hair, back: short, fluffy and wavy, flicking out at the ends */}
@@ -72,7 +75,7 @@ function Dancer({ look, anim, flipDelay = 0, mirrored = false }) {
         )}
 
         {/* the back of the jacket, shown mid-turn when the dancer faces away: plain, with a centre seam */}
-        <g className={anim('mini-step-back')} style={{ transform: 'scale(0)', animationDelay: `${flipDelay}s` }}>
+        <g className={anim(`mini-step-back-${order}`)} style={{ transform: 'scale(0)' }}>
           <path d="M43.5 92 C43.5 86.5 51 84 60 84 C69 84 76.5 86.5 76.5 92 C77 97 76 101.5 74.6 105 C76 108.5 77 111.5 76.6 114 L60 115 L43.4 114 C43 111.5 44 108.5 45.4 105 C44 101.5 43 97 43.5 92 Z" fill={o.fill} stroke={o.line} strokeWidth="0.8" strokeLinejoin="round" />
           <path d="M60 86 V115" stroke={o.line} strokeWidth="0.7" />
           <path d="M46.5 99 C47.5 102 47.2 104 46.4 106 M73.5 99 C72.5 102 72.8 104 73.6 106" stroke={o.shade} strokeWidth="1.2" strokeLinecap="round" fill="none" />
@@ -146,7 +149,7 @@ function Dancer({ look, anim, flipDelay = 0, mirrored = false }) {
           <path d="M57.2 76.4 C59 75.2 61 75.2 62.8 76.4 C61 77.3 59 77.3 57.2 76.4 Z" fill="#e0776b" />
 
           {/* the back of the head, shown mid-turn: all hair, with the ears peeking out and the nape flicks */}
-          <g className={anim('mini-step-back')} style={{ transform: 'scale(0)', animationDelay: `${flipDelay}s` }}>
+          <g className={anim(`mini-step-back-${order}`)} style={{ transform: 'scale(0)' }}>
             <path d="M27 47 C24 37 29 26 37 20 C42 14 50 11 57 12 C63 8 73 9 79 14 C88 17 94 27 93 37 C94 41 94 44 93 47 C94 57 93.5 63 91 69 C89 74 84 79 77 81 C71 83 66 84 60 84 C54 84 49 83 43 81 C36 79 31 74 29 69 C26.5 62 26 54 27 47 Z" fill={h.hair} />
             <path d="M40 27 C45 21 52 18 58 18 M66 18 C73 19 80 23 85 30" stroke={h.shine} strokeWidth="1.8" strokeLinecap="round" fill="none" />
             <path d="M60 22 C58 34 59 48 60 60 M48 26 C44 38 43 52 46 66 M72 26 C76 38 77 52 74 66" stroke={h.wave} strokeWidth="1.2" strokeLinecap="round" fill="none" />
@@ -157,6 +160,49 @@ function Dancer({ look, anim, flipDelay = 0, mirrored = false }) {
         </g>
       </g>
     </g>
+  )
+}
+
+// the finale's lighting: the stage fades to dark, then a pin light drops on each member, Mini Step last.
+// The darkness is a huge rect with the light beams cut out of it by a mask; the same beams are drawn faintly on top
+// so the light shows. Timings are the mini-step-dark and mini-step-spot keyframes in index.css.
+const spots = [
+  { cx: 11, top: -40, floor: 110.5, w: 24 }, // pink
+  { cx: 109, top: -40, floor: 110.5, w: 24 }, // silver
+  { cx: 60, top: -40, floor: 131, w: 32 }, // Mini Step
+]
+
+function Beam({ spot, i, fill, pool }) {
+  const { cx, top, floor, w } = spot
+  return (
+    <g className={`mini-step-spot-${i}`} style={{ transform: 'scaleY(0)', transformOrigin: `${cx}px ${top}px` }}>
+      <path d={`M${cx - 5} ${top} L${cx + 5} ${top} L${cx + w} ${floor} L${cx - w} ${floor} Z`} fill={fill} />
+      <ellipse cx={cx} cy={floor} rx={w} ry="5" fill={pool} />
+    </g>
+  )
+}
+
+function StageLights() {
+  const id = `mini-step-lights-${useId().replace(/[^a-zA-Z0-9]/g, '')}`
+  return (
+    <>
+      <defs>
+        <mask id={id} maskUnits="userSpaceOnUse" x="-300" y="-300" width="800" height="800">
+          <rect x="-300" y="-300" width="800" height="800" fill="#fff" />
+          {spots.map((spot, i) => (
+            <Beam key={i} spot={spot} i={i} fill="#000" pool="#000" />
+          ))}
+        </mask>
+        <linearGradient id={`${id}-beam`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#fff6dc" stopOpacity="0.05" />
+          <stop offset="1" stopColor="#fff6dc" stopOpacity="0.3" />
+        </linearGradient>
+      </defs>
+      <rect x="-300" y="-300" width="800" height="800" fill="#04060a" mask={`url(#${id})`} className="mini-step-dark" style={{ fillOpacity: 0 }} />
+      {spots.map((spot, i) => (
+        <Beam key={i} spot={spot} i={i} fill={`url(#${id}-beam)`} pool="rgba(255, 246, 220, 0.35)" />
+      ))}
+    </>
   )
 }
 
@@ -175,15 +221,16 @@ export default function MiniStep({ className = '', still = false, crew = false }
     <svg viewBox="-32 0 184 136" className={className} overflow="visible" aria-hidden="true">
       <svg x="-28" y="28" width="78" height="84.5" viewBox="0 4 120 130" overflow="visible">
         <g style={{ transform: 'scaleX(-1)', transformOrigin: '60px 0px' }}>
-          <Dancer look="pink" anim={anim} mirrored />
+          <Dancer look="pink" anim={anim} order={0} mirrored />
         </g>
       </svg>
       <svg x="70" y="28" width="78" height="84.5" viewBox="0 4 120 130" overflow="visible">
-        <Dancer look="silver" anim={anim} flipDelay={0.5} />
+        <Dancer look="silver" anim={anim} order={2} />
       </svg>
       <svg x="0" y="4" width="120" height="130" viewBox="0 4 120 130" overflow="visible">
-        <Dancer look="step" anim={anim} flipDelay={0.25} />
+        <Dancer look="step" anim={anim} />
       </svg>
+      {!still && <StageLights />}
     </svg>
   )
 }
