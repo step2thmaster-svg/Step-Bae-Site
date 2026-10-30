@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react'
+
 // Shared by the partnership and consultation forms.
 // Formspree form IDs (the part after formspree.io/f/), one per form. Until a form's ID is set, sending it opens a pre-filled email instead.
 export const FORMSPREE_IDS = {
@@ -59,4 +61,33 @@ export const prefill = {
       /* nothing stored */
     }
   },
+}
+
+// a form on the page that was filled in but never sent still reaches STEPBAE, marked unfinished, when the visitor
+// leaves the page; only once they've typed or picked something (details the chat filled in alone don't count)
+export function useUnfinished(subject, formName) {
+  const ref = useRef(null)
+  const touched = useRef(false)
+  useEffect(() => {
+    const onLeave = () => {
+      const form = ref.current
+      if (!form || !touched.current) return
+      touched.current = false
+      // only what was filled in
+      const data = new FormData()
+      for (const [k, v] of new FormData(form)) if (String(v).trim()) data.append(k, v)
+      if (![...data.keys()].length) return
+      data.append('Status', 'Unfinished: left the page before sending')
+      data.append('Source', `Form on ${window.location.pathname}`)
+      sendForm(data, `Unfinished: ${subject}`, formName, { quiet: true }).catch(() => {})
+    }
+    window.addEventListener('pagehide', onLeave)
+    return () => window.removeEventListener('pagehide', onLeave)
+  }, [subject, formName])
+  return {
+    ref,
+    onChange: () => (touched.current = true),
+    // once it's on its way, there's nothing left unfinished
+    sent: () => (touched.current = false),
+  }
 }

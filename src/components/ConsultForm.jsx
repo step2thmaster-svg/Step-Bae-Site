@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ArrowRight } from './Icons.jsx'
-import { EMAIL, sendForm } from './sendForm.js'
+import { EMAIL, sendForm, useUnfinished } from './sendForm.js'
 
 // also offered by the Mini Steps chat, which can take the same inquiry one question at a time
 export const inquiryOptions = ['Consulting', 'Course or workshop', 'Lecture or speaking', 'Sponsorship or collaboration', 'Something else']
@@ -12,11 +12,13 @@ const inputClass =
 
 export default function ConsultForm() {
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
+  const unfinished = useUnfinished('New consultation inquiry', 'consultation')
 
   async function onSubmit(e) {
     e.preventDefault()
     const form = e.currentTarget
     setStatus('sending')
+    unfinished.sent()
     try {
       if (await sendForm(form, 'New consultation inquiry', 'consultation')) {
         form.reset()
@@ -25,6 +27,8 @@ export default function ConsultForm() {
         setStatus('idle')
       }
     } catch {
+      // not sent after all, so it counts as unfinished again
+      unfinished.onChange()
       setStatus('error')
     }
   }
@@ -45,7 +49,7 @@ export default function ConsultForm() {
             Thank you. We've received your inquiry and will be in touch shortly.
           </p>
         ) : (
-          <form onSubmit={onSubmit} className="mt-10 grid gap-5 sm:grid-cols-2">
+          <form ref={unfinished.ref} onChange={unfinished.onChange} onSubmit={onSubmit} className="mt-10 grid gap-5 sm:grid-cols-2">
             <label className={labelClass}>
               Your name *
               <input name="Name" required autoComplete="name" className={inputClass} />

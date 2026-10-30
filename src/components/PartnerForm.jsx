@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ArrowRight } from './Icons.jsx'
-import { EMAIL, sendForm, prefill } from './sendForm.js'
+import { EMAIL, sendForm, prefill, useUnfinished } from './sendForm.js'
 
 const portalOptions = ['iTero', '3Shape TRIOS', 'Medit', 'Primescan / CEREC', 'Other scanner', 'No scanner (physical impressions)']
 // also asked by the Mini Steps chat when a dentist requests the price list
@@ -12,6 +12,7 @@ const inputClass =
 
 export default function PartnerForm() {
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
+  const unfinished = useUnfinished('New dentist partnership', 'partnership')
   // anything the dentist already told the Mini Steps chat
   const [known] = useState(prefill.get)
 
@@ -19,6 +20,7 @@ export default function PartnerForm() {
     e.preventDefault()
     const form = e.currentTarget
     setStatus('sending')
+    unfinished.sent()
     try {
       if (await sendForm(form, 'New dentist partnership', 'partnership')) {
         form.reset()
@@ -28,6 +30,8 @@ export default function PartnerForm() {
         setStatus('idle')
       }
     } catch {
+      // not sent after all, so it counts as unfinished again
+      unfinished.onChange()
       setStatus('error')
     }
   }
@@ -48,7 +52,7 @@ export default function PartnerForm() {
             Thank you. We've received your details and will be in touch shortly.
           </p>
         ) : (
-          <form onSubmit={onSubmit} className="mt-10 grid gap-5 sm:grid-cols-2">
+          <form ref={unfinished.ref} onChange={unfinished.onChange} onSubmit={onSubmit} className="mt-10 grid gap-5 sm:grid-cols-2">
             <label className={labelClass}>
               Dentist name *
               <input name="Dentist name" required autoComplete="name" defaultValue={known['Dentist name']} className={inputClass} />
