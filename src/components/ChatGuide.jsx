@@ -242,7 +242,7 @@ const botMessage = (id) => ({ from: 'bot', step: id })
 function Avatar({ size, still, className = '' }) {
   return (
     <span className={`relative block shrink-0 overflow-hidden rounded-full bg-cream ring-2 ring-gold ${size} ${className}`}>
-      <MiniStep still={still} className="absolute left-1/2 top-[7%] w-[114%] -translate-x-1/2" />
+      <MiniStep still={still} className="absolute left-1/2 top-[8%] w-[84%] -translate-x-[47%]" />
     </span>
   )
 }
@@ -299,7 +299,7 @@ export default function ChatGuide() {
         <div
           role="dialog"
           aria-label="Mini Step, the STEPBAE assistant"
-          className="fixed inset-x-3 bottom-24 z-50 flex max-h-[min(560px,calc(100dvh-110px))] flex-col overflow-hidden rounded-[6px] border border-gold/40 bg-ink-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] sm:inset-x-auto sm:right-6 sm:w-[370px]"
+          className="fixed inset-x-3 bottom-28 z-50 flex max-h-[min(560px,calc(100dvh-130px))] flex-col overflow-hidden rounded-[6px] border border-gold/40 bg-ink-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] sm:inset-x-auto sm:right-6 sm:w-[370px]"
         >
           <div className="flex items-center justify-between border-b border-gold/25 px-4 py-3">
             <div className="flex items-center gap-3">
@@ -347,7 +347,7 @@ export default function ChatGuide() {
       )}
 
       {teaser && !open && (
-        <div className="fixed bottom-24 right-5 z-50 w-[260px] rounded-[12px] rounded-br-[3px] border border-gold/40 bg-cream py-3 pl-4 pr-8 text-ink shadow-[0_18px_40px_-14px_rgba(0,0,0,0.7)] sm:right-6">
+        <div className="fixed bottom-28 right-5 z-50 w-[260px] rounded-[12px] rounded-br-[3px] border border-gold/40 bg-cream py-3 pl-4 pr-8 text-ink shadow-[0_18px_40px_-14px_rgba(0,0,0,0.7)] sm:right-6">
           <button onClick={toggle} className="text-left">
             <span className="block font-display text-[18px] font-medium leading-tight">Hi, I’m Mini Step!</span>
             <span className="mt-1 block text-[14px] leading-snug text-ink/80">
@@ -366,9 +366,9 @@ export default function ChatGuide() {
         aria-expanded={open}
         className="fixed bottom-4 right-4 z-50 rounded-full shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] transition-transform hover:scale-105 sm:right-6"
       >
-        <Avatar size="h-16 w-16" />
+        <Avatar size="h-20 w-20" />
         {/* a small live dot, so Mini Step reads as ready to talk */}
-        <span className="absolute right-0.5 top-0.5 flex h-3.5 w-3.5">
+        <span className="absolute left-1 top-1 flex h-3.5 w-3.5">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75 motion-reduce:animate-none" />
           <span className="relative inline-flex h-3.5 w-3.5 rounded-full border-2 border-ink bg-teal" />
         </span>

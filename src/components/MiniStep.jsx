@@ -1,39 +1,42 @@
 // "Mini Step": a K-pop style chibi (SD) version of Step for the site assistant: short wavy hair, V-line jaw,
-// dark jacket, holding a tooth.
+// small dark-jacketed body, holding a big paint brush.
 // It gently bobs, blinks and waves (see the mini-step keyframes in index.css); `still` turns the motion off.
 export default function MiniStep({ className = '', still = false }) {
   const anim = (name) => (still ? undefined : name)
   return (
-    <svg viewBox="0 0 120 130" className={className} aria-hidden="true">
+    <svg viewBox="0 4 120 114" className={className} aria-hidden="true">
       <g className={anim('mini-step-bob')}>
         {/* hair, back: short, fluffy and wavy, ending at the nape */}
         <path d="M28 50 C27 30 42 15 60 15 C78 15 93 28 92 50 C94 58 93 64 89 68 C87 70 84.5 69 85 66 L35 66 C35.5 69 33 70 31 68 C27 64 26 58 28 50 Z" fill="#2a1f1b" />
 
-        {/* body: dark jacket over a white shirt */}
-        <path d="M38 96 C38 86 48 82 60 82 C72 82 82 86 82 96 L84 118 C84 122 81 124 77 124 L43 124 C39 124 36 122 36 118 Z" fill="#2b2622" />
-        <path d="M53 83 L60 98 L67 83 Z" fill="#f7f2ea" />
-        <path d="M60 98 L57 86 M60 98 L63 86" stroke="#d4a868" strokeWidth="1.2" fill="none" />
-        <circle cx="60" cy="106" r="1.4" fill="#d4a868" />
-        <circle cx="60" cy="113" r="1.4" fill="#d4a868" />
+        {/* body: small and chibi, a dark jacket over a white shirt */}
+        <path d="M44 93 C44 87 51 84 60 84 C69 84 76 87 76 93 L77 106 C77 109 75 110 72 110 L48 110 C45 110 43 109 43 106 Z" fill="#2b2622" />
+        <path d="M55 85 L60 95 L65 85 Z" fill="#f7f2ea" />
+        <path d="M60 95 L58 88 M60 95 L62 88" stroke="#d4a868" strokeWidth="1" fill="none" />
+        <circle cx="60" cy="100" r="1.2" fill="#d4a868" />
+        <circle cx="60" cy="105" r="1.2" fill="#d4a868" />
         {/* legs */}
-        <rect x="47" y="121" width="10" height="7" rx="3" fill="#1d1916" />
-        <rect x="63" y="121" width="10" height="7" rx="3" fill="#1d1916" />
+        <rect x="49" y="108" width="8" height="7" rx="3" fill="#1d1916" />
+        <rect x="63" y="108" width="8" height="7" rx="3" fill="#1d1916" />
 
         {/* left arm resting */}
-        <path d="M39 92 C33 98 32 106 35 112" stroke="#2b2622" strokeWidth="8" strokeLinecap="round" fill="none" />
-        <circle cx="35.5" cy="113" r="4.2" fill="#f2cfae" />
+        <path d="M45 91 C41 95 40 100 41.5 104" stroke="#2b2622" strokeWidth="6.5" strokeLinecap="round" fill="none" />
+        <circle cx="41.8" cy="105" r="3.4" fill="#f2cfae" />
 
-        {/* right arm waving, holding up a little tooth */}
-        <g className={anim('mini-step-wave')} style={{ transformOrigin: '81px 92px' }}>
-          <path d="M81 92 C89 88 93 80 94 72" stroke="#2b2622" strokeWidth="8" strokeLinecap="round" fill="none" />
-          <circle cx="94.5" cy="69" r="4.4" fill="#f2cfae" />
-          <path
-            d="M88 58 C88 52 92 50 95 52 C97 51 99 51 101 52 C104 50 108 52 108 58 C108 63 106 66 105 70 C104 74 101 74 100.5 70 L99.5 66 C99 64 98 64 97.5 66 L96.5 70 C96 74 93 74 92 70 C91 66 88 63 88 58 Z"
-            fill="#ffffff"
-            stroke="#c9b9a3"
-            strokeWidth="1"
-          />
-          <path d="M91.5 55.5 C92.5 54 94 53.6 95 54" stroke="#e7ddd0" strokeWidth="1.4" strokeLinecap="round" fill="none" />
+        {/* right arm raised, holding a big ceramist's paint brush; it waves */}
+        <g className={anim('mini-step-wave')} style={{ transformOrigin: '75px 90px' }}>
+          <path d="M75 91 C80 89 83 85 84.5 80" stroke="#2b2622" strokeWidth="6.5" strokeLinecap="round" fill="none" />
+          <g transform="rotate(22 85 78)">
+            {/* handle, ferrule, then bristles with a dab of porcelain on the tip */}
+            <rect x="82.4" y="58" width="5.2" height="44" rx="2.6" fill="#a46c43" />
+            <rect x="82.4" y="93" width="5.2" height="9" rx="2.6" fill="#6e4429" />
+            <rect x="81.6" y="47" width="6.8" height="12" rx="1.4" fill="#d4a868" />
+            <path d="M82.2 50 H87.8 M82.2 55 H87.8" stroke="#b98a4c" strokeWidth="0.8" />
+            <path d="M81.8 47.5 C79.6 39 81.8 30 85 22 C88.2 30 90.4 39 88.2 47.5 Z" fill="#3a2a22" />
+            <path d="M83.4 30 C84 26.5 84.5 24 85 22 C85.5 24 86 26.5 86.6 30 C85.6 31.2 84.4 31.2 83.4 30 Z" fill="#f7f2ea" />
+            <path d="M83.2 44 C82.8 38 83.6 33 84.4 29" stroke="#5a463c" strokeWidth="0.8" strokeLinecap="round" fill="none" />
+          </g>
+          <circle cx="85" cy="78" r="3.6" fill="#f2cfae" />
         </g>
 
         {/* neck, then the head: a soft V-line jaw with a sharper chin */}
