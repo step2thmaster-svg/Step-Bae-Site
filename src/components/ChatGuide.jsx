@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowRight } from './Icons.jsx'
+import MiniStep from './MiniStep.jsx'
 import { portals } from './PortalGuide.jsx'
 import { EMAIL } from './sendForm.js'
 
@@ -237,12 +238,12 @@ const save = (state) => {
 
 const botMessage = (id) => ({ from: 'bot', step: id })
 
-function ChatIcon({ className }) {
+// Mini Step in a round frame: the chat button, the chat header and beside each answer
+function Avatar({ size, still, className = '' }) {
   return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v9a1.5 1.5 0 0 1-1.5 1.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z" />
-      <path d="M8 9h8M8 12h5" />
-    </svg>
+    <span className={`relative block shrink-0 overflow-hidden rounded-full bg-cream ring-2 ring-gold ${size} ${className}`}>
+      <MiniStep still={still} className="absolute left-1/2 top-[9%] w-[104%] -translate-x-1/2" />
+    </span>
   )
 }
 
@@ -297,13 +298,16 @@ export default function ChatGuide() {
       {open && (
         <div
           role="dialog"
-          aria-label="STEPBAE assistant"
-          className="fixed inset-x-3 bottom-20 z-50 flex max-h-[min(560px,calc(100dvh-110px))] flex-col overflow-hidden rounded-[6px] border border-gold/40 bg-ink-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] sm:inset-x-auto sm:right-6 sm:w-[370px]"
+          aria-label="Mini Step, the STEPBAE assistant"
+          className="fixed inset-x-3 bottom-24 z-50 flex max-h-[min(560px,calc(100dvh-110px))] flex-col overflow-hidden rounded-[6px] border border-gold/40 bg-ink-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] sm:inset-x-auto sm:right-6 sm:w-[370px]"
         >
           <div className="flex items-center justify-between border-b border-gold/25 px-4 py-3">
-            <div>
-              <p className="font-display text-[19px] font-medium leading-tight text-white">STEPBAE Assistant</p>
-              <p className="text-[12px] text-white/55">Find your way or send us a case</p>
+            <div className="flex items-center gap-3">
+              <Avatar size="h-11 w-11" />
+              <div>
+                <p className="font-display text-[20px] font-medium leading-tight text-white">Mini Step</p>
+                <p className="text-[12px] text-white/55">Your guide to STEPBAE</p>
+              </div>
             </div>
             <div className="flex items-center gap-1">
               <button onClick={restart} className="rounded px-2 py-1 text-[12px] text-white/60 hover:text-gold">
@@ -343,11 +347,11 @@ export default function ChatGuide() {
       )}
 
       {teaser && !open && (
-        <div className="fixed bottom-20 right-5 z-50 w-[260px] rounded-[12px] rounded-br-[3px] border border-gold/40 bg-cream py-3 pl-4 pr-8 text-ink shadow-[0_18px_40px_-14px_rgba(0,0,0,0.7)] sm:right-6">
+        <div className="fixed bottom-24 right-5 z-50 w-[260px] rounded-[12px] rounded-br-[3px] border border-gold/40 bg-cream py-3 pl-4 pr-8 text-ink shadow-[0_18px_40px_-14px_rgba(0,0,0,0.7)] sm:right-6">
           <button onClick={toggle} className="text-left">
-            <span className="block font-display text-[18px] font-medium leading-tight">Hi there!</span>
+            <span className="block font-display text-[18px] font-medium leading-tight">Hi, I’m Mini Step!</span>
             <span className="mt-1 block text-[14px] leading-snug text-ink/80">
-              Sending a case or just curious? I can walk you through it in a minute.
+              Sending a case or just curious? Tap me and I’ll show you around.
             </span>
           </button>
           <button onClick={dismissTeaser} aria-label="Dismiss" className="absolute right-2 top-1.5 px-1 text-[18px] leading-none text-ink/50 hover:text-ink">
@@ -358,23 +362,16 @@ export default function ChatGuide() {
 
       <button
         onClick={toggle}
-        aria-label={open ? 'Close assistant' : 'Open assistant'}
+        aria-label={open ? 'Close Mini Step' : 'Chat with Mini Step'}
         aria-expanded={open}
-        className="fixed bottom-5 right-5 z-50 flex h-12 items-center gap-2 rounded-full bg-gold px-4 text-[14px] font-semibold text-ink shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] transition-colors hover:bg-gold-light sm:right-6"
+        className="fixed bottom-4 right-4 z-50 rounded-full shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] transition-transform hover:scale-105 sm:right-6"
       >
-        {open ? (
-          <span className="px-1 text-[22px] leading-none">×</span>
-        ) : (
-          <>
-            {/* a small live dot, so the button reads as someone ready to talk */}
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75 motion-reduce:animate-none" />
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-teal ring-2 ring-ink/20" />
-            </span>
-            <ChatIcon className="h-5 w-5" />
-            <span>Let’s chat</span>
-          </>
-        )}
+        <Avatar size="h-16 w-16" />
+        {/* a small live dot, so Mini Step reads as ready to talk */}
+        <span className="absolute right-0.5 top-0.5 flex h-3.5 w-3.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75 motion-reduce:animate-none" />
+          <span className="relative inline-flex h-3.5 w-3.5 rounded-full border-2 border-ink bg-teal" />
+        </span>
       </button>
     </>
   )
@@ -383,45 +380,48 @@ export default function ChatGuide() {
 // one turn from the assistant: its lines, an optional list, and (on the latest turn only) the choices
 function BotTurn({ step, active, onChoose }) {
   return (
-    <div className="max-w-[92%] space-y-2">
-      {step.say.map((line) => (
-        <p key={line} className="w-fit rounded-[12px] rounded-bl-[3px] bg-cream px-3 py-2 text-[14px] leading-snug text-ink">
-          {line}
-        </p>
-      ))}
-      {step.list && (
-        <ol className="space-y-1.5 rounded-[12px] bg-cream px-3 py-2.5 text-[13px] leading-snug text-ink/90">
-          {step.list.map((item, i) => (
-            <li key={item} className="flex gap-2">
-              <span className="font-semibold text-gold-dark">{i + 1}.</span>
-              {item}
-            </li>
-          ))}
-        </ol>
-      )}
-      {active && (
-        <div className="flex flex-wrap gap-2 pt-1">
-          {step.options.map((o) =>
-            o.href ? (
-              <a
-                key={o.label}
-                href={o.href}
-                className="inline-flex items-center gap-1.5 rounded-full bg-gold px-3 py-1.5 text-[13px] font-medium text-ink hover:bg-gold-light"
-              >
-                {o.label} <ArrowRight className="h-3 w-3" />
-              </a>
-            ) : (
-              <button
-                key={o.label}
-                onClick={() => onChoose(o.label, o.next)}
-                className="rounded-full border border-gold/60 px-3 py-1.5 text-[13px] text-white/90 hover:border-gold hover:bg-gold/10 hover:text-gold"
-              >
-                {o.label}
-              </button>
-            ),
-          )}
-        </div>
-      )}
+    <div className="flex max-w-[96%] gap-2">
+      <Avatar size="h-7 w-7" still className="mt-0.5 ring-1" />
+      <div className="min-w-0 space-y-2">
+        {step.say.map((line) => (
+          <p key={line} className="w-fit rounded-[12px] rounded-bl-[3px] bg-cream px-3 py-2 text-[14px] leading-snug text-ink">
+            {line}
+          </p>
+        ))}
+        {step.list && (
+          <ol className="space-y-1.5 rounded-[12px] bg-cream px-3 py-2.5 text-[13px] leading-snug text-ink/90">
+            {step.list.map((item, i) => (
+              <li key={item} className="flex gap-2">
+                <span className="font-semibold text-gold-dark">{i + 1}.</span>
+                {item}
+              </li>
+            ))}
+          </ol>
+        )}
+        {active && (
+          <div className="flex flex-wrap gap-2 pt-1">
+            {step.options.map((o) =>
+              o.href ? (
+                <a
+                  key={o.label}
+                  href={o.href}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-gold px-3 py-1.5 text-[13px] font-medium text-ink hover:bg-gold-light"
+                >
+                  {o.label} <ArrowRight className="h-3 w-3" />
+                </a>
+              ) : (
+                <button
+                  key={o.label}
+                  onClick={() => onChoose(o.label, o.next)}
+                  className="rounded-full border border-gold/60 px-3 py-1.5 text-[13px] text-white/90 hover:border-gold hover:bg-gold/10 hover:text-gold"
+                >
+                  {o.label}
+                </button>
+              ),
+            )}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

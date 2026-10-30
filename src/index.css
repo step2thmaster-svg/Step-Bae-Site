@@ -19,3 +19,14 @@ html { scroll-behavior: smooth; }
 body {
   @apply bg-ink font-serif text-white antialiased;
 }
+
+/* Mini Step, the site assistant's character (MiniStep.jsx): a gentle bob, a blink every few seconds, a wave now and then */
+@keyframes mini-step-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes mini-step-blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+@keyframes mini-step-wave { 0%, 60%, 100% { transform: rotate(0); } 68% { transform: rotate(-14deg); } 76% { transform: rotate(8deg); } 84% { transform: rotate(-10deg); } 92% { transform: rotate(4deg); } }
+.mini-step-bob { animation: mini-step-bob 3s ease-in-out infinite; }
+.mini-step-blink { animation: mini-step-blink 4.5s infinite; }
+.mini-step-wave { animation: mini-step-wave 5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .mini-step-bob, .mini-step-blink, .mini-step-wave { animation: none; }
+}
