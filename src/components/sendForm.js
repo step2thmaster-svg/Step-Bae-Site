@@ -7,13 +7,15 @@ export const FORMSPREE_IDS = {
 export const EMAIL = 'info@stepbae.com'
 
 // resolves true once Formspree has the submission, false when it fell back to opening an email;
-// `form` is a form element, or FormData built some other way (the Mini Steps chat builds it from answers)
-export async function sendForm(form, subject, formName) {
+// `form` is a form element, or FormData built some other way (the Mini Steps chat builds it from answers);
+// `quiet` sends in the background, even as the page closes, and never falls back to email (for unfinished chat forms)
+export async function sendForm(form, subject, formName, { quiet = false } = {}) {
   const data = form instanceof FormData ? form : new FormData(form)
   data.append('_subject', subject)
   const id = FORMSPREE_IDS[formName]
 
   if (!id) {
+    if (quiet) return false
     const body = [...data.entries()]
       .filter(([k]) => k !== '_subject')
       .map(([k, v]) => `${k}: ${v}`)
@@ -26,6 +28,7 @@ export async function sendForm(form, subject, formName) {
     method: 'POST',
     body: data,
     headers: { Accept: 'application/json' },
+    keepalive: quiet,
   })
   if (!res.ok) throw new Error(res.statusText)
   return true

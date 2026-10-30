@@ -505,6 +505,11 @@ export default function ChatGuide() {
   // a lead in progress: which flow, the answers so far, the question number, a field being changed, sending
   const [lead, setLead] = useState(null)
   const listRef = useRef(null)
+  // the lead as it stands, so whatever was answered can still be sent if the visitor leaves partway
+  const leadRef = useRef(null)
+  useEffect(() => {
+    leadRef.current = lead
+  }, [lead])
 
   useEffect(
     () => save({ open, messages: messages.filter((m) => !m.lead && !m.private), greeted }),
@@ -533,8 +538,30 @@ export default function ChatGuide() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
+  // a form left partway (Start over, another choice, or leaving the page) still sends what was answered, marked
+  // unfinished, so STEPBAE can follow up; nothing is sent if no questions were answered yet
+  const sendUnfinished = () => {
+    const l = leadRef.current
+    leadRef.current = null
+    if (!l || l.sending || !Object.values(l.answers).some(Boolean)) return
+    const flow = leadFlows[l.flow]
+    const fields = flow.fields.map((id) => leadFields[id])
+    const data = new FormData()
+    for (const [k, v] of Object.entries(l.answers)) if (v) data.append(k, v)
+    data.append('Status', 'Unfinished: left the chat before sending')
+    const stoppedAt = fields[l.editing ? flow.fields.indexOf(l.editing) : l.i]
+    data.append('Stopped at', stoppedAt ? stoppedAt.label ?? stoppedAt.key : 'Review, before sending')
+    data.append('Source', `Mini Steps chat, ${window.location.pathname}`)
+    sendForm(data, `Unfinished: ${flow.subject}`, flow.formName, { quiet: true }).catch(() => {})
+  }
+  useEffect(() => {
+    window.addEventListener('pagehide', sendUnfinished)
+    return () => window.removeEventListener('pagehide', sendUnfinished)
+  }, [])
+
   const say = (...msgs) => setMessages((m) => [...m, ...msgs])
   const go = (label, next) => {
+    sendUnfinished()
     const step = steps[next]
     const msgs = [{ from: 'user', text: label }, botMessage(next)]
     if (step?.portal) prefill.add({ Portal: step.portal })
@@ -600,6 +627,7 @@ export default function ChatGuide() {
     else go(t, matchStep(t))
   }
   const restart = () => {
+    sendUnfinished()
     setLead(null)
     setMessages([botMessage('start')])
   }
