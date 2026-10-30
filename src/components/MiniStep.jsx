@@ -4,24 +4,24 @@
 export default function MiniStep({ className = '', still = false }) {
   const anim = (name) => (still ? undefined : name)
   return (
-    <svg viewBox="0 4 120 114" className={className} aria-hidden="true">
+    <svg viewBox="0 4 120 120" className={className} aria-hidden="true">
       <g className={anim('mini-step-bob')}>
-        {/* hair, back: short, fluffy and wavy, ending at the nape */}
-        <path d="M28 50 C27 30 42 15 60 15 C78 15 93 28 92 50 C94 58 93 64 89 68 C87 70 84.5 69 85 66 L35 66 C35.5 69 33 70 31 68 C27 64 26 58 28 50 Z" fill="#2a1f1b" />
+        {/* hair, back: short, fluffy and wavy, flicking out at the ends */}
+        <path d="M28 50 C27 30 42 15 60 15 C78 15 93 28 92 50 C93 59 93 66 91 71 C93 72 95.5 71 97 68.5 C96.8 73.5 93 77 88 76 L32 76 C27 77 23.2 73.5 23 68.5 C24.5 71 27 72 29 71 C27 66 27 59 28 50 Z" fill="#2a1f1b" />
 
         {/* legs: white trousers and dark shoes */}
-        <rect x="49" y="106" width="8.5" height="8" rx="2" fill="#fbf8f2" stroke="#cfc6b8" strokeWidth="0.8" />
-        <rect x="62.5" y="106" width="8.5" height="8" rx="2" fill="#fbf8f2" stroke="#cfc6b8" strokeWidth="0.8" />
-        <ellipse cx="53" cy="115" rx="5" ry="2.4" fill="#2a1f1b" />
-        <ellipse cx="67" cy="115" rx="5" ry="2.4" fill="#2a1f1b" />
+        <rect x="49" y="110" width="8.5" height="9" rx="2" fill="#fbf8f2" stroke="#cfc6b8" strokeWidth="0.8" />
+        <rect x="62.5" y="110" width="8.5" height="9" rx="2" fill="#fbf8f2" stroke="#cfc6b8" strokeWidth="0.8" />
+        <ellipse cx="53" cy="120" rx="5" ry="2.4" fill="#2a1f1b" />
+        <ellipse cx="67" cy="120" rx="5" ry="2.4" fill="#2a1f1b" />
 
         {/* body: small and chibi, a white suit over a sky-blue shirt */}
-        <path d="M44 93 C44 87 51 84 60 84 C69 84 76 87 76 93 L77 106 C77 109 75 110 72 110 L48 110 C45 110 43 109 43 106 Z" fill="#fbf8f2" stroke="#cfc6b8" strokeWidth="0.8" />
+        <path d="M44 93 C44 87 51 84 60 84 C69 84 76 87 76 93 L77.5 111 C77.5 114 75.5 115 72.5 115 L47.5 115 C44.5 115 42.5 114 42.5 111 Z" fill="#fbf8f2" stroke="#cfc6b8" strokeWidth="0.8" />
         <path d="M55 85 L60 96 L65 85 Z" fill="#8fcdee" />
         {/* lapels */}
         <path d="M54.5 85 L60 96 L56.5 92 L52 88.5 Z M65.5 85 L60 96 L63.5 92 L68 88.5 Z" fill="#f1ece3" stroke="#cfc6b8" strokeWidth="0.7" strokeLinejoin="round" />
-        <circle cx="60" cy="101" r="1.1" fill="#c9b48a" />
-        <circle cx="60" cy="105.5" r="1.1" fill="#c9b48a" />
+        <circle cx="60" cy="102" r="1.1" fill="#c9b48a" />
+        <circle cx="60" cy="107.5" r="1.1" fill="#c9b48a" />
 
         {/* left arm resting */}
         <path d="M45 91 C41 95 40 100 41.5 104" stroke="#cfc6b8" strokeWidth="7.6" strokeLinecap="round" fill="none" />
@@ -50,7 +50,7 @@ export default function MiniStep({ className = '', still = false }) {
         <path d="M33 52 C33 37 45 28 60 28 C75 28 87 37 87 52 C87 63 83 72 75 79 C70 83 65 86 60 88 C55 86 50 83 45 79 C37 72 33 63 33 52 Z" fill="#f2cfae" />
         {/* hair, front: wavy curtain bangs parted near the middle, with curls at the temples */}
         <path
-          d="M57 12 C63 8 73 9 79 14 C88 17 94 27 93 37 C94 41 94 44 93 47 C94 55 92 61 89 66 C88 60 87 56 84 53 C83 57 81 60 78 61 C80 55 77 48 73 44 C74 48 73 51 70 53 C68 45 64 38 58 33 C55 39 51 45 47 52 C45 49 45 46 46 43 C42 47 40 52 41 58 C38 57 36 55 35 52 C34 57 33 61 31 65 C27 59 26 53 27 47 C24 37 29 26 37 20 C42 14 50 11 57 12 Z"
+          d="M57 12 C63 8 73 9 79 14 C88 17 94 27 93 37 C94 41 94 44 93 47 C94 57 93.5 63 91 69 C88.5 63 87 57 84 53 C83 57 81 60 78 61 C80 55 77 48 73 44 C74 48 73 51 70 53 C68 45 64 38 58 33 C55 39 51 45 47 52 C45 49 45 46 46 43 C42 47 40 52 41 58 C38 57 36 55 35 52 C34 59 32.5 64 29 69 C26.5 62 26 54 27 47 C24 37 29 26 37 20 C42 14 50 11 57 12 Z"
           fill="#2a1f1b"
         />
         {/* ears tucked over the side curls, with a small gold stud */}
@@ -59,6 +59,8 @@ export default function MiniStep({ className = '', still = false }) {
         <circle cx="32.2" cy="62.6" r="1.2" fill="#d4a868" />
         <circle cx="87.8" cy="62.6" r="1.2" fill="#d4a868" />
 
+        {/* a faint rim of light along the hair's outline, so it lifts off the backdrop */}
+        <path d="M27 47 C24 37 29 26 37 20 C42 14 50 11 57 12 C63 8 73 9 79 14 C88 17 94 27 93 37" stroke="#7a6052" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.8" />
         {/* soft waves of light in the hair */}
         <path d="M40 27 C45 21 52 18 58 18" stroke="#6b5246" strokeWidth="2" strokeLinecap="round" fill="none" />
         <path d="M66 18 C73 19 80 23 85 30" stroke="#6b5246" strokeWidth="1.6" strokeLinecap="round" fill="none" />
