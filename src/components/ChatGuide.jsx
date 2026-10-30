@@ -176,7 +176,7 @@ const steps = {
     lead: 'price',
     options: [
       { label: 'Get the price list', next: 'lead-price' },
-      { label: 'Maybe later', next: 'start' },
+      { label: 'Maybe later', next: 'start', quiet: true },
     ],
   },
   'lead-talk': {
@@ -184,7 +184,7 @@ const steps = {
     lead: 'talk',
     options: [
       { label: 'Leave a message', next: 'lead-talk' },
-      { label: 'Maybe later', next: 'start' },
+      { label: 'Maybe later', next: 'start', quiet: true },
     ],
   },
   'lead-consult': {
@@ -192,7 +192,7 @@ const steps = {
     lead: 'consult',
     options: [
       { label: 'Start my inquiry', next: 'lead-consult' },
-      { label: 'Maybe later', next: 'start' },
+      { label: 'Maybe later', next: 'start', quiet: true },
     ],
   },
   'consult-thanks': {
@@ -659,6 +659,8 @@ function Bubble({ children }) {
   return <p className="w-fit rounded-[12px] rounded-bl-[3px] bg-cream px-3 py-2 text-[14px] leading-snug text-ink">{children}</p>
 }
 const chip = 'rounded-full border border-gold/60 px-3 py-1.5 text-[13px] text-white/90 hover:border-gold hover:bg-gold/10 hover:text-gold'
+// "Maybe later" leaves the conversation, so it's a muted grey rather than gold, to read as stepping away
+const quietChip = 'rounded-full border border-white/20 px-3 py-1.5 text-[13px] text-white/55 hover:border-white/40 hover:text-white/80'
 const solidChip =
   'inline-flex items-center gap-1.5 rounded-full bg-gold px-3 py-1.5 text-[13px] font-medium text-ink hover:bg-gold-light disabled:opacity-60'
 
@@ -717,7 +719,7 @@ function LeadTurn({ message, lead, active, onAnswer, onChange, onChangeField, on
                   {leadFields[id].label ?? leadFields[id].key}
                 </button>
               ))}
-            <button onClick={onLater} className={chip}>
+            <button onClick={onLater} className={quietChip}>
               Maybe later
             </button>
           </div>
@@ -758,11 +760,7 @@ function BotTurn({ step, active, onChoose }) {
                   {o.label} <ArrowRight className="h-3 w-3" />
                 </a>
               ) : (
-                <button
-                  key={o.label}
-                  onClick={() => onChoose(o.label, o.next)}
-                  className="rounded-full border border-gold/60 px-3 py-1.5 text-[13px] text-white/90 hover:border-gold hover:bg-gold/10 hover:text-gold"
-                >
+                <button key={o.label} onClick={() => onChoose(o.label, o.next)} className={o.quiet ? quietChip : chip}>
                   {o.label}
                 </button>
               ),
