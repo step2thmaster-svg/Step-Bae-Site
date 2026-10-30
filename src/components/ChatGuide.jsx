@@ -205,7 +205,6 @@ const steps = {
     lead: 'price',
     options: [
       { label: 'Get the price list', next: 'lead-price' },
-      { label: 'Maybe later', next: 'start', quiet: true },
     ],
   },
   'lead-talk': {
@@ -213,7 +212,6 @@ const steps = {
     lead: 'talk',
     options: [
       { label: 'Leave a message', next: 'lead-talk' },
-      { label: 'Maybe later', next: 'start', quiet: true },
     ],
   },
   'lead-consult': {
@@ -221,7 +219,6 @@ const steps = {
     lead: 'consult',
     options: [
       { label: 'Start my inquiry', next: 'lead-consult' },
-      { label: 'Maybe later', next: 'start', quiet: true },
     ],
   },
   'consult-thanks': {
@@ -627,7 +624,7 @@ export default function ChatGuide() {
               </div>
             </div>
             <div className="flex items-center gap-1">
-              <button onClick={restart} className="rounded px-2 py-1 text-[12px] text-white/60 hover:text-gold">
+              <button onClick={restart} className="rounded-full border border-gold/50 px-3 py-1 text-[14px] font-medium text-white/85 hover:border-gold hover:text-gold">
                 Start over
               </button>
               <button onClick={() => setOpen(false)} aria-label="Close assistant" className="rounded px-2 py-1 text-[20px] leading-none text-white/60 hover:text-gold">
@@ -652,7 +649,6 @@ export default function ChatGuide() {
                   onChange={() => say({ from: 'bot', lead: 'change' })}
                   onChangeField={changeField}
                   onSend={sendLead}
-                  onLater={() => go('Maybe later', 'start')}
                 />
               ) : (
                 <BotTurn key={i} step={steps[m.step] ?? steps.unknown} active={i === last} onChoose={go} />
@@ -721,14 +717,12 @@ function Bubble({ children }) {
   return <p className="w-fit rounded-[12px] rounded-bl-[3px] bg-cream px-3 py-2 text-[14px] leading-snug text-ink">{children}</p>
 }
 const chip = 'rounded-full border border-gold/60 px-3 py-1.5 text-[13px] text-white/90 hover:border-gold hover:bg-gold/10 hover:text-gold'
-// "Maybe later" leaves the conversation, so it's a muted grey rather than gold, to read as stepping away
-const quietChip = 'rounded-full border border-white/20 px-3 py-1.5 text-[13px] text-white/55 hover:border-white/40 hover:text-white/80'
 const solidChip =
   'inline-flex items-center gap-1.5 rounded-full bg-gold px-3 py-1.5 text-[13px] font-medium text-ink hover:bg-gold-light disabled:opacity-60'
 
 // a turn while collecting a lead: a question (with choices, Skip for optional ones), the review before sending,
 // the list of answers to change, or a sending error; buttons only on the latest turn
-function LeadTurn({ message, lead, active, onAnswer, onChange, onChangeField, onSend, onLater }) {
+function LeadTurn({ message, lead, active, onAnswer, onChange, onChangeField, onSend }) {
   const flow = lead && leadFlows[lead.flow]
   const field = leadFields[message.field]
   return (
@@ -781,9 +775,6 @@ function LeadTurn({ message, lead, active, onAnswer, onChange, onChangeField, on
                   {leadFields[id].label ?? leadFields[id].key}
                 </button>
               ))}
-            <button onClick={onLater} className={quietChip}>
-              Maybe later
-            </button>
           </div>
         )}
       </div>
@@ -822,7 +813,7 @@ function BotTurn({ step, active, onChoose }) {
                   {o.label} <ArrowRight className="h-3 w-3" />
                 </a>
               ) : (
-                <button key={o.label} onClick={() => onChoose(o.label, o.next)} className={o.quiet ? quietChip : chip}>
+                <button key={o.label} onClick={() => onChoose(o.label, o.next)} className={chip}>
                   {o.label}
                 </button>
               ),
