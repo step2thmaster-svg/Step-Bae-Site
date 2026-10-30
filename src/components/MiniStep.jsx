@@ -231,6 +231,37 @@ function StageLights() {
   )
 }
 
+// confetti for the finale: as the lights come back up, a shower of little pieces in the group's colours falls
+// across the stage for two seconds (mini-step-confetti); each starts above the frame, staggered a touch, with its
+// own drift and spin, so it never looks like one sheet falling
+const confettiColors = ['#d4a868', '#f0a6c2', '#c5d0dd', '#7fc8c4', '#fbf8f2', '#8fcdee']
+const confetti = Array.from({ length: 34 }, (_, i) => ({
+  x: -30 + ((i * 47) % 178),
+  y: -72 + ((i * 13) % 26),
+  w: i % 3 === 0 ? 4.5 : 6.5,
+  h: i % 3 === 0 ? 4.5 : 3.2,
+  color: confettiColors[i % confettiColors.length],
+  dx: ((i * 29) % 31) - 15,
+  turn: (i % 2 ? 1 : -1) * (360 + ((i * 53) % 360)),
+  delay: ((i * 7) % 10) * 0.05,
+}))
+
+function Confetti() {
+  return confetti.map((c, i) => (
+    <rect
+      key={i}
+      x={c.x}
+      y={c.y}
+      width={c.w}
+      height={c.h}
+      rx="0.6"
+      fill={c.color}
+      className="mini-step-confetti"
+      style={{ '--dx': `${c.dx}px`, '--turn': `${c.turn}deg`, animationDelay: `${c.delay}s` }}
+    />
+  ))
+}
+
 export default function MiniStep({ className = '', still = false, crew = false }) {
   const anim = (name) => (still ? undefined : name)
   if (!crew)
@@ -256,6 +287,7 @@ export default function MiniStep({ className = '', still = false, crew = false }
         <Dancer look="step" anim={anim} />
       </svg>
       {!still && <StageLights />}
+      {!still && <Confetti />}
     </svg>
   )
 }
