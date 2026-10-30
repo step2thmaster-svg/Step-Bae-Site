@@ -2,11 +2,15 @@ import { useEffect, useRef, useState } from 'react'
 import { ArrowRight } from './Icons.jsx'
 import MiniStep from './MiniStep.jsx'
 import { portals } from './PortalGuide.jsx'
-import { EMAIL } from './sendForm.js'
+import { EMAIL, sendForm } from './sendForm.js'
+import { articles } from './cv.js'
 
-// A guided site assistant: a scripted conversation (no AI, no server) that helps visitors find their way
-// and walks dentists through sending a case. Each step says something and offers choices; a choice either
-// goes to another step (`next`) or opens a page (`href`). Typed questions are matched to a step by keywords.
+// The Mini Steps, the site's guide and sales rep: a scripted conversation (no AI, no server) that helps visitors
+// find their way, makes the case for STEPBAE, answers the usual questions (price, turnaround, "I already have a lab")
+// and walks dentists through sending a case or leaving their details. Each step says something and offers choices;
+// a choice either goes to another step (`next`) or opens a page (`href`), and a step with `form` collects a lead
+// right in the chat. Typed questions are matched to a step by keywords. Only facts the site already states are used:
+// no prices, turnaround times or offers are promised here; those go to Step.
 
 const caseChecklist = [
   'Both full arches and a bite scan, even for a single crown',
@@ -32,12 +36,25 @@ const portalSteps = Object.fromEntries(
   ]),
 )
 
+// why dentists choose STEPBAE: the strengths the rest of the site already shows
+const strengths = [
+  'Every case is handcrafted and layered by Step Toothmaster Bae, CDT, DTG',
+  'You talk directly with the technician making your case',
+  'Shade matched to your patient’s natural teeth, not just a shade tab',
+  `An educator dentists learn from: more than 70 lectures and hands-on courses internationally, and ${articles.length} published articles`,
+  'Works with iTero, 3Shape TRIOS, Medit and Primescan, or physical impressions',
+]
+
 const steps = {
   start: {
-    say: ['Hi, we’re the Mini Steps, welcome to STEPBAE! We can help you find your way around or walk you through sending us a case.', 'What brings you here today?'],
+    say: [
+      'Hi, we’re the Mini Steps, welcome to STEPBAE! We help dentists deliver natural, beautiful restorations, handcrafted by Step Toothmaster Bae, CDT, DTG.',
+      'What brings you here today?',
+    ],
     options: [
       { label: 'I’m a dentist: send a case', next: 'case-start' },
-      { label: 'I’m a dentist: other questions', next: 'dentist' },
+      { label: 'Why choose STEPBAE?', next: 'why' },
+      { label: 'Get our price list', next: 'lead-price' },
       { label: 'I’m a patient', next: 'patient' },
       { label: 'Consulting & courses', next: 'consulting' },
       { label: 'Read our insights', next: 'insights' },
@@ -84,6 +101,7 @@ const steps = {
     options: [
       { label: 'Go to the partnership form', href: '/partnership.html#partner-form' },
       { label: 'What should I include with a case?', next: 'checklist' },
+      { label: 'Get our price list', next: 'lead-price' },
     ],
   },
   'case-physical': {
@@ -93,6 +111,7 @@ const steps = {
     options: [
       { label: 'Go to the partnership form', href: '/partnership.html#partner-form' },
       { label: 'What should I include?', next: 'checklist' },
+      { label: 'Get our price list', next: 'lead-price' },
     ],
   },
   'case-returning': {
@@ -100,7 +119,7 @@ const steps = {
     list: caseChecklist,
     options: [
       { label: 'Read the full guide', href: '/article.html?p=how-to-submit-a-digital-case' },
-      { label: 'Discuss a case with Step first', href: '/partnership.html#partner-form' },
+      { label: 'Discuss a case with Step first', next: 'lead-talk' },
       { label: 'Something else', next: 'start' },
     ],
   },
@@ -110,6 +129,56 @@ const steps = {
     options: [
       { label: 'Read the full guide', href: '/article.html?p=how-to-submit-a-digital-case' },
       { label: 'Go to the partnership form', href: '/partnership.html#partner-form' },
+      { label: 'Start over', next: 'start' },
+    ],
+  },
+
+  why: {
+    say: ['Great question! Here’s why dentists send their esthetic cases to STEPBAE:'],
+    list: strengths,
+    options: [
+      { label: 'See Step’s work', href: '/craftsmanship.html' },
+      { label: 'Send my first case', next: 'case-start' },
+      { label: 'Get our price list', next: 'lead-price' },
+      { label: 'I already have a lab', next: 'switching' },
+    ],
+  },
+  switching: {
+    say: [
+      'That’s completely fine, most of the dentists we work with did too!',
+      'Many start by sending us just one case where the details really show, like an anterior crown or a set of veneers. Connecting your scanner takes a few minutes, and you choose the lab case by case.',
+    ],
+    options: [
+      { label: 'Try one case', next: 'case-start' },
+      { label: 'See Step’s work', href: '/craftsmanship.html' },
+      { label: 'Talk to Step', next: 'lead-talk' },
+    ],
+  },
+  turnaround: {
+    say: [
+      'It depends on the restoration and how much characterization the case needs, and layered esthetic work takes a little longer than a monolithic crown.',
+      'Tell us what you’re planning and Step will give you a timeline before you prep, so you can book your patient with confidence.',
+    ],
+    options: [
+      { label: 'Ask about my case', next: 'lead-talk' },
+      { label: 'Send a case', next: 'case-start' },
+    ],
+  },
+  'lead-price': {
+    say: ['We’d be happy to send you our current price list! Just leave your details and we’ll email it to you.'],
+    form: { subject: 'Price list request (Mini Steps chat)', message: 'Please send me your price list.' },
+    options: [{ label: 'Maybe later', next: 'start' }],
+  },
+  'lead-talk': {
+    say: ['Tell us a little about your case or question, and Step will get back to you personally.'],
+    form: { subject: 'Question for Step (Mini Steps chat)', message: '' },
+    options: [{ label: 'Maybe later', next: 'start' }],
+  },
+  'lead-thanks': {
+    say: ['Thank you! We’ve got your details, and Step will be in touch shortly.', 'While you wait, would you like to see some of Step’s work?'],
+    options: [
+      { label: 'See Step’s work', href: '/craftsmanship.html' },
+      { label: 'Connect my scanner', next: 'scanner' },
       { label: 'Start over', next: 'start' },
     ],
   },
@@ -142,6 +211,7 @@ const steps = {
       { label: 'How to submit a digital case', href: '/article.html?p=how-to-submit-a-digital-case' },
       { label: 'Zirconia vs. layered zirconia crowns', href: '/article.html?p=zirconia-vs-layered-ceramic' },
       { label: 'All articles', href: '/insights.html#latest' },
+      { label: 'Send us a case', next: 'case-start' },
     ],
   },
   'insights-patients': {
@@ -156,7 +226,8 @@ const steps = {
     say: ['Happy to help. What would you like to know about?'],
     options: [
       { label: 'Send a case', next: 'case-start' },
-      { label: 'See Step’s work', href: '/craftsmanship.html' },
+      { label: 'Why choose STEPBAE?', next: 'why' },
+      { label: 'Get our price list', next: 'lead-price' },
       { label: 'Consulting & courses', next: 'consulting' },
       { label: 'Articles for dentists', next: 'insights-dentists' },
     ],
@@ -179,13 +250,14 @@ const steps = {
       { label: 'About Step', href: '/about.html' },
       { label: 'Consulting & courses', href: '/consultation.html' },
       { label: 'Insights articles', href: '/insights.html' },
+      { label: 'Why dentists choose STEPBAE', next: 'why' },
       { label: 'Send a case', next: 'case-start' },
     ],
   },
   contact: {
-    say: [`You can reach us at ${EMAIL}, or send a message with the question form and we’ll get back to you.`],
+    say: [`You can reach us at ${EMAIL}, or leave a message right here and Step will get back to you.`],
     options: [
-      { label: 'Ask a question', href: '/consultation.html#inquiry' },
+      { label: 'Leave a message', next: 'lead-talk' },
       { label: 'Start over', next: 'start' },
     ],
   },
@@ -195,7 +267,7 @@ const steps = {
       { label: 'Send a case', next: 'case-start' },
       { label: 'Find my way around', next: 'browse' },
       { label: 'I’m a patient', next: 'patient' },
-      { label: 'Contact STEPBAE', next: 'contact' },
+      { label: 'Talk to Step', next: 'lead-talk' },
     ],
   },
 }
@@ -209,6 +281,11 @@ const keywordRules = [
   [/scanner|portal|connect/, 'scanner'],
   [/impression|model|ship|mail in|physical/, 'case-physical'],
   [/checklist|include|shade|photo|prescription|\brx\b/, 'checklist'],
+  [/price|pricing|cost|fee|how much|quote|expensive|cheap/, 'lead-price'],
+  [/turnaround|how long|how fast|days|weeks|deadline|rush/, 'turnaround'],
+  [/already have|current lab|another lab|other lab|switch/, 'switching'],
+  [/why|better|different|quality|choose|experience|reviews?/, 'why'],
+  [/talk|speak|human|person|call me|step bae/, 'lead-talk'],
   [/case|send|submit|start|partner|account/, 'case-start'],
   [/patient|my teeth|my dentist|my crown|my veneer/, 'patient'],
   [/course|lecture|consult|training|event|class/, 'consulting'],
@@ -255,6 +332,58 @@ function Avatar({ size, still, crew, className = '' }) {
   )
 }
 
+// the hello bubble's pitch fits the page the visitor is on
+const pitches = {
+  '/craftsmanship.html': 'Like what you see? We can help you get results like these on your next case.',
+  '/partnership.html': 'Ready to send your first case? We’ll walk you through connecting your scanner in a minute.',
+  '/insights.html': 'Enjoying the read? Ask us anything, or send a case and see the difference for yourself.',
+  '/article.html': 'Enjoying the read? Ask us anything, or send a case and see the difference for yourself.',
+  '/consultation.html': 'Planning a course or consultation? We’ll point you to the right one.',
+  '/about.html': 'Want Step on your next case? We can set that up in a minute.',
+}
+const defaultPitch = 'We do more than dancing. Sending a case or just curious? Tap us and we’ll show you around.'
+
+// a short lead form inside the chat: what Step needs to follow up, sent with the partnership form's Formspree
+function LeadForm({ form, onSent }) {
+  const [status, setStatus] = useState('idle') // idle | sending | error
+  const input =
+    'w-full rounded-[3px] border border-white/15 bg-ink px-3 py-2 text-[14px] text-white placeholder:text-white/40 focus:border-gold focus:outline-none'
+
+  async function onSubmit(e) {
+    e.preventDefault()
+    setStatus('sending')
+    try {
+      if (await sendForm(e.currentTarget, form.subject, 'partnership')) onSent()
+      else setStatus('idle')
+    } catch {
+      setStatus('error')
+    }
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="space-y-2 rounded-[12px] border border-gold/30 bg-ink-3 p-3">
+      <input type="hidden" name="Source" value={`Mini Steps chat, ${window.location.pathname}`} />
+      <input name="Name" required autoComplete="name" placeholder="Your name *" aria-label="Your name" className={input} />
+      <input name="Practice" autoComplete="organization" placeholder="Practice name" aria-label="Practice name" className={input} />
+      <input name="email" type="email" required autoComplete="email" placeholder="Email *" aria-label="Email" className={input} />
+      <input name="Phone" type="tel" autoComplete="tel" placeholder="Phone (optional)" aria-label="Phone" className={input} />
+      <textarea name="Message" rows="2" defaultValue={form.message} placeholder="Your case or question" aria-label="Your case or question" className={input} />
+      <button
+        type="submit"
+        disabled={status === 'sending'}
+        className="inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-gold px-3 py-2 text-[13px] font-semibold text-ink hover:bg-gold-light disabled:opacity-60"
+      >
+        {status === 'sending' ? 'Sending…' : 'Send to Step'} <ArrowRight className="h-3 w-3" />
+      </button>
+      {status === 'error' && (
+        <p role="alert" className="text-[12px] text-white/75">
+          Sorry, that didn’t go through. Please try again or email us at {EMAIL}.
+        </p>
+      )}
+    </form>
+  )
+}
+
 export default function ChatGuide() {
   const saved = load()
   const [open, setOpen] = useState(saved?.open ?? false)
@@ -298,6 +427,8 @@ export default function ChatGuide() {
     go(t, matchStep(t))
   }
   const restart = () => setMessages([botMessage('start')])
+  const leadSent = () => setMessages((m) => [...m, botMessage('lead-thanks')])
+  const pitch = pitches[window.location.pathname] ?? defaultPitch
 
   const last = messages.length - 1
 
@@ -334,7 +465,7 @@ export default function ChatGuide() {
                   {m.text}
                 </p>
               ) : (
-                <BotTurn key={i} step={steps[m.step] ?? steps.unknown} active={i === last} onChoose={go} />
+                <BotTurn key={i} step={steps[m.step] ?? steps.unknown} active={i === last} onChoose={go} onLeadSent={leadSent} />
               ),
             )}
           </div>
@@ -359,7 +490,7 @@ export default function ChatGuide() {
           <button onClick={toggle} className="text-left">
             <span className="block font-display text-[18px] font-medium leading-tight">Hi, we’re the Mini Steps!</span>
             <span className="mt-1 block text-[14px] leading-snug text-ink/80">
-              We do more than dancing. Sending a case or just curious? Tap us and we’ll show you around.
+              {pitch}
             </span>
           </button>
           <button onClick={dismissTeaser} aria-label="Dismiss" className="absolute right-2 top-1.5 px-1 text-[18px] leading-none text-ink/50 hover:text-ink">
@@ -385,8 +516,8 @@ export default function ChatGuide() {
   )
 }
 
-// one turn from the assistant: its lines, an optional list, and (on the latest turn only) the choices
-function BotTurn({ step, active, onChoose }) {
+// one turn from the assistant: its lines, an optional list, and (on the latest turn only) a lead form and the choices
+function BotTurn({ step, active, onChoose, onLeadSent }) {
   return (
     <div className="flex max-w-[96%] gap-2">
       <Avatar crew size="h-8 w-8" still className="mt-0.5 ring-1" />
@@ -406,6 +537,7 @@ function BotTurn({ step, active, onChoose }) {
             ))}
           </ol>
         )}
+        {active && step.form && <LeadForm form={step.form} onSent={onLeadSent} />}
         {active && (
           <div className="flex flex-wrap gap-2 pt-1">
             {step.options.map((o) =>
