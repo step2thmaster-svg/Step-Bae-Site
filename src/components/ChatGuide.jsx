@@ -251,9 +251,26 @@ export default function ChatGuide() {
   const [open, setOpen] = useState(saved?.open ?? false)
   const [messages, setMessages] = useState(saved?.messages ?? [botMessage('start')])
   const [text, setText] = useState('')
+  // a friendly hello pops up beside the button a few seconds into the visit, once, until it's opened or closed
+  const [greeted, setGreeted] = useState(saved?.greeted ?? false)
+  const [teaser, setTeaser] = useState(false)
   const listRef = useRef(null)
 
-  useEffect(() => save({ open, messages }), [open, messages])
+  useEffect(() => save({ open, messages, greeted }), [open, messages, greeted])
+  useEffect(() => {
+    if (greeted || open) return
+    const t = setTimeout(() => setTeaser(true), 4000)
+    return () => clearTimeout(t)
+  }, [greeted, open])
+  const toggle = () => {
+    setOpen((o) => !o)
+    setTeaser(false)
+    setGreeted(true)
+  }
+  const dismissTeaser = () => {
+    setTeaser(false)
+    setGreeted(true)
+  }
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: 'smooth' })
   }, [messages, open])
@@ -325,14 +342,39 @@ export default function ChatGuide() {
         </div>
       )}
 
+      {teaser && !open && (
+        <div className="fixed bottom-20 right-5 z-50 w-[260px] rounded-[12px] rounded-br-[3px] border border-gold/40 bg-cream py-3 pl-4 pr-8 text-ink shadow-[0_18px_40px_-14px_rgba(0,0,0,0.7)] sm:right-6">
+          <button onClick={toggle} className="text-left">
+            <span className="block font-display text-[18px] font-medium leading-tight">Hi there!</span>
+            <span className="mt-1 block text-[14px] leading-snug text-ink/80">
+              Sending a case or just curious? I can walk you through it in a minute.
+            </span>
+          </button>
+          <button onClick={dismissTeaser} aria-label="Dismiss" className="absolute right-2 top-1.5 px-1 text-[18px] leading-none text-ink/50 hover:text-ink">
+            ×
+          </button>
+        </div>
+      )}
+
       <button
-        onClick={() => setOpen((o) => !o)}
+        onClick={toggle}
         aria-label={open ? 'Close assistant' : 'Open assistant'}
         aria-expanded={open}
         className="fixed bottom-5 right-5 z-50 flex h-12 items-center gap-2 rounded-full bg-gold px-4 text-[14px] font-semibold text-ink shadow-[0_10px_30px_-8px_rgba(0,0,0,0.7)] transition-colors hover:bg-gold-light sm:right-6"
       >
-        {open ? <span className="px-1 text-[22px] leading-none">×</span> : <ChatIcon className="h-5 w-5" />}
-        {!open && <span className="max-sm:hidden">Need help?</span>}
+        {open ? (
+          <span className="px-1 text-[22px] leading-none">×</span>
+        ) : (
+          <>
+            {/* a small live dot, so the button reads as someone ready to talk */}
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75 motion-reduce:animate-none" />
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-teal ring-2 ring-ink/20" />
+            </span>
+            <ChatIcon className="h-5 w-5" />
+            <span>Let’s chat</span>
+          </>
+        )}
       </button>
     </>
   )
