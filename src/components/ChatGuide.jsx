@@ -242,7 +242,7 @@ const botMessage = (id) => ({ from: 'bot', step: id })
 function Avatar({ size, still, className = '' }) {
   return (
     <span className={`relative block shrink-0 overflow-hidden rounded-full bg-cream ring-2 ring-gold ${size} ${className}`}>
-      <MiniStep still={still} className="absolute left-1/2 top-[9%] w-[104%] -translate-x-1/2" />
+      <MiniStep still={still} className="absolute left-1/2 top-[7%] w-[114%] -translate-x-1/2" />
     </span>
   )
 }
