@@ -83,7 +83,7 @@ const shareNote = 'Answers you give here are shared with STEPBAE, to save you ti
 const steps = {
   start: {
     say: [
-      'Hi, we’re the Mini Steps, welcome to STEPBAE! We help dentists deliver natural, beautiful restorations!',
+      'Hi, we’re the Mini Steps, welcome to STEPBAE.com! We are here to serve you!',
       'What brings you here today?',
     ],
     options: [
