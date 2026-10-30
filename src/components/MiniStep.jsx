@@ -1,6 +1,6 @@
 // "Mini Step": a K-pop style chibi (SD) version of Step for the site assistant: short wavy hair, V-line jaw,
 // dressed like a fashion model in an open white blazer and sky-blue shirt.
-// He dances like a K-pop idol, throws in a somersault every few seconds, and blinks (see the mini-step keyframes in index.css); `still` turns the motion off.
+// He dances like a K-pop idol, throws in a turn and a somersault every few seconds, and blinks (see the mini-step keyframes in index.css); `still` turns the motion off.
 // With `crew`, two backup dancers in matching black-and-gold stage outfits dance behind him, Mini Step at centre.
 
 // hair colours and outfit for each member
@@ -22,13 +22,13 @@ const outfits = {
   },
 }
 
-// `flipDelay` staggers the somersault, so in a group the members flip one after another;
+// `flipDelay` staggers the turn and somersault, so in a group the members go one after another;
 // `mirrored` reverses the spin for a mirrored dancer, so everyone spins left to right
 function Dancer({ look, anim, flipDelay = 0, mirrored = false }) {
   const h = looks[look]
   const o = outfits[h.outfit]
   return (
-    <g className={anim('mini-step-flip')} style={{ transformOrigin: '60px 80px', animationDelay: `${flipDelay}s`, '--spin': mirrored ? -1 : 1 }}>
+    <g className={anim('mini-step-moves')} style={{ transformOrigin: '60px 80px', animationDelay: `${flipDelay}s`, '--spin': mirrored ? -1 : 1 }}>
       <g className={anim('mini-step-dance')} style={{ transformOrigin: '60px 131px' }}>
         <g className={anim('mini-step-head')} style={{ transformOrigin: '60px 86px' }}>
           {/* hair, back: short, fluffy and wavy, flicking out at the ends */}

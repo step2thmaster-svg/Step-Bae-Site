@@ -23,7 +23,7 @@ body {
 /* Mini Step, the site assistant's character (MiniStep.jsx), dancing like a K-pop idol on a 1.2s loop:
    the body bounces and sways, the head tilts against it, the right arm points to the beat,
    the left arm swings out from the hip and the feet step in turn; he also blinks every few seconds
-   and does a somersault every six loops */
+   and does a turn and a somersault every six loops */
 @keyframes mini-step-dance {
   0%, 100% { transform: translateY(0) rotate(-3deg); }
   25%, 75% { transform: translateY(-3px) rotate(0deg); }
@@ -34,10 +34,16 @@ body {
 @keyframes mini-step-arm-l { 0%, 40%, 100% { transform: rotate(0deg); } 55% { transform: rotate(48deg); } 70% { transform: rotate(30deg); } 85% { transform: rotate(48deg); } }
 @keyframes mini-step-leg-l { 0%, 50%, 100% { transform: translateY(0); } 25% { transform: translateY(-2.5px); } }
 @keyframes mini-step-leg-r { 0%, 50%, 100% { transform: translateY(0); } 75% { transform: translateY(-2.5px); } }
-/* every 7.2s (six dance loops) a somersault: crouch, jump, a full flip spinning left to right (clockwise), land with
-   a little squash; --spin: -1 reverses it for a mirrored dancer so the whole group still spins left to right */
-@keyframes mini-step-flip {
-  0%, 80% { transform: translateY(0) rotate(0deg) scale(1, 1); }
+/* the big moves, on a 7.2s cycle (six dance loops): first a turn, spinning round on the spot with a little hop
+   (squeezed flat and back out mirrored, so it reads as turning to face the back and round again), then a somersault:
+   crouch, jump, a full flip spinning left to right (clockwise), land with a little squash.
+   --spin: -1 reverses the flip for a mirrored dancer so the whole group still spins left to right */
+@keyframes mini-step-moves {
+  0%, 33% { transform: translateY(0) rotate(0deg) scale(1, 1); }
+  37% { transform: translateY(-3px) rotate(0deg) scale(0, 1); }
+  41% { transform: translateY(-5px) rotate(0deg) scale(-1, 1); }
+  45% { transform: translateY(-3px) rotate(0deg) scale(0, 1); }
+  49%, 80% { transform: translateY(0) rotate(0deg) scale(1, 1); }
   83% { transform: translateY(5px) rotate(0deg) scale(1.04, 0.9); }
   88% { transform: translateY(-24px) rotate(calc(var(--spin, 1) * 180deg)) scale(1, 1); }
   93% { transform: translateY(-6px) rotate(calc(var(--spin, 1) * 345deg)) scale(1, 1); }
@@ -51,8 +57,8 @@ body {
 .mini-step-arm-l { animation: mini-step-arm-l 2.4s ease-in-out infinite; }
 .mini-step-leg-l { animation: mini-step-leg-l 1.2s ease-in-out infinite; }
 .mini-step-leg-r { animation: mini-step-leg-r 1.2s ease-in-out infinite; }
-.mini-step-flip { animation: mini-step-flip 7.2s ease-in-out infinite; }
+.mini-step-moves { animation: mini-step-moves 7.2s ease-in-out infinite; }
 .mini-step-blink { animation: mini-step-blink 4.5s infinite; }
 @media (prefers-reduced-motion: reduce) {
-  .mini-step-flip, .mini-step-dance, .mini-step-head, .mini-step-arm-r, .mini-step-arm-l, .mini-step-leg-l, .mini-step-leg-r, .mini-step-blink { animation: none; }
+  .mini-step-moves, .mini-step-dance, .mini-step-head, .mini-step-arm-r, .mini-step-arm-l, .mini-step-leg-l, .mini-step-leg-r, .mini-step-blink { animation: none; }
 }
