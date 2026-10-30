@@ -77,6 +77,9 @@ const strengths = [
   'Works with iTero, 3Shape TRIOS, Medit and Primescan, or physical impressions',
 ]
 
+// a light word, as a lead starts, that answers go to STEPBAE (unfinished ones too)
+const shareNote = 'Answers you give here are shared with STEPBAE, to save you time filling out the boring form.'
+
 const steps = {
   start: {
     say: [
@@ -201,6 +204,7 @@ const steps = {
   // these two start a lead: the questions come from leadFlows below (the options only show if the visitor
   // comes back to the chat mid-way, since unsent answers aren't kept)
   'lead-price': {
+    note: shareNote,
     say: ['We’d be happy to send you our current price list! We just need a few quick details.'],
     lead: 'price',
     options: [
@@ -208,6 +212,7 @@ const steps = {
     ],
   },
   'lead-talk': {
+    note: shareNote,
     say: ['STEPBAE would love to hear from you! A few quick questions, and we’ll get back to you personally.'],
     lead: 'talk',
     options: [
@@ -215,6 +220,7 @@ const steps = {
     ],
   },
   'lead-consult': {
+    note: shareNote,
     say: ['Wonderful! Let’s get your inquiry to STEPBAE. Just a few quick questions.'],
     lead: 'consult',
     options: [
@@ -819,6 +825,7 @@ function BotTurn({ step, active, onChoose }) {
         {step.say.map((line) => (
           <Bubble key={line}>{line}</Bubble>
         ))}
+        {step.note && <p className="px-1 text-[12px] italic leading-snug text-white/55">{step.note}</p>}
         {step.list && (
           <ol className="space-y-1.5 rounded-[12px] bg-cream px-3 py-2.5 text-[13px] leading-snug text-ink/90">
             {step.list.map((item, i) => (
