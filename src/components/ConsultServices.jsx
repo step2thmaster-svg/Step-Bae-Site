@@ -1,49 +1,125 @@
-import { Palette, Education, Speaker, Consulting } from './Icons.jsx'
+import Button from './Button.jsx'
 
+// one banner per service, in the style of the home page's Art of Precision: a photo on one half fading into the text
+// on the other, alternating sides down the page. `inquiry` is what each button picks in the form below (one of
+// ConsultForm's inquiryOptions)
 const services = [
   {
-    Icon: Consulting,
-    title: 'Digital Lab Consulting',
-    text: 'Setting up or refining a digital workflow: scanners, design software, milling and pressing, and how cases move between practice and lab.',
+    eyebrow: 'FOR PRACTICES & LABS',
+    title: ['Digital Workflow', 'Consulting'],
+    text: 'Every practice and lab runs on its own mix of scanners, design software and equipment. Step comes in, learns how your team works, and builds a digital workflow that fits your ecosystem, not the other way around.',
+    points: [
+      'A review of your scanners, design software, milling and pressing',
+      'A clear path for how cases move between practice and lab',
+      'Scan, photo and prescription standards your team can follow',
+      'Guidance as you add new equipment or materials',
+    ],
+    cta: 'Plan My Workflow',
+    inquiry: 'Consulting',
+    image: '/images/gallery/work-16.jpg',
+    alt: 'A digital design on the design grid, above the finished ceramic restorations it became',
+    position: 'object-[22%_50%]',
   },
   {
-    Icon: Education,
-    title: 'Esthetic Case Planning',
-    text: 'A second pair of eyes on complex anterior and implant cases, from material choice and shade to communication between dentist and technician.',
+    eyebrow: 'FOR PRACTICES & LABS',
+    title: ['Hands-On', 'Team Training'],
+    text: 'Step comes to you and trains your team at their own benches, on the skill they need most. Small groups, real techniques, and results they can use on the very next case.',
+    points: [
+      'Ceramic layering and cutback',
+      'Foil veneers',
+      'Stain & glaze characterization',
+      'A custom course built around your team’s needs',
+    ],
+    cta: 'Train My Team',
+    inquiry: 'Course or workshop',
+    image: '/images/home/hands-on-class.jpg',
+    alt: 'Technicians celebrating with their work at the end of a hands-on course',
+    position: 'object-[50%_64%]',
   },
   {
-    Icon: Palette,
-    title: 'Hands-On Courses',
-    text: 'Small-group courses for technicians and clinicians on ceramic layering, cutback, foil veneers and stain & glaze characterization.',
+    eyebrow: 'FOR DENTISTS & LABS',
+    title: ['Esthetic', 'Case Planning'],
+    text: 'A complicated case deserves a second set of expert eyes before anything is prepped. Step works with the dentist and the technician to plan the result from the start, so the final restoration is predictable.',
+    points: [
+      'Complex anterior and implant cases',
+      'Material choice and shade strategy',
+      'Clear communication between dentist and technician',
+      'A plan agreed before prep, not after',
+    ],
+    cta: 'Plan a Case',
+    inquiry: 'Consulting',
+    image: '/images/insights/dentisthappy.jpg',
+    alt: 'Dentists and Step reviewing smiles together',
   },
   {
-    Icon: Speaker,
-    title: 'Lectures & Events',
-    text: 'Lectures for study clubs, lab days, conferences and manufacturers, in person or online.',
+    eyebrow: 'FOR CONFERENCES & EVENTS',
+    title: ['Speaking &', 'Live Demos'],
+    text: 'Bring Step to your stage. With more than 70 lectures and hands-on courses given internationally, Step can speak or perform a live demo on your behalf, for your audience, your products and your event.',
+    points: [
+      'Keynotes and lectures for conferences, study clubs and lab days',
+      'Live ceramic demos for manufacturers and sponsors',
+      'In person or online',
+    ],
+    cta: 'Book Step to Speak',
+    inquiry: 'Lecture or speaking',
+    image: '/images/about/stage-digital-days.jpg',
+    alt: 'Step lecturing on stage at a digital dentistry event',
   },
 ]
 
+// picks the matching topic in the inquiry form, then the link scrolls down to it
+const chooseInquiry = (inquiry) => {
+  const select = document.querySelector('#inquiry select[name="Inquiry"]')
+  if (select) select.value = inquiry
+}
+
 export default function ConsultServices() {
   return (
-    <section id="services" className="bg-cream px-6 py-14 text-ink lg:px-12">
-      <div className="mx-auto max-w-[1200px]">
-        <div className="flex items-center gap-6">
-          <h2 className="font-display text-[36px] font-medium leading-none sm:whitespace-nowrap md:text-[40px]">
-            How I Can Help
-          </h2>
-          <span className="hidden h-px flex-1 bg-gold-dark/40 sm:block" />
-        </div>
+    <section id="services">
+      {services.map((s, i) => {
+        const flip = i % 2 === 1
+        return (
+          <div key={s.cta} className={`grid border-t border-gold/20 md:grid-cols-2 ${i % 2 ? 'bg-ink' : 'bg-ink-2'}`}>
+            {/* md+: the photo reaches 96px past the middle, under the text column, so its fade sits further in */}
+            <div className={`relative min-h-[260px] md:min-h-[460px] ${flip ? 'md:order-2 md:ml-[-96px]' : 'md:mr-[-96px]'}`}>
+              <img src={s.image} alt={s.alt} loading="lazy" className={`absolute inset-0 h-full w-full object-cover ${s.position ?? 'object-center'}`} />
+              {/* fades into the section's dark along the bottom, and on md+ also toward the text side */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: `linear-gradient(0deg, var(--bg) 0%, rgba(0,0,0,0) 30%), linear-gradient(${flip ? 270 : 90}deg, rgba(0,0,0,0) calc(100% - 160px), var(--bg) 100%)`,
+                  '--bg': i % 2 ? '#141210' : '#1c1916',
+                }}
+              />
+            </div>
 
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map(({ Icon, title, text }) => (
-            <article key={title} className="rounded-[3px] border border-gold-dark/30 bg-white/60 p-6">
-              <Icon className="h-11 w-11 text-gold-dark" />
-              <h3 className="mt-4 font-display text-[24px] font-medium leading-tight">{title}</h3>
-              <p className="mt-3 text-[14px] leading-[1.55] text-ink/80">{text}</p>
-            </article>
-          ))}
-        </div>
-      </div>
+            <div
+              className={`relative z-10 flex items-center px-6 py-12 ${
+                flip ? 'md:order-1 md:pl-12 md:pr-[calc(3rem+96px)] lg:pl-16 lg:pr-[calc(4rem+96px)]' : 'md:pl-[calc(3rem+96px)] md:pr-12 lg:pl-[calc(4rem+96px)] lg:pr-16'
+              }`}
+            >
+              <div className="max-w-[500px]">
+                <p className="text-[12px] font-semibold tracking-[0.3em] text-gold">{s.eyebrow}</p>
+                <h2 className="mt-3 font-display text-[36px] font-medium leading-[1.08] text-white md:text-[42px]">
+                  {s.title[0]} <em className="font-normal text-gold">{s.title[1]}</em>
+                </h2>
+                <p className="mt-4 text-[15px] leading-[1.6] text-white/90">{s.text}</p>
+                <ul className="mt-5 space-y-2 text-[14px] text-white/90">
+                  {s.points.map((p) => (
+                    <li key={p} className="flex items-start gap-2.5">
+                      <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+                <Button href="#inquiry" onClick={() => chooseInquiry(s.inquiry)} className="mt-7 h-10 px-6">
+                  {s.cta}
+                </Button>
+              </div>
+            </div>
+          </div>
+        )
+      })}
     </section>
   )
 }

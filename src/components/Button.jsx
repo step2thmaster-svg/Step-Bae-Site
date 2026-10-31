@@ -15,10 +15,12 @@ export default function Button({
   variant = 'solid',
   arrow = true,
   className = '',
+  onClick,
 }) {
   return (
     <a
       href={href}
+      onClick={onClick}
       className={`inline-flex items-center justify-center gap-2 text-[13px] font-semibold transition-colors duration-200 ${variants[variant]} ${className}`}
     >
       {children}
