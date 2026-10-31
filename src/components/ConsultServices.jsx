@@ -7,7 +7,7 @@ const services = [
   {
     eyebrow: 'FOR PRACTICES & LABS',
     title: ['Digital Workflow', 'Consulting'],
-    text: 'Every practice and lab runs on its own mix of scanners, design software and equipment. Step comes in, learns how your team works, and builds a digital workflow that fits your ecosystem, not the other way around.',
+    text: 'Every practice and lab runs on its own mix of scanners, design software and equipment. Let’s work together on a digital workflow that fits your ecosystem: we’ll start with how your team works today and build from there, not the other way around.',
     points: [
       'A review of your scanners, design software, milling and pressing',
       'A clear path for how cases move between practice and lab',
@@ -23,7 +23,7 @@ const services = [
   {
     eyebrow: 'FOR PRACTICES & LABS',
     title: ['Hands-On', 'Team Training'],
-    text: 'Step comes to you and trains your team at their own benches, on the skill they need most. Small groups, real techniques, and results they can use on the very next case.',
+    text: 'Let’s work together on the skill your team needs most, right at their own benches. Small groups, real techniques, and results they can use on the very next case.',
     points: [
       'Ceramic layering and cutback',
       'Foil veneers',
@@ -39,7 +39,7 @@ const services = [
   {
     eyebrow: 'FOR DENTISTS & LABS',
     title: ['Esthetic', 'Case Planning'],
-    text: 'A complicated case deserves a second set of expert eyes before anything is prepped. Step works with the dentist and the technician to plan the result from the start, so the final restoration is predictable.',
+    text: 'A complicated case deserves a second set of expert eyes before anything is prepped. Let’s work together, dentist, technician and Step, to plan the result from the start, so the final restoration is predictable.',
     points: [
       'Complex anterior and implant cases',
       'Material choice and shade strategy',
@@ -54,7 +54,7 @@ const services = [
   {
     eyebrow: 'FOR CONFERENCES & EVENTS',
     title: ['Speaking &', 'Live Demos'],
-    text: 'Bring Step to your stage. With more than 70 lectures and hands-on courses given internationally, Step can speak or perform a live demo on your behalf, for your audience, your products and your event.',
+    text: 'Let’s work together on your next event. With more than 70 lectures and hands-on courses given internationally, Step can speak or perform a live demo on your behalf, for your audience, your products and your stage.',
     points: [
       'Keynotes and lectures for conferences, study clubs and lab days',
       'Live ceramic demos for manufacturers and sponsors',
