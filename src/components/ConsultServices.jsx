@@ -26,7 +26,7 @@ const services = [
     text: 'Let’s work together on the skill your team needs most, right at their own benches. Small groups, real techniques, and results they can use on the very next case.',
     points: [
       'Ceramic layering and cutback',
-      'All-on-X workflow',
+      'All-on-X implant workflow',
       'Stain & glaze characterization',
       'A custom course built around your team’s needs',
     ],
