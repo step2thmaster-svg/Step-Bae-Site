@@ -3,8 +3,8 @@ import { ArrowRight } from './Icons.jsx'
 
 // add upcoming courses and events here; the list shows them in this order. `image` is optional (in public/images/courses);
 // it's trimmed to the card's shape unless `fit: 'contain'`, which shows it whole (for badges and flyers). `link` is a registration page;
-// `soon: true` says registration is coming soon until a link is ready. `session` and `room` say when and where Step's own
-// part of a longer event takes place.
+// `soon: true` says registration is coming soon until a link is ready. `talk`, `session` and `room` say what Step presents,
+// and when and where, within a longer event.
 // e.g. { date: 'March 14–15, 2027', title: 'Foil Veneer Hands-On', place: 'Charlotte, NC', text: 'Two-day course…', link: 'https://…' }
 export const upcoming = [
   {
@@ -16,6 +16,8 @@ export const upcoming = [
     alt: 'The Cranio-Mandibular Complex: TMJ to Smile Design. AES 72nd Annual Scientific Meeting, February 24–25, 2027, Chicago, IL',
     fit: 'contain',
     link: 'https://aes-tmj.glueup.com/event/aes-2027-annual-scientific-meeting-169267/',
+    talk: 'Problem Solvers: Make Big Problems Small',
+    session: '1:30–1:45 PM',
   },
   {
     date: 'February 25–27, 2027',
@@ -60,8 +62,14 @@ export default function Events() {
                   <h3 className="mt-2 font-display text-[26px] font-medium leading-tight text-white">{ev.title}</h3>
                   {ev.place && <p className="mt-1 text-[14px] text-white/70">{ev.place}</p>}
                   {ev.text && <p className="mt-3 text-[15px] leading-[1.6] text-white/85">{ev.text}</p>}
-                  {(ev.session || ev.room) && (
+                  {(ev.talk || ev.session || ev.room) && (
                     <dl className="mt-4 space-y-1 border-l-2 border-gold/50 pl-3 text-[14px] leading-[1.5]">
+                      {ev.talk && (
+                        <div className="flex gap-2">
+                          <dt className="font-semibold text-gold">Talk</dt>
+                          <dd className="italic text-white/85">{ev.talk}</dd>
+                        </div>
+                      )}
                       {ev.session && (
                         <div className="flex gap-2">
                           <dt className="font-semibold text-gold">When</dt>
