@@ -18,7 +18,8 @@ const services = [
     inquiry: 'Consulting',
     image: '/images/consult/digital-morphopsychology.jpg',
     alt: 'A smile design moving from the digital design on the right to the finished restorations, with Dr. Paul Bylis, DDS',
-    position: 'object-[88%_50%]',
+    // wide enough to run the whole banner, under the text, rather than fill one half
+    behind: true,
   },
   {
     eyebrow: 'FOR PRACTICES & LABS',
@@ -81,19 +82,34 @@ export default function ConsultServices() {
       {services.map((s, i) => {
         const flip = i % 2 === 1
         return (
-          <div key={s.cta} className={`grid border-t border-gold/20 md:grid-cols-2 ${i % 2 ? 'bg-ink' : 'bg-ink-2'}`}>
+          <div key={s.cta} className={`relative grid border-t border-gold/20 md:grid-cols-2 ${i % 2 ? 'bg-ink' : 'bg-ink-2'}`}>
+            {s.behind && (
+              <>
+                {/* phones: the whole photo above the text; md+: across the full banner, darkened behind the text */}
+                <img src={s.image} alt={s.alt} loading="lazy" className="block h-auto w-full md:absolute md:inset-0 md:h-full md:object-cover" />
+                <div
+                  className="absolute inset-0 hidden md:block"
+                  style={{
+                    background: `linear-gradient(${flip ? 270 : 90}deg, rgba(28,25,22,0) 35%, rgba(28,25,22,0.68) 55%, rgba(28,25,22,0.8) 100%)`,
+                  }}
+                />
+                <div className={`hidden md:block ${flip ? 'md:order-2' : ''}`} />
+              </>
+            )}
             {/* md+: the photo reaches 96px past the middle, under the text column, so its fade sits further in */}
-            <div className={`relative min-h-[260px] md:min-h-[460px] ${flip ? 'md:order-2 md:ml-[-96px]' : 'md:mr-[-96px]'}`}>
-              <img src={s.image} alt={s.alt} loading="lazy" className={`absolute inset-0 h-full w-full object-cover ${s.position ?? 'object-center'}`} />
-              {/* fades into the section's dark along the bottom, and on md+ also toward the text side */}
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: `linear-gradient(0deg, var(--bg) 0%, rgba(0,0,0,0) 30%), linear-gradient(${flip ? 270 : 90}deg, rgba(0,0,0,0) calc(100% - ${s.fade ?? 160}px), var(--bg) 100%)`,
-                  '--bg': i % 2 ? '#141210' : '#1c1916',
-                }}
-              />
-            </div>
+            {!s.behind && (
+              <div className={`relative min-h-[260px] md:min-h-[460px] ${flip ? 'md:order-2 md:ml-[-96px]' : 'md:mr-[-96px]'}`}>
+                <img src={s.image} alt={s.alt} loading="lazy" className={`absolute inset-0 h-full w-full object-cover ${s.position ?? 'object-center'}`} />
+                {/* fades into the section's dark along the bottom, and on md+ also toward the text side */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(0deg, var(--bg) 0%, rgba(0,0,0,0) 30%), linear-gradient(${flip ? 270 : 90}deg, rgba(0,0,0,0) calc(100% - ${s.fade ?? 160}px), var(--bg) 100%)`,
+                    '--bg': i % 2 ? '#141210' : '#1c1916',
+                  }}
+                />
+              </div>
+            )}
 
             <div
               className={`relative z-10 flex items-center px-6 py-12 ${
