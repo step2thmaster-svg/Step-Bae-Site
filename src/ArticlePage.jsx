@@ -300,11 +300,10 @@ export default function ArticlePage() {
               <Button href={cta.secondary.href} variant="ghost" className="h-10 px-6">{cta.secondary.label}</Button>
             )}
           </div>
-          <p className="mt-8">
-            <a href={insightsHref} className="text-[14px] text-white/70 underline underline-offset-4 hover:text-gold">
-              More insights
-            </a>
-          </p>
+          {/* back to the library, as a full button so it's easy to find */}
+          <Button href={insightsHref} variant="ghost" className="mt-8 h-11 px-7 text-[14px]">
+            More Insights
+          </Button>
         </div>
       </section>
 
