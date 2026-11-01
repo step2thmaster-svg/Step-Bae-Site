@@ -9,13 +9,6 @@ const Screen = ({ className }) => (
     <path d="M17 41h14M24 33v8M19 21l4 4 7-8" />
   </svg>
 )
-const Play = ({ className }) => (
-  <svg viewBox="0 0 48 48" className={className} {...line}>
-    <circle cx="24" cy="24" r="18" />
-    <path d="m20 16 12 8-12 8z" />
-  </svg>
-)
-
 // the ways a practice, lab or event can work with Step, as a bento grid: the headline formats are photo cards (two
 // columns wide unless `narrow`), the rest compact icon cards. `where` is how each one can be delivered. Order fills a 4-column grid in three
 // rows on desktop (wide, small, small / small, small, wide / wide, wide)
@@ -40,7 +33,16 @@ const formats = [
     // a photo card one column wide, so the first row still fits
     narrow: true,
   },
-  { group: 'Education', title: 'Webinar', text: 'A live online lecture for your members, customers or team, with time for questions.', where: ['Online'], Icon: Play },
+  {
+    group: 'Education',
+    title: 'Webinar',
+    text: 'A live online lecture for your members, customers or team, with time for questions.',
+    where: ['Online'],
+    // a frame from Step's glaze and correction bake video, cropped above the video's own title lettering
+    image: '/images/consult/webinar-glaze.jpg',
+    position: 'object-[12%_50%]',
+    narrow: true,
+  },
   {
     group: 'Consulting',
     title: 'Ongoing Support',
