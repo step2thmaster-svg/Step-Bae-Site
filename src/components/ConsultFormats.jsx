@@ -49,7 +49,7 @@ const formats = [
     // the two smiles centred in the card, and darker shading so the words over them read clearly
     position: 'object-[45%_50%]',
     narrow: true,
-    shade: 'from-ink via-ink/80 to-ink/50',
+    shade: 'from-ink via-ink/60 to-ink/25',
   },
   {
     group: 'Education',
