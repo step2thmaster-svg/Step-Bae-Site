@@ -155,7 +155,7 @@ export const hosts = [
   },
   {
     group: 'International meetings',
-    names: ['IDS Cologne, Germany', 'Korean National Technician Expo, South Korea', 'Digital Days, Mexico'],
+    names: ['IDS Cologne, Koln, Germany', 'Korean National Technician Expo, Seoul, South Korea', 'Digital Days, Puebla, Mexico'],
   },
   {
     group: 'U.S. meetings & symposia',
