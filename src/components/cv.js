@@ -151,7 +151,7 @@ export const articles = [
 export const hosts = [
   {
     group: 'Manufacturers',
-    names: ['Aidite', 'Asiga', 'Dentsply Sirona', 'GC America', 'Ivoclar', 'Renfert', 'Wagner', 'White Peaks'],
+    names: ['Aidite USA', 'Asiga USA', 'Dentsply Sirona', 'GC America', 'Ivoclar', 'Renfert', 'Smileline USA', 'Wagner', 'White Peaks'],
   },
   {
     group: 'International meetings',
