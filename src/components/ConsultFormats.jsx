@@ -38,9 +38,9 @@ const formats = [
     title: 'Webinar',
     text: 'A live online lecture for your members, customers or team, with time for questions.',
     where: ['Online'],
-    // a frame from Step's glaze and correction bake video, cropped above the video's own title lettering
-    image: '/images/consult/webinar-glaze.jpg',
-    position: 'object-[12%_50%]',
+    // Step at the podium with a headset mic; framed on Step, above the words
+    image: '/images/consult/webinar-podium.jpg',
+    position: 'object-[40%_10%]',
     narrow: true,
   },
   {
