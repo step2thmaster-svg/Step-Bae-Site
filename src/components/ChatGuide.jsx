@@ -10,6 +10,7 @@ import { services } from './ConsultServices.jsx'
 import { formats } from './ConsultFormats.jsx'
 import { upcoming } from './Events.jsx'
 import { faqs } from './ConsultFAQ.jsx'
+import { partnerFaqs } from './PartnerSections.jsx'
 import { articleKnowledge, journalArticles, dentistArticles, patientArticles } from './chatArticles.js'
 
 // The Mini Steps, the site's guide and sales rep: a scripted conversation (no AI, no server) that helps visitors
@@ -147,6 +148,10 @@ const topics = {
   faq: { pitch: 'Have a question that isn’t here? Just ask us.', say: 'Have a question? We know the answers to these.', next: 'faq' },
   inquiry: { pitch: 'Prefer to chat? We can take your inquiry one question at a time.', say: 'Prefer to chat instead of the form? We’ll ask one question at a time.', next: 'lead-consult' },
   portals: { pitch: 'Need help connecting your scanner? We’ll walk you through it.', say: 'Connecting your scanner? Pick yours and we’ll show you how.', next: 'scanner' },
+  'partner-why': { pitch: 'Wondering if STEPBAE is the right lab? We can answer anything, or send our price list.', say: 'Getting to know STEPBAE? Here’s why dentists send their esthetic cases here.', next: 'why' },
+  'partner-restorations': { pitch: 'Want our price list? We can send it in a minute.', say: 'Looking at what we make? We can send our current price list.', next: 'lead-price' },
+  'partner-flow': { pitch: 'Ready to send your first case? We’ll walk you through it.', say: 'Ready to send your first case? We’ll walk you through it.', next: 'case-start' },
+  'partner-faq': { pitch: 'Have a question that isn’t here? Just ask us.', say: 'Have a question? Ask us about turnaround, warranty, shipping or anything else.', next: 'dentist' },
   'partner-form': { pitch: 'Prefer to chat instead of the form? We can take your details here.', say: 'Prefer to chat instead of the form? Leave your details here.', next: 'lead-talk' },
   // each article: the reader's next step depends on who it's written for
   ...Object.fromEntries(
@@ -254,7 +259,7 @@ const steps = {
   'case-physical': {
     portal: 'No scanner (physical impressions)',
     say: [
-      'Of course. Please fill out the partnership form and mention that you’ll send physical impressions or models. We’ll reply with shipping details and our Rx form.',
+      'Of course, and shipping is on us: STEPBAE provides prepaid shipping labels. Fill out the partnership form and mention that you’ll send physical impressions or models, and we’ll send the labels with our Rx form.',
     ],
     options: [
       { label: 'Go to the partnership form', href: '/partnership.html#partner-form' },
@@ -304,14 +309,29 @@ const steps = {
   },
   turnaround: {
     say: [
-      'It depends on the restoration and how much characterization the case needs, and layered esthetic work takes a little longer than a monolithic crown.',
-      'Tell us what you’re planning and STEPBAE will give you a timeline before you prep, so you can book your patient with confidence.',
+      'Standard turnaround is 10 business days from the day STEPBAE receives your case.',
+      'Rush cases are only taken by arrangement, at a premium rush rate, so please ask before you prep.',
     ],
     options: [
-      { label: 'Ask about my case', next: 'lead-talk' },
+      { label: 'Ask about a rush', next: 'lead-talk' },
       { label: 'Send a case', next: 'case-start' },
+      { label: 'Get our price list', next: 'lead-price' },
     ],
   },
+  // the Dentist Partnership page's FAQ, answered from the page itself
+  ...Object.fromEntries(
+    partnerFaqs.map((f) => [
+      `lab-${f.id}`,
+      {
+        say: [f.a],
+        options: [
+          { label: 'Send a case', next: 'case-start' },
+          { label: 'Get our price list', next: 'lead-price' },
+          { label: 'Talk to STEPBAE', next: 'lead-talk' },
+        ],
+      },
+    ]),
+  ),
   // these two start a lead: the questions come from leadFlows below (the options only show if the visitor
   // comes back to the chat mid-way, since unsent answers aren't kept)
   'lead-price': {
@@ -616,7 +636,11 @@ const keywordRules = [
   [/case planning|complex case|complicated|difficult case|second opinion|case review|treatment plan/, 'svc-planning'],
   [/keynote|lecture|live demo|\bdemo\b|conference|speaker|sponsor|study club|event/, 'svc-speaking'],
   [/price|pricing|cost|fee|how much|quote|expensive|cheap/, 'lead-price'],
-  [/turnaround|how long|how fast|days|weeks|deadline|rush/, 'turnaround'],
+  [/rush|urgent|expedite|asap/, 'lab-rush'],
+  [/turnaround|how long|how fast|days|weeks|deadline/, 'turnaround'],
+  [/warrant|guarantee/, 'lab-warranty'],
+  [/chairside|delivery appointment/, 'lab-chairside'],
+  [/shipping|label|fedex|ups|courier/, 'case-physical'],
   [/already have|current lab|another lab|other lab|switch/, 'switching'],
   [/why|better|different|quality|choose|experience|reviews?/, 'why'],
   [/talk|speak|human|person|call me|step bae/, 'lead-talk'],
