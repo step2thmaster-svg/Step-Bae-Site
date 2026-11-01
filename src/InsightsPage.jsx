@@ -68,7 +68,16 @@ export default function InsightsPage() {
                     }`}
                   >
                     <span className={`absolute inset-x-0 top-0 h-1 ${audienceColor[p.audience]}`} />
-                    {p.image && <img src={p.image} alt="" loading="lazy" style={{ objectPosition: p.imagePosition }} className="aspect-[16/9] w-full object-cover sm:aspect-auto sm:w-2/5 sm:self-stretch" />}
+                    {/* a journal article's photo is shown whole, on black, rather than trimmed to fill the space */}
+                    {p.image && (
+                      <img
+                        src={p.image}
+                        alt=""
+                        loading="lazy"
+                        style={{ objectPosition: p.imagePosition }}
+                        className={`aspect-[16/9] w-full sm:aspect-auto sm:w-2/5 sm:self-stretch ${p.source ? 'bg-black object-contain' : 'object-cover'}`}
+                      />
+                    )}
                     <div className={`flex flex-1 flex-col ${p.image ? 'px-5 py-4 sm:justify-center' : 'px-5 py-4'}`}>
                       <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                         <AudienceTag audience={p.audience} />
