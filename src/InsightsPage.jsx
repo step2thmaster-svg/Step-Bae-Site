@@ -60,6 +60,7 @@ export default function InsightsPage() {
                   <Card
                     key={`${p.date}${p.title}`}
                     {...(p.href ? { href: p.href } : {})}
+                    {...(p.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                     // posts with a photo are featured wider than the rest (two to a row on large screens), photo beside the text from sm up;
                     // the band across the top shows who the article is for
                     className={`relative flex flex-col overflow-hidden rounded-[3px] border border-ink/15 bg-white/60 pt-1 transition-colors ${p.href ? 'hover:border-ink/40' : ''} ${
@@ -83,6 +84,7 @@ export default function InsightsPage() {
                       </p>
                       {/* published articles without a page here yet; they get one (and a link) once uploaded */}
                       {!p.href && <p className="pt-1 text-[12px] italic text-gold-dark">Coming soon to the site</p>}
+                      {p.external && <p className="pt-1 text-[12px] italic text-gold-dark">Read it in {p.source} ↗</p>}
                     </div>
                   </Card>
                 )

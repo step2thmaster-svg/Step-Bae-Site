@@ -54,14 +54,18 @@ const articleTopics = {
   'GC smile makeover': 'veneers',
   'Dentsply Sirona Celtra Press': 'ceramics',
   'GC LiSi Press on a hybrid arch': 'implants',
-  'Ceramic veneer for GC': 'veneers',
+  'New Case, Old Patient': 'veneers',
 }
 
 const publications = articles
   .filter(([, , subject]) => subject)
-  .map(([date, source, subject]) => ({
+  .map(([date, source, subject, link, excerpt]) => ({
     title: subject,
     source,
+    // read on the journal's own site
+    href: link,
+    external: Boolean(link),
+    excerpt,
     audience: 'dentists',
     topic: articleTopics[subject],
     date,

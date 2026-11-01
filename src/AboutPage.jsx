@@ -72,12 +72,24 @@ export default function AboutPage() {
           <div>
             <h2 className="font-display text-[36px] font-medium leading-none md:text-[40px]">Published Articles</h2>
             <ul className="mt-5 border-t border-gold-dark/30 pt-2">
-              {[...articles].reverse().map(([date, pub, subject]) => (
+              {[...articles].reverse().map(([date, pub, subject, link]) => (
                 <li key={`${date}${pub}`} className="flex gap-4 py-[3px] text-[14px] leading-[1.45]">
                   <span className="w-[64px] shrink-0 tabular-nums text-gold-dark">{date}</span>
                   <span>
                     <span className="font-semibold">{pub}</span>
-                    {subject && <span className="text-ink/75">: {subject}</span>}
+                    {subject && (
+                      <span className="text-ink/75">
+                        :{' '}
+                        {/* where the article can be read online, its title links there */}
+                        {link ? (
+                          <a href={link} target="_blank" rel="noopener noreferrer" className="underline decoration-gold-dark/50 underline-offset-2 hover:text-gold-dark">
+                            {subject}
+                          </a>
+                        ) : (
+                          subject
+                        )}
+                      </span>
+                    )}
                   </span>
                 </li>
               ))}

@@ -84,7 +84,7 @@ export const events = [
   ['2/2027', 'American Equilibration Society Annual Scientific Meeting', 'Chicago, IL', 'upcoming'],
 ]
 
-// [month/year, publication, subject]
+// [month/year, publication, subject, link to read it online (where there is one), a one-line summary]
 export const articles = [
   ['6/2007', 'Dental Assisting', ''],
   ['12/2014', 'LMT', 'GC stains'],
@@ -94,7 +94,13 @@ export const articles = [
   ['11/2018', 'LMT', 'Dentsply Sirona Celtra Press'],
   ['3/2019', 'Spectrum', 'GC LiSi Press on a hybrid arch'],
   ['6/2023', 'Focus', 'FDLA'],
-  ['3/2024', 'IDT', 'Ceramic veneer for GC'],
+  [
+    '3/2024',
+    'Inside Dental Technology',
+    'New Case, Old Patient',
+    'https://insidedentaltech.com/2024/03/new-case-old-patient/',
+    'Veneers placed seven years earlier are remade after two cracked, with shorter incisal edges for the wear on other teeth, in GC pressable lithium disilicate layered with GC ceramics.',
+  ],
 ]
 
 // who Step has taught for and where, grouped; drawn from the events above (cancelled events left out, upcoming ones included).
