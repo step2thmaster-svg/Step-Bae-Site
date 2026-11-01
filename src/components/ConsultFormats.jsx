@@ -46,8 +46,10 @@ const formats = [
     text: 'Regular check-ins as your team settles into a new workflow, technique or material.',
     where: ['On-site', 'Online'],
     image: '/images/consult/ongoing-support.jpg',
-    position: 'object-[50%_18%]',
+    // the two smiles centred in the card, and darker shading so the words over them read clearly
+    position: 'object-[45%_50%]',
     narrow: true,
+    shade: 'from-ink via-ink/80 to-ink/50',
   },
   {
     group: 'Education',
@@ -114,7 +116,7 @@ export default function ConsultFormats() {
               <article key={f.title} className={`${card} min-h-[300px] ${f.narrow ? '' : 'sm:col-span-2'}`}>
                 <img src={f.image} alt="" loading="lazy" className={`absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105 ${f.position ?? 'object-center'}`} />
                 {/* lighter on a narrow card, whose photo sits mostly behind the words, so its subject still shows through */}
-                <div className={`absolute inset-0 bg-gradient-to-t ${f.narrow ? 'from-ink/95 via-ink/45 to-transparent' : 'from-ink via-ink/75 to-ink/10'}`} />
+                <div className={`absolute inset-0 bg-gradient-to-t ${f.shade ?? (f.narrow ? 'from-ink/95 via-ink/45 to-transparent' : 'from-ink via-ink/75 to-ink/10')}`} />
                 <div className="relative flex h-full flex-col justify-end p-7">
                   <p className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.25em] text-gold">
                     <GroupIcon className="h-5 w-5" />
