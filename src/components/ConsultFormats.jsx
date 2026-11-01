@@ -4,7 +4,7 @@ const menu = [
   {
     course: 'Consulting',
     items: [
-      { title: 'On-Site Consulting', text: 'Step visits your practice or lab to see your workflow in action and build a better one with your team.', where: ['On-site'] },
+      { title: 'On-Site Consulting', text: 'Step visits your practice or lab to see your workflow in action and build a better one with your team.', where: ['On-site', 'Online'] },
       { title: 'Remote Consulting', text: 'Video sessions and screen sharing for workflow, design and communication reviews.', where: ['Online'] },
       { title: 'Case Review', text: 'One complex case, planned with the dentist and the technician before anything is prepped.', where: ['On-site', 'Online'] },
       { title: 'Ongoing Support', text: 'Regular check-ins as your team settles into a new workflow, technique or material.', where: ['On-site', 'Online'] },
