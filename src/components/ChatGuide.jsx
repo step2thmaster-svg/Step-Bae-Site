@@ -9,6 +9,7 @@ import { inquiryOptions, orgOptions } from './ConsultForm.jsx'
 import { services } from './ConsultServices.jsx'
 import { formats } from './ConsultFormats.jsx'
 import { upcoming } from './Events.jsx'
+import { faqs } from './ConsultFAQ.jsx'
 
 // The Mini Steps, the site's guide and sales rep: a scripted conversation (no AI, no server) that helps visitors
 // find their way, makes the case for STEPBAE, answers the usual questions (price, turnaround, "I already have a lab")
@@ -108,22 +109,14 @@ const serviceSteps = Object.fromEntries(
   ]),
 )
 
-// the questions practices, labs and event hosts ask before booking (the Consultation page's FAQ, in the chat's words)
-const faqs = [
-  ['travel', 'Do you travel?', 'Yes! STEPBAE travels everywhere, across the country and internationally, to your practice, lab, training center or event.'],
-  ['group', 'Minimum group size?', 'Hands-on courses run for a minimum of 6 participants, so everyone gets real time at the bench.'],
-  ['prep', 'How does my team prepare?', 'Once your course date is confirmed, your team receives a list of everything to prepare, so the day can start right away.'],
-  ['ce', 'Is CE credit available?', 'Yes, CE credit is available.'],
-  ['languages', 'Which languages?', 'Sessions are given in fluent English and Korean, and courses, lectures and consulting can be arranged in any language.'],
-  ['topics', 'How are lecture topics chosen?', 'Every lecture is customized: the topic is built around your event’s theme and goals, and the audience you’re bringing together.'],
-  ['online', 'Can we work online?', 'Yes. Remote consulting, case reviews, webinars and lectures can all be done online.'],
-  ['cost', 'How much does it cost?', 'Every engagement is tailored, so there’s no one price. Tell us what you have in mind and STEPBAE will reply with a plan made for you.'],
-]
+// the Consultation page's FAQ, studied from the page itself so a new question there is one the chat can answer too;
+// answers speak for STEPBAE, never as Step
+const faqAnswer = (f) => f.chat ?? f.a.replace(/\bStep\b/g, 'STEPBAE')
 const faqSteps = Object.fromEntries(
-  faqs.map(([id, , a]) => [
-    `faq-${id}`,
+  faqs.map((f) => [
+    `faq-${f.id}`,
     {
-      say: [a],
+      say: [faqAnswer(f)],
       options: [
         { label: 'Plan it with us', next: 'lead-consult' },
         { label: 'Another question', next: 'faq' },
@@ -364,7 +357,7 @@ const steps = {
   },
   faq: {
     say: ['Happy to help! What would you like to know?'],
-    options: [...faqs.map(([id, q]) => ({ label: q, next: `faq-${id}` })), { label: 'Ask STEPBAE directly', next: 'lead-consult' }],
+    options: [...faqs.map((f) => ({ label: f.q, next: `faq-${f.id}` })), { label: 'Ask STEPBAE directly', next: 'lead-consult' }],
   },
   ...faqSteps,
   events: {
@@ -565,16 +558,11 @@ const keywordRules = [
   [/scanner|portal|connect/, 'scanner'],
   [/impression|model|ship|mail in|physical/, 'case-physical'],
   [/checklist|include|shade|photo|prescription|\brx\b/, 'checklist'],
-  // consulting, courses and events, ahead of the lab rules that share their words
-  [/(consult|course|training|lecture|speak|demo|webinar|keynote).*(cost|price|fee|how much)|(cost|price|fee|how much).*(consult|course|training|lecture|speak|demo|webinar|keynote)/, 'faq-cost'],
-  [/travel|fly|come to (us|our)|visit (us|our)/, 'faq-travel'],
-  [/\bce\b|credit|continuing education/, 'faq-ce'],
-  [/language|korean|spanish|english|translat/, 'faq-languages'],
-  [/minimum|group size|how many (people|participants)|participants/, 'faq-group'],
-  [/prepare|preparation|what to bring/, 'faq-prep'],
+  // the FAQ's own words, then consulting, courses and events, ahead of the lab rules that share their words
+  ...faqs.map((f) => [f.words, `faq-${f.id}`]),
   [/\baes\b|lab ?day|upcoming|schedule|chicago|register|registration/, 'events'],
   [/how (does )?(consulting|coaching) work|consulting process|how do we start/, 'process'],
-  [/format|ways to work|remote|virtual|zoom|webinar/, 'formats'],
+  [/format|ways to work|webinar/, 'formats'],
   [/workflow|exocad|\bcad\b|milling|digital lab/, 'svc-workflow'],
   [/train|hands-on|hands on|workshop|all-on-x|all on x|cutback|layering|stain|glaze/, 'svc-training'],
   [/case planning|complex case|complicated|difficult case|second opinion|case review|treatment plan/, 'svc-planning'],
