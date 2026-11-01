@@ -88,7 +88,7 @@ export const events = [
 // where to read it when it isn't open online]
 export const articles = [
   ['6/2007', 'Dental Assisting', ''],
-  ['12/2014', 'LMT', 'GC stains'],
+  ['12/2014', 'LMT', 'GC stains', '', '', '/images/insights/gc-stains.jpg'],
   [
     '1/2015',
     'Inside Dental Technology',
