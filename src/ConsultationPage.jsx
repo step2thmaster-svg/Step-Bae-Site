@@ -1,6 +1,10 @@
 import Header from './components/Header.jsx'
 import Button from './components/Button.jsx'
+import Features from './components/Features.jsx'
 import ConsultServices from './components/ConsultServices.jsx'
+import ConsultProcess from './components/ConsultProcess.jsx'
+import ConsultFormats from './components/ConsultFormats.jsx'
+import ConsultFAQ from './components/ConsultFAQ.jsx'
 import Events from './components/Events.jsx'
 import ConsultForm from './components/ConsultForm.jsx'
 import Footer from './components/Footer.jsx'
@@ -24,8 +28,13 @@ export default function ConsultationPage() {
           <Button href="#inquiry" className="mt-8 h-10 px-6">Start a Conversation</Button>
         </section>
       </div>
+      {/* the same credentials strip as under the home page hero */}
+      <Features />
       <ConsultServices />
+      <ConsultProcess />
+      <ConsultFormats />
       <Events />
+      <ConsultFAQ />
       <ConsultForm />
       <Footer />
     </div>

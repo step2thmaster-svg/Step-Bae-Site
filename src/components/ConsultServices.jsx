@@ -60,6 +60,7 @@ const services = [
     title: ['Speaking &', 'Live Demos'],
     text: 'Let’s work together on your next event. With more than 70 lectures and hands-on courses given internationally, Step can speak or perform a live demo on your behalf, for your audience, your products and your stage.',
     points: [
+      'Topics customized to your event’s theme and goals',
       'Keynotes and lectures for conferences, study clubs and lab days',
       'Live ceramic demos for manufacturers and sponsors',
       'In person or online',
