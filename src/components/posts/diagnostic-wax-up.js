@@ -10,6 +10,8 @@ export default {
   source: 'Contemporary Dental Assisting',
   excerpt:
     'An accurate diagnostic wax-up, something the patient can see, can be the deciding factor in whether they go ahead with esthetic treatment. Here is how the lab builds one, from the checklist to the Golden Proportion.',
+  image: '/images/insights/wax-up-final-preview.jpg',
+  imageAlt: 'A final preview design: the diagnostic wax-up from the occlusal and front, with the diagnostic wax-up models below',
   body: [
     {
       p: 'Originally published in Contemporary Dental Assisting, September 2006 (“At the Bench,” pages 24–25), by Step Bae, CDT, then at the Center for Ceramics at the Nash Institute in Charlotte, North Carolina.',
