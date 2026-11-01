@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Header from './components/Header.jsx'
 import Button from './components/Button.jsx'
 import Footer from './components/Footer.jsx'
@@ -6,14 +7,18 @@ import { topics, insights, formatDate } from './components/insights.js'
 
 const topicLabel = (id) => topics.find((t) => t.id === id)?.label
 
-// the color key shown above the list; every article is listed, color coded by who it is for
-const key = [
-  ['dentists', 'For Dentists'],
-  ['patients', 'For Patients'],
-  ['both', 'For Dentists & Patients'],
+// the filters above the list, which double as its color key: who an article is for, or the journal articles
+const filters = [
+  { id: 'all', label: 'All', test: () => true },
+  { id: 'dentists', label: 'For Dentists', test: (p) => p.audience !== 'patients' },
+  { id: 'patients', label: 'For Patients', test: (p) => p.audience !== 'dentists' },
+  { id: 'journal', label: 'Published in Journals', test: (p) => p.source },
 ]
+const filterDot = { dentists: 'bg-gold', patients: 'bg-teal', journal: 'bg-ink' }
 
 export default function InsightsPage() {
+  const [filter, setFilter] = useState('all')
+  const shown = insights.filter(filters.find((f) => f.id === filter).test)
   return (
     <div className="min-h-screen bg-ink">
       <div className="relative">
@@ -43,59 +48,75 @@ export default function InsightsPage() {
             <h2 className="whitespace-nowrap font-display text-[28px] font-medium leading-none md:text-[32px]">All Articles</h2>
             <span className="hidden h-px flex-1 bg-gold-dark/40 sm:block" />
           </div>
-          <ul className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] text-ink/75" aria-label="Color key">
-            {key.map(([id, label]) => (
-              <li key={id} className="flex items-center gap-2">
-                <span className={`h-2.5 w-6 rounded-full ${audienceColor[id]}`} />
-                {label}
-              </li>
-            ))}
-          </ul>
+          {/* filter by who it's for, or show only the journal articles */}
+          <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Filter articles">
+            {filters.map((f) => {
+              const count = insights.filter(f.test).length
+              const on = filter === f.id
+              return (
+                <button
+                  key={f.id}
+                  onClick={() => setFilter(f.id)}
+                  aria-pressed={on}
+                  className={`flex items-center gap-2 rounded-full border px-4 py-1.5 text-[13px] font-medium transition-colors ${
+                    on ? 'border-ink bg-ink text-cream' : 'border-ink/20 text-ink/80 hover:border-ink/50'
+                  }`}
+                >
+                  {filterDot[f.id] && <span className={`h-2 w-2 rounded-full ${on && f.id === 'journal' ? 'bg-cream' : filterDot[f.id]}`} />}
+                  {f.label}
+                  <span className={on ? 'text-cream/60' : 'text-ink/45'}>{count}</span>
+                </button>
+              )
+            })}
+          </div>
 
           {insights.length > 0 ? (
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {insights.map((p) => {
+            // every article as an even, compact card, so the whole library fits in a few rows
+            <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+              {shown.map((p) => {
                 const Card = p.href ? 'a' : 'article'
                 return (
                   <Card
                     key={`${p.date}${p.title}`}
                     {...(p.href ? { href: p.href } : {})}
                     {...(p.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    // posts with a photo are featured wider than the rest (two to a row on large screens), photo beside the text from sm up;
+                    title={p.excerpt}
                     // the band across the top shows who the article is for
-                    className={`relative flex flex-col overflow-hidden rounded-[3px] border border-ink/15 bg-white/60 pt-1 transition-colors ${p.href ? 'hover:border-ink/40' : ''} ${
-                      p.image ? 'sm:col-span-2 sm:flex-row' : ''
-                    }`}
+                    className={`group relative flex flex-col overflow-hidden rounded-[3px] border border-ink/15 bg-white/60 transition-colors ${p.href ? 'hover:border-ink/40' : ''}`}
                   >
-                    <span className={`absolute inset-x-0 top-0 h-1 ${audienceColor[p.audience]}`} />
-                    {/* a journal article's photo is shown whole, on black, rather than trimmed to fill the space */}
-                    {p.image && (
-                      <img
-                        src={p.image}
-                        alt=""
-                        loading="lazy"
-                        style={{ objectPosition: p.imagePosition }}
-                        className={`aspect-[16/9] w-full sm:aspect-auto sm:w-2/5 sm:self-stretch ${p.source ? 'bg-black object-contain' : 'object-cover'}`}
-                      />
-                    )}
-                    <div className={`flex flex-1 flex-col ${p.image ? 'px-5 py-4 sm:justify-center' : 'px-5 py-4'}`}>
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                    <span className={`absolute inset-x-0 top-0 z-10 h-1 ${audienceColor[p.audience]}`} />
+                    {/* a journal article's photo is shown whole, on black; an article without one shows its topic */}
+                    <div className="aspect-[16/10] overflow-hidden bg-ink">
+                      {p.image ? (
+                        <img
+                          src={p.image}
+                          alt=""
+                          loading="lazy"
+                          style={{ objectPosition: p.imagePosition }}
+                          className={`h-full w-full transition-transform duration-500 ${p.source ? 'object-contain' : 'object-cover group-hover:scale-105'}`}
+                        />
+                      ) : (
+                        <span className="flex h-full items-center justify-center px-4 text-center font-display text-[18px] italic text-gold/80">
+                          {p.topic ? topicLabel(p.topic) : 'Published Article'}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex flex-1 flex-col px-3.5 pb-3.5 pt-3 md:px-4">
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                         <AudienceTag audience={p.audience} />
-                        <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-dark">
+                        <p className="hidden text-[10px] font-semibold tracking-[0.18em] text-gold-dark sm:block">
                           {(p.topic ? topicLabel(p.topic) : p.source ? 'Published Article' : 'Article').toUpperCase()}
                         </p>
                       </div>
-                      <h3 className={`mt-2 font-display font-medium leading-tight ${p.image ? 'text-[21px]' : 'text-[20px]'}`}>{p.title}</h3>
-                      {p.excerpt && <p className="mt-2 text-[13px] leading-[1.55] text-ink/80">{p.excerpt}</p>}
-                      <p className={`pt-3 text-[12px] text-ink/60 ${p.image ? '' : 'mt-auto'}`}>
-                        {p.source && <>Published in <span className="text-ink/85">{p.source}</span> · </>}
+                      <h3 className="mt-2 line-clamp-3 font-display text-[16px] font-medium leading-snug md:text-[18px]">{p.title}</h3>
+                      <p className="mt-auto pt-2 text-[11.5px] leading-snug text-ink/60">
+                        {p.source && <>{p.source} · </>}
                         {formatDate(p.date)}
+                        {p.external && <span className="text-gold-dark"> · Read online ↗</span>}
+                        {!p.href && p.readIn && (
+                          <span className="italic text-gold-dark"> · {/members/.test(p.readIn) ? 'Members only' : p.readIn.replace(`${p.source}, `, '')}</span>
+                        )}
                       </p>
-                      {/* published articles without a page here yet; they get one (and a link) once uploaded */}
-                      {!p.href && (
-                        <p className="pt-1 text-[12px] italic text-gold-dark">{p.readIn ? `Available in ${p.readIn}` : 'Coming soon to the site'}</p>
-                      )}
-                      {p.external && <p className="pt-1 text-[12px] italic text-gold-dark">Read it in {p.source} ↗</p>}
                     </div>
                   </Card>
                 )
