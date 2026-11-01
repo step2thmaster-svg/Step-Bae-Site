@@ -65,10 +65,10 @@ const publications = articles
     title: subject,
     source,
     // read on the journal's own site
-    href: link,
+    href: link || undefined,
     external: Boolean(link),
-    excerpt,
-    image,
+    excerpt: excerpt || undefined,
+    image: image || undefined,
     audience: 'dentists',
     topic: articleTopics[subject],
     date,
