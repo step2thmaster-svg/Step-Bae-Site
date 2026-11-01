@@ -87,7 +87,7 @@ export default function ConsultServices() {
               <>
                 {/* phones: the whole photo above the text; md+: it runs most of the banner, under the text, and fades into
                     a narrower strip of dark than the other banners leave */}
-                <div className={`relative md:absolute md:inset-y-0 md:w-[88%] ${flip ? 'md:right-0' : 'md:left-0'}`}>
+                <div className={`relative md:absolute md:inset-y-0 md:w-[88%] ${flip ? 'md:right-0' : 'md:left-[-144px]'}`}>
                   <img src={s.image} alt={s.alt} loading="lazy" className="block h-auto w-full md:h-full md:object-cover md:object-[65%_50%]" />
                   <div
                     className="absolute inset-0 hidden md:block"
