@@ -18,19 +18,30 @@ const filterDot = { dentists: 'bg-gold', patients: 'bg-teal', journal: 'bg-ink' 
 
 export default function InsightsPage() {
   const [filter, setFilter] = useState('all')
-  const shown = insights.filter(filters.find((f) => f.id === filter).test)
+  const [query, setQuery] = useState('')
+  // a search matches the title, summary, topic and publication
+  const words = query.toLowerCase().split(/\s+/).filter(Boolean)
+  const matches = (p) => {
+    const text = [p.title, p.excerpt, p.topic && topicLabel(p.topic), p.source].filter(Boolean).join(' ').toLowerCase()
+    return words.every((w) => text.includes(w))
+  }
+  const filtered = insights.filter((p) => filters.find((f) => f.id === filter).test(p) && matches(p))
+  // the newest article leads, larger, until the list is filtered or searched
+  const browsing = filter === 'all' && !words.length
+  const featured = browsing ? insights[0] : null
+  const shown = featured ? filtered.slice(1) : filtered
   return (
     <div className="min-h-screen bg-ink">
       <div className="relative">
         <Header />
 
         {/* 1. editorial hero; top padding clears the header, as on the other pages */}
-        <section className="px-6 pb-12 pt-[138px] text-center lg:px-12">
+        <section className="px-6 pb-9 pt-[124px] text-center lg:px-12">
           <p className="text-[12px] font-semibold tracking-[0.3em] text-gold">INSIGHTS</p>
-          <h1 className="mt-4 font-display text-[44px] font-medium leading-[1.08] text-white md:text-[58px]">
+          <h1 className="mt-3 font-display text-[40px] font-medium leading-[1.08] text-white md:text-[52px]">
             Notes <em className="font-normal">from the</em> <em className="font-normal text-gold">Bench</em>
           </h1>
-          <p className="mx-auto mt-5 max-w-[600px] text-[15px] leading-[1.6] text-white/90 md:text-[16px]">
+          <p className="mx-auto mt-4 max-w-[600px] text-[15px] leading-[1.6] text-white/90 md:text-[16px]">
             Articles from Step Toothmaster Bae, CDT, DTG, and STEPBAE.COM: practical lab insight for dentists, and clear
             answers for patients about the restorations in their smile.
           </p>
@@ -48,8 +59,9 @@ export default function InsightsPage() {
             <h2 className="whitespace-nowrap font-display text-[28px] font-medium leading-none md:text-[32px]">All Articles</h2>
             <span className="hidden h-px flex-1 bg-gold-dark/40 sm:block" />
           </div>
-          {/* filter by who it's for, or show only the journal articles */}
-          <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Filter articles">
+          {/* filter by who it's for, or show only the journal articles; search on the right */}
+          <div className="mt-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Filter articles">
             {filters.map((f) => {
               const count = insights.filter(f.test).length
               const on = filter === f.id
@@ -69,10 +81,68 @@ export default function InsightsPage() {
               )
             })}
           </div>
+            <label className="relative block md:w-[260px]">
+              <span className="sr-only">Search articles</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/45" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-3.5-3.5" />
+              </svg>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search: veneers, shade, zirconia…"
+                className="h-10 w-full rounded-full border border-ink/20 bg-white/70 pl-10 pr-4 text-[14px] text-ink placeholder:text-ink/40 focus:border-ink/60 focus:outline-none"
+              />
+            </label>
+          </div>
+
+          {/* the newest article, featured wide above the rest */}
+          {featured && (
+            <a
+              href={featured.href}
+              {...(featured.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              className="group relative mt-6 grid overflow-hidden rounded-[3px] border border-ink/15 bg-white/70 transition-colors hover:border-ink/40 md:grid-cols-[1.25fr_1fr]"
+            >
+              <span className={`absolute inset-x-0 top-0 z-10 h-1 ${audienceColor[featured.audience]}`} />
+              <div className="aspect-[16/9] overflow-hidden bg-ink md:aspect-auto md:min-h-[300px]">
+                {featured.image && (
+                  <img
+                    src={featured.image}
+                    alt=""
+                    style={{ objectPosition: featured.imagePosition }}
+                    className={`h-full w-full transition-transform duration-700 ${featured.source ? 'object-contain' : 'object-cover group-hover:scale-105'}`}
+                  />
+                )}
+              </div>
+              <div className="flex flex-col justify-center px-6 py-6 md:px-9">
+                <p className="text-[11px] font-semibold tracking-[0.3em] text-gold-dark">LATEST</p>
+                <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                  <AudienceTag audience={featured.audience} />
+                  {featured.topic && <p className="text-[11px] font-semibold tracking-[0.2em] text-gold-dark">{topicLabel(featured.topic).toUpperCase()}</p>}
+                </div>
+                <h3 className="mt-3 font-display text-[28px] font-medium leading-tight md:text-[32px]">{featured.title}</h3>
+                {featured.excerpt && <p className="mt-3 text-[15px] leading-[1.6] text-ink/80">{featured.excerpt}</p>}
+                <p className="mt-4 flex items-center justify-between gap-4 text-[12px] text-ink/60">
+                  {formatDate(featured.date)}
+                  <span className="text-[13px] font-semibold text-gold-dark group-hover:text-ink">Read article →</span>
+                </p>
+              </div>
+            </a>
+          )}
+
+          {!filtered.length && (
+            <p className="mt-10 text-center text-[15px] text-ink/70">
+              No articles match “{query}”.{' '}
+              <button onClick={() => { setQuery(''); setFilter('all') }} className="font-semibold text-gold-dark underline underline-offset-4">
+                Show all
+              </button>
+            </p>
+          )}
 
           {insights.length > 0 ? (
             // every article as an even, compact card, so the whole library fits in a few rows
-            <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+            <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
               {shown.map((p) => {
                 const Card = p.href ? 'a' : 'article'
                 return (
