@@ -34,9 +34,10 @@ const formats = [
     title: 'Case Review',
     text: 'One complex case, planned with the dentist and the technician before anything is prepped.',
     where: ['On-site', 'Online'],
-    // a LiSi case from prep to try-in; the card shows the series of shots: prep, try-in, shade check, try-in
+    // a LiSi case from prep to try-in: the series of shots, cropped from the full slide without its title and
+    // bottom lettering
     image: '/images/consult/case-review-lisi.jpg',
-    position: 'object-[4%_50%]',
+    position: 'object-[30%_30%]',
     // a photo card one column wide, so the first row still fits
     narrow: true,
   },
