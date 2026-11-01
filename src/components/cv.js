@@ -161,7 +161,7 @@ export const hosts = [
     group: 'U.S. meetings & symposia',
     names: [
       'American Academy of Cosmetic Dentistry', 'American Equilibration Society', 'Dentsply Sirona World', 'Digital Dentistry Forum', 'DTG Symposium',
-      'Gro3X Summit', 'Lab Day East', 'LMT Lab Day Chicago', 'Master Speakers Symposium',
+      'Gro3X Summit', 'Lab Day East', 'LMT Lab Day Chicago', 'Master Speakers Symposium', 'Nowak Invitational',
     ],
   },
   {
