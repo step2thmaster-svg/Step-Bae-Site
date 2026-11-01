@@ -37,7 +37,7 @@ const formats = [
     // a LiSi case from prep to try-in: the series of shots, cropped from the full slide without its title and
     // bottom lettering
     image: '/images/consult/case-review-lisi.jpg',
-    position: 'object-[30%_30%]',
+    position: 'object-[35%_30%]',
     // a photo card one column wide, so the first row still fits
     narrow: true,
   },
