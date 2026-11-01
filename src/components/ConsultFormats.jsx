@@ -41,7 +41,7 @@ const formats = [
     text: 'One complex case, planned with the dentist and the technician before anything is prepped.',
     where: ['On-site', 'Online'],
     image: '/images/consult/case-review-morphopsychology.jpg',
-    position: 'object-[24%_62%]',
+    position: 'object-[22%_50%]',
     // a photo card one column wide, so the first row still fits
     narrow: true,
   },
@@ -108,26 +108,11 @@ export default function ConsultFormats() {
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {formats.map((f) => {
             const GroupIcon = groupIcon[f.group]
-            // a narrow photo card puts its photo on top and the words below, so neither covers the other
-            if (f.narrow)
-              return (
-                <article key={f.title} className={`${card} flex flex-col bg-gradient-to-br from-ink-3 to-ink-2`}>
-                  <div className="relative h-[150px] shrink-0 overflow-hidden">
-                    <img src={f.image} alt="" loading="lazy" className={`h-full w-full object-cover transition duration-700 group-hover:scale-105 ${f.position ?? 'object-center'}`} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink-3/80 to-transparent to-50%" />
-                  </div>
-                  <div className="px-7 pb-7 pt-4">
-                    <p className="text-[11px] font-semibold tracking-[0.25em] text-gold">{f.group.toUpperCase()}</p>
-                    <h3 className="mt-1.5 font-display text-[25px] font-medium leading-tight text-white">{f.title}</h3>
-                    <p className="mt-2 text-[14px] leading-[1.55] text-white/75">{f.text}</p>
-                    <Tags where={f.where} />
-                  </div>
-                </article>
-              )
             return f.image ? (
-              <article key={f.title} className={`${card} min-h-[300px] sm:col-span-2`}>
+              <article key={f.title} className={`${card} min-h-[300px] ${f.narrow ? '' : 'sm:col-span-2'}`}>
                 <img src={f.image} alt="" loading="lazy" className={`absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105 ${f.position ?? 'object-center'}`} />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/10" />
+                {/* lighter on a narrow card, whose photo sits mostly behind the words, so its subject still shows through */}
+                <div className={`absolute inset-0 bg-gradient-to-t ${f.narrow ? 'from-ink/95 via-ink/45 to-transparent' : 'from-ink via-ink/75 to-ink/10'}`} />
                 <div className="relative flex h-full flex-col justify-end p-7">
                   <p className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.25em] text-gold">
                     <GroupIcon className="h-5 w-5" />
