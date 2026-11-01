@@ -88,7 +88,14 @@ export const events = [
 export const articles = [
   ['6/2007', 'Dental Assisting', ''],
   ['12/2014', 'LMT', 'GC stains'],
-  ['1/2015', 'IDT', 'GC Initial ZR-FS'],
+  [
+    '1/2015',
+    'Inside Dental Technology',
+    'A Modular Approach to Complex Cases',
+    'https://insidedentaltech.com/2015/01/a-modular-approach-to-complex-cases/',
+    'A six-unit lower anterior bridge with four pontics and rebuilt pink tissue, planned in steps on a zirconia substructure layered with GC Initial Zr-FS and Gradia gum.',
+    '/images/insights/modular-approach-complex-cases.jpg',
+  ],
   [
     '1/2015',
     'LMT',

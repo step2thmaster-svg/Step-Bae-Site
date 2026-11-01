@@ -49,7 +49,7 @@ export const getPost = (slug) => posts.find((post) => post.slug === slug)
 // Step's published trade-journal articles, filed for dentists; the topic is set where the subject makes it clear
 const articleTopics = {
   'GC stains': 'shade',
-  'GC Initial ZR-FS': 'zirconia',
+  'A Modular Approach to Complex Cases': 'zirconia',
   'Two veneers': 'veneers',
   'GC smile makeover': 'veneers',
   'How to Use an Esthetic Blending Process with Celtra Press': 'ceramics',
