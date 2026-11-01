@@ -2,14 +2,15 @@ import Button from './Button.jsx'
 import { articles } from './cv.js'
 
 // the Dentist Partnership page's sections, between the opening and the scanner guide. The promises and FAQ answers
-// are STEPBAE's stated policies (10 business days, 5-year warranty, prepaid labels, price list on request); the
+// are STEPBAE's stated policies (10 business days, 5-year warranty, prepaid labels available but not free, price list on
+// request); the
 // Mini Steps chat answers from the same `partnerFaqs`
 
 // the four promises a practice can count on, shown right under the opening
 export const promises = [
   ['10', 'Business days', 'Standard turnaround from the day we receive your case'],
   ['5-Year', 'Warranty', 'On every restoration we make'],
-  ['Free', 'Prepaid labels', 'For physical impressions and models'],
+  ['4', 'Scanner portals', 'iTero, 3Shape TRIOS, Medit and Primescan'],
   ['1:1', 'With your technician', 'You talk directly with the person making your case'],
 ]
 

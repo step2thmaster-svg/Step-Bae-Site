@@ -259,7 +259,7 @@ const steps = {
   'case-physical': {
     portal: 'No scanner (physical impressions)',
     say: [
-      'Of course, and shipping is on us: STEPBAE provides prepaid shipping labels. Fill out the partnership form and mention that you’ll send physical impressions or models, and we’ll send the labels with our Rx form.',
+      'Of course. STEPBAE can provide prepaid shipping labels. Fill out the partnership form and mention that you’ll send physical impressions or models, and we’ll send the labels with our Rx form.',
     ],
     options: [
       { label: 'Go to the partnership form', href: '/partnership.html#partner-form' },
