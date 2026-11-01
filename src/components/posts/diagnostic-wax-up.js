@@ -12,7 +12,7 @@ export default {
     'An accurate diagnostic wax-up, something the patient can see, can be the deciding factor in whether they go ahead with esthetic treatment. Here is how the lab builds one, from the checklist to the Golden Proportion.',
   body: [
     {
-      p: 'Originally published in Contemporary Dental Assisting, September 2006 (“At the Bench,” pages 24–25), by Step Bae, CDT, then at the Passaro Center for Ceramics at the Nash Institute in Charlotte, North Carolina.',
+      p: 'Originally published in Contemporary Dental Assisting, September 2006 (“At the Bench,” pages 24–25), by Step Bae, CDT, then at the Center for Ceramics at the Nash Institute in Charlotte, North Carolina.',
     },
     {
       p: 'It can be tremendously rewarding to create an ideal smile that functions properly for a patient. An accurate diagnostic wax-up, something that the patient can see, can be the deciding factor in whether that patient decides to get esthetic work performed.',
