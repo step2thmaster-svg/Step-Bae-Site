@@ -1,17 +1,9 @@
 import Button from './Button.jsx'
 import { Consulting, Education, Speaker } from './Icons.jsx'
 
-// small line icons for the formats without a photo, drawn to match Icons.jsx
-const line = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round' }
-const Screen = ({ className }) => (
-  <svg viewBox="0 0 48 48" className={className} {...line}>
-    <rect x="5" y="9" width="38" height="24" rx="2" />
-    <path d="M17 41h14M24 33v8M19 21l4 4 7-8" />
-  </svg>
-)
-// the ways a practice, lab or event can work with Step, as a bento grid: the headline formats are photo cards (two
-// columns wide unless `narrow`), the rest compact icon cards. `where` is how each one can be delivered. Order fills a 4-column grid in three
-// rows on desktop (wide, small, small / small, small, wide / wide, wide)
+// the ways a practice, lab or event can work with Step, as a bento grid of photo cards, two columns wide unless
+// `narrow`. `where` is how each one can be delivered. Order fills a 4-column grid in three rows on desktop
+// (wide, narrow, narrow / narrow, narrow, wide / wide, wide)
 const formats = [
   {
     group: 'Consulting',
@@ -21,7 +13,18 @@ const formats = [
     image: '/images/insights/dentisthappy.jpg',
     position: 'object-[50%_35%]',
   },
-  { group: 'Consulting', title: 'Remote Consulting', text: 'Video sessions and screen sharing for workflow, design and communication reviews.', where: ['Online'], Icon: Screen },
+  {
+    group: 'Consulting',
+    title: 'Remote Consulting',
+    text: 'Video sessions and screen sharing for workflow, design and communication reviews.',
+    where: ['Online'],
+    // Step's lab, where remote sessions are run from
+    image: '/images/consult/remote-consulting-lab.jpg',
+    position: 'object-[30%_40%]',
+    narrow: true,
+    // a bright, busy room, so it's shaded more for the words to read
+    shade: 'from-ink via-ink/75 to-ink/30',
+  },
   {
     group: 'Consulting',
     title: 'Case Review',
@@ -117,7 +120,7 @@ export default function ConsultFormats() {
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {formats.map((f) => {
             const GroupIcon = groupIcon[f.group]
-            return f.image ? (
+            return (
               <article key={f.title} className={`${card} min-h-[300px] ${f.narrow ? '' : 'sm:col-span-2'}`}>
                 <img src={f.image} alt="" loading="lazy" className={`absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105 ${f.position ?? 'object-center'}`} />
                 {/* lighter on a narrow card, whose photo sits mostly behind the words, so its subject still shows through */}
@@ -127,20 +130,10 @@ export default function ConsultFormats() {
                     <GroupIcon className="h-5 w-5" />
                     {f.group.toUpperCase()}
                   </p>
-                  <h3 className="mt-2 font-display text-[32px] font-medium leading-tight text-white">{f.title}</h3>
+                  <h3 className={`mt-2 font-display font-medium leading-tight text-white ${f.narrow ? 'text-[27px]' : 'text-[32px]'}`}>{f.title}</h3>
                   <p className="mt-2 max-w-[440px] text-[15px] leading-[1.55] text-white/85">{f.text}</p>
                   <Tags where={f.where} />
                 </div>
-              </article>
-            ) : (
-              <article key={f.title} className={`${card} bg-gradient-to-br from-ink-3 to-ink-2 p-7`}>
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-gold/10 text-gold ring-1 ring-gold/40 transition group-hover:bg-gold group-hover:text-ink">
-                  <f.Icon className="h-6 w-6" />
-                </span>
-                <p className="mt-5 text-[11px] font-semibold tracking-[0.25em] text-gold">{f.group.toUpperCase()}</p>
-                <h3 className="mt-1.5 font-display text-[25px] font-medium leading-tight text-white">{f.title}</h3>
-                <p className="mt-2 text-[14px] leading-[1.55] text-white/75">{f.text}</p>
-                <Tags where={f.where} />
               </article>
             )
           })}
