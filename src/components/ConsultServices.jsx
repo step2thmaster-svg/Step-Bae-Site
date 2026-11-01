@@ -34,9 +34,7 @@ const services = [
     inquiry: 'Course or workshop',
     image: '/images/consult/lecture-morphopsychology.jpg',
     alt: 'Step teaching morphopsychology and treatment planning to a seated audience',
-    // a taller banner, so the whole room fits: the top of the screen down to the attendees' tables
-    position: 'object-[50%_70%]',
-    height: 'md:min-h-[540px]',
+    position: 'object-[50%_90%]',
   },
   {
     eyebrow: 'FOR DENTISTS & LABS',
@@ -85,7 +83,7 @@ export default function ConsultServices() {
         return (
           <div key={s.cta} className={`grid border-t border-gold/20 md:grid-cols-2 ${i % 2 ? 'bg-ink' : 'bg-ink-2'}`}>
             {/* md+: the photo reaches 96px past the middle, under the text column, so its fade sits further in */}
-            <div className={`relative min-h-[260px] ${s.height ?? 'md:min-h-[460px]'} ${flip ? 'md:order-2 md:ml-[-96px]' : 'md:mr-[-96px]'}`}>
+            <div className={`relative min-h-[260px] md:min-h-[460px] ${flip ? 'md:order-2 md:ml-[-96px]' : 'md:mr-[-96px]'}`}>
               <img src={s.image} alt={s.alt} loading="lazy" className={`absolute inset-0 h-full w-full object-cover ${s.position ?? 'object-center'}`} />
               {/* fades into the section's dark along the bottom, and on md+ also toward the text side */}
               <div
