@@ -160,8 +160,8 @@ export const hosts = [
   {
     group: 'U.S. meetings & symposia',
     names: [
-      'LMT Lab Day Chicago', 'Lab Day East', 'AACD', 'American Equilibration Society', 'DTG Symposium',
-      'Dentsply Sirona World', 'Master Speakers Symposium', 'Digital Dentistry Forum',
+      'AACD', 'American Equilibration Society', 'Dentsply Sirona World', 'Digital Dentistry Forum', 'DTG Symposium',
+      'Gro3X Summit', 'Lab Day East', 'LMT Lab Day Chicago', 'Master Speakers Symposium',
     ],
   },
   {
