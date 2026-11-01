@@ -8,6 +8,7 @@ import naturalCrowns from './posts/natural-crowns.js'
 import crownVsVeneer from './posts/crown-vs-veneer.js'
 import crownColor from './posts/crown-color.js'
 import veneersVsOrtho from './posts/veneers-vs-orthodontics.js'
+import diagnosticWaxUp from './posts/diagnostic-wax-up.js'
 
 // the two audiences the Insights library is split by; every topic belongs to one,
 // and a post belongs to one or to 'both' (it then appears under each)
@@ -42,13 +43,12 @@ export const topics = [
 
 // blog posts, each in its own file in ./posts (see natural-ceramics.js for the shape), newest first;
 // to add one, create the file and import it here. Each post is read at /article.html?p=<slug>
-export const posts = [veneersVsOrtho, crownColor, crownVsVeneer, naturalCrowns, submitDigitalCase, zirconiaVsLayered, refractoryLayering, shadeMatching, naturalCeramics].map((post) => ({ ...post, href: `/article.html?p=${post.slug}` }))
+export const posts = [veneersVsOrtho, crownColor, crownVsVeneer, naturalCrowns, submitDigitalCase, zirconiaVsLayered, refractoryLayering, shadeMatching, naturalCeramics, diagnosticWaxUp].map((post) => ({ ...post, href: `/article.html?p=${post.slug}` }))
 
 export const getPost = (slug) => posts.find((post) => post.slug === slug)
 
 // Step's published trade-journal articles, filed for dentists; the topic is set where the subject makes it clear
 const articleTopics = {
-  'GC stains': 'shade',
   'A Modular Approach to Complex Cases': 'zirconia',
   'Two veneers': 'veneers',
   'Smile Makeover with GC Initial LiSi™ Press': 'veneers',
@@ -59,8 +59,9 @@ const articleTopics = {
   'How to Shade Match Anterior Zirconia Restorations Using the GC Initial System': 'shade',
 }
 
+// (one that has its own page here is listed from its post instead, so it isn't shown twice)
 const publications = articles
-  .filter(([, , subject]) => subject)
+  .filter(([, , subject, link]) => subject && !link?.startsWith('/'))
   .map(([date, source, subject, link, excerpt, image, readIn]) => ({
     title: subject,
     source,

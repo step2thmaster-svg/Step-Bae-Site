@@ -82,7 +82,7 @@ export default function AboutPage() {
                         :{' '}
                         {/* where the article can be read online, its title links there */}
                         {link ? (
-                          <a href={link} target="_blank" rel="noopener noreferrer" className="underline decoration-gold-dark/50 underline-offset-2 hover:text-gold-dark">
+                          <a href={link} {...(link.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })} className="underline decoration-gold-dark/50 underline-offset-2 hover:text-gold-dark">
                             {subject}
                           </a>
                         ) : (

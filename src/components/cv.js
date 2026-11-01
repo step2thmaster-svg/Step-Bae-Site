@@ -87,8 +87,14 @@ export const events = [
 // [month/year, publication, subject, link to read it online (where there is one), a one-line summary, a photo from it,
 // where to read it when it isn't open online]
 export const articles = [
+  // readable on this site as a post (posts/diagnostic-wax-up.js), so the Insights page lists it once, from there
+  [
+    '9/2006',
+    'Contemporary Dental Assisting',
+    'Diagnostic Wax-up: Key to Treatment Acceptance',
+    '/article.html?p=diagnostic-wax-up-key-to-treatment-acceptance',
+  ],
   ['6/2007', 'Dental Assisting', ''],
-  ['12/2014', 'LMT', 'GC stains', '', '', '/images/insights/gc-stains.jpg'],
   [
     '1/2015',
     'Inside Dental Technology',
