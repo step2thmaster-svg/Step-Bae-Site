@@ -9,12 +9,6 @@ const Screen = ({ className }) => (
     <path d="M17 41h14M24 33v8M19 21l4 4 7-8" />
   </svg>
 )
-const Loop = ({ className }) => (
-  <svg viewBox="0 0 48 48" className={className} {...line}>
-    <path d="M40 20A16 16 0 0 0 10 15M8 28a16 16 0 0 0 30 5" />
-    <path d="M10 7v8h8M38 41v-8h-8" />
-  </svg>
-)
 const Play = ({ className }) => (
   <svg viewBox="0 0 48 48" className={className} {...line}>
     <circle cx="24" cy="24" r="18" />
@@ -46,7 +40,15 @@ const formats = [
     narrow: true,
   },
   { group: 'Education', title: 'Webinar', text: 'A live online lecture for your members, customers or team, with time for questions.', where: ['Online'], Icon: Play },
-  { group: 'Consulting', title: 'Ongoing Support', text: 'Regular check-ins as your team settles into a new workflow, technique or material.', where: ['On-site', 'Online'], Icon: Loop },
+  {
+    group: 'Consulting',
+    title: 'Ongoing Support',
+    text: 'Regular check-ins as your team settles into a new workflow, technique or material.',
+    where: ['On-site', 'Online'],
+    image: '/images/consult/ongoing-support.jpg',
+    position: 'object-[50%_18%]',
+    narrow: true,
+  },
   {
     group: 'Education',
     title: 'Hands-On Course',
