@@ -16,9 +16,9 @@ const services = [
     ],
     cta: 'Plan My Workflow',
     inquiry: 'Consulting',
-    image: '/images/gallery/work-16.jpg',
-    alt: 'A digital design on the design grid, above the finished ceramic restorations it became',
-    position: 'object-[22%_50%]',
+    image: '/images/consult/digital-morphopsychology.jpg',
+    alt: 'A smile design moving from the digital design on the right to the finished restorations, with Dr. Paul Bylis, DDS',
+    position: 'object-[88%_50%]',
   },
   {
     eyebrow: 'FOR PRACTICES & LABS',
