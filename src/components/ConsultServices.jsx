@@ -34,7 +34,7 @@ const services = [
     inquiry: 'Course or workshop',
     image: '/images/consult/lecture-morphopsychology.jpg',
     alt: 'Step teaching morphopsychology and treatment planning to a seated audience',
-    position: 'object-[50%_45%]',
+    position: 'object-[50%_90%]',
   },
   {
     eyebrow: 'FOR DENTISTS & LABS',
