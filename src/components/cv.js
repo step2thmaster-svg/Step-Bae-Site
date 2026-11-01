@@ -84,7 +84,8 @@ export const events = [
   ['2/2027', 'American Equilibration Society Annual Scientific Meeting', 'Chicago, IL', 'upcoming'],
 ]
 
-// [month/year, publication, subject, link to read it online (where there is one), a one-line summary, a photo from it]
+// [month/year, publication, subject, link to read it online (where there is one), a one-line summary, a photo from it,
+// where to read it when it isn't open online]
 export const articles = [
   ['6/2007', 'Dental Assisting', ''],
   ['12/2014', 'LMT', 'GC stains'],
@@ -105,7 +106,7 @@ export const articles = [
     '/images/insights/shade-match-zirconia-gc-initial.jpg',
   ],
   ['3/2015', 'DTG Magazine', 'Two veneers'],
-  ['10/2017', 'Spectrum Dialogue', 'Smile Makeover with GC Initial LiSi™ Press', '', '', '/images/insights/smile-makeover-gc-lisi-press.jpg'],
+  ['10/2017', 'Spectrum Dialogue', 'Smile Makeover with GC Initial LiSi™ Press', '', '', '/images/insights/smile-makeover-gc-lisi-press.jpg', 'Spectrum Dialogue’s Digital Edition Repository, for members'],
   [
     '6/2018',
     'Spectrum Dialogue',

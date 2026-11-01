@@ -92,7 +92,9 @@ export default function InsightsPage() {
                         {formatDate(p.date)}
                       </p>
                       {/* published articles without a page here yet; they get one (and a link) once uploaded */}
-                      {!p.href && <p className="pt-1 text-[12px] italic text-gold-dark">Coming soon to the site</p>}
+                      {!p.href && (
+                        <p className="pt-1 text-[12px] italic text-gold-dark">{p.readIn ? `Available in ${p.readIn}` : 'Coming soon to the site'}</p>
+                      )}
                       {p.external && <p className="pt-1 text-[12px] italic text-gold-dark">Read it in {p.source} ↗</p>}
                     </div>
                   </Card>
