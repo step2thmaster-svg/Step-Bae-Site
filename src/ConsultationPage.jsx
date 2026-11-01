@@ -1,6 +1,6 @@
 import Header from './components/Header.jsx'
 import Button from './components/Button.jsx'
-import Features from './components/Features.jsx'
+import StatsStrip from './components/StatsStrip.jsx'
 import ConsultServices from './components/ConsultServices.jsx'
 import ConsultProcess from './components/ConsultProcess.jsx'
 import ConsultFormats from './components/ConsultFormats.jsx'
@@ -28,8 +28,8 @@ export default function ConsultationPage() {
           <Button href="#inquiry" className="mt-8 h-10 px-6">Start a Conversation</Button>
         </section>
       </div>
-      {/* the same credentials strip as under the home page hero */}
-      <Features />
+      {/* the same teaching numbers as on the About page */}
+      <StatsStrip />
       <ConsultServices />
       <ConsultProcess />
       <ConsultFormats />
