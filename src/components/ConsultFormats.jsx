@@ -40,8 +40,9 @@ const formats = [
     where: ['Online'],
     // a frame from Step's glaze and correction bake video, cropped above the video's own title lettering
     image: '/images/consult/webinar-glaze.jpg',
-    position: 'object-[12%_50%]',
     narrow: true,
+    // shown whole and smaller, above the words rather than behind them
+    above: true,
   },
   {
     group: 'Consulting',
@@ -117,6 +118,22 @@ export default function ConsultFormats() {
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {formats.map((f) => {
             const GroupIcon = groupIcon[f.group]
+            // a photo above the words, at its own shape, so neither covers the other
+            if (f.above)
+              return (
+                <article key={f.title} className={`${card} flex flex-col bg-gradient-to-br from-ink-3 to-ink-2`}>
+                  <img src={f.image} alt="" loading="lazy" className="block h-auto w-full transition duration-700 group-hover:scale-105" />
+                  <div className="px-7 pb-7 pt-5">
+                    <p className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.25em] text-gold">
+                      <GroupIcon className="h-5 w-5" />
+                      {f.group.toUpperCase()}
+                    </p>
+                    <h3 className="mt-1.5 font-display text-[25px] font-medium leading-tight text-white">{f.title}</h3>
+                    <p className="mt-2 text-[14px] leading-[1.55] text-white/75">{f.text}</p>
+                    <Tags where={f.where} />
+                  </div>
+                </article>
+              )
             return f.image ? (
               <article key={f.title} className={`${card} min-h-[300px] ${f.narrow ? '' : 'sm:col-span-2'}`}>
                 <img src={f.image} alt="" loading="lazy" className={`absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105 ${f.position ?? 'object-center'}`} />
