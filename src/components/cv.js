@@ -94,7 +94,6 @@ export const articles = [
     'Diagnostic Wax-up: Key to Treatment Acceptance',
     '/article.html?p=diagnostic-wax-up-key-to-treatment-acceptance',
   ],
-  ['6/2007', 'Dental Assisting', ''],
   [
     '1/2015',
     'Inside Dental Technology',
