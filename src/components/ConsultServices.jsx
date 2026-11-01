@@ -32,9 +32,9 @@ const services = [
     ],
     cta: 'Train My Team',
     inquiry: 'Course or workshop',
-    image: '/images/home/hands-on-class.jpg',
-    alt: 'Technicians celebrating with their work at the end of a hands-on course',
-    position: 'object-[50%_64%]',
+    image: '/images/consult/lecture-morphopsychology.jpg',
+    alt: 'Step teaching morphopsychology and treatment planning to a seated audience',
+    position: 'object-[50%_45%]',
   },
   {
     eyebrow: 'FOR DENTISTS & LABS',
