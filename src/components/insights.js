@@ -51,7 +51,7 @@ const articleTopics = {
   'GC stains': 'shade',
   'A Modular Approach to Complex Cases': 'zirconia',
   'Two veneers': 'veneers',
-  'GC smile makeover': 'veneers',
+  'Smile Makeover with GC Initial LiSi™ Press': 'veneers',
   'How to Use an Esthetic Blending Process with Celtra Press': 'ceramics',
   'The Making of a Sample Model': 'implants',
   'New Case, Old Patient': 'veneers',

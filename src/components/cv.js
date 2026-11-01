@@ -105,7 +105,7 @@ export const articles = [
     '/images/insights/shade-match-zirconia-gc-initial.jpg',
   ],
   ['3/2015', 'DTG Magazine', 'Two veneers'],
-  ['11/2017', 'Spectrum', 'GC smile makeover'],
+  ['10/2017', 'Spectrum Dialogue', 'Smile Makeover with GC Initial LiSi™ Press'],
   [
     '6/2018',
     'Spectrum Dialogue',
