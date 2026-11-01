@@ -85,14 +85,17 @@ export default function ConsultServices() {
           <div key={s.cta} className={`relative grid border-t border-gold/20 md:grid-cols-2 ${i % 2 ? 'bg-ink' : 'bg-ink-2'}`}>
             {s.behind && (
               <>
-                {/* phones: the whole photo above the text; md+: across the full banner, darkened behind the text */}
-                <img src={s.image} alt={s.alt} loading="lazy" className="block h-auto w-full md:absolute md:inset-0 md:h-full md:object-cover" />
-                <div
-                  className="absolute inset-0 hidden md:block"
-                  style={{
-                    background: `linear-gradient(${flip ? 270 : 90}deg, rgba(28,25,22,0) 35%, rgba(28,25,22,0.68) 55%, rgba(28,25,22,0.8) 100%)`,
-                  }}
-                />
+                {/* phones: the whole photo above the text; md+: it runs most of the banner, under the text, and fades into
+                    a narrower strip of dark than the other banners leave */}
+                <div className={`relative md:absolute md:inset-y-0 md:w-[88%] ${flip ? 'md:right-0' : 'md:left-0'}`}>
+                  <img src={s.image} alt={s.alt} loading="lazy" className="block h-auto w-full md:h-full md:object-cover md:object-[65%_50%]" />
+                  <div
+                    className="absolute inset-0 hidden md:block"
+                    style={{
+                      background: `linear-gradient(${flip ? 270 : 90}deg, rgba(28,25,22,0) 40%, rgba(28,25,22,0.62) 62%, rgba(28,25,22,0.75) 88%, #1c1916 100%)`,
+                    }}
+                  />
+                </div>
                 <div className={`hidden md:block ${flip ? 'md:order-2' : ''}`} />
               </>
             )}
