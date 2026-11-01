@@ -37,9 +37,7 @@ const services = [
     inquiry: 'Course or workshop',
     image: '/images/consult/lecture-morphopsychology.jpg',
     alt: 'Step teaching morphopsychology and treatment planning to a seated audience',
-    behind: true,
-    // keeps the Morphopsychology slide title in frame
-    position: 'md:object-[50%_33%]',
+    position: 'object-[50%_58%]',
   },
   {
     eyebrow: 'FOR DENTISTS & LABS',
@@ -70,9 +68,8 @@ const services = [
     inquiry: 'Lecture or speaking',
     image: '/images/consult/stage-hablemos-de-futuro.jpg',
     alt: 'Step on stage presenting full-arch implant restorations at the Hablemos de Futuro conference',
-    behind: true,
-    // Step stands near this photo's left edge, so it's pushed 3in right, clear of the text
-    shift: '-288px',
+    // Step stands near this photo's left edge, so its fade into the text is kept short
+    fade: 60,
   },
 ]
 
