@@ -170,6 +170,6 @@ export const hosts = [
   },
   {
     group: 'Labs & training centers',
-    names: ['Dawson Center', 'Creodent', 'By Design Dental Lab', 'NDL', 'Oral Arts'],
+    names: ['Dawson Center', 'Creodent', 'By Design Dental Lab', 'Nudent Dental Lab', 'Oral Arts Dental Lab'],
   },
 ]
