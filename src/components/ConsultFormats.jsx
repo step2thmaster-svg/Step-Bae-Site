@@ -73,7 +73,9 @@ const formats = [
     title: 'Live Demo',
     text: 'Ceramic demonstrations on stage or at your booth, on behalf of manufacturers, sponsors and hosts.',
     where: ['On-site'],
-    image: '/images/precision.jpg',
+    // Step laughing with the crowd at a live demo table; framed on the top of the picture, where the faces are
+    image: '/images/consult/live-demo.jpg',
+    position: 'object-[50%_30%]',
   },
 ]
 
