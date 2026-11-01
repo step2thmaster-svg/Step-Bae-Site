@@ -59,13 +59,14 @@ const articleTopics = {
 
 const publications = articles
   .filter(([, , subject]) => subject)
-  .map(([date, source, subject, link, excerpt]) => ({
+  .map(([date, source, subject, link, excerpt, image]) => ({
     title: subject,
     source,
     // read on the journal's own site
     href: link,
     external: Boolean(link),
     excerpt,
+    image,
     audience: 'dentists',
     topic: articleTopics[subject],
     date,

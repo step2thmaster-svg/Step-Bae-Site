@@ -84,7 +84,7 @@ export const events = [
   ['2/2027', 'American Equilibration Society Annual Scientific Meeting', 'Chicago, IL', 'upcoming'],
 ]
 
-// [month/year, publication, subject, link to read it online (where there is one), a one-line summary]
+// [month/year, publication, subject, link to read it online (where there is one), a one-line summary, a photo from it]
 export const articles = [
   ['6/2007', 'Dental Assisting', ''],
   ['12/2014', 'LMT', 'GC stains'],
@@ -100,6 +100,7 @@ export const articles = [
     'New Case, Old Patient',
     'https://insidedentaltech.com/2024/03/new-case-old-patient/',
     'Veneers placed seven years earlier are remade after two cracked, with shorter incisal edges for the wear on other teeth, in GC pressable lithium disilicate layered with GC ceramics.',
+    '/images/insights/new-case-old-patient.jpg',
   ],
 ]
 
