@@ -62,8 +62,10 @@ const services = [
     ],
     cta: 'Book Step to Speak',
     inquiry: 'Lecture or speaking',
-    image: '/images/consult/gc-art-of-cutback.jpg',
-    alt: 'Step presenting The Art of Cutback, a GC America lecture on lithium disilicate',
+    image: '/images/consult/stage-hablemos-de-futuro.jpg',
+    alt: 'Step on stage presenting full-arch implant restorations at the Hablemos de Futuro conference',
+    // Step stands near this photo's left edge, so its fade into the text is kept short
+    fade: 60,
   },
 ]
 
@@ -87,7 +89,7 @@ export default function ConsultServices() {
               <div
                 className="absolute inset-0"
                 style={{
-                  background: `linear-gradient(0deg, var(--bg) 0%, rgba(0,0,0,0) 30%), linear-gradient(${flip ? 270 : 90}deg, rgba(0,0,0,0) calc(100% - 160px), var(--bg) 100%)`,
+                  background: `linear-gradient(0deg, var(--bg) 0%, rgba(0,0,0,0) 30%), linear-gradient(${flip ? 270 : 90}deg, rgba(0,0,0,0) calc(100% - ${s.fade ?? 160}px), var(--bg) 100%)`,
                   '--bg': i % 2 ? '#141210' : '#1c1916',
                 }}
               />
