@@ -18,8 +18,10 @@ const services = [
     inquiry: 'Consulting',
     image: '/images/consult/digital-morphopsychology.jpg',
     alt: 'A smile design moving from the digital design on the right to the finished restorations, with Dr. Paul Bylis, DDS',
-    // wide enough to run the whole banner, under the text, rather than fill one half
+    // wide enough to run the whole banner, under the text, rather than fill one half; nudged 2in (192px) left
     behind: true,
+    shift: '-192px',
+    position: 'md:object-[65%_50%]',
   },
   {
     eyebrow: 'FOR PRACTICES & LABS',
@@ -49,8 +51,9 @@ const services = [
     ],
     cta: 'Plan a Case',
     inquiry: 'Consulting',
-    image: '/images/insights/dentisthappy.jpg',
-    alt: 'Dentists and Step reviewing smiles together',
+    image: '/images/consult/case-mosaic.jpg',
+    alt: 'A wall of Step’s esthetic cases: veneers, crowns, implant bridges and course slides',
+    behind: true,
   },
   {
     eyebrow: 'FOR CONFERENCES & EVENTS',
@@ -87,8 +90,11 @@ export default function ConsultServices() {
               <>
                 {/* phones: the whole photo above the text; md+: it runs most of the banner, under the text, and fades into
                     a narrower strip of dark than the other banners leave */}
-                <div className={`relative md:absolute md:inset-y-0 md:w-[88%] ${flip ? 'md:right-0' : 'md:left-[-192px]'}`}>
-                  <img src={s.image} alt={s.alt} loading="lazy" className="block h-auto w-full md:h-full md:object-cover md:object-[65%_50%]" />
+                <div
+                  className={`relative md:absolute md:inset-y-0 md:w-[88%] ${flip ? 'md:right-[var(--shift)]' : 'md:left-[var(--shift)]'}`}
+                  style={{ '--shift': s.shift ?? '0px' }}
+                >
+                  <img src={s.image} alt={s.alt} loading="lazy" className={`block h-auto w-full md:h-full md:object-cover ${s.position ?? ''}`} />
                   <div
                     className="absolute inset-0 hidden md:block"
                     style={{
