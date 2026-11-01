@@ -1,7 +1,9 @@
 import Button from './Button.jsx'
+import { ArrowRight } from './Icons.jsx'
 
 // add upcoming courses and events here; the list shows them in this order. `image` is optional (in public/images/courses);
-// it's trimmed to the card's shape unless `fit: 'contain'`, which shows it whole (for badges and flyers). `link` is a registration page.
+// it's trimmed to the card's shape unless `fit: 'contain'`, which shows it whole (for badges and flyers). `link` is a registration page;
+// `soon: true` says registration is coming soon until a link is ready.
 // e.g. { date: 'March 14–15, 2027', title: 'Foil Veneer Hands-On', place: 'Charlotte, NC', text: 'Two-day course…', link: 'https://…' }
 export const upcoming = [
   {
@@ -12,6 +14,7 @@ export const upcoming = [
     image: '/images/courses/aes-2027.jpg',
     alt: 'The Cranio-Mandibular Complex: TMJ to Smile Design. AES 72nd Annual Scientific Meeting, February 24–25, 2027, Chicago, IL',
     fit: 'contain',
+    link: 'https://aes-tmj.glueup.com/event/aes-2027-annual-scientific-meeting-169267/',
   },
   {
     date: 'February 25–27, 2027',
@@ -21,6 +24,7 @@ export const upcoming = [
     image: '/images/courses/lab-day-chicago-2027.jpg',
     alt: 'LMT LAB DAY Chicago 2027, February 25–27, 2027, Chicago, IL',
     fit: 'contain',
+    soon: true,
   },
 ]
 
@@ -53,9 +57,23 @@ export default function Events() {
                   <h3 className="mt-2 font-display text-[26px] font-medium leading-tight text-white">{ev.title}</h3>
                   {ev.place && <p className="mt-1 text-[14px] text-white/70">{ev.place}</p>}
                   {ev.text && <p className="mt-3 text-[15px] leading-[1.6] text-white/85">{ev.text}</p>}
-                  <Button href={ev.link ?? '#inquiry'} className="mt-5 h-10 px-6">
-                    {ev.link ? 'Details & Registration' : 'Ask About This Event'}
-                  </Button>
+                  {ev.link ? (
+                    // registration is on the organizer's site, so it opens in a new tab
+                    <a
+                      href={ev.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-5 inline-flex h-10 items-center justify-center gap-2 bg-gold px-6 text-[13px] font-semibold text-ink-2 shadow-[0_6px_20px_-8px_rgba(212,168,104,0.6)] transition-colors duration-200 hover:bg-gold-light"
+                    >
+                      Details &amp; Registration <ArrowRight />
+                    </a>
+                  ) : ev.soon ? (
+                    <p className="mt-5 inline-flex h-10 items-center border border-gold/40 px-6 text-[13px] font-semibold tracking-[0.04em] text-gold/80">
+                      Registration Coming Soon
+                    </p>
+                  ) : (
+                    <Button href="#inquiry" className="mt-5 h-10 px-6">Ask About This Event</Button>
+                  )}
                 </div>
               </article>
             ))}
