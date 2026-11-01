@@ -62,8 +62,8 @@ const services = [
     ],
     cta: 'Book Step to Speak',
     inquiry: 'Lecture or speaking',
-    image: '/images/about/stage-digital-days.jpg',
-    alt: 'Step lecturing on stage at a digital dentistry event',
+    image: '/images/consult/gc-art-of-cutback.jpg',
+    alt: 'Step presenting The Art of Cutback, a GC America lecture on lithium disilicate',
   },
 ]
 
