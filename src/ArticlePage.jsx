@@ -276,7 +276,8 @@ export default function ArticlePage() {
         </section>
       </div>
 
-      <article className="relative bg-cream px-6 py-12 text-ink lg:px-12">
+      {/* the Mini Steps notice which article is being read */}
+      <article data-chat-topic={`article:${post.slug}`} className="relative bg-cream px-6 py-12 text-ink lg:px-12">
         <span className={`absolute inset-x-0 top-0 h-1 ${audienceColor[post.audience]}`} />
         <div className="mx-auto max-w-[700px] text-[17px] leading-[1.7] text-ink/90">
           <p className="font-display text-[22px] italic leading-[1.45] text-ink">{post.excerpt}</p>

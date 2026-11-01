@@ -10,6 +10,7 @@ import { services } from './ConsultServices.jsx'
 import { formats } from './ConsultFormats.jsx'
 import { upcoming } from './Events.jsx'
 import { faqs } from './ConsultFAQ.jsx'
+import { articleKnowledge, journalArticles, dentistArticles, patientArticles } from './chatArticles.js'
 
 // The Mini Steps, the site's guide and sales rep: a scripted conversation (no AI, no server) that helps visitors
 // find their way, makes the case for STEPBAE, answers the usual questions (price, turnaround, "I already have a lab")
@@ -147,11 +148,46 @@ const topics = {
   inquiry: { pitch: 'Prefer to chat? We can take your inquiry one question at a time.', say: 'Prefer to chat instead of the form? We’ll ask one question at a time.', next: 'lead-consult' },
   portals: { pitch: 'Need help connecting your scanner? We’ll walk you through it.', say: 'Connecting your scanner? Pick yours and we’ll show you how.', next: 'scanner' },
   'partner-form': { pitch: 'Prefer to chat instead of the form? We can take your details here.', say: 'Prefer to chat instead of the form? Leave your details here.', next: 'lead-talk' },
+  // each article: the reader's next step depends on who it's written for
+  ...Object.fromEntries(
+    articleKnowledge.map((a) => [
+      `article:${a.slug}`,
+      a.post.audience === 'patients'
+        ? {
+            pitch: 'Reading about your smile? We can help you ask your dentist for STEPBAE.',
+            say: `Reading “${a.short}”? Here’s the short version, and how STEPBAE can help.`,
+            next: `art-${a.slug}`,
+          }
+        : {
+            pitch: 'Want results like these on your next case? We can help you send it in a minute.',
+            say: `Reading “${a.short}”? Here are the key takeaways, and how STEPBAE can help with your case.`,
+            next: `art-${a.slug}`,
+          },
+    ]),
+  ),
 }
 const hintSteps = Object.fromEntries(
   Object.entries(topics).map(([id, t]) => [
     `hint-${id}`,
     { say: [t.say], options: [{ label: 'Yes, show me', next: t.next }, { label: 'Something else', next: 'start' }] },
+  ]),
+)
+
+// what the Mini Steps learned from each Insights article: the gist and takeaways, then the step it leads to, with the
+// article to read in full; patients are also offered a ready note for their dentist
+const articleSteps = Object.fromEntries(
+  articleKnowledge.map((a) => [
+    `art-${a.slug}`,
+    {
+      say: [a.say],
+      ...(a.tips.length && { list: a.tips }),
+      options: [
+        ...a.next,
+        ...(a.post.audience === 'patients' ? [{ label: 'Write a note to my dentist', href: dentistNote }] : []),
+        { label: 'Read the full article', href: a.post.href },
+        { label: 'Another topic', next: a.post.audience === 'patients' ? 'insights-patients' : 'insights-dentists' },
+      ],
+    },
   ]),
 )
 
@@ -167,7 +203,7 @@ const steps = {
       { label: 'Get our price list', next: 'lead-price' },
       { label: 'I’m a patient', next: 'patient' },
       { label: 'Consulting & courses', next: 'consulting' },
-      { label: 'Read our insights', next: 'insights' },
+      { label: 'Learn from our articles', next: 'insights' },
       { label: 'Just looking around', next: 'browse' },
     ],
   },
@@ -373,33 +409,41 @@ const steps = {
   ...hintSteps,
   insights: {
     say: [
-      'Our Insights page has articles from the bench, color coded so you can spot yours: gold for dentists, teal for patients.',
+      'Our Insights library has articles from the bench, for dentists and for patients. We’ve read them all, so ask us anything, or pick a topic.',
       'Who are you reading for?',
     ],
     options: [
-      { label: 'Articles for dentists', next: 'insights-dentists' },
-      { label: 'Articles for patients', next: 'insights-patients' },
+      { label: 'I’m a dentist', next: 'insights-dentists' },
+      { label: 'I’m a patient', next: 'insights-patients' },
+      { label: 'Published in journals', next: 'journal' },
       { label: 'See all articles', href: '/insights.html#latest' },
     ],
   },
   'insights-dentists': {
-    say: ['Here are a few good places to start:'],
+    say: ['What would you like to know more about?'],
     options: [
-      { label: 'How to submit a digital case', href: '/article.html?p=how-to-submit-a-digital-case' },
-      { label: 'Zirconia vs. layered zirconia crowns', href: '/article.html?p=zirconia-vs-layered-ceramic' },
-      { label: 'All articles', href: '/insights.html#latest' },
-      { label: 'Send us a case', next: 'case-start' },
+      ...dentistArticles.map((a) => ({ label: a.short, next: `art-${a.slug}` })),
+      { label: 'Published in journals', next: 'journal' },
     ],
   },
   'insights-patients': {
-    say: ['Here are a few good places to start:'],
+    say: ['What would you like to know more about?'],
     options: [
-      { label: 'Crown or veneer?', href: '/article.html?p=crown-vs-veneer' },
-      { label: 'Veneers vs. braces or aligners', href: '/article.html?p=veneers-vs-braces-or-clear-aligners' },
-      { label: 'All articles', href: '/insights.html#latest' },
+      ...patientArticles.map((a) => ({ label: a.short, next: `art-${a.slug}` })),
       { label: 'Ask my dentist for STEPBAE', next: 'patient-ask' },
     ],
   },
+  journal: {
+    say: [
+      'STEPBAE’s cases have been published in dental journals including Inside Dental Technology, LMT and Spectrum Dialogue. These you can read online:',
+    ],
+    options: [
+      ...journalArticles.map((p) => ({ label: p.title, href: p.href })),
+      { label: 'All articles', href: '/insights.html#latest' },
+      { label: 'Send a case', next: 'case-start' },
+    ],
+  },
+  ...articleSteps,
   dentist: {
     say: ['Happy to help. What would you like to know about?'],
     options: [
@@ -465,6 +509,7 @@ const steps = {
   unknown: {
     say: ['We’re simple guides, so we may not understand everything. Here’s what we can help with:'],
     options: [
+      { label: 'Ask about a topic', next: 'insights' },
       { label: 'Send a case', next: 'case-start' },
       { label: 'Find my way around', next: 'browse' },
       { label: 'I’m a patient', next: 'patient' },
@@ -555,11 +600,14 @@ const keywordRules = [
   [/trios|3shape/, 'portal-3Shape TRIOS'],
   [/medit/, 'portal-Medit'],
   [/primescan|cerec|dentsply|sirona/, 'portal-Primescan / CEREC'],
+  // the Insights articles, ahead of the broader lab rules that share their words (shade, impression, crown)
+  ...articleKnowledge.map((a) => [a.words, `art-${a.slug}`]),
   [/scanner|portal|connect/, 'scanner'],
   [/impression|model|ship|mail in|physical/, 'case-physical'],
   [/checklist|include|shade|photo|prescription|\brx\b/, 'checklist'],
   // the FAQ's own words, then consulting, courses and events, ahead of the lab rules that share their words
   ...faqs.map((f) => [f.words, `faq-${f.id}`]),
+  [/published|journal|magazine|publication/, 'journal'],
   [/\baes\b|lab ?day|upcoming|schedule|chicago|register|registration/, 'events'],
   [/how (does )?(consulting|coaching) work|consulting process|how do we start/, 'process'],
   [/format|ways to work|webinar/, 'formats'],
