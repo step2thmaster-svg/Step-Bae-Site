@@ -52,7 +52,7 @@ const articleTopics = {
   'GC Initial ZR-FS': 'zirconia',
   'Two veneers': 'veneers',
   'GC smile makeover': 'veneers',
-  'Dentsply Sirona Celtra Press': 'ceramics',
+  'How to Use an Esthetic Blending Process with Celtra Press': 'ceramics',
   'The Making of a Sample Model': 'implants',
   'New Case, Old Patient': 'veneers',
   'Nine Lab Hacks': 'digital',

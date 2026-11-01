@@ -107,7 +107,14 @@ export const articles = [
     'How Step built a full-arch implant sample model, from the hybrid framework to GC LiSi Press teeth and natural-looking pink gingiva.',
     '/images/insights/making-of-a-sample-model.jpg',
   ],
-  ['11/2018', 'LMT', 'Dentsply Sirona Celtra Press'],
+  [
+    '11/2018',
+    'LMT',
+    'How to Use an Esthetic Blending Process with Celtra Press',
+    'https://lmtmag.com/articles/how-to-use-an-esthetic-blending-process-with-celtra-press',
+    'An implant crown on #7 and a crown on #8 replaced in Dentsply Sirona’s Celtra Press, chosen for how naturally it blends with the surrounding teeth.',
+    '/images/insights/esthetic-blending-celtra-press.jpg',
+  ],
   [
     '6/2022',
     'focus (Florida Dental Laboratory Association)',
