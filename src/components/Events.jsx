@@ -5,10 +5,11 @@ import { ArrowRight } from './Icons.jsx'
 // it's trimmed to the card's shape unless `fit: 'contain'`, which shows it whole (for badges and flyers). `link` is a registration page;
 // `soon: true` says registration is coming soon until a link is ready. `talk`, `session` and `room` say what Step presents,
 // and when and where, within a longer event.
-// e.g. { date: 'March 14–15, 2027', title: 'Foil Veneer Hands-On', place: 'Charlotte, NC', text: 'Two-day course…', link: 'https://…' }
+// `short` is the name the Mini Steps chat uses. e.g. { date: 'March 14–15, 2027', title: 'Foil Veneer Hands-On', place: 'Charlotte, NC', text: 'Two-day course…', link: 'https://…' }
 export const upcoming = [
   {
     date: 'February 24–25, 2027',
+    short: 'AES 2027',
     title: 'American Equilibration Society 72nd Annual Scientific Meeting',
     place: 'Chicago, IL',
     text: 'Step joins the program at "The Cranio-Mandibular Complex: TMJ to Smile Design," the 2027 AES Annual Scientific Meeting.',
@@ -21,6 +22,7 @@ export const upcoming = [
   },
   {
     date: 'February 25–27, 2027',
+    short: 'GC Lab Day 2027',
     title: 'GC America Lecture at LMT LAB DAY',
     place: 'Chicago, IL',
     text: 'A lecture for GC America at LMT LAB DAY Chicago 2027, the largest dental laboratory show in the world.',
@@ -35,7 +37,7 @@ export const upcoming = [
 
 export default function Events() {
   return (
-    <section id="events" className="bg-ink px-6 py-16 lg:px-12">
+    <section id="events" data-chat-topic="events" className="bg-ink px-6 py-16 lg:px-12">
       <div className="mx-auto max-w-[1200px]">
         <div className="flex items-center gap-6">
           <h2 className="font-display text-[36px] font-medium leading-none sm:whitespace-nowrap text-white md:text-[40px]">

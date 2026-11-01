@@ -4,7 +4,7 @@ import { Consulting, Education, Speaker } from './Icons.jsx'
 // the ways a practice, lab or event can work with Step, as a bento grid of photo cards, two columns wide unless
 // `narrow`. `where` is how each one can be delivered. Order fills a 4-column grid in three rows on desktop
 // (wide, narrow, narrow / narrow, narrow, wide / wide, wide)
-const formats = [
+export const formats = [
   {
     group: 'Consulting',
     title: 'On-Site Consulting',
@@ -103,7 +103,7 @@ const card =
 
 export default function ConsultFormats() {
   return (
-    <section id="formats" className="relative overflow-hidden border-t border-gold/20 bg-ink px-6 py-16 lg:px-12">
+    <section id="formats" data-chat-topic="formats" className="relative overflow-hidden border-t border-gold/20 bg-ink px-6 py-16 lg:px-12">
       {/* a soft gold glow behind the grid */}
       <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-24 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-gold/10 blur-[120px]" />
 

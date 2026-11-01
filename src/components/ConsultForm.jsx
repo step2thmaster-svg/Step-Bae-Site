@@ -34,7 +34,7 @@ export default function ConsultForm() {
   }
 
   return (
-    <section id="inquiry" className="bg-ink-2 px-6 py-16 lg:px-12">
+    <section id="inquiry" data-chat-topic="inquiry" className="bg-ink-2 px-6 py-16 lg:px-12">
       <div className="mx-auto max-w-[760px]">
         <h2 className="text-center font-display text-[36px] font-medium leading-tight text-white md:text-[40px]">
           Let's <em className="font-normal text-gold">Talk</em>

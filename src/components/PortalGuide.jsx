@@ -45,7 +45,7 @@ export const portals = [
 
 export default function PortalGuide() {
   return (
-    <section id="portals" className="bg-cream px-6 py-14 text-ink lg:px-12">
+    <section id="portals" data-chat-topic="portals" className="bg-cream px-6 py-14 text-ink lg:px-12">
       <div className="mx-auto max-w-[1200px]">
         <div className="flex items-center gap-6">
           <h2 className="font-display text-[36px] font-medium leading-none sm:whitespace-nowrap md:text-[40px]">

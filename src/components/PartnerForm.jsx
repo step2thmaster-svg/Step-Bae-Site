@@ -37,7 +37,7 @@ export default function PartnerForm() {
   }
 
   return (
-    <section id="partner-form" className="bg-ink-2 px-6 py-16 lg:px-12">
+    <section id="partner-form" data-chat-topic="partner-form" className="bg-ink-2 px-6 py-16 lg:px-12">
       <div className="mx-auto max-w-[760px]">
         <h2 className="text-center font-display text-[36px] font-medium leading-tight text-white md:text-[40px]">
           Tell us more about <em className="font-normal text-gold">You</em>

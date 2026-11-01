@@ -1,9 +1,9 @@
 import Button from './Button.jsx'
 
-// one banner per service, in the style of the home page's Art of Precision: a photo on one half fading into the text
+// one banner per service (also what the Mini Steps chat offers, by `id`), in the style of the home page's Art of Precision: a photo on one half fading into the text
 // on the other, alternating sides down the page. `inquiry` is what each button picks in the form below (one of
 // ConsultForm's inquiryOptions)
-const services = [
+export const services = [
   {
     eyebrow: 'FOR PRACTICES & LABS',
     title: ['Digital Workflow', 'Consulting'],
@@ -14,6 +14,7 @@ const services = [
       'Scan, photo and prescription standards your team can follow',
       'Guidance as you add new equipment or materials',
     ],
+    id: 'workflow',
     cta: 'Plan My Workflow',
     inquiry: 'Consulting',
     image: '/images/consult/digital-morphopsychology.jpg',
@@ -33,6 +34,7 @@ const services = [
       'Stain & glaze characterization',
       'A custom course built around your team’s needs',
     ],
+    id: 'training',
     cta: 'Train My Team',
     inquiry: 'Course or workshop',
     image: '/images/consult/lecture-morphopsychology.jpg',
@@ -49,6 +51,7 @@ const services = [
       'Clear communication between dentist and technician',
       'A plan agreed before prep, not after',
     ],
+    id: 'planning',
     cta: 'Plan a Case',
     inquiry: 'Consulting',
     image: '/images/consult/case-mosaic.jpg',
@@ -65,6 +68,7 @@ const services = [
       'Live ceramic demos for manufacturers and sponsors',
       'In person or online',
     ],
+    id: 'speaking',
     cta: 'Book Step to Speak',
     inquiry: 'Lecture or speaking',
     image: '/images/consult/stage-hablemos-de-futuro.jpg',
@@ -86,7 +90,7 @@ export default function ConsultServices() {
       {services.map((s, i) => {
         const flip = i % 2 === 1
         return (
-          <div key={s.cta} className={`relative grid border-t border-gold/20 md:grid-cols-2 ${i % 2 ? 'bg-ink' : 'bg-ink-2'}`}>
+          <div key={s.cta} id={s.id} data-chat-topic={s.id} className={`relative grid border-t border-gold/20 md:grid-cols-2 ${i % 2 ? 'bg-ink' : 'bg-ink-2'}`}>
             {s.behind && (
               <>
                 {/* phones: the whole photo above the text; md+: it runs most of the banner, under the text, and fades into

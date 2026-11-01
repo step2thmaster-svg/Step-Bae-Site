@@ -6,6 +6,9 @@ import { EMAIL, sendForm, prefill } from './sendForm.js'
 import { articles } from './cv.js'
 import { unitOptions } from './PartnerForm.jsx'
 import { inquiryOptions, orgOptions } from './ConsultForm.jsx'
+import { services } from './ConsultServices.jsx'
+import { formats } from './ConsultFormats.jsx'
+import { upcoming } from './Events.jsx'
 
 // The Mini Steps, the site's guide and sales rep: a scripted conversation (no AI, no server) that helps visitors
 // find their way, makes the case for STEPBAE, answers the usual questions (price, turnaround, "I already have a lab")
@@ -79,6 +82,85 @@ const strengths = [
 
 // a light word, as a lead starts, that answers go to STEPBAE (unfinished ones too)
 const shareNote = 'Answers you give here are shared with STEPBAE, to save you time filling out the boring form.'
+
+// what STEPBAE's consulting does for each kind of visitor, in the chat's own words (it speaks for STEPBAE, never as
+// Step); the list under each comes from the Consultation page's banners, so the two always match
+const serviceOutcomes = {
+  workflow: 'Smoother handoffs and fewer surprises: a digital workflow built around the scanners, software and equipment you already have, so cases move cleanly between practice and lab.',
+  training: 'Your team learns the skill it needs most, right at its own benches, in small groups of 6 or more, and uses it on the very next case.',
+  planning: 'Predictable results on your hardest cases: the dentist, the technician and STEPBAE plan the outcome together, before anything is prepped.',
+  speaking: 'A talk or live demo made for your event: the topic is built around your theme and goals, backed by more than 70 lectures and hands-on courses given internationally, in person or online.',
+}
+const serviceName = (s) => s.title.join(' ')
+const serviceSteps = Object.fromEntries(
+  services.map((s) => [
+    `svc-${s.id}`,
+    {
+      say: [serviceOutcomes[s.id], 'What’s included:'],
+      list: s.points,
+      options: [
+        // starts the inquiry with its topic already chosen
+        { label: s.cta.replace('Step', 'STEPBAE'), next: 'lead-consult', preset: { Inquiry: s.inquiry } },
+        { label: 'Ways to work together', next: 'formats' },
+        { label: 'Other services', next: 'consulting' },
+      ],
+    },
+  ]),
+)
+
+// the questions practices, labs and event hosts ask before booking (the Consultation page's FAQ, in the chat's words)
+const faqs = [
+  ['travel', 'Do you travel?', 'Yes! STEPBAE travels everywhere, across the country and internationally, to your practice, lab, training center or event.'],
+  ['group', 'Minimum group size?', 'Hands-on courses run for a minimum of 6 participants, so everyone gets real time at the bench.'],
+  ['prep', 'How does my team prepare?', 'Once your course date is confirmed, your team receives a list of everything to prepare, so the day can start right away.'],
+  ['ce', 'Is CE credit available?', 'Yes, CE credit is available.'],
+  ['languages', 'Which languages?', 'Sessions are given in fluent English and Korean, and courses, lectures and consulting can be arranged in any language.'],
+  ['topics', 'How are lecture topics chosen?', 'Every lecture is customized: the topic is built around your event’s theme and goals, and the audience you’re bringing together.'],
+  ['online', 'Can we work online?', 'Yes. Remote consulting, case reviews, webinars and lectures can all be done online.'],
+  ['cost', 'How much does it cost?', 'Every engagement is tailored, so there’s no one price. Tell us what you have in mind and STEPBAE will reply with a plan made for you.'],
+]
+const faqSteps = Object.fromEntries(
+  faqs.map(([id, , a]) => [
+    `faq-${id}`,
+    {
+      say: [a],
+      options: [
+        { label: 'Plan it with us', next: 'lead-consult' },
+        { label: 'Another question', next: 'faq' },
+        { label: 'Our services', next: 'consulting' },
+      ],
+    },
+  ]),
+)
+
+// upcoming courses and events, from the same list the Consultation page shows
+const eventLines = upcoming.map((ev) =>
+  [`${ev.short ?? ev.title}: ${ev.date}, ${ev.place}`, ev.talk && `“${ev.talk}”`, ev.session, ev.room, ev.soon && 'registration opens soon']
+    .filter(Boolean)
+    .join(' · '),
+)
+
+// what the Mini Steps say when they notice what a visitor is reading: each `data-chat-topic` on the page has a
+// pitch for the hello bubble and a suggestion offered when the chat opens
+const topics = {
+  workflow: { pitch: 'Thinking about your digital workflow? We can show you how STEPBAE would fit it to your setup.', say: 'Looking at digital workflow consulting? Here’s what it can do for you.', next: 'svc-workflow' },
+  training: { pitch: 'Want your team trained on a new skill? Ask us about hands-on courses.', say: 'Looking at team training? Here’s what your team gets.', next: 'svc-training' },
+  planning: { pitch: 'Have a tricky case coming up? Let’s plan it together.', say: 'Got a complex case? Here’s how case planning works.', next: 'svc-planning' },
+  speaking: { pitch: 'Planning an event? We can help you book a talk or a live demo.', say: 'Planning an event? Here’s what STEPBAE can bring to your stage.', next: 'svc-speaking' },
+  process: { pitch: 'Ready to start? It only takes one short message.', say: 'Ready to start? It only takes a few quick questions.', next: 'lead-consult' },
+  formats: { pitch: 'Not sure which format fits? We’ll help you choose.', say: 'Not sure which format fits? Here they all are.', next: 'formats' },
+  events: { pitch: 'Coming to an upcoming event? We have the times and rooms.', say: 'Coming to one of our events? Here are the details.', next: 'events' },
+  faq: { pitch: 'Have a question that isn’t here? Just ask us.', say: 'Have a question? We know the answers to these.', next: 'faq' },
+  inquiry: { pitch: 'Prefer to chat? We can take your inquiry one question at a time.', say: 'Prefer to chat instead of the form? We’ll ask one question at a time.', next: 'lead-consult' },
+  portals: { pitch: 'Need help connecting your scanner? We’ll walk you through it.', say: 'Connecting your scanner? Pick yours and we’ll show you how.', next: 'scanner' },
+  'partner-form': { pitch: 'Prefer to chat instead of the form? We can take your details here.', say: 'Prefer to chat instead of the form? Leave your details here.', next: 'lead-talk' },
+}
+const hintSteps = Object.fromEntries(
+  Object.entries(topics).map(([id, t]) => [
+    `hint-${id}`,
+    { say: [t.say], options: [{ label: 'Yes, show me', next: t.next }, { label: 'Something else', next: 'start' }] },
+  ]),
+)
 
 const steps = {
   start: {
@@ -246,15 +328,56 @@ const steps = {
 
   consulting: {
     say: [
-      'STEPBAE works with practices and labs on digital workflow, esthetic and implant case planning, and hands-on training for your team, and lectures for study clubs and corporate events.',
-      'What would you like to do?',
+      'STEPBAE helps practices, labs and event hosts in four ways. What are you hoping to achieve?',
     ],
     options: [
-      { label: 'Plan it with us here', next: 'lead-consult' },
-      { label: 'See consulting services', href: '/consultation.html#services' },
-      { label: 'Upcoming courses & events', href: '/consultation.html#events' },
+      ...services.map((s) => ({ label: serviceName(s), next: `svc-${s.id}` })),
+      { label: 'Ways to work together', next: 'formats' },
+      { label: 'How it works', next: 'process' },
+      { label: 'Upcoming events', next: 'events' },
+      { label: 'Common questions', next: 'faq' },
     ],
   },
+  ...serviceSteps,
+  formats: {
+    say: ['Every team and every event is different, so pick one, combine a few, or tell us what you have in mind:'],
+    list: formats.map((f) => `${f.title} (${f.where.join(' or ').toLowerCase()}): ${f.text.replace('Step visits', 'STEPBAE visits')}`),
+    options: [
+      { label: 'Plan it with us', next: 'lead-consult' },
+      { label: 'How it works', next: 'process' },
+      { label: 'Common questions', next: 'faq' },
+    ],
+  },
+  process: {
+    say: ['It’s simple from the start:'],
+    list: [
+      'Tell us what you need, here in the chat or with the form',
+      'Talk it through with STEPBAE: your team, your cases, and what success looks like',
+      'Get your plan: the format, the dates, the topics, and what your team will need',
+      'Let’s work together: at your practice or lab, online, or on your stage',
+    ],
+    options: [
+      { label: 'Start now', next: 'lead-consult' },
+      { label: 'Ways to work together', next: 'formats' },
+      { label: 'Common questions', next: 'faq' },
+    ],
+  },
+  faq: {
+    say: ['Happy to help! What would you like to know?'],
+    options: [...faqs.map(([id, q]) => ({ label: q, next: `faq-${id}` })), { label: 'Ask STEPBAE directly', next: 'lead-consult' }],
+  },
+  ...faqSteps,
+  events: {
+    say: upcoming.length ? ['Here’s where you can catch STEPBAE next:'] : ['New dates are on the way! Want to bring a course or talk to your own event?'],
+    list: eventLines,
+    options: [
+      // registration on the organizer's site, where there's a link
+      ...upcoming.filter((ev) => ev.link).map((ev) => ({ label: `Register for ${ev.short ?? ev.title}`, href: ev.link })),
+      { label: 'Book STEPBAE for your event', next: 'lead-consult', preset: { Inquiry: 'Lecture or speaking' } },
+      { label: 'All courses & events', href: '/consultation.html#events' },
+    ],
+  },
+  ...hintSteps,
   insights: {
     say: [
       'Our Insights page has articles from the bench, color coded so you can spot yours: gold for dentists, teal for patients.',
@@ -410,6 +533,12 @@ const leadFlows = {
     fixed: {},
   },
 }
+// the next question from `from` on that isn't answered yet (a preset answer skips its question)
+const nextOpen = (fields, answers, from) => {
+  let i = from
+  while (i < fields.length && answers[leadFields[fields[i]].key] !== undefined) i++
+  return i
+}
 const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
 // the summary is kept on the message, so it still reads correctly after the lead is sent
 const reviewMessage = (flow, answers) => ({
@@ -436,6 +565,20 @@ const keywordRules = [
   [/scanner|portal|connect/, 'scanner'],
   [/impression|model|ship|mail in|physical/, 'case-physical'],
   [/checklist|include|shade|photo|prescription|\brx\b/, 'checklist'],
+  // consulting, courses and events, ahead of the lab rules that share their words
+  [/(consult|course|training|lecture|speak|demo|webinar|keynote).*(cost|price|fee|how much)|(cost|price|fee|how much).*(consult|course|training|lecture|speak|demo|webinar|keynote)/, 'faq-cost'],
+  [/travel|fly|come to (us|our)|visit (us|our)/, 'faq-travel'],
+  [/\bce\b|credit|continuing education/, 'faq-ce'],
+  [/language|korean|spanish|english|translat/, 'faq-languages'],
+  [/minimum|group size|how many (people|participants)|participants/, 'faq-group'],
+  [/prepare|preparation|what to bring/, 'faq-prep'],
+  [/\baes\b|lab ?day|upcoming|schedule|chicago|register|registration/, 'events'],
+  [/how (does )?(consulting|coaching) work|consulting process|how do we start/, 'process'],
+  [/format|ways to work|remote|virtual|zoom|webinar/, 'formats'],
+  [/workflow|exocad|\bcad\b|milling|digital lab/, 'svc-workflow'],
+  [/train|hands-on|hands on|workshop|all-on-x|all on x|cutback|layering|stain|glaze/, 'svc-training'],
+  [/case planning|complex case|complicated|difficult case|second opinion|case review|treatment plan/, 'svc-planning'],
+  [/keynote|lecture|live demo|\bdemo\b|conference|speaker|sponsor|study club|event/, 'svc-speaking'],
   [/price|pricing|cost|fee|how much|quote|expensive|cheap/, 'lead-price'],
   [/turnaround|how long|how fast|days|weeks|deadline|rush/, 'turnaround'],
   [/already have|current lab|another lab|other lab|switch/, 'switching'],
@@ -443,8 +586,8 @@ const keywordRules = [
   [/talk|speak|human|person|call me|step bae/, 'lead-talk'],
   [/case|send|submit|start|partner|account/, 'case-start'],
   [/patient|my teeth|my dentist|my crown|my veneer/, 'patient'],
-  [/book|hire|invite|speaker|sponsor/, 'lead-consult'],
-  [/course|lecture|consult|training|event|class/, 'consulting'],
+  [/book|hire|invite/, 'lead-consult'],
+  [/course|consult|class|educat/, 'consulting'],
   [/article|blog|insight|read/, 'insights'],
   [/work|gallery|photos|cases you/, 'browse'],
   [/contact|email|phone|call|reach|question/, 'contact'],
@@ -495,7 +638,7 @@ const pitches = {
   '/partnership.html': 'Ready to send your first case? We’ll walk you through connecting your scanner in a minute.',
   '/insights.html': 'Enjoying the read? Ask us anything, or send a case and see the difference for yourself.',
   '/article.html': 'Enjoying the read? Ask us anything, or send a case and see the difference for yourself.',
-  '/consultation.html': 'Planning a course or consultation? We’ll point you to the right one.',
+  '/consultation.html': 'Planning a course, a consultation or an event? We’ll help you find the right fit.',
   '/about.html': 'Want STEPBAE on your next case? We can set that up in a minute.',
 }
 const defaultPitch = 'We do more than dancing. Sending a case or just curious? Tap us and we’ll show you around.'
@@ -511,6 +654,24 @@ export default function ChatGuide() {
   // a lead in progress: which flow, the answers so far, the question number, a field being changed, sending
   const [lead, setLead] = useState(null)
   const listRef = useRef(null)
+  // the Mini Steps follow along: the section the visitor is reading now (`data-chat-topic`), and the last one they
+  // offered help with, so they suggest each topic once
+  const [topic, setTopic] = useState(null)
+  const [offered, setOffered] = useState(saved?.offered ?? [])
+  useEffect(() => {
+    const seen = new Map()
+    const watch = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) seen.set(e.target, e.intersectionRatio)
+        // the section filling most of the screen
+        const [best] = [...seen].filter(([, r]) => r > 0.25).sort((a, b) => b[1] - a[1])
+        if (best) setTopic(best[0].dataset.chatTopic)
+      },
+      { threshold: [0, 0.25, 0.5, 0.75] },
+    )
+    document.querySelectorAll('[data-chat-topic]').forEach((el) => watch.observe(el))
+    return () => watch.disconnect()
+  }, [])
   // the lead as it stands, so whatever was answered can still be sent if the visitor leaves partway
   const leadRef = useRef(null)
   useEffect(() => {
@@ -518,8 +679,8 @@ export default function ChatGuide() {
   }, [lead])
 
   useEffect(
-    () => save({ open, messages: messages.filter((m) => !m.lead && !m.private), greeted }),
-    [open, messages, greeted],
+    () => save({ open, messages: messages.filter((m) => !m.lead && !m.private), greeted, offered }),
+    [open, messages, greeted, offered],
   )
   useEffect(() => {
     if (greeted || open) return
@@ -527,6 +688,12 @@ export default function ChatGuide() {
     return () => clearTimeout(t)
   }, [greeted, open])
   const toggle = () => {
+    // opening on a section they haven't been offered help with yet: the Mini Steps notice and offer it, unless a
+    // lead is in the middle of being answered
+    if (!open && topics[topic] && !offered.includes(topic) && !lead) {
+      setOffered((o) => [...o, topic])
+      say(botMessage(`hint-${topic}`))
+    }
     setOpen((o) => !o)
     setTeaser(false)
     setGreeted(true)
@@ -549,7 +716,7 @@ export default function ChatGuide() {
   const sendUnfinished = () => {
     const l = leadRef.current
     leadRef.current = null
-    if (!l || l.sending || !Object.values(l.answers).some(Boolean)) return
+    if (!l || l.sending || !Object.entries(l.answers).some(([k, v]) => v && !l.preset?.includes(k))) return
     const flow = leadFlows[l.flow]
     const fields = flow.fields.map((id) => leadFields[id])
     const data = new FormData()
@@ -566,15 +733,17 @@ export default function ChatGuide() {
   }, [])
 
   const say = (...msgs) => setMessages((m) => [...m, ...msgs])
-  const go = (label, next) => {
+  // `preset` answers some of a lead's questions up front (a service's topic), so they aren't asked again
+  const go = (label, next, preset = {}) => {
     sendUnfinished()
     const step = steps[next]
     const msgs = [{ from: 'user', text: label }, botMessage(next)]
     if (step?.portal) prefill.add({ Portal: step.portal })
     if (step?.lead) {
-      const fresh = { flow: step.lead, answers: {}, i: 0, editing: null, sending: false }
-      setLead(fresh)
-      msgs.push(askMessage({}, leadFlows[step.lead].fields[0]))
+      const fields = leadFlows[step.lead].fields
+      const i = nextOpen(fields, preset, 0)
+      setLead({ flow: step.lead, answers: { ...preset }, preset: Object.keys(preset), i, editing: null, sending: false })
+      msgs.push(askMessage(preset, fields[i]))
     } else setLead(null)
     say(...msgs)
   }
@@ -593,7 +762,7 @@ export default function ChatGuide() {
       return say(reply, askMessage(lead.answers, waitingOn, 'Please pick one of the ranges below. '))
     const fields = leadFlows[lead.flow].fields
     const next = { ...lead, answers: { ...lead.answers, [field.key]: value }, editing: null }
-    next.i = lead.editing ? fields.length : lead.i + 1
+    next.i = lead.editing ? fields.length : nextOpen(fields, next.answers, lead.i + 1)
     setLead(next)
     say(reply, next.i < fields.length ? askMessage(next.answers, fields[next.i]) : reviewMessage(lead.flow, next.answers))
   }
@@ -637,7 +806,7 @@ export default function ChatGuide() {
     setLead(null)
     setMessages([botMessage('start')])
   }
-  const pitch = pitches[window.location.pathname] ?? defaultPitch
+  const pitch = topics[topic]?.pitch ?? pitches[window.location.pathname] ?? defaultPitch
 
   const last = messages.length - 1
 
@@ -847,12 +1016,13 @@ function BotTurn({ step, active, onChoose }) {
                 <a
                   key={o.label}
                   href={o.href}
+                  {...(o.href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
                   className="inline-flex items-center gap-1.5 rounded-full bg-gold px-3 py-1.5 text-[13px] font-medium text-ink hover:bg-gold-light"
                 >
                   {o.label} <ArrowRight className="h-3 w-3" />
                 </a>
               ) : (
-                <button key={o.label} onClick={() => onChoose(o.label, o.next)} className={chip}>
+                <button key={o.label} onClick={() => onChoose(o.label, o.next, o.preset)} className={chip}>
                   {o.label}
                 </button>
               ),

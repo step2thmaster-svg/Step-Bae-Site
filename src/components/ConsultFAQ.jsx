@@ -36,7 +36,7 @@ const faqs = [
 
 export default function ConsultFAQ() {
   return (
-    <section id="faq" className="border-t border-gold/20 bg-ink px-6 py-16 lg:px-12">
+    <section id="faq" data-chat-topic="faq" className="border-t border-gold/20 bg-ink px-6 py-16 lg:px-12">
       <div className="mx-auto max-w-[820px]">
         <h2 className="text-center font-display text-[36px] font-medium leading-tight text-white md:text-[42px]">
           Frequently Asked <em className="font-normal text-gold">Questions</em>

@@ -20,7 +20,7 @@ const steps = [
 
 export default function ConsultProcess() {
   return (
-    <section id="process" className="border-t border-gold/20 bg-ink-2 px-6 py-16 lg:px-12">
+    <section id="process" data-chat-topic="process" className="border-t border-gold/20 bg-ink-2 px-6 py-16 lg:px-12">
       <div className="mx-auto max-w-[1200px]">
         <p className="text-center text-[12px] font-semibold tracking-[0.3em] text-gold">SIMPLE FROM THE START</p>
         <h2 className="mt-3 text-center font-display text-[36px] font-medium leading-tight text-white md:text-[42px]">
