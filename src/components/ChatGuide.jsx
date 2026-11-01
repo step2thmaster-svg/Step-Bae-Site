@@ -758,6 +758,21 @@ export default function ChatGuide() {
     setTeaser(false)
     setGreeted(true)
   }
+  // with the chat open, the Mini Steps keep following along: once the visitor settles on a new section (a moment's
+  // pause, so scrolling past doesn't count), they offer its help; an earlier offer left unanswered is replaced rather
+  // than stacked, and nothing interrupts a lead being answered
+  useEffect(() => {
+    if (!open || !topics[topic] || offered.includes(topic) || lead) return
+    const t = setTimeout(() => {
+      setOffered((o) => [...o, topic])
+      setMessages((m) => {
+        const last = m[m.length - 1]
+        const rest = last?.step?.startsWith('hint-') ? m.slice(0, -1) : m
+        return [...rest, botMessage(`hint-${topic}`)]
+      })
+    }, 1200)
+    return () => clearTimeout(t)
+  }, [open, topic, offered, lead])
   const dismissTeaser = () => {
     setTeaser(false)
     setGreeted(true)
