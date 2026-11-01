@@ -53,7 +53,7 @@ const articleTopics = {
   'Two veneers': 'veneers',
   'GC smile makeover': 'veneers',
   'Dentsply Sirona Celtra Press': 'ceramics',
-  'GC LiSi Press on a hybrid arch': 'implants',
+  'The Making of a Sample Model': 'implants',
   'New Case, Old Patient': 'veneers',
   'Nine Lab Hacks': 'digital',
   'How to Shade Match Anterior Zirconia Restorations Using the GC Initial System': 'shade',

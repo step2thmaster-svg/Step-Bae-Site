@@ -99,8 +99,15 @@ export const articles = [
   ],
   ['3/2015', 'DTG Magazine', 'Two veneers'],
   ['11/2017', 'Spectrum', 'GC smile makeover'],
+  [
+    '6/2018',
+    'Spectrum Dialogue',
+    'The Making of a Sample Model',
+    'https://online.fliphtml5.com/dksbb/ywjl/#p=3',
+    'How Step built a full-arch implant sample model, from the hybrid framework to GC LiSi Press teeth and natural-looking pink gingiva.',
+    '/images/insights/making-of-a-sample-model.jpg',
+  ],
   ['11/2018', 'LMT', 'Dentsply Sirona Celtra Press'],
-  ['3/2019', 'Spectrum', 'GC LiSi Press on a hybrid arch'],
   [
     '6/2022',
     'focus (Florida Dental Laboratory Association)',
