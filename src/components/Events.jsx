@@ -3,7 +3,8 @@ import { ArrowRight } from './Icons.jsx'
 
 // add upcoming courses and events here; the list shows them in this order. `image` is optional (in public/images/courses);
 // it's trimmed to the card's shape unless `fit: 'contain'`, which shows it whole (for badges and flyers). `link` is a registration page;
-// `soon: true` says registration is coming soon until a link is ready.
+// `soon: true` says registration is coming soon until a link is ready. `session` and `room` say when and where Step's own
+// part of a longer event takes place.
 // e.g. { date: 'March 14–15, 2027', title: 'Foil Veneer Hands-On', place: 'Charlotte, NC', text: 'Two-day course…', link: 'https://…' }
 export const upcoming = [
   {
@@ -25,6 +26,8 @@ export const upcoming = [
     alt: 'LMT LAB DAY Chicago 2027, February 25–27, 2027, Chicago, IL',
     fit: 'contain',
     soon: true,
+    session: 'Thursday, February 25 · 9:00–10:30 AM',
+    room: 'Plaza Ballroom A/B, main floor behind the restaurant',
   },
 ]
 
@@ -57,6 +60,22 @@ export default function Events() {
                   <h3 className="mt-2 font-display text-[26px] font-medium leading-tight text-white">{ev.title}</h3>
                   {ev.place && <p className="mt-1 text-[14px] text-white/70">{ev.place}</p>}
                   {ev.text && <p className="mt-3 text-[15px] leading-[1.6] text-white/85">{ev.text}</p>}
+                  {(ev.session || ev.room) && (
+                    <dl className="mt-4 space-y-1 border-l-2 border-gold/50 pl-3 text-[14px] leading-[1.5]">
+                      {ev.session && (
+                        <div className="flex gap-2">
+                          <dt className="font-semibold text-gold">When</dt>
+                          <dd className="text-white/85">{ev.session}</dd>
+                        </div>
+                      )}
+                      {ev.room && (
+                        <div className="flex gap-2">
+                          <dt className="font-semibold text-gold">Where</dt>
+                          <dd className="text-white/85">{ev.room}</dd>
+                        </div>
+                      )}
+                    </dl>
+                  )}
                   {ev.link ? (
                     // registration is on the organizer's site, so it opens in a new tab
                     <a
