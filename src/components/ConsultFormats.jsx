@@ -9,12 +9,6 @@ const Screen = ({ className }) => (
     <path d="M17 41h14M24 33v8M19 21l4 4 7-8" />
   </svg>
 )
-const Magnifier = ({ className }) => (
-  <svg viewBox="0 0 48 48" className={className} {...line}>
-    <circle cx="21" cy="21" r="13" />
-    <path d="m31 31 11 11M15 21h12M21 15v12" />
-  </svg>
-)
 const Loop = ({ className }) => (
   <svg viewBox="0 0 48 48" className={className} {...line}>
     <path d="M40 20A16 16 0 0 0 10 15M8 28a16 16 0 0 0 30 5" />
@@ -28,8 +22,8 @@ const Play = ({ className }) => (
   </svg>
 )
 
-// the ways a practice, lab or event can work with Step, as a bento grid: the four headline formats are wide photo
-// cards, the rest compact icon cards. `where` is how each one can be delivered. Order fills a 4-column grid in three
+// the ways a practice, lab or event can work with Step, as a bento grid: the headline formats are photo cards (two
+// columns wide unless `narrow`), the rest compact icon cards. `where` is how each one can be delivered. Order fills a 4-column grid in three
 // rows on desktop (wide, small, small / small, small, wide / wide, wide)
 const formats = [
   {
@@ -41,7 +35,16 @@ const formats = [
     position: 'object-[50%_35%]',
   },
   { group: 'Consulting', title: 'Remote Consulting', text: 'Video sessions and screen sharing for workflow, design and communication reviews.', where: ['Online'], Icon: Screen },
-  { group: 'Consulting', title: 'Case Review', text: 'One complex case, planned with the dentist and the technician before anything is prepped.', where: ['On-site', 'Online'], Icon: Magnifier },
+  {
+    group: 'Consulting',
+    title: 'Case Review',
+    text: 'One complex case, planned with the dentist and the technician before anything is prepped.',
+    where: ['On-site', 'Online'],
+    image: '/images/consult/case-review-morphopsychology.jpg',
+    position: 'object-[24%_62%]',
+    // a photo card one column wide, so the first row still fits
+    narrow: true,
+  },
   { group: 'Education', title: 'Webinar', text: 'A live online lecture for your members, customers or team, with time for questions.', where: ['Online'], Icon: Play },
   { group: 'Consulting', title: 'Ongoing Support', text: 'Regular check-ins as your team settles into a new workflow, technique or material.', where: ['On-site', 'Online'], Icon: Loop },
   {
@@ -105,6 +108,22 @@ export default function ConsultFormats() {
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {formats.map((f) => {
             const GroupIcon = groupIcon[f.group]
+            // a narrow photo card puts its photo on top and the words below, so neither covers the other
+            if (f.narrow)
+              return (
+                <article key={f.title} className={`${card} flex flex-col bg-gradient-to-br from-ink-3 to-ink-2`}>
+                  <div className="relative h-[150px] shrink-0 overflow-hidden">
+                    <img src={f.image} alt="" loading="lazy" className={`h-full w-full object-cover transition duration-700 group-hover:scale-105 ${f.position ?? 'object-center'}`} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink-3/80 to-transparent to-50%" />
+                  </div>
+                  <div className="px-7 pb-7 pt-4">
+                    <p className="text-[11px] font-semibold tracking-[0.25em] text-gold">{f.group.toUpperCase()}</p>
+                    <h3 className="mt-1.5 font-display text-[25px] font-medium leading-tight text-white">{f.title}</h3>
+                    <p className="mt-2 text-[14px] leading-[1.55] text-white/75">{f.text}</p>
+                    <Tags where={f.where} />
+                  </div>
+                </article>
+              )
             return f.image ? (
               <article key={f.title} className={`${card} min-h-[300px] sm:col-span-2`}>
                 <img src={f.image} alt="" loading="lazy" className={`absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105 ${f.position ?? 'object-center'}`} />
