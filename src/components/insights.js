@@ -56,6 +56,7 @@ const articleTopics = {
   'GC LiSi Press on a hybrid arch': 'implants',
   'New Case, Old Patient': 'veneers',
   'Nine Lab Hacks': 'digital',
+  'How to Shade Match Anterior Zirconia Restorations Using the GC Initial System': 'shade',
 }
 
 const publications = articles
