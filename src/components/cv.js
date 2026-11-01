@@ -105,7 +105,7 @@ export const articles = [
     'Six discolored anterior teeth restored with zirconia crowns matched to the patient’s natural A1 shade, rather than bleached veneers, using the GC Initial system.',
     '/images/insights/shade-match-zirconia-gc-initial.jpg',
   ],
-  ['3/2015', 'DTG Magazine', 'Two veneers', '', '', '/images/insights/two-veneers.jpg'],
+  ['3/2015', 'DTG Magazine', 'Two veneers', '', '', '/images/insights/two-veneers.jpg', 'DTG Magazine, issue #3 (print only)'],
   ['10/2017', 'Spectrum Dialogue', 'Smile Makeover with GC Initial LiSi™ Press', '', '', '/images/insights/smile-makeover-gc-lisi-press.jpg', 'Spectrum Dialogue’s Digital Edition Repository, for members only'],
   [
     '6/2018',
