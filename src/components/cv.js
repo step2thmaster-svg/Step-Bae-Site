@@ -93,7 +93,14 @@ export const articles = [
   ['11/2017', 'Spectrum', 'GC smile makeover'],
   ['11/2018', 'LMT', 'Dentsply Sirona Celtra Press'],
   ['3/2019', 'Spectrum', 'GC LiSi Press on a hybrid arch'],
-  ['6/2023', 'Focus', 'FDLA'],
+  [
+    '6/2022',
+    'focus (Florida Dental Laboratory Association)',
+    'Nine Lab Hacks',
+    'https://www.fdla.net/assets/Focus_2ndQtr_2022_final.pdf',
+    'Nine tools from Step’s own bench that make lab work faster and easier, from a 3D mouse for CAD design to a homemade “magic stick” for staining and glazing.',
+    '/images/insights/nine-lab-hacks.jpg',
+  ],
   [
     '3/2024',
     'Inside Dental Technology',

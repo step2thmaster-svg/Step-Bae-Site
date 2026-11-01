@@ -55,6 +55,7 @@ const articleTopics = {
   'Dentsply Sirona Celtra Press': 'ceramics',
   'GC LiSi Press on a hybrid arch': 'implants',
   'New Case, Old Patient': 'veneers',
+  'Nine Lab Hacks': 'digital',
 }
 
 const publications = articles
