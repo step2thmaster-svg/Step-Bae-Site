@@ -43,6 +43,7 @@ export const events = [
   ['8/2017', 'DTG Symposium, lecture & WMDA commentator', 'Provo, UT'],
   ['9/2017', 'Siroworld lecture', 'Las Vegas, NV'],
   ['10/2017', 'Morphopsychology ZR', 'Charlotte, NC'],
+  ['11/2017', 'City Spire Dental, in-house lab training with Sean Han', 'New York, NY'],
   ['12/2017', 'Morphopsychology ZR', 'Charlotte, NC'],
 
   ['2/2018', 'GC lecture, Lab Day', 'Chicago, IL'],
