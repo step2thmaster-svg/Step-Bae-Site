@@ -69,7 +69,7 @@ export const reviews = [
   {
     page: 'patients',
     about: 'Patient helped to find the right dentist for her veneers',
-    quote: 'I wanted veneers but didn’t know where to start. STEPBAE helped me understand my options and find the right dentist. My veneers look completely natural, and nobody can tell they aren’t my own teeth.',
+    quote: 'I wanted veneers but didn’t know where to start. STEPBAE Dental Lab helped me understand my options and find the right dentist. My veneers look completely natural, and nobody can tell they aren’t my own teeth.',
     tag: 'Veneers',
     name: '',
     role: 'Veneer patient',
@@ -77,5 +77,5 @@ export const reviews = [
   },
 ]
 
-// the reviews ready to show on a page
-export const reviewsFor = (page) => reviews.filter((r) => r.page === page && r.approved)
+// the reviews ready to show on a page (or several pages' reviews together)
+export const reviewsFor = (pages) => reviews.filter((r) => [pages].flat().includes(r.page) && r.approved)

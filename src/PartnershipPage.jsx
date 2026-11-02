@@ -31,7 +31,7 @@ export default function PartnershipPage() {
       <Reasons />
       <Restorations />
       <CaseFlow />
-      <Reviews page="partnership" eyebrow="FROM OUR DENTISTS" title={['What Dentists', 'Say']} />
+      <Reviews page={['partnership', 'patients']} eyebrow="FROM OUR DENTISTS & PATIENTS" title={['What Dentists & Patients', 'Say']} />
       <Approach />
       <PortalGuide />
       <PartnerFAQ />
