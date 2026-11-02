@@ -14,21 +14,21 @@ function Quote({ r, large = false }) {
   return (
     <figure
       className={`flex h-full flex-col rounded-[6px] border border-gold-dark/25 bg-white/70 shadow-[0_14px_34px_-24px_rgba(20,18,16,0.5)] ${
-        large ? 'p-8 md:p-10' : 'p-6 md:p-7'
+        large ? 'p-6 md:p-7' : 'p-5'
       }`}
     >
       <div className="flex items-center justify-between gap-4">
-        {r.tag && <span className="rounded-full bg-gold/20 px-3 py-1 text-[10.5px] font-semibold tracking-[0.16em] text-gold-dark">{r.tag.toUpperCase()}</span>}
-        <span aria-hidden="true" className={`font-display leading-[0.6] text-gold ${large ? 'text-[72px]' : 'text-[56px]'}`}>
+        {r.tag && <span className="rounded-full bg-gold/20 px-2.5 py-0.5 text-[9.5px] font-semibold tracking-[0.16em] text-gold-dark">{r.tag.toUpperCase()}</span>}
+        <span aria-hidden="true" className={`font-display leading-[0.6] text-gold ${large ? 'text-[52px]' : 'text-[42px]'}`}>
           ”
         </span>
       </div>
-      <blockquote className={`mt-4 flex-1 font-display italic leading-[1.5] text-ink ${large ? 'text-[22px] md:text-[26px]' : 'text-[18px]'}`}>
+      <blockquote className={`mt-3 flex-1 font-display italic leading-[1.5] text-ink ${large ? 'text-[18px] md:text-[20px]' : 'text-[15.5px]'}`}>
         {r.quote}
       </blockquote>
-      <figcaption className="mt-6 flex items-center gap-3 border-t border-gold-dark/20 pt-4 text-[13.5px]">
+      <figcaption className="mt-4 flex items-center gap-2.5 border-t border-gold-dark/20 pt-3 text-[12.5px]">
         {/* a monogram, or a quiet mark when the client is anonymous */}
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink text-[12px] font-semibold tracking-[0.06em] text-gold">
+        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ink text-[10.5px] font-semibold tracking-[0.06em] text-gold">
           {r.name ? initials(r.name) : '✦'}
         </span>
         <span>
@@ -47,20 +47,20 @@ export default function Reviews({ page, eyebrow = 'FROM OUR CLIENTS', title = ['
   if (!shown.length) return null
   const [first, ...rest] = shown
   return (
-    <section className="overflow-hidden bg-cream px-6 py-16 text-ink lg:px-12">
-      <div className="mx-auto max-w-[1150px]">
+    <section className="overflow-hidden bg-cream px-6 py-12 text-ink lg:px-12">
+      <div className="mx-auto max-w-[1000px]">
         <p className="text-center text-[12px] font-semibold tracking-[0.3em] text-gold-dark">{eyebrow}</p>
-        <h2 className="mt-3 text-center font-display text-[36px] font-medium leading-tight md:text-[42px]">
+        <h2 className="mt-2 text-center font-display text-[30px] font-medium leading-tight md:text-[34px]">
           {title[0]} <em className="font-normal text-gold-dark">{title[1]}</em>
         </h2>
 
-        <div className="mx-auto mt-10 max-w-[860px]">
+        <div className="mx-auto mt-7 max-w-[720px]">
           <Quote r={first} large />
         </div>
 
         {rest.length > 0 && (
           <div
-            className={`-mx-6 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-3 [scrollbar-width:none] sm:mx-0 sm:grid sm:overflow-visible sm:px-0 sm:pb-0 ${
+            className={`-mx-6 mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6 pb-3 [scrollbar-width:none] sm:mx-0 sm:grid sm:overflow-visible sm:px-0 sm:pb-0 ${
               rest.length === 1
                 ? 'sm:mx-auto sm:max-w-[560px] sm:grid-cols-1'
                 : rest.length === 5
