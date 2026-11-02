@@ -79,7 +79,7 @@ const strengths = [
   'Every case is handcrafted by highly trained technicians, for precise fit, natural esthetics and consistent quality',
   'You talk directly with the technician making your case',
   'Shade matched to your patient’s natural teeth, not just a shade tab',
-  `An educator dentists learn from: more than 70 lectures and hands-on courses internationally, and ${articles.length} published articles`,
+  `Always learning and sharing: more than 70 lectures and hands-on courses for fellow technicians and dentists, and ${articles.length} articles in dental journals`,
   'Works with iTero, 3Shape TRIOS, Medit and Primescan, or physical impressions',
 ]
 

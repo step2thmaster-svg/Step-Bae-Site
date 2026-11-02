@@ -38,7 +38,7 @@ const reasons = [
   ['A direct line to your technician', 'Questions about a prep, a shade or a plan go straight to the person making the case, so nothing is lost in translation.'],
   ['Matched to your patient', 'Shade, texture and form are matched to the patient’s own teeth and face, not just to a shade tab.'],
   ['Planned before it’s made', 'Complex and esthetic cases are planned with you first, so the result is predictable and remakes are rare.'],
-  ['An educator dentists learn from', `More than 70 lectures and hands-on courses internationally, and ${articles.length} articles published in dental journals.`],
+  ['Always learning, always sharing', `We keep learning and pass it on: more than 70 lectures and hands-on courses for fellow technicians and dentists, and ${articles.length} articles in dental journals.`],
   ['Fits your workflow', 'iTero, 3Shape TRIOS, Medit and Primescan, or physical impressions with prepaid shipping labels.'],
 ]
 
