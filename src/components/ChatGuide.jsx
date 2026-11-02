@@ -639,7 +639,6 @@ const keywordRules = [
   [/rush|urgent|expedite|asap/, 'lab-rush'],
   [/turnaround|how long|how fast|days|weeks|deadline/, 'turnaround'],
   [/warrant|guarantee/, 'lab-warranty'],
-  [/chairside|delivery appointment/, 'lab-chairside'],
   [/shipping|label|fedex|ups|courier/, 'case-physical'],
   [/already have|current lab|another lab|other lab|switch/, 'switching'],
   [/why|better|different|quality|choose|experience|reviews?/, 'why'],

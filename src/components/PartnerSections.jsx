@@ -144,7 +144,7 @@ const flow = [
   ['Connect once', 'Add STEPBAE in your scanner’s portal, or request prepaid labels for physical impressions.'],
   ['Send the case', 'Scans, prescription, shade and photos. If anything is unclear, we call before we start.'],
   ['Handcrafted', 'Your case is designed, built, characterized and photographed for quality control in house.'],
-  ['Delivered', 'Standard turnaround is 10 business days. Local practices can ask STEPBAE to join the delivery appointment.'],
+  ['Delivered', 'Standard turnaround is 10 business days, and every restoration is backed by a 5-year warranty.'],
 ]
 
 export function CaseFlow() {
@@ -295,12 +295,6 @@ export const partnerFaqs = [
     q: 'How much do restorations cost?',
     a: 'Pricing depends on the restoration and your monthly volume, so we send our current price list on request. Ask for it with the form below, or in the chat.',
     words: /price|pricing|cost|fee|how much|quote/,
-  },
-  {
-    id: 'chairside',
-    q: 'Can you help at the delivery appointment?',
-    a: 'For local practices, STEPBAE can join the delivery appointment to adjust or stain the restorations chairside. Just ask when you send the case.',
-    words: /chairside|delivery appointment|seat|come to (our|my) office|in person/,
   },
 ]
 
