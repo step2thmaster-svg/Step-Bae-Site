@@ -49,13 +49,23 @@ export default function HomeConsult() {
           <div className="rounded-[3px] border border-gold/40 bg-cream px-6 py-5 text-ink shadow-[0_18px_40px_-18px_rgba(0,0,0,0.6)]">
             <p className="text-[12px] font-semibold tracking-[0.2em] text-gold-dark">UPCOMING</p>
             <ul className="mt-3 divide-y divide-gold-dark/20">
+              {/* each event opens its registration page, or its details on the Consultation page until registration opens */}
               {upcoming.map((ev) => (
                 <li key={ev.title} className="py-2.5 first:pt-0 last:pb-0">
-                  <p className="text-[12px] font-semibold tracking-[0.12em] text-gold-dark">{ev.date.toUpperCase()}</p>
-                  <p className="mt-0.5 font-display text-[19px] font-medium leading-tight">
-                    {ev.title}
-                    {ev.place && <span className="font-serif text-[13px] font-normal text-ink/60"> · {ev.place}</span>}
-                  </p>
+                  <a
+                    href={ev.link ?? '/consultation.html#events'}
+                    {...(ev.link && { target: '_blank', rel: 'noopener noreferrer' })}
+                    className="group block"
+                  >
+                    <p className="text-[12px] font-semibold tracking-[0.12em] text-gold-dark">{ev.date.toUpperCase()}</p>
+                    <p className="mt-0.5 font-display text-[19px] font-medium leading-tight group-hover:text-gold-dark">
+                      {ev.title}
+                      {ev.place && <span className="font-serif text-[13px] font-normal text-ink/60"> · {ev.place}</span>}
+                    </p>
+                    <p className="mt-1 text-[12.5px] font-semibold text-gold-dark">
+                      {ev.link ? 'Details & Registration ↗' : ev.soon ? 'Registration coming soon →' : 'Details →'}
+                    </p>
+                  </a>
                 </li>
               ))}
             </ul>
