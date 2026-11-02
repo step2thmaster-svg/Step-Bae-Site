@@ -5,7 +5,7 @@ export const reviews = [
   {
     page: 'partnership',
     about: 'Dentist who switched from an unsatisfying lab',
-    quote: 'I was tired of adjusting crowns and sending cases back. Since switching to STEPBAE, restorations seat with minimal adjustment and the shade matches on the first try. I only wish I had switched sooner.',
+    quote: 'I was tired of adjusting crowns and sending cases back. Since switching to STEPBAE Dental Lab, restorations seat with minimal adjustment and the shade matches on the first try. I only wish I had switched sooner.',
     tag: 'Switched labs',
     name: '',
     role: 'Dentist, partner practice',
@@ -15,7 +15,7 @@ export const reviews = [
   {
     page: 'partnership',
     about: 'Dentist searching for the best work for their patients',
-    quote: 'I’d tried several labs looking for work I’d be proud to put in my patients’ mouths. STEPBAE’s anterior work is the most natural I’ve seen: real depth of color, texture and form that fits the patient. My patients notice, and so do their friends.',
+    quote: 'I’d tried several labs looking for work I’d be proud to put in my patients’ mouths. STEPBAE Dental Lab’s anterior work is the most natural I’ve seen: real depth of color, texture and form that fits the patient. My patients notice, and so do their friends.',
     tag: 'Esthetic results',
     name: '',
     role: 'Dentist, partner practice',
@@ -24,7 +24,7 @@ export const reviews = [
   {
     page: 'partnership',
     about: 'Dentist who values the relationship and quick responses',
-    quote: 'What sets STEPBAE apart is the relationship. When I have a question about a prep or a shade, I get a real answer from the technician, usually the same day. It feels like having a partner in the case, not a vendor.',
+    quote: 'What sets STEPBAE Dental Lab apart is the relationship. When I have a question about a prep or a shade, I get a real answer from the technician, usually the same day. It feels like having a partner in the case, not a vendor.',
     tag: 'Partnership',
     name: '',
     role: 'Dentist, partner practice',
