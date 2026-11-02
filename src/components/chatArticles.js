@@ -13,6 +13,38 @@ const forPatients = [
 
 export const articleKnowledge = [
   {
+    slug: 'dental-terms-explained',
+    short: 'Dental terms explained',
+    words: /what (does|is) .*mean|what (is|are) (a |an |the )?(crowns?|veneers?|bridges?|implants?|abutments?|fillings?|enamel|dentin|pulp|occlusion|provisionals?|anterior|posterior)\b|dental (terms|words|vocabulary|glossary)|glossary|terminology/,
+    say: 'Dental visits come with a lot of new words. Our simple guide explains the common ones, like crown, veneer, implant, abutment and shade, so you can follow along and ask good questions.',
+    tips: [],
+    next: forPatients,
+  },
+  {
+    slug: 'implant-crowns-and-all-on-x',
+    short: 'Implants & All-on-X',
+    words: /^(?!.*(course|train|class|workshop|hands.?on)).*(implant|all.?on.?(x|4|four|6|six)|full.?arch|hybrid|screw.?retained|pink (ceramic|porcelain|gingiva)|ti.?base|scan bod)/,
+    say: 'An implant restoration is only as good as the plan behind it. STEPBAE makes single implant crowns through full-arch bridges, with natural-looking pink ceramic gingiva.',
+    tips: [
+      'Single crowns depend on a natural emergence profile; screw retention is favored when the access allows',
+      'Full-arch cases are planned from the smile back to the implants, with enough restorative space',
+      'Send the implant system, scan bodies, a scan of the approved provisional and photos',
+    ],
+    next: [{ label: 'Plan an implant case', next: 'lead-talk' }, { label: 'Send a case', next: 'case-start' }],
+  },
+  {
+    slug: 'posterior-crowns-and-bridges',
+    short: 'Posterior crowns & bridges',
+    words: /posterior|molar|premolar|bicuspid|bridge|pontic|connector|occlusion|high bite|bite (is )?high|contacts? (open|tight)/,
+    say: 'Posterior work is judged by the bite before the smile. STEPBAE chooses the material for the tooth and the patient, and builds natural anatomy for function.',
+    tips: [
+      'Monolithic zirconia for molars and grinders; layered zirconia or lithium disilicate where the tooth shows',
+      'Cusps and grooves are built in, not ground in afterwards',
+      'Send a clear bite scan and notes on grinding or past fractures',
+    ],
+    next: [{ label: 'Ask which fits my case', next: 'lead-talk' }, { label: 'Send a case', next: 'case-start' }],
+  },
+  {
     slug: 'morphopsychology-teeth-that-fit-the-person',
     short: 'Morphopsychology',
     words: /morpho|tooth form|tooth shape|face shape|fit (the|my) (face|person|patient)|personality|remake/,

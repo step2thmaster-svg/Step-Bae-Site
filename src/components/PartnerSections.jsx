@@ -80,14 +80,17 @@ const restorations = [
   },
   {
     title: 'Posterior Crowns & Bridges',
+    subject: 'Posterior Crowns', // keeps the card's link on one line
     text: 'Monolithic or layered zirconia, chosen for the bite and the esthetic demands of each case.',
     image: '/images/case-posterior-bridge.jpg',
     position: 'object-right',
+    href: '/article.html?p=posterior-crowns-and-bridges',
   },
   {
     title: 'Implant & All-on-X',
     text: 'Single implant crowns through full-arch bridges, with natural-looking pink ceramic gingiva.',
     image: '/images/case-all-on-x.jpg',
+    href: '/article.html?p=implant-crowns-and-all-on-x',
   },
   {
     title: 'Diagnostic Wax-ups',
@@ -99,7 +102,7 @@ const restorations = [
 
 export function Restorations() {
   return (
-    <section data-chat-topic="partner-restorations" className="bg-ink px-6 py-16 lg:px-12">
+    <section id="restorations" data-chat-topic="partner-restorations" className="scroll-mt-20 bg-ink px-6 py-16 lg:px-12">
       <div className="mx-auto max-w-[1200px]">
         <p className="text-center text-[12px] font-semibold tracking-[0.3em] text-gold">WHAT WE MAKE</p>
         <h2 className="mt-3 text-center font-display text-[36px] font-medium leading-tight text-white md:text-[42px]">
@@ -112,7 +115,7 @@ export function Restorations() {
               <Card
                 key={r.title}
                 {...(r.href && { href: r.href })}
-                className="group overflow-hidden rounded-[6px] bg-ink-2 ring-1 ring-gold/20 transition hover:ring-gold/60"
+                className="group flex flex-col overflow-hidden rounded-[6px] bg-ink-2 ring-1 ring-gold/20 transition hover:ring-gold/60"
               >
                 <div className="aspect-[4/3] overflow-hidden bg-black">
                   <img
@@ -122,17 +125,17 @@ export function Restorations() {
                     className={`h-full w-full object-cover transition duration-700 group-hover:scale-105 ${r.position ?? 'object-center'}`}
                   />
                 </div>
-                <div className="p-5">
+                <div className="flex flex-1 flex-col p-5">
                   <h3 className="font-display text-[22px] font-medium leading-tight text-white">{r.title}</h3>
                   <p className="mt-2 text-[13.5px] leading-[1.55] text-white/75">{r.text}</p>
-                  {r.href && <p className="mt-3 text-[12.5px] font-semibold text-gold group-hover:text-gold-light">Learn more →</p>}
+                  {r.href && <p className="mt-auto pt-3 text-[12.5px] font-semibold text-gold group-hover:text-gold-light">Read about {r.subject ?? r.title} →</p>}
                 </div>
               </Card>
             )
           })}
         </div>
         <div className="mt-10 text-center">
-          <Button href="#partner-form" className="h-11 px-7">Request Our Price List</Button>
+          <Button href="#partner-form" className="h-11 px-7">Send Us a Case</Button>
         </div>
       </div>
     </section>
