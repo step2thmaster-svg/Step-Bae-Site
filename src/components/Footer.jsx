@@ -91,7 +91,7 @@ export default function Footer() {
         <div className="flex flex-col gap-3 border-t border-white/10 py-4 text-[12px] text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} STEPBAE Dental Laboratory. All rights reserved.</span>
           <div className="flex gap-6">
-            <a href="#" className="transition-colors hover:text-gold">Privacy Policy</a>
+            <a href="/privacy.html" className="transition-colors hover:text-gold">Privacy Policy</a>
             <a href="#" className="transition-colors hover:text-gold">Terms of Service</a>
           </div>
         </div>

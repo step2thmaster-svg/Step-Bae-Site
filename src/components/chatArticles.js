@@ -26,6 +26,19 @@ export const articleKnowledge = [
     next: forPatients,
   },
   {
+    slug: 'dental-terms-a-closer-look',
+    short: 'Dental terms, part 2',
+    words: /(part 2|advanced|more) (dental )?(terms|words)|tooth (numbers?|numbering|surfaces?)|teeth numbers?|mesial|distal|buccal|lingual|overbite|overjet|crossbite|inlay|onlay|hue|chroma|translucen|buccal corridor/,
+    say: 'Our second guide to dental words goes a step further, with simple illustrations: the sides of a tooth, tooth numbers, inlays and onlays, overbite and overjet, and the color words dentists and labs use.',
+    tips: [
+      'Every tooth has five sides: facial, lingual, mesial, distal and occlusal (an “MOD” filling covers three)',
+      'Adult teeth are numbered 1 to 32 in the US, starting with the upper right wisdom tooth',
+      'Inlays and onlays cover only part of a tooth, so more of your natural tooth is kept',
+      'Shade has three parts: hue, value and chroma, plus translucency at the edge',
+    ],
+    next: forPatients,
+  },
+  {
     slug: 'implant-crowns-and-all-on-x',
     short: 'Implants & All-on-X',
     words: /^(?!.*(course|train|class|workshop|hands.?on)).*(implant|all.?on.?(x|4|four|6|six)|full.?arch|hybrid|screw.?retained|pink (ceramic|porcelain|gingiva)|ti.?base|scan bod)/,
@@ -174,18 +187,18 @@ export const articleKnowledge = [
   .map((a) => ({ ...a, post: posts.find((p) => p.slug === a.slug) }))
   .filter((a) => a.post)
 
-// every word the Dental Terms guide explains ("Term (other name): meaning"), so the Mini Steps can answer
-// "what is an abutment?" with the guide's own plain-language definition
-const termsGuide = posts.find((p) => p.slug === 'dental-terms-explained')
+// every word the two Dental Terms guides explain ("Term (other name): meaning"), so the Mini Steps can answer
+// "what is an abutment?" with the guide's own plain-language definition, and link to the guide it comes from
+const termsGuides = ['dental-terms-explained', 'dental-terms-a-closer-look'].map((slug) => posts.find((p) => p.slug === slug)).filter(Boolean)
 const pattern = (name) =>
   name
     .toLowerCase()
     .replace(/ teeth$/, '')
     .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     .replace(/[- ]/g, '.?')
-export const glossary = (termsGuide?.body ?? [])
-  .flatMap((block) => block.list ?? [])
-  .map((item) => {
+export const glossary = termsGuides
+  .flatMap((guide) => guide.body.flatMap((block) => block.list ?? []).map((item) => [item, guide.href]))
+  .map(([item, href]) => {
     const [, term, other, meaning] = item.match(/^([^:(]+?)(?: \(([^)]+)\))?: (.+)$/)
     const names = [term, other].filter(Boolean).map(pattern).join('|')
     return {
@@ -194,7 +207,7 @@ export const glossary = (termsGuide?.body ?? [])
       meaning: meaning.charAt(0).toUpperCase() + meaning.slice(1),
       // asked as a definition: "what is…", "what does … mean", "define…", "meaning of…"
       words: new RegExp(`(what('?s| is| are| does)|define|meaning of|explain)\\W+(an? |the |my )?(${names})s?\\b|\\b(${names})s?\\W+(mean|definition)`),
-      href: termsGuide.href,
+      href,
     }
   })
 

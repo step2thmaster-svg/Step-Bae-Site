@@ -180,9 +180,17 @@ function Block({ block }) {
     )
   if (block.figure)
     return (
-      // small photos are shown near their own size rather than stretched to the column
+      // small photos are shown near their own size rather than stretched to the column; a labeled `diagram` opens on
+      // its own when tapped, where a phone can zoom in on labels too small to read in the column
       <figure className={`mt-8 ${block.small ? 'mx-auto max-w-[420px]' : ''}`}>
-        <img src={block.figure} alt={block.alt} loading="lazy" className="w-full rounded-[3px]" />
+        {block.diagram ? (
+          <a href={block.figure} target="_blank" rel="noopener" className="block">
+            <img src={block.figure} alt={block.alt} loading="lazy" className="w-full rounded-[3px]" />
+            <span className="mt-1.5 block text-[12px] text-ink/50 sm:hidden">Tap to enlarge</span>
+          </a>
+        ) : (
+          <img src={block.figure} alt={block.alt} loading="lazy" className="w-full rounded-[3px]" />
+        )}
         {block.caption && <figcaption className="mt-2.5 text-[14px] italic leading-[1.5] text-ink/65">{block.caption}</figcaption>}
         <Credit block={block} className="mt-1 text-ink/50" />
       </figure>

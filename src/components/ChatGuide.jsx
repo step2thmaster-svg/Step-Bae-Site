@@ -13,12 +13,14 @@ import { faqs } from './ConsultFAQ.jsx'
 import { partnerFaqs } from './PartnerSections.jsx'
 import { articleKnowledge, journalArticles, dentistArticles, patientArticles, glossary } from './chatArticles.js'
 
-// The Mini Steps, the site's guide and sales rep: a scripted conversation (no AI, no server) that helps visitors
+// The Mini Steps, the site's guide and sales rep: a scripted conversation that helps visitors
 // find their way, makes the case for STEPBAE, answers the usual questions (price, turnaround, "I already have a lab")
 // and walks dentists through sending a case or leaving their details. Each step says something and offers choices;
 // a choice either goes to another step (`next`) or opens a page (`href`), and a step with `lead` starts collecting
 // a lead right in the chat, one question at a time, with a review before anything is sent. Typed questions are matched to a step by keywords. Only facts the site already states are used:
-// no prices, turnaround times or offers are promised here; those go to STEPBAE.
+// no prices, turnaround times or offers are promised here; those go to STEPBAE. A typed question no keyword matches
+// is answered by AI (functions/api/chat.js, held to the same facts in chatKnowledge.js); when that isn't available
+// (no server, as in local development, or an error), the scripted "unknown" answer is shown instead.
 
 const caseChecklist = [
   'Both full arches and a bite scan, even for a single crown',
@@ -760,7 +762,7 @@ export default function ChatGuide() {
   }, [lead])
 
   useEffect(
-    () => save({ open, messages: messages.filter((m) => !m.lead && !m.private), greeted, offered }),
+    () => save({ open, messages: messages.filter((m) => !m.lead && !m.private && !m.thinking), greeted, offered }),
     [open, messages, greeted, offered],
   )
   useEffect(() => {
@@ -889,13 +891,44 @@ export default function ChatGuide() {
     }
   }
 
+  // a typed question no keyword matches goes to the AI, with the last few AI questions and answers for context;
+  // anything but an answer (no server, an error, a declined question) shows the scripted answer instead
+  const [asking, setAsking] = useState(false)
+  const askAi = async (question) => {
+    sendUnfinished()
+    setLead(null)
+    const history = messages
+      .filter((m) => m.ai)
+      .slice(-3)
+      .flatMap((m) => [{ role: 'user', text: m.q }, { role: 'assistant', text: m.text }])
+    say({ from: 'user', text: question }, { from: 'bot', thinking: true })
+    setAsking(true)
+    let reply = botMessage('unknown')
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question, history }),
+        signal: AbortSignal.timeout(30_000),
+      })
+      const data = res.ok && (await res.json())
+      if (data?.answer) reply = { from: 'bot', ai: true, q: question, text: data.answer }
+    } catch {
+      /* no server or no answer: the scripted reply stands */
+    }
+    setMessages((m) => [...m.filter((x) => !x.thinking), reply])
+    setAsking(false)
+  }
+
   const send = (e) => {
     e.preventDefault()
     const t = text.trim()
-    if (!t) return
+    if (!t || asking) return
     setText('')
-    if (waitingOn) answer(t)
-    else go(t, matchStep(t))
+    if (waitingOn) return answer(t)
+    const step = matchStep(t)
+    if (step === 'unknown') askAi(t.slice(0, 500))
+    else go(t, step)
   }
   const restart = () => {
     sendUnfinished()
@@ -949,6 +982,10 @@ export default function ChatGuide() {
                   onChangeField={changeField}
                   onSend={sendLead}
                 />
+              ) : m.thinking ? (
+                <ThinkingTurn key={i} />
+              ) : m.ai ? (
+                <AiTurn key={i} message={m} active={i === last} onChoose={go} />
               ) : (
                 <BotTurn key={i} step={steps[m.step] ?? steps.unknown} active={i === last} onChoose={go} />
               ),
@@ -965,7 +1002,7 @@ export default function ChatGuide() {
               aria-label={waitingOn ? 'Type your answer' : 'Type a question'}
               className="min-w-0 flex-1 rounded-[3px] border border-white/15 bg-ink px-3 py-2 text-[14px] text-white placeholder:text-white/40 focus:border-gold focus:outline-none"
             />
-            <button type="submit" aria-label="Send" className="rounded-[3px] bg-gold px-3 text-ink hover:bg-gold-light">
+            <button type="submit" disabled={asking} aria-label="Send" className="rounded-[3px] bg-gold px-3 text-ink hover:bg-gold-light disabled:opacity-60">
               <ArrowRight className="h-4 w-4" />
             </button>
           </form>
@@ -1081,6 +1118,49 @@ function LeadTurn({ message, lead, active, onAnswer, onChange, onChangeField, on
           </div>
         )}
       </div>
+    </div>
+  )
+}
+
+// an AI answer to a typed question, marked as one, with a way to reach a person or go back to the menu
+const aiOptions = [
+  { label: 'Talk to STEPBAE', next: 'lead-talk' },
+  { label: 'Show me the menu', next: 'start' },
+]
+function AiTurn({ message, active, onChoose }) {
+  return (
+    <div className="flex max-w-[96%] gap-2">
+      <Avatar crew size="h-8 w-8" still className="mt-0.5 ring-1" />
+      <div className="min-w-0 space-y-2">
+        <p className="w-fit whitespace-pre-line rounded-[12px] rounded-bl-[3px] bg-cream px-3 py-2 text-[14px] leading-snug text-ink">{message.text}</p>
+        <p className="px-1 text-[12px] italic leading-snug text-white/55">
+          Answered by AI, so it may not be perfect. Please don’t share health or personal details here.{' '}
+          <a href="/privacy.html" className="underline underline-offset-2 hover:text-gold">Privacy</a>
+        </p>
+        {active && (
+          <div className="flex flex-wrap gap-2 pt-1">
+            {aiOptions.map((o) => (
+              <button key={o.label} onClick={() => onChoose(o.label, o.next)} className={chip}>
+                {o.label}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// while the AI answer is on its way
+function ThinkingTurn() {
+  return (
+    <div className="flex max-w-[96%] gap-2" aria-label="The Mini Steps are thinking">
+      <Avatar crew size="h-8 w-8" still className="mt-0.5 ring-1" />
+      <p className="flex w-fit gap-1 rounded-[12px] rounded-bl-[3px] bg-cream px-3 py-3">
+        {[0, 150, 300].map((delay) => (
+          <span key={delay} className="h-1.5 w-1.5 animate-bounce rounded-full bg-ink/50 motion-reduce:animate-none" style={{ animationDelay: `${delay}ms` }} />
+        ))}
+      </p>
     </div>
   )
 }

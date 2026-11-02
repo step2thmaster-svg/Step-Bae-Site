@@ -13,6 +13,7 @@ import morphopsychology from './posts/morphopsychology.js'
 import implantAllOnX from './posts/implant-all-on-x.js'
 import posteriorCrowns from './posts/posterior-crowns.js'
 import dentalTerms from './posts/dental-terms.js'
+import dentalTermsAdvanced from './posts/dental-terms-advanced.js'
 
 // the two audiences the Insights library is split by; every topic belongs to one,
 // and a post belongs to one or to 'both' (it then appears under each)
@@ -47,7 +48,7 @@ export const topics = [
 
 // blog posts, each in its own file in ./posts (see natural-ceramics.js for the shape), newest first;
 // to add one, create the file and import it here. Each post is read at /article.html?p=<slug>
-export const posts = [morphopsychology, implantAllOnX, posteriorCrowns, dentalTerms, veneersVsOrtho, crownColor, crownVsVeneer, naturalCrowns, submitDigitalCase, zirconiaVsLayered, refractoryLayering, shadeMatching, naturalCeramics, diagnosticWaxUp].map((post) => ({ ...post, href: `/article.html?p=${post.slug}` }))
+export const posts = [morphopsychology, implantAllOnX, posteriorCrowns, dentalTermsAdvanced, dentalTerms, veneersVsOrtho, crownColor, crownVsVeneer, naturalCrowns, submitDigitalCase, zirconiaVsLayered, refractoryLayering, shadeMatching, naturalCeramics, diagnosticWaxUp].map((post) => ({ ...post, href: `/article.html?p=${post.slug}` }))
 
 export const getPost = (slug) => posts.find((post) => post.slug === slug)
 

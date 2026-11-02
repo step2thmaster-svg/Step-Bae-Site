@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" font-family="Georgia, 'Times New Roman', serif">
+  <title>A tooth in its socket, labeling the enamel, dentin and pulp, and the gumline, cementum, periodontal ligament and alveolar bone</title>
+  <defs>
+    <clipPath id="bone">
+      <path d="M140 700 L140 420 C220 412 270 390 300 372 L500 372 C530 390 580 412 660 420 L660 700 Z" />
+    </clipPath>
+    <pattern id="trabecular" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="7" cy="8" r="3" fill="#d9c4a2" />
+      <circle cx="19" cy="19" r="2.2" fill="#d9c4a2" />
+    </pattern>
+  </defs>
+  <rect width="1000" height="700" fill="#fbf7f1" />
+
+  <!-- bone, with the ligament as a band around the root -->
+  <path d="M140 700 L140 420 C220 412 270 390 300 372 L500 372 C530 390 580 412 660 420 L660 700 Z" fill="#ead9bc" />
+  <path d="M140 700 L140 420 C220 412 270 390 300 372 L500 372 C530 390 580 412 660 420 L660 700 Z" fill="url(#trabecular)" />
+  <path clip-path="url(#bone)" d="M500 330 C495 450 450 580 410 645 Q400 655 390 645 C350 580 305 450 300 330" fill="none" stroke="#e3a090" stroke-width="28" />
+
+  <!-- gums -->
+  <path d="M140 446 L140 352 C210 336 262 320 296 312 L400 312 L400 400 L300 400 C270 418 220 438 140 446 Z" fill="#e7a3a0" />
+  <path d="M660 446 L660 352 C590 336 538 320 504 312 L400 312 L400 400 L500 400 C530 418 580 438 660 446 Z" fill="#e7a3a0" />
+
+  <!-- tooth: enamel, dentin, cementum on the root, pulp -->
+  <path d="M300 330 C280 250 270 150 300 100 C330 70 470 70 500 100 C530 150 520 250 500 330 C495 450 450 580 410 645 Q400 655 390 645 C350 580 305 450 300 330 Z" fill="#fffdf8" stroke="#141210" stroke-width="2.5" />
+  <path d="M300 330 C292 255 293 165 322 125 C348 98 452 98 478 125 C507 165 508 255 500 330 C495 450 450 580 410 645 Q400 655 390 645 C350 580 305 450 300 330 Z" fill="#f1dfb5" />
+  <path d="M500 330 C495 450 450 580 410 645 Q400 655 390 645 C350 580 305 450 300 330" fill="none" stroke="#b98a4c" stroke-width="8" />
+  <path d="M360 205 C360 168 440 168 440 205 L432 300 C425 420 410 540 402 610 Q400 616 398 610 C390 540 375 420 368 300 Z" fill="#d9706a" />
+
+  <!-- leader lines and labels: the first guide's words in ink, this guide's in gold -->
+  <g stroke="#141210" stroke-width="1.5" fill="none" opacity="0.55">
+    <path d="M512 160 L690 120" />
+    <path d="M478 215 L690 190" />
+    <path d="M425 250 L690 260" />
+    <path d="M506 313 L690 330" />
+    <path d="M488 440 L690 410" />
+    <path d="M480 510 L690 490" />
+    <path d="M590 600 L690 570" />
+  </g>
+  <g fill="#141210">
+    <circle cx="512" cy="160" r="5" /><circle cx="478" cy="215" r="5" /><circle cx="425" cy="250" r="5" />
+  </g>
+  <g fill="#b98a4c">
+    <circle cx="506" cy="313" r="6" /><circle cx="488" cy="440" r="6" /><circle cx="480" cy="510" r="6" /><circle cx="590" cy="600" r="6" />
+  </g>
+  <g font-size="26" fill="#141210">
+    <text x="700" y="128">Enamel</text>
+    <text x="700" y="198">Dentin</text>
+    <text x="700" y="268">Pulp</text>
+  </g>
+  <g font-size="26" font-weight="bold" fill="#a87a3e">
+    <text x="700" y="338">Gumline</text>
+    <text x="700" y="418">Cementum</text>
+    <text x="700" y="498">Periodontal ligament</text>
+    <text x="700" y="578">Alveolar bone</text>
+  </g>
+  <g font-size="18" fill="#141210" opacity="0.6">
+    <text x="700" y="358">where the gum meets the tooth</text>
+    <text x="700" y="438">covers the root</text>
+    <text x="700" y="518">the fibers that hold and cushion</text>
+    <text x="700" y="598">the bone around the root</text>
+  </g>
+</svg>

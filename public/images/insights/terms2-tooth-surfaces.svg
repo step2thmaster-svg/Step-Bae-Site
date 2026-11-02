@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1260 640" font-family="Georgia, 'Times New Roman', serif">
+<title>An upper arch seen from below with the midline, and one molar enlarged to show its mesial, distal, facial (buccal), lingual and occlusal sides</title>
+<rect width="1260" height="640" fill="#fbf7f1"/>
+<path d="M30 560 C30 300 120 70 340 70 C560 70 650 300 650 560 Z" fill="#efc3bd"/>
+<path d="M140 560 C140 360 200 180 340 180 C480 180 540 360 540 560 Z" fill="#f4d3cd"/>
+<ellipse cx="298" cy="120" rx="34" ry="21" transform="rotate(8 298 120)" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<ellipse cx="230" cy="142" rx="28" ry="19" transform="rotate(26 230 142)" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<ellipse cx="172" cy="188" rx="24" ry="23" transform="rotate(48 172 188)" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<ellipse cx="134" cy="248" rx="26" ry="24" transform="rotate(64 134 248)" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<ellipse cx="108" cy="310" rx="26" ry="25" transform="rotate(72 108 310)" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<ellipse cx="88" cy="388" rx="38" ry="35" transform="rotate(80 88 388)" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<ellipse cx="74" cy="470" rx="35" ry="33" transform="rotate(84 74 470)" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<ellipse cx="382" cy="120" rx="34" ry="21" transform="rotate(-8 382 120)" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<ellipse cx="450" cy="142" rx="28" ry="19" transform="rotate(-26 450 142)" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<ellipse cx="508" cy="188" rx="24" ry="23" transform="rotate(-48 508 188)" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<ellipse cx="546" cy="248" rx="26" ry="24" transform="rotate(-64 546 248)" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<ellipse cx="572" cy="310" rx="26" ry="25" transform="rotate(-72 572 310)" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<ellipse cx="592" cy="388" rx="38" ry="35" transform="rotate(-80 592 388)" fill="#d4a868" stroke="#141210" stroke-width="2"/>
+<ellipse cx="606" cy="470" rx="35" ry="33" transform="rotate(-84 606 470)" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<path d="M340 40 L340 600" stroke="#141210" stroke-width="2" stroke-dasharray="8 8" opacity="0.6"/>
+<text x="340" y="30" font-size="22" text-anchor="middle" fill="#141210">Midline</text>
+<text x="340" y="420" font-size="22" text-anchor="middle" fill="#7a6a62" paint-order="stroke" stroke="#f4d3cd" stroke-width="8">tongue side</text>
+<text x="20" y="610" font-size="22" fill="#141210" opacity="0.6">cheek side</text>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#141210"/></marker></defs>
+<path d="M612 362 L810 150" stroke="#141210" stroke-width="1.5" stroke-dasharray="5 6" opacity="0.5"/>
+<path d="M612 414 L810 450" stroke="#141210" stroke-width="1.5" stroke-dasharray="5 6" opacity="0.5"/>
+<rect x="810" y="150" width="300" height="300" rx="70" fill="#fffdf8" stroke="#141210" stroke-width="2.5"/>
+<defs><clipPath id="m"><rect x="810" y="150" width="300" height="300" rx="70"/></clipPath></defs>
+<g clip-path="url(#m)"><path d="M810 150 L1110 150 L1076 184 L844 184 Z" fill="#d4a868"/><path d="M810 450 L1110 450 L1076 416 L844 416 Z" fill="#9c7a52"/><path d="M810 150 L844 184 L844 416 L810 450 Z" fill="#e7a3a0"/><path d="M1110 150 L1076 184 L1076 416 L1110 450 Z" fill="#7fc8c4"/></g>
+<path d="M870 306.0 C920.0 280.0 1000.0 326.0 1050 296.0 M956.0 210 C936.0 260.0 982.0 340.0 962.0 390" fill="none" stroke="#b98a4c" stroke-width="3" stroke-linecap="round"/>
+<rect x="810" y="150" width="300" height="300" rx="70" fill="none" stroke="#141210" stroke-width="2.5"/>
+<text x="960.0" y="100" paint-order="stroke" stroke="#fffdf8" stroke-width="8" stroke-linejoin="round" font-size="25" font-weight="bold" fill="#a87a3e" text-anchor="middle">Mesial</text>
+<text x="960.0" y="124" paint-order="stroke" stroke="#fffdf8" stroke-width="6" stroke-linejoin="round" font-size="18" fill="#6b645b" text-anchor="middle">toward the midline</text>
+<text x="960.0" y="488" paint-order="stroke" stroke="#fffdf8" stroke-width="8" stroke-linejoin="round" font-size="25" font-weight="bold" fill="#7a5c38" text-anchor="middle">Distal</text>
+<text x="960.0" y="512" paint-order="stroke" stroke="#fffdf8" stroke-width="6" stroke-linejoin="round" font-size="18" fill="#6b645b" text-anchor="middle">toward the back</text>
+<text x="792" y="292.0" paint-order="stroke" stroke="#fffdf8" stroke-width="8" stroke-linejoin="round" font-size="25" font-weight="bold" fill="#c0645e" text-anchor="end">Lingual</text>
+<text x="792" y="316.0" paint-order="stroke" stroke="#fffdf8" stroke-width="6" stroke-linejoin="round" font-size="18" fill="#6b645b" text-anchor="end">tongue side</text>
+<text x="1128" y="292.0" paint-order="stroke" stroke="#fffdf8" stroke-width="8" stroke-linejoin="round" font-size="25" font-weight="bold" fill="#3f8f8a" text-anchor="start">Facial</text>
+<text x="1128" y="316.0" paint-order="stroke" stroke="#fffdf8" stroke-width="6" stroke-linejoin="round" font-size="18" fill="#6b645b" text-anchor="start">(buccal)</text>
+<text x="1128" y="340.0" font-size="18" fill="#6b645b">cheek side</text>
+<text x="1018.0" y="238.0" paint-order="stroke" stroke="#fffdf8" stroke-width="8" stroke-linejoin="round" font-size="25" font-weight="bold" fill="#141210" text-anchor="middle">Occlusal</text>
+<text x="1018.0" y="262.0" paint-order="stroke" stroke="#fffdf8" stroke-width="6" stroke-linejoin="round" font-size="18" fill="#6b645b" text-anchor="middle">the chewing top</text>
+</svg>

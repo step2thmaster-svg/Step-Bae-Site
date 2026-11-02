@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" font-family="Georgia, 'Times New Roman', serif">
+<title>Shade tabs showing hue (more yellow to more red), value (lighter to darker), chroma (softer to stronger), and translucency at the edge of a tooth</title>
+<rect width="1200" height="760" fill="#fbf7f1"/>
+<defs><linearGradient id="edge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3e6cc" stop-opacity="1"/><stop offset="0.55" stop-color="#f1e5cf" stop-opacity="1"/><stop offset="1" stop-color="#dfe6ea" stop-opacity="0.35"/></linearGradient>
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#6b645b"/></marker></defs>
+<pattern id="stripes" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="24" height="24" fill="#3a3430"/><rect width="12" height="24" fill="#5a524b"/></pattern></defs>
+<text x="60" y="102" font-size="32" font-weight="bold" fill="#a87a3e">Hue</text>
+<text x="60" y="132" font-size="19" fill="#6b645b">the color family</text>
+<path transform="translate(420 40)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="#ecd6a0" stroke="#141210" stroke-width="1.8"/>
+<path transform="translate(570 40)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="#ecd9b4" stroke="#141210" stroke-width="1.8"/>
+<path transform="translate(720 40)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="#e8d0bc" stroke="#141210" stroke-width="1.8"/>
+<path transform="translate(870 40)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="#e2c5b8" stroke="#141210" stroke-width="1.8"/>
+<text x="455" y="192" font-size="17" fill="#6b645b" text-anchor="middle">more yellow</text>
+<text x="905" y="192" font-size="17" fill="#6b645b" text-anchor="middle">more red</text>
+<path d="M512 187 L850 187" stroke="#6b645b" stroke-width="1.5" marker-end="url(#ar)" opacity="0.6"/>
+<text x="60" y="277" font-size="32" font-weight="bold" fill="#a87a3e">Value</text>
+<text x="60" y="307" font-size="19" fill="#6b645b">light or dark</text>
+<path transform="translate(420 215)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="#faf3e4" stroke="#141210" stroke-width="1.8"/>
+<path transform="translate(570 215)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="#eadcc0" stroke="#141210" stroke-width="1.8"/>
+<path transform="translate(720 215)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="#d2c2a2" stroke="#141210" stroke-width="1.8"/>
+<path transform="translate(870 215)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="#ad9e82" stroke="#141210" stroke-width="1.8"/>
+<text x="455" y="367" font-size="17" fill="#6b645b" text-anchor="middle">lighter</text>
+<text x="905" y="367" font-size="17" fill="#6b645b" text-anchor="middle">darker</text>
+<path d="M512 362 L850 362" stroke="#6b645b" stroke-width="1.5" marker-end="url(#ar)" opacity="0.6"/>
+<text x="60" y="452" font-size="32" font-weight="bold" fill="#a87a3e">Chroma</text>
+<text x="60" y="482" font-size="19" fill="#6b645b">how strong the color is</text>
+<path transform="translate(420 390)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="#efe8da" stroke="#141210" stroke-width="1.8"/>
+<path transform="translate(570 390)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="#efdfbd" stroke="#141210" stroke-width="1.8"/>
+<path transform="translate(720 390)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="#efd49b" stroke="#141210" stroke-width="1.8"/>
+<path transform="translate(870 390)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="#efc675" stroke="#141210" stroke-width="1.8"/>
+<text x="455" y="542" font-size="17" fill="#6b645b" text-anchor="middle">softer</text>
+<text x="905" y="542" font-size="17" fill="#6b645b" text-anchor="middle">stronger</text>
+<path d="M512 537 L850 537" stroke="#6b645b" stroke-width="1.5" marker-end="url(#ar)" opacity="0.6"/>
+<text x="60" y="627" font-size="32" font-weight="bold" fill="#a87a3e">Translucency</text>
+<text x="60" y="657" font-size="19" fill="#6b645b">how much light passes through</text>
+<rect x="420" y="555" width="520" height="150" rx="6" fill="url(#stripes)"/>
+<path transform="translate(500 565) scale(1.0 1.05)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="#f1e3c6" stroke="#141210" stroke-width="1.8"/>
+<path transform="translate(790 565) scale(1.0 1.05)" d="M0 10 C0 3 6 0 14 0 L56 0 C64 0 70 3 70 10 L70 70 C70 102 58 122 35 124 C12 122 0 102 0 70 Z" fill="url(#edge)" stroke="#141210" stroke-width="1.8"/>
+<text x="535" y="733" font-size="17" fill="#6b645b" text-anchor="middle">flat and opaque</text>
+<text x="825" y="733" font-size="17" fill="#6b645b" text-anchor="middle">natural, see-through edge</text>
+</svg>

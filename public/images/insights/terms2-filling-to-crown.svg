@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" font-family="Georgia, 'Times New Roman', serif">
+<title>A filling, an inlay, an onlay and a crown on a back tooth, seen from above and from the side, with the restoration shown in gold</title>
+<rect width="1200" height="700" fill="#fbf7f1"/>
+<text x="30" y="200" font-size="18" fill="#6b645b" transform="rotate(-90 30 200)" text-anchor="middle">FROM ABOVE</text>
+<text x="30" y="450" font-size="18" fill="#6b645b" transform="rotate(-90 30 450)" text-anchor="middle">FROM THE SIDE</text>
+<text x="200" y="62" font-size="30" font-weight="bold" text-anchor="middle" fill="#141210">Filling</text>
+<text x="200" y="92" font-size="19" text-anchor="middle" fill="#6b645b">small, placed in the chair</text>
+<g transform="translate(120 125)">
+<rect x="5" y="5" width="150" height="150" rx="45" fill="#fffdf8"/>
+<path d="M66 64 C72 58 92 60 96 70 C100 82 94 96 82 98 C68 100 60 90 62 78 Z" fill="#d4a868"/>
+<path d="M30 82 C55 70 105 92 130 80 M82 30 C74 55 88 105 80 130" fill="none" stroke="#b98a4c" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+<rect x="5" y="5" width="150" height="150" rx="45" fill="none" stroke="#141210" stroke-width="2.5"/>
+</g>
+<g transform="translate(120 340) scale(1.0 1.25)">
+<path d="M-30 150 C10 130 40 118 60 116 L100 116 C120 118 150 130 190 150 L190 245 L-30 245 Z" fill="#efc3bd"/>
+<path d="M10 70 C10 40 20 20 40 18 C55 16 65 30 80 32 C95 30 105 16 120 18 C140 20 150 40 150 70 L145 120 C140 170 132 215 120 235 L105 235 C100 200 92 165 80 150 C68 165 60 200 55 235 L40 235 C28 215 20 170 15 120 Z" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<path d="M64 31 C70 33 90 33 96 31 L94 56 C88 61 72 61 66 56 Z" fill="#d4a868" stroke="#141210" stroke-width="1.5"/>
+</g>
+<text x="480" y="62" font-size="30" font-weight="bold" text-anchor="middle" fill="#141210">Inlay</text>
+<text x="480" y="92" font-size="19" text-anchor="middle" fill="#6b645b">fits inside, between the cusps</text>
+<g transform="translate(400 125)">
+<rect x="5" y="5" width="150" height="150" rx="45" fill="#fffdf8"/>
+<path d="M44 70 L70 68 L72 38 L90 38 L92 68 L116 70 L116 90 L92 92 L90 122 L72 122 L70 92 L44 90 Z" fill="#d4a868"/>
+<path d="M30 82 C55 70 105 92 130 80 M82 30 C74 55 88 105 80 130" fill="none" stroke="#b98a4c" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+<rect x="5" y="5" width="150" height="150" rx="45" fill="none" stroke="#141210" stroke-width="2.5"/>
+</g>
+<g transform="translate(400 340) scale(1.0 1.25)">
+<path d="M-30 150 C10 130 40 118 60 116 L100 116 C120 118 150 130 190 150 L190 245 L-30 245 Z" fill="#efc3bd"/>
+<path d="M10 70 C10 40 20 20 40 18 C55 16 65 30 80 32 C95 30 105 16 120 18 C140 20 150 40 150 70 L145 120 C140 170 132 215 120 235 L105 235 C100 200 92 165 80 150 C68 165 60 200 55 235 L40 235 C28 215 20 170 15 120 Z" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<path d="M54 27 C68 33 92 33 106 27 L102 78 L58 78 Z" fill="#d4a868" stroke="#141210" stroke-width="1.5"/>
+</g>
+<text x="760" y="62" font-size="30" font-weight="bold" text-anchor="middle" fill="#141210">Onlay</text>
+<text x="760" y="92" font-size="19" text-anchor="middle" fill="#6b645b">covers one or more cusps</text>
+<g transform="translate(680 125)">
+<rect x="5" y="5" width="150" height="150" rx="45" fill="#fffdf8"/>
+<path d="M50 6 C24 8 7 24 6 50 L6 110 C7 136 24 152 50 154 L92 154 L90 92 L116 90 L116 70 L92 68 L92 6 Z" fill="#d4a868"/>
+<path d="M30 82 C55 70 105 92 130 80 M82 30 C74 55 88 105 80 130" fill="none" stroke="#b98a4c" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+<rect x="5" y="5" width="150" height="150" rx="45" fill="none" stroke="#141210" stroke-width="2.5"/>
+</g>
+<g transform="translate(680 340) scale(1.0 1.25)">
+<path d="M-30 150 C10 130 40 118 60 116 L100 116 C120 118 150 130 190 150 L190 245 L-30 245 Z" fill="#efc3bd"/>
+<path d="M10 70 C10 40 20 20 40 18 C55 16 65 30 80 32 C95 30 105 16 120 18 C140 20 150 40 150 70 L145 120 C140 170 132 215 120 235 L105 235 C100 200 92 165 80 150 C68 165 60 200 55 235 L40 235 C28 215 20 170 15 120 Z" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<path d="M11 64 C11 40 21 20 40 18 C55 16 65 30 80 32 C93 31 101 28 106 27 L102 80 L14 84 Z" fill="#d4a868" stroke="#141210" stroke-width="1.5"/>
+</g>
+<text x="1040" y="62" font-size="30" font-weight="bold" text-anchor="middle" fill="#141210">Crown</text>
+<text x="1040" y="92" font-size="19" text-anchor="middle" fill="#6b645b">covers the whole tooth</text>
+<g transform="translate(960 125)">
+<rect x="5" y="5" width="150" height="150" rx="45" fill="#fffdf8"/>
+<path d="M50 5 L110 5 C138 5 155 22 155 50 L155 110 C155 138 138 155 110 155 L50 155 C22 155 5 138 5 110 L5 50 C5 22 22 5 50 5 Z" fill="#d4a868"/>
+<path d="M30 82 C55 70 105 92 130 80 M82 30 C74 55 88 105 80 130" fill="none" stroke="#b98a4c" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+<rect x="5" y="5" width="150" height="150" rx="45" fill="none" stroke="#141210" stroke-width="2.5"/>
+</g>
+<g transform="translate(960 340) scale(1.0 1.25)">
+<path d="M-30 150 C10 130 40 118 60 116 L100 116 C120 118 150 130 190 150 L190 245 L-30 245 Z" fill="#efc3bd"/>
+<path d="M10 70 C10 40 20 20 40 18 C55 16 65 30 80 32 C95 30 105 16 120 18 C140 20 150 40 150 70 L145 120 C140 170 132 215 120 235 L105 235 C100 200 92 165 80 150 C68 165 60 200 55 235 L40 235 C28 215 20 170 15 120 Z" fill="#fffdf8" stroke="#141210" stroke-width="2"/>
+<path d="M10 70 C10 40 20 20 40 18 C55 16 65 30 80 32 C95 30 105 16 120 18 C140 20 150 40 150 70 L145 120 L130 120 L124 64 C118 52 42 52 36 64 L30 120 L15 120 Z" fill="#d4a868" stroke="#141210" stroke-width="1.5"/>
+</g>
+</svg>

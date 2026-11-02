@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" font-family="Georgia, 'Times New Roman', serif">
+  <title>Side view of the front teeth showing overbite (vertical overlap) and overjet (horizontal distance), and back teeth seen from the front in a normal bite and in a crossbite</title>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#a87a3e" />
+    </marker>
+  </defs>
+  <rect width="1200" height="680" fill="#fbf7f1" />
+  <path d="M600 40 L600 640" stroke="#141210" stroke-width="1.5" opacity="0.15" />
+
+  <!-- left: front teeth from the side; the lips face right -->
+  <text x="300" y="44" font-size="28" font-weight="bold" text-anchor="middle" fill="#141210">Front teeth, from the side</text>
+  <text x="540" y="300" font-size="18" fill="#6b645b" text-anchor="middle">lips →</text>
+  <g transform="translate(0 -6)">
+  <!-- lower incisor first, so the upper one overlaps in front of it -->
+  <path transform="translate(352 415) rotate(12) scale(1.08)" d="M0 0 C10 20 16 50 18 90 C18 140 10 190 0 215 C-10 190 -18 140 -18 90 C-16 60 -8 25 -4 0 Z" fill="#fffdf8" stroke="#141210" stroke-width="1.7" />
+  <!-- upper incisor: root up, edge down and forward toward the lips -->
+  <path transform="translate(260 80) rotate(-18) scale(1.6)" d="M0 0 C18 40 30 90 34 130 C40 170 36 215 14 250 L6 252 C0 230 -8 200 -18 180 C-30 165 -34 150 -32 130 C-30 90 -18 40 0 0 Z" fill="#fffdf8" stroke="#141210" stroke-width="1.6" />
+  <path transform="translate(260 80) rotate(-18) scale(1.6)" d="M34 130 C20 136 -18 136 -32 130" fill="none" stroke="#141210" stroke-width="1" opacity="0.4" />
+  <!-- guides -->
+  <g stroke="#a87a3e" stroke-width="1.5" stroke-dasharray="6 6">
+    <path d="M352 415 L470 415" /><path d="M399 458 L470 458" />
+    <path d="M360 452 L360 540" /><path d="M399 464 L399 540" />
+  </g>
+  <!-- overbite: up and down -->
+  <path d="M460 419 L460 454" stroke="#a87a3e" stroke-width="3" marker-start="url(#a)" marker-end="url(#a)" />
+  <text x="480" y="432" font-size="24" font-weight="bold" fill="#a87a3e">Overbite</text>
+  <text x="480" y="456" font-size="17" fill="#6b645b">overlap, top to bottom</text>
+  <!-- overjet: front to back -->
+  <path d="M363 530 L396 530" stroke="#a87a3e" stroke-width="3" marker-start="url(#a)" marker-end="url(#a)" />
+  <text x="412" y="560" font-size="24" font-weight="bold" fill="#a87a3e">Overjet</text>
+  <text x="412" y="584" font-size="17" fill="#6b645b">distance, front to back</text>
+  <text x="170" y="200" font-size="20" fill="#141210" text-anchor="end">Upper</text>
+  <text x="170" y="224" font-size="20" fill="#141210" text-anchor="end">front tooth</text>
+  <path d="M178 212 L268 212" stroke="#141210" stroke-width="1.5" opacity="0.55" />
+  <text x="170" y="580" font-size="20" fill="#141210" text-anchor="end">Lower</text>
+  <text x="170" y="604" font-size="20" fill="#141210" text-anchor="end">front tooth</text>
+  <path d="M178 592 L330 592" stroke="#141210" stroke-width="1.5" opacity="0.55" />
+
+  </g>
+
+  <!-- right: back teeth from the front, normal and crossbite; cheek on the outside (left of each pair) -->
+  <text x="900" y="44" font-size="28" font-weight="bold" text-anchor="middle" fill="#141210">Back teeth, from the front</text>
+
+  <g transform="translate(700 120)">
+    <text x="80" y="20" font-size="22" text-anchor="middle" fill="#141210">Normal</text>
+    <!-- upper molar sits slightly outside the lower -->
+    <path d="M20 60 L140 60 L140 150 C140 168 132 184 118 186 C108 176 100 170 92 178 C84 168 74 168 66 178 C58 170 50 176 40 186 C26 184 20 168 20 150 Z" fill="#fffdf8" stroke="#141210" stroke-width="2.5" transform="translate(-14 0)" />
+    <path d="M30 330 L150 330 L150 240 C150 222 142 206 128 204 C118 214 110 220 102 212 C94 222 84 222 76 212 C68 220 60 214 50 204 C36 206 30 222 30 240 Z" fill="#fffdf8" stroke="#141210" stroke-width="2.5" transform="translate(-4 -14)" />
+    <text x="80" y="380" font-size="17" fill="#6b645b" text-anchor="middle">upper outside lower</text>
+  </g>
+  <g transform="translate(940 120)">
+    <text x="80" y="20" font-size="22" font-weight="bold" text-anchor="middle" fill="#a87a3e">Crossbite</text>
+    <!-- upper molar sits inside the lower -->
+    <path d="M20 60 L140 60 L140 150 C140 168 132 184 118 186 C108 176 100 170 92 178 C84 168 74 168 66 178 C58 170 50 176 40 186 C26 184 20 168 20 150 Z" fill="#fffdf8" stroke="#a87a3e" stroke-width="3" transform="translate(34 0)" />
+    <path d="M30 330 L150 330 L150 240 C150 222 142 206 128 204 C118 214 110 220 102 212 C94 222 84 222 76 212 C68 220 60 214 50 204 C36 206 30 222 30 240 Z" fill="#fffdf8" stroke="#141210" stroke-width="2.5" transform="translate(-14 -14)" />
+    <text x="80" y="380" font-size="17" fill="#6b645b" text-anchor="middle">upper inside lower</text>
+  </g>
+  <text x="680" y="560" font-size="18" fill="#6b645b">← cheek side</text>
+  <text x="1150" y="560" font-size="18" fill="#6b645b" text-anchor="end">tongue side →</text>
+</svg>

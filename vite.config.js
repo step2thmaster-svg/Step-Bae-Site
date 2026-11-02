@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   // six pages: home, About, the Craftsmanship gallery, Dentist Partnership, Consultation and Insights,
-  // plus the article page that shows one Insights post
+  // plus the article page that shows one Insights post, and the privacy policy
   build: {
     rollupOptions: {
       input: {
@@ -17,6 +17,7 @@ export default defineConfig({
         about: resolve(import.meta.dirname, 'about.html'),
         insights: resolve(import.meta.dirname, 'insights.html'),
         article: resolve(import.meta.dirname, 'article.html'),
+        privacy: resolve(import.meta.dirname, 'privacy.html'),
       },
     },
   },

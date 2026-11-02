@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 780" font-family="Georgia, 'Times New Roman', serif">
+<title>A chart of the 32 adult teeth numbered 1 to 32, colored by type: incisors, canines, premolars and molars</title>
+<rect width="1240" height="780" fill="#fbf7f1"/>
+<circle cx="222.7" cy="234.3" r="31" fill="#9c7a52" stroke="#141210" stroke-width="1.8"/>
+<text x="222.7" y="242.3" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">1</text>
+<circle cx="270.4" cy="184.5" r="31" fill="#9c7a52" stroke="#141210" stroke-width="1.8"/>
+<text x="270.4" y="192.5" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">2</text>
+<circle cx="328.1" cy="146.4" r="31" fill="#9c7a52" stroke="#141210" stroke-width="1.8"/>
+<text x="328.1" y="154.4" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">3</text>
+<circle cx="385.5" cy="120.5" r="25" fill="#d4a868" stroke="#141210" stroke-width="1.8"/>
+<text x="385.5" y="128.5" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">4</text>
+<circle cx="440.0" cy="103.0" r="25" fill="#d4a868" stroke="#141210" stroke-width="1.8"/>
+<text x="440.0" y="111.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">5</text>
+<circle cx="493.9" cy="91.0" r="23" fill="#7fc8c4" stroke="#141210" stroke-width="1.8"/>
+<text x="493.9" y="99.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">6</text>
+<circle cx="544.6" cy="83.9" r="21" fill="#e7a3a0" stroke="#141210" stroke-width="1.8"/>
+<text x="544.6" y="91.9" font-size="19" font-weight="bold" text-anchor="middle" fill="#141210">7</text>
+<circle cx="593.7" cy="80.5" r="21" fill="#e7a3a0" stroke="#141210" stroke-width="4"/>
+<text x="593.7" y="88.5" font-size="19" font-weight="bold" text-anchor="middle" fill="#141210">8</text>
+<circle cx="646.3" cy="80.5" r="21" fill="#e7a3a0" stroke="#141210" stroke-width="1.8"/>
+<text x="646.3" y="88.5" font-size="19" font-weight="bold" text-anchor="middle" fill="#141210">9</text>
+<circle cx="695.4" cy="83.9" r="21" fill="#e7a3a0" stroke="#141210" stroke-width="1.8"/>
+<text x="695.4" y="91.9" font-size="19" font-weight="bold" text-anchor="middle" fill="#141210">10</text>
+<circle cx="746.1" cy="91.0" r="23" fill="#7fc8c4" stroke="#141210" stroke-width="1.8"/>
+<text x="746.1" y="99.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">11</text>
+<circle cx="800.0" cy="103.0" r="25" fill="#d4a868" stroke="#141210" stroke-width="1.8"/>
+<text x="800.0" y="111.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">12</text>
+<circle cx="854.5" cy="120.5" r="25" fill="#d4a868" stroke="#141210" stroke-width="1.8"/>
+<text x="854.5" y="128.5" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">13</text>
+<circle cx="911.9" cy="146.4" r="31" fill="#9c7a52" stroke="#141210" stroke-width="1.8"/>
+<text x="911.9" y="154.4" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">14</text>
+<circle cx="969.6" cy="184.5" r="31" fill="#9c7a52" stroke="#141210" stroke-width="1.8"/>
+<text x="969.6" y="192.5" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">15</text>
+<circle cx="1017.3" cy="234.3" r="31" fill="#9c7a52" stroke="#141210" stroke-width="1.8"/>
+<text x="1017.3" y="242.3" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">16</text>
+<circle cx="1017.3" cy="545.7" r="31" fill="#9c7a52" stroke="#141210" stroke-width="1.8"/>
+<text x="1017.3" y="553.7" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">17</text>
+<circle cx="969.6" cy="595.5" r="31" fill="#9c7a52" stroke="#141210" stroke-width="1.8"/>
+<text x="969.6" y="603.5" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">18</text>
+<circle cx="911.9" cy="633.6" r="31" fill="#9c7a52" stroke="#141210" stroke-width="1.8"/>
+<text x="911.9" y="641.6" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">19</text>
+<circle cx="854.5" cy="659.5" r="25" fill="#d4a868" stroke="#141210" stroke-width="1.8"/>
+<text x="854.5" y="667.5" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">20</text>
+<circle cx="800.0" cy="677.0" r="25" fill="#d4a868" stroke="#141210" stroke-width="1.8"/>
+<text x="800.0" y="685.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">21</text>
+<circle cx="746.1" cy="689.0" r="23" fill="#7fc8c4" stroke="#141210" stroke-width="1.8"/>
+<text x="746.1" y="697.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">22</text>
+<circle cx="695.4" cy="696.1" r="21" fill="#e7a3a0" stroke="#141210" stroke-width="1.8"/>
+<text x="695.4" y="704.1" font-size="19" font-weight="bold" text-anchor="middle" fill="#141210">23</text>
+<circle cx="646.3" cy="699.5" r="21" fill="#e7a3a0" stroke="#141210" stroke-width="1.8"/>
+<text x="646.3" y="707.5" font-size="19" font-weight="bold" text-anchor="middle" fill="#141210">24</text>
+<circle cx="593.7" cy="699.5" r="21" fill="#e7a3a0" stroke="#141210" stroke-width="1.8"/>
+<text x="593.7" y="707.5" font-size="19" font-weight="bold" text-anchor="middle" fill="#141210">25</text>
+<circle cx="544.6" cy="696.1" r="21" fill="#e7a3a0" stroke="#141210" stroke-width="1.8"/>
+<text x="544.6" y="704.1" font-size="19" font-weight="bold" text-anchor="middle" fill="#141210">26</text>
+<circle cx="493.9" cy="689.0" r="23" fill="#7fc8c4" stroke="#141210" stroke-width="1.8"/>
+<text x="493.9" y="697.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">27</text>
+<circle cx="440.0" cy="677.0" r="25" fill="#d4a868" stroke="#141210" stroke-width="1.8"/>
+<text x="440.0" y="685.0" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">28</text>
+<circle cx="385.5" cy="659.5" r="25" fill="#d4a868" stroke="#141210" stroke-width="1.8"/>
+<text x="385.5" y="667.5" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">29</text>
+<circle cx="328.1" cy="633.6" r="31" fill="#9c7a52" stroke="#141210" stroke-width="4"/>
+<text x="328.1" y="641.6" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">30</text>
+<circle cx="270.4" cy="595.5" r="31" fill="#9c7a52" stroke="#141210" stroke-width="1.8"/>
+<text x="270.4" y="603.5" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">31</text>
+<circle cx="222.7" cy="545.7" r="31" fill="#9c7a52" stroke="#141210" stroke-width="1.8"/>
+<text x="222.7" y="553.7" font-size="22" font-weight="bold" text-anchor="middle" fill="#141210">32</text>
+<text x="620" y="210" font-size="26" text-anchor="middle" fill="#6b645b" letter-spacing="4">UPPER</text>
+<text x="620" y="510" font-size="26" text-anchor="middle" fill="#6b645b" letter-spacing="4">LOWER</text>
+<text x="40" y="398.0" font-size="20" fill="#6b645b">Patient’s right</text>
+<text x="1200" y="398.0" font-size="20" fill="#6b645b" text-anchor="end">Patient’s left</text>
+<circle cx="320" cy="390.0" r="12" fill="#e7a3a0" stroke="#141210" stroke-width="1.5"/>
+<text x="340" y="397.0" font-size="21" fill="#141210">Incisors</text>
+<circle cx="480" cy="390.0" r="12" fill="#7fc8c4" stroke="#141210" stroke-width="1.5"/>
+<text x="500" y="397.0" font-size="21" fill="#141210">Canines</text>
+<circle cx="640" cy="390.0" r="12" fill="#d4a868" stroke="#141210" stroke-width="1.5"/>
+<text x="660" y="397.0" font-size="21" fill="#141210">Premolars</text>
+<circle cx="800" cy="390.0" r="12" fill="#9c7a52" stroke="#141210" stroke-width="1.5"/>
+<text x="820" y="397.0" font-size="21" fill="#141210">Molars</text>
+<text x="620" y="270" font-size="19" text-anchor="middle" fill="#6b645b">Tooth 8: upper right front tooth</text>
+<text x="620" y="560" font-size="19" text-anchor="middle" fill="#6b645b">Tooth 30: lower right first molar</text>
+<text x="620" y="588" font-size="19" text-anchor="middle" fill="#6b645b">Wisdom teeth: 1, 16, 17 and 32</text>
+</svg>
