@@ -170,11 +170,7 @@ export const hosts = [
     names: ['KADTA', 'DLAT', 'ODLA', 'FDLA', 'ECDL'],
   },
   {
-    group: 'Dental practices',
-    names: ['City Spire Dental'],
-  },
-  {
-    group: 'Labs & training centers',
-    names: ['Dawson Center', 'Creodent', 'By Design Dental Lab', 'Nudent Dental Lab', 'Oral Arts Dental Lab', 'Beauty & Beast Dental Lab', 'Nash Institute for Dental Learning'],
+    group: 'Practices, labs & training centers',
+    names: ['Dawson Center', 'Creodent', 'By Design Dental Lab', 'Nudent Dental Lab', 'Oral Arts Dental Lab', 'Beauty & Beast Dental Lab', 'Nash Institute for Dental Learning', 'City Spire Dental'],
   },
 ]
