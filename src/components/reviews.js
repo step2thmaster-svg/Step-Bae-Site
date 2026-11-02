@@ -11,26 +11,6 @@ export const reviews = [
     role: 'Dentist, partner practice',
     approved: true,
   },
-  // first shared on toothlab.ai, about the restorations themselves
-  {
-    page: 'partnership',
-    quote: 'I was skeptical at first, but the quality speaks for itself. The crowns and bridges we receive are consistently excellent. My chair time has decreased significantly, and patient satisfaction is at an all-time high.',
-    name: 'Dr. Jeff Blank',
-    role: 'General Dentist, Beaufort, SC',
-    tag: 'Consistent quality',
-    source: 'toothlab',
-    approved: true,
-  },
-  {
-    page: 'partnership',
-    quote: 'The level of precision in their work is remarkable. Every case comes back exactly as planned. The communication is clear, and the support team is always responsive. Highly recommend.',
-    name: 'Dr. Jong S. Lim',
-    role: 'General Dentist, Elmhurst, NY',
-    tag: 'Precision',
-    source: 'toothlab',
-    approved: true,
-  },
-
   // anonymous for now; names can be added once each client agrees
   {
     page: 'partnership',

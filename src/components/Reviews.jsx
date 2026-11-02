@@ -1,6 +1,6 @@
 import { reviewsFor } from './reviews.js'
 
-// first and last initials: "Dr. Jeff Blank" → "JB", "Dr. Jong S. Lim" → "JL"
+// first and last initials of a named reviewer: "Dr. Jane A. Smith" → "JS"
 const initials = (name) => {
   const words = name.replace(/^Dr\.?\s*/, '').split(/\s+/).filter(Boolean)
   return (words[0][0] + (words.length > 1 ? words[words.length - 1][0] : '')).toUpperCase()
@@ -46,7 +46,6 @@ export default function Reviews({ page, eyebrow = 'FROM OUR CLIENTS', title = ['
   const shown = reviewsFor(page)
   if (!shown.length) return null
   const [first, ...rest] = shown
-  const fromToothLab = shown.some((r) => r.source === 'toothlab')
   return (
     <section className="overflow-hidden bg-cream px-6 py-16 text-ink lg:px-12">
       <div className="mx-auto max-w-[1150px]">
@@ -80,15 +79,6 @@ export default function Reviews({ page, eyebrow = 'FROM OUR CLIENTS', title = ['
         )}
         {rest.length > 1 && <p className="mt-2 text-center text-[12px] text-ink/50 sm:hidden">Swipe for more →</p>}
 
-        {fromToothLab && (
-          <p className="mt-6 text-center text-[13px] italic text-ink/60">
-            Some reviews first shared on{' '}
-            <a href="https://toothlab.ai" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-gold-dark">
-              ToothLab.ai
-            </a>
-            .
-          </p>
-        )}
       </div>
     </section>
   )
