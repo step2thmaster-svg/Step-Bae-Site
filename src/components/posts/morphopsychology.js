@@ -56,7 +56,7 @@ export default {
         'Communication skill. Agree on the plan with the dentist before anything is made, and make sure the patient knows what the new smile will look like. Surprising the patient or the dentist is in no one’s best interest.',
         'Elective dentistry. Esthetic work is a choice. The patient’s expectations, the warranty and the cost should all be clear before the case starts.',
         'Binary system. Every step is a yes or a no. There are no cut corners. If something isn’t right, it isn’t right yet.',
-        'Delivery follow-up. After the case is seated, check in with the dentist on how the patient feels about the result, and learn from it for the next case.',
+        'Delivery follow-up. When it’s practical, I join the delivery appointment so I can adjust or stain chairside. It’s the one optional module.',
       ],
     },
     {
