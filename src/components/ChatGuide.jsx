@@ -76,7 +76,7 @@ const workNote = mailNote('Have you seen STEPBAE’s work?', [
 
 // why dentists choose STEPBAE: the strengths the rest of the site already shows
 const strengths = [
-  'Every case is handcrafted in house at STEPBAE, under the direction of a CDT, DTG master ceramist',
+  'Every case is handcrafted in house at STEPBAE by highly trained, skilled technicians',
   'You talk directly with the technician making your case',
   'Shade matched to your patient’s natural teeth, not just a shade tab',
   `An educator dentists learn from: more than 70 lectures and hands-on courses internationally, and ${articles.length} published articles`,
