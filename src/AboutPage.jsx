@@ -45,16 +45,15 @@ export default function AboutPage() {
                 Toothmaster is the legal middle name, not a nickname.
               </p>
               <p className="mt-4 max-w-[640px] text-pretty text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
-                Step specializes in setting up or
-                refining a digital workflow, planning complex esthetic and implant cases, and
-                training teams to get more from their potential. Step works side by side with your
-                dentist and the team, so the improvements become part of how you work.
+                Step Bae, CDT, DTG, is a master ceramist and certified dental technician with nearly three
+                decades at the bench, since 1997, and more than a decade teaching. The work runs from
+                natural anterior esthetics to complex implant cases, and the teaching from hands-on courses
+                for lab teams to keynotes in Seoul, IDS Cologne and Digital Days in Mexico.
               </p>
               <p className="mt-4 max-w-[640px] text-pretty text-[15px] leading-[1.65] text-white/90 md:text-[16px]">
-                Away from the bench, you might catch Step riding an electric unicycle. It’s
-                one wheel, no handlebars, and every small shift of weight counts. It turns out
-                that’s not so different from shaping a tooth: stay balanced, stay focused, and
-                let the small adjustments do the work.
+                Whether it’s setting up or refining a digital workflow, planning a difficult case or training
+                a team in layering and staining, Step works side by side with you, so the improvements become
+                part of how you work long after the course ends.
               </p>
               <Button href="/consultation.html#inquiry" className="mt-6 h-10 px-6 [text-shadow:none]">Book a Consultation</Button>
             </div>

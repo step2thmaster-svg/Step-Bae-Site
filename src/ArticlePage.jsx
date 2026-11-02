@@ -148,26 +148,27 @@ function Block({ block }) {
         ))}
       </div>
     )
-  // two small photos side by side with one shared caption
+  // two small photos side by side with one shared caption; `even` trims both to the same 4:3 frame so they line up
   if (block.pair)
     return (
       <figure className="mx-auto mt-8 max-w-[560px]">
         <div className="grid grid-cols-2 items-end gap-3">
           {block.pair.map((photo) => (
-            <img key={photo.src} src={photo.src} alt={photo.alt} loading="lazy" className="w-full rounded-[3px]" />
+            <img key={photo.src} src={photo.src} alt={photo.alt} loading="lazy" className={`w-full rounded-[3px] ${block.even ? 'aspect-[4/3] object-cover' : ''}`} />
           ))}
         </div>
         {block.caption && <figcaption className="mt-2.5 text-[14px] italic leading-[1.5] text-ink/65">{block.caption}</figcaption>}
+        <Credit block={block} className="mt-1 text-ink/50" />
       </figure>
     )
-  // a numbered sequence of photos, two to a row from sm up, in the order given
+  // a numbered sequence of photos, two to a row from sm up, in the order given; `even` trims them to one 4:3 frame
   if (block.gallery)
     return (
       <ol className="mt-8 grid gap-x-5 gap-y-6 sm:grid-cols-2">
         {block.gallery.map((photo, i) => (
           <li key={photo.src}>
             <figure>
-              <img src={photo.src} alt={photo.alt} loading="lazy" className="w-full rounded-[3px]" />
+              <img src={photo.src} alt={photo.alt} loading="lazy" className={`w-full rounded-[3px] ${block.even ? 'aspect-[4/3] object-cover' : ''}`} />
               <figcaption className="mt-2 text-[14px] leading-[1.5] text-ink/70">
                 <span className="mr-1.5 font-semibold text-gold-dark">{i + 1}.</span>
                 {photo.caption}

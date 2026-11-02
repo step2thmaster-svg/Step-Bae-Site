@@ -15,9 +15,14 @@ export const articleKnowledge = [
   {
     slug: 'dental-terms-explained',
     short: 'Dental terms explained',
-    words: /what (does|is) .*mean|what (is|are) (a |an |the )?(crowns?|veneers?|bridges?|implants?|abutments?|fillings?|enamel|dentin|pulp|occlusion|provisionals?|anterior|posterior)\b|dental (terms|words|vocabulary|glossary)|glossary|terminology/,
-    say: 'Dental visits come with a lot of new words. Our simple guide explains the common ones, like crown, veneer, implant, abutment and shade, so you can follow along and ask good questions.',
-    tips: [],
+    words: /what (does|is) .*mean|dental (terms|words|vocabulary|glossary)|glossary|terminology|jargon/,
+    say: 'Dental visits come with a lot of new words. Our simple guide explains the common ones, like crown, veneer, implant, abutment and shade, so you can follow along and ask good questions. Ask us about any word, like “what is an abutment?”',
+    tips: [
+      'Parts of a tooth: enamel, dentin, pulp, root and gums',
+      'Restorations: fillings, crowns, veneers, bridges, implants and All-on-X',
+      'Materials: ceramic, zirconia and lithium disilicate',
+      'There are no silly questions: ask your dentist what a word means for your teeth',
+    ],
     next: forPatients,
   },
   {
@@ -168,6 +173,30 @@ export const articleKnowledge = [
   // each article's own page, audience and title, from the Insights library
   .map((a) => ({ ...a, post: posts.find((p) => p.slug === a.slug) }))
   .filter((a) => a.post)
+
+// every word the Dental Terms guide explains ("Term (other name): meaning"), so the Mini Steps can answer
+// "what is an abutment?" with the guide's own plain-language definition
+const termsGuide = posts.find((p) => p.slug === 'dental-terms-explained')
+const pattern = (name) =>
+  name
+    .toLowerCase()
+    .replace(/ teeth$/, '')
+    .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    .replace(/[- ]/g, '.?')
+export const glossary = (termsGuide?.body ?? [])
+  .flatMap((block) => block.list ?? [])
+  .map((item) => {
+    const [, term, other, meaning] = item.match(/^([^:(]+?)(?: \(([^)]+)\))?: (.+)$/)
+    const names = [term, other].filter(Boolean).map(pattern).join('|')
+    return {
+      id: term.toLowerCase().replace(/[^a-z]+/g, '-'),
+      term: other ? `${term} (${other})` : term,
+      meaning: meaning.charAt(0).toUpperCase() + meaning.slice(1),
+      // asked as a definition: "what is…", "what does … mean", "define…", "meaning of…"
+      words: new RegExp(`(what('?s| is| are| does)|define|meaning of|explain)\\W+(an? |the |my )?(${names})s?\\b|\\b(${names})s?\\W+(mean|definition)`),
+      href: termsGuide.href,
+    }
+  })
 
 // Step's journal articles that can be read online
 export const journalArticles = insights.filter((p) => p.external)

@@ -28,8 +28,8 @@ function Quote({ r }) {
           {r.name ? initials(r.name) : '✦'}
         </span>
         <span>
-          {r.name && <span className="block font-semibold text-ink">{r.name}</span>}
-          <span className={r.name ? 'text-ink/60' : 'font-semibold text-ink/80'}>{r.role}</span>
+          {r.name && <span className="block text-balance font-semibold text-ink">{r.name}</span>}
+          <span className={`block text-balance ${r.name ? 'text-ink/60' : 'font-semibold text-ink/80'}`}>{r.role}</span>
         </span>
       </figcaption>
     </figure>

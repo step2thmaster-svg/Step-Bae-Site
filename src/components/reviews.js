@@ -42,28 +42,28 @@ export const reviews = [
   {
     page: 'consultation',
     about: 'Consulting client',
-    quote: 'We brought STEPBAE in to help with our digital workflow. Instead of telling us to buy new equipment, they worked with what we had and built a process our team actually follows. Our remakes dropped, and communication between the practice and lab is much clearer.',
+    quote: 'We brought Step in to help with our laboratory digital workflow. We were given very easy-to-follow instructions for our team members, and it didn’t take long for our clients to notice the difference. Our production numbers increased and remake rates dropped.',
     tag: 'Consulting',
     name: '',
-    role: 'Practice owner, consulting client',
+    role: 'L. Dental Group, Lilburn, GA',
     approved: true,
   },
   {
     page: 'consultation',
     about: 'Hands-on training client',
-    quote: 'Our technicians learned more in two days of hands-on training than in months on their own. Small group, real techniques, and everyone left using new layering and staining skills on their very next case.',
+    quote: 'Our technicians learned so much in two days of hands-on training. Most importantly, everyone on my team became highly motivated. We all started using new layering and staining skills on our very next case.',
     tag: 'Hands-on training',
     name: '',
-    role: 'Training client',
+    role: 'Oral Arts Dental Lab, Huntsville, AL',
     approved: true,
   },
   {
     page: 'consultation',
-    about: 'State dental lab association meeting organizer',
-    quote: 'STEPBAE’s lecture was one of the highlights of our state meeting. It was built around our theme, packed with practical takeaways, and our members were still talking about it at the next meeting. We’d gladly invite STEPBAE back.',
+    about: 'Seoul International Dental Exhibition & Scientific Congress',
+    quote: 'Step’s keynote lecture was one of the highlights of our meeting. It was built around our digital theme, packed with practical takeaways, and our attendees were very hyped and motivated.',
     tag: 'Lecture',
     name: '',
-    role: 'State dental lab association meeting organizer',
+    role: 'Seoul International Dental Exhibition & Scientific Congress, Seoul, South Korea',
     approved: true,
   },
   {
@@ -77,5 +77,6 @@ export const reviews = [
   },
 ]
 
-// the reviews ready to show on a page (or several pages' reviews together)
-export const reviewsFor = (pages) => reviews.filter((r) => [pages].flat().includes(r.page) && r.approved)
+// the reviews ready to show, in the order of the pages given: each page shows every review, its own first
+export const reviewsFor = (pages) =>
+  [pages].flat().flatMap((page) => reviews.filter((r) => r.page === page && r.approved))

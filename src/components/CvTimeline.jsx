@@ -1,4 +1,4 @@
-import { events } from './cv.js'
+import { events, eventLinks } from './cv.js'
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
@@ -24,6 +24,20 @@ const placeClass = { intl: 'text-gold', upcoming: 'text-teal/80' }
 // flags for international lines, keyed by the country at the end of the place
 const flags = { Germany: '🇩🇪', 'South Korea': '🇰🇷', Mexico: '🇲🇽' }
 const flagFor = (place) => flags[place.split(', ').pop()]
+
+// an entry's text, with any name from eventLinks turned into a link to its site (only on its own line, when it has a date)
+const linkPattern = new RegExp(`(${[...new Set(eventLinks.map((l) => l.name))].map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`)
+const withLinks = (text, date) =>
+  text.split(linkPattern).map((part, i) => {
+    const link = eventLinks.find((l) => l.name === part && (l.date ?? date) === date)
+    return link ? (
+      <a key={i} href={link.href} target="_blank" rel="noopener noreferrer" className="underline decoration-gold/60 underline-offset-2 transition-colors hover:text-gold">
+        {part}
+      </a>
+    ) : (
+      part
+    )
+  })
 
 // lg (three columns): the years that start the middle and right columns
 const columnStarts = ['2019', '2016']
@@ -67,7 +81,7 @@ export default function CvTimeline() {
                       {months[Number(date.split('/')[0]) - 1]}
                     </span>
                     <span className={textClass[tag] ?? 'text-white/90'}>
-                      <span className={tag === 'cancelled' ? 'line-through decoration-white/40' : ''}>{what}</span>
+                      <span className={tag === 'cancelled' ? 'line-through decoration-white/40' : ''}>{withLinks(what, date)}</span>
                       {where && <span className={placeClass[tag] ?? 'text-white/50'}> · {where}</span>}
                       {tag === 'intl' && flagFor(where) && (
                         <span className="ml-1.5 not-italic" role="img" aria-label={where.split(', ').pop()}>

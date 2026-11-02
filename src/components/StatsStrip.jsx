@@ -5,7 +5,7 @@ const firstYear = events[0][0].split('/')[1]
 // cities taught in: places given as "City, State/Country" (state-only places like "Virginia" aren't counted), skipping cancelled and upcoming
 const cities = new Set(events.filter(([, , place, tag]) => place.includes(', ') && tag !== 'cancelled' && tag !== 'upcoming').map(([, , place]) => place))
 
-// headline count of lectures and hands-on courses, set by hand (the CV list in cv.js has 68 delivered entries)
+// headline count of lectures and hands-on courses, set by hand (the CV list in cv.js has 69 delivered entries)
 const lectureCount = 70
 
 const stats = [

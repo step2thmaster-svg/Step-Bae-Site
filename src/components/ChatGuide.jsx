@@ -11,7 +11,7 @@ import { formats } from './ConsultFormats.jsx'
 import { upcoming } from './Events.jsx'
 import { faqs } from './ConsultFAQ.jsx'
 import { partnerFaqs } from './PartnerSections.jsx'
-import { articleKnowledge, journalArticles, dentistArticles, patientArticles } from './chatArticles.js'
+import { articleKnowledge, journalArticles, dentistArticles, patientArticles, glossary } from './chatArticles.js'
 
 // The Mini Steps, the site's guide and sales rep: a scripted conversation (no AI, no server) that helps visitors
 // find their way, makes the case for STEPBAE, answers the usual questions (price, turnaround, "I already have a lab")
@@ -191,6 +191,21 @@ const articleSteps = Object.fromEntries(
         ...(a.post.audience === 'patients' ? [{ label: 'Write a note to my dentist', href: dentistNote }] : []),
         { label: 'Read the full article', href: a.post.href },
         { label: 'Another topic', next: a.post.audience === 'patients' ? 'insights-patients' : 'insights-dentists' },
+      ],
+    },
+  ]),
+)
+
+// one word from the Dental Terms guide, explained the way the guide explains it
+const termSteps = Object.fromEntries(
+  glossary.map((t) => [
+    `term-${t.id}`,
+    {
+      say: [`${t.term}: ${t.meaning}`],
+      options: [
+        { label: 'Ask about another word', next: 'term-ask' },
+        { label: 'Read the full guide', href: t.href },
+        { label: 'Ask my dentist for STEPBAE', next: 'patient-ask' },
       ],
     },
   ]),
@@ -464,6 +479,11 @@ const steps = {
     ],
   },
   ...articleSteps,
+  ...termSteps,
+  'term-ask': {
+    say: ['Type any dental word and we’ll explain it simply, like “what is an abutment?” or “what does occlusion mean?”'],
+    options: [{ label: 'Read the full guide', href: glossary[0]?.href }, { label: 'Something else', next: 'start' }],
+  },
   dentist: {
     say: ['Happy to help. What would you like to know about?'],
     options: [
@@ -620,7 +640,9 @@ const keywordRules = [
   [/trios|3shape/, 'portal-3Shape TRIOS'],
   [/medit/, 'portal-Medit'],
   [/primescan|cerec|dentsply|sirona/, 'portal-Primescan / CEREC'],
-  // the Insights articles, ahead of the broader lab rules that share their words (shade, impression, crown)
+  // a dental word asked as a definition ("what is an abutment?"), then the Insights articles, ahead of the broader
+  // lab rules that share their words (shade, impression, crown)
+  ...glossary.map((t) => [t.words, `term-${t.id}`]),
   ...articleKnowledge.map((a) => [a.words, `art-${a.slug}`]),
   [/scanner|portal|connect/, 'scanner'],
   [/impression|model|ship|mail in|physical/, 'case-physical'],

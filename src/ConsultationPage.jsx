@@ -34,7 +34,7 @@ export default function ConsultationPage() {
       <ConsultServices />
       <ConsultProcess />
       <ConsultFormats />
-      <Reviews page="consultation" />
+      <Reviews page={['consultation', 'partnership', 'patients']} />
       <Events />
       <ConsultFAQ />
       <ConsultForm />

@@ -10,10 +10,10 @@ export const events = [
   ['3/2015', 'Ivoclar lecture & Demo', 'Cologne, Germany', 'intl'],
   ['5/2015', 'GC hands-on course', 'Alsip, IL'],
   ['6/2015', 'Morphopsychology 1', 'Charlotte, NC'],
-  ['7/2015', 'Korean National Technician Expo, Keynote speaker', 'Seoul, South Korea', 'intl'],
+  ['7/2015', 'Seoul International Dental Exhibition & Scientific Congress, Keynote speaker', 'Seoul, South Korea', 'intl'],
   ['8/2015', 'GC hands-on course, Dawson Center', 'Chesapeake, VA'],
   ['8/2015', 'DTG Symposium, lecture & WMDA commentator', 'Provo, UT'],
-  ['9/2015', 'Creodent, GC hands-on course', 'New York, NY'],
+  ['9/2015', 'Creodent Dental Lab, GC hands-on course', 'New York, NY'],
   ['10/2015', 'Morphopsychology 2', 'Charlotte, NC'],
   ['11/2015', 'GC lecture, ECDL', 'Charlotte, NC'],
   ['11/2015', 'Master Speakers Symposium, Keynote Speaker', 'Las Vegas, NV'],
@@ -80,9 +80,20 @@ export const events = [
   ['2/2024', 'Lecture & demo, Lab Day', 'Chicago, IL'],
   ['3/2024', 'GC hands-on course', 'Alsip, IL'],
   ['8/2024', 'Zirconia hands-on course', 'Lafayette, LA'],
+  ['10/2024', 'Gro3X Summit hands-on training', 'Fort Mill, SC'],
 
   ['2/2027', 'GC lecture, LMT Lab Day', 'Chicago, IL', 'upcoming'],
   ['2/2027', 'American Equilibration Society Annual Scientific Meeting', 'Chicago, IL', 'upcoming'],
+]
+
+// names in the lines above that link to a site: a link applies wherever its name appears, or with `date`, only on that line
+export const eventLinks = [
+  { name: 'Dr. Bylis', href: 'https://bylisdental.com/' },
+  { name: 'WMDA commentator', href: 'https://www.youtube.com/watch?v=DK9-J9UKqiM', date: '8/2016' }, // the DTG's 2016 WMDA video
+  { name: 'WMDA commentator', href: 'https://www.youtube.com/watch?v=UpRQRhTA-V8', date: '8/2017' }, // the DTG's 2017 WMDA video
+  { name: 'Digital Days lecture', href: 'https://www.facebook.com/692511723/videos/a.10159723681521724/841028241029249', date: '9/2023' }, // video on Facebook
+  { name: 'DTG Symposium, Lecture', href: 'https://www.youtube.com/watch?v=AEj5SUELuv4', date: '8/2014' }, // Step's DTG lecture, from GC America
+  { name: 'DLAT lecture & hands-on course', href: 'https://www.youtube.com/watch?v=mGYrztipJbk', date: '4/2018' }, // DLAT's conference highlights
 ]
 
 // [month/year, publication, subject, link to read it online (where there is one), a one-line summary, a photo from it,
@@ -156,7 +167,7 @@ export const hosts = [
   },
   {
     group: 'International meetings',
-    names: ['IDS Cologne, Koln, Germany', 'Korean National Technician Expo, Seoul, South Korea', 'Digital Days, Puebla, Mexico'],
+    names: ['IDS Cologne, Koln, Germany', 'Seoul International Dental Exhibition & Scientific Congress, Seoul, South Korea', 'Digital Days, Puebla, Mexico'],
   },
   {
     group: 'U.S. meetings & symposia',
@@ -171,6 +182,6 @@ export const hosts = [
   },
   {
     group: 'Practices, labs & training centers',
-    names: ['Dawson Center', 'Creodent', 'By Design Dental Lab', 'Nudent Dental Lab', 'Oral Arts Dental Lab', 'Beauty & Beast Dental Lab', 'Nash Institute for Dental Learning', 'City Spire Dental'],
+    names: ['Dawson Center', 'Creodent Dental Lab', 'By Design Dental Lab', 'Nudent Dental Lab', 'Oral Arts Dental Lab', 'Beauty & Beast Dental Lab', 'Nash Institute for Dental Learning', 'City Spire Dental'],
   },
 ]
