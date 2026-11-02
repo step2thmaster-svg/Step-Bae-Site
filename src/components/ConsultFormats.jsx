@@ -70,8 +70,9 @@ export const formats = [
     title: 'Lecture & Keynote',
     text: 'For conferences, study clubs and corporate events, built around your event’s theme and goals.',
     where: ['On-site', 'Online'],
-    image: '/images/about/stage-digital-days.jpg',
-    position: 'object-[60%_40%]',
+    // Step lecturing to a study group around a conference table; framed on the room and the speaker
+    image: '/images/consult/lecture-roundtable.jpg',
+    position: 'object-[60%_45%]',
   },
   {
     group: 'Events',
