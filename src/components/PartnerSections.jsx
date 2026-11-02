@@ -34,7 +34,7 @@ export function Promises() {
 
 // why dentists send their esthetic cases here
 const reasons = [
-  ['Handcrafted by skilled technicians', 'Every case is designed, built and finished in our own lab by highly trained technicians, with the care of a boutique lab, not a production line.'],
+  ['Handcrafted by skilled technicians', 'Highly trained technicians give every case the attention of a boutique lab: precise fit, natural esthetics and consistent quality, case after case.'],
   ['A direct line to your technician', 'Questions about a prep, a shade or a plan go straight to the person making the case, so nothing is lost in translation.'],
   ['Matched to your patient', 'Shade, texture and form are matched to the patient’s own teeth and face, not just to a shade tab.'],
   ['Planned before it’s made', 'Complex and esthetic cases are planned with you first, so the result is predictable and remakes are rare.'],
