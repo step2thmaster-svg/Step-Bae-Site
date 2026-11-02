@@ -9,7 +9,7 @@ import { articles } from './cv.js'
 // the four promises a practice can count on, shown right under the opening
 export const promises = [
   ['10', 'Business days', 'Standard turnaround from the day we receive your case'],
-  ['5-Year', 'Warranty', 'On every restoration we make'],
+  ['5', 'Year warranty', 'On every restoration we make'],
   ['4', 'Scanner portals', 'iTero, 3Shape TRIOS, Medit and Primescan'],
   ['1:1', 'With your technician', 'You talk directly with the person making your case'],
 ]
@@ -24,7 +24,7 @@ export function Promises() {
               {label.toUpperCase()}
               <span className="mt-1 block text-[11.5px] font-normal tracking-normal text-white/55">{note}</span>
             </dt>
-            <dd className="font-display text-[38px] font-medium leading-none text-gold md:text-[46px]">{value}</dd>
+            <dd className="font-display text-[38px] font-medium leading-none text-gold [font-variant-numeric:lining-nums] md:text-[46px]">{value}</dd>
           </div>
         ))}
       </dl>
