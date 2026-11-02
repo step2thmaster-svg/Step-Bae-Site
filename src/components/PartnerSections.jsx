@@ -16,15 +16,15 @@ export const promises = [
 
 export function Promises() {
   return (
-    <section className="border-y border-gold/25 bg-ink-2 px-4 py-4 sm:px-6 lg:px-12">
-      <dl className="mx-auto grid max-w-[1000px] grid-cols-2 gap-y-4 md:grid-cols-4">
+    <section className="border-y border-gold/25 bg-ink-2 px-4 py-7 sm:px-6 lg:px-12">
+      <dl className="mx-auto grid max-w-[1100px] grid-cols-2 gap-y-6 md:grid-cols-4">
         {promises.map(([value, label, note]) => (
           <div key={label} className="flex flex-col-reverse justify-end px-2 text-center">
-            <dt className="mt-1 text-[10.5px] font-semibold tracking-[0.12em] text-white/85 sm:text-[11px]">
+            <dt className="mt-1.5 text-[12px] font-semibold tracking-[0.12em] text-white/85 sm:text-[13px]">
               {label.toUpperCase()}
-              <span className="mt-0.5 block text-[10.5px] font-normal tracking-normal text-white/55">{note}</span>
+              <span className="mt-1 block text-[11.5px] font-normal tracking-normal text-white/55">{note}</span>
             </dt>
-            <dd className="font-display text-[26px] font-medium leading-none text-gold md:text-[30px]">{value}</dd>
+            <dd className="font-display text-[38px] font-medium leading-none text-gold md:text-[46px]">{value}</dd>
           </div>
         ))}
       </dl>
