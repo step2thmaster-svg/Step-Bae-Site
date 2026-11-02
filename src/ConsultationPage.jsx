@@ -7,6 +7,7 @@ import ConsultFormats from './components/ConsultFormats.jsx'
 import ConsultFAQ from './components/ConsultFAQ.jsx'
 import Events from './components/Events.jsx'
 import ConsultForm from './components/ConsultForm.jsx'
+import Reviews from './components/Reviews.jsx'
 import Footer from './components/Footer.jsx'
 
 export default function ConsultationPage() {
@@ -33,6 +34,7 @@ export default function ConsultationPage() {
       <ConsultServices />
       <ConsultProcess />
       <ConsultFormats />
+      <Reviews page="consultation" />
       <Events />
       <ConsultFAQ />
       <ConsultForm />

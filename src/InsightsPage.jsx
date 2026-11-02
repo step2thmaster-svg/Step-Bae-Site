@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Header from './components/Header.jsx'
 import Button from './components/Button.jsx'
+import Reviews from './components/Reviews.jsx'
 import Footer from './components/Footer.jsx'
 import AudienceTag, { audienceColor } from './components/AudienceTag.jsx'
 import { topics, insights, formatDate } from './components/insights.js'
@@ -205,6 +206,8 @@ export default function InsightsPage() {
           )}
         </div>
       </section>
+
+      <Reviews page="patients" eyebrow="FROM OUR PATIENTS" title={['What Patients', 'Say']} />
 
       {/* 3. conversion: one next step for each audience, in its color */}
       <section className="border-t border-gold/30 px-6 py-14 lg:px-12">

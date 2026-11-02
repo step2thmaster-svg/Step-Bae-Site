@@ -211,52 +211,6 @@ export function Approach() {
   )
 }
 
-// reviews from STEPBAE's dentist clients, first published on toothlab.ai (only those about the restorations themselves)
-const reviews = [
-  {
-    quote: 'I was skeptical at first, but the quality speaks for itself. The crowns and bridges we receive are consistently excellent. My chair time has decreased significantly, and patient satisfaction is at an all-time high.',
-    name: 'Dr. Jeff Blank',
-    role: 'General Dentist, Beaufort, SC',
-  },
-  {
-    quote: 'The level of precision in their work is remarkable. Every case comes back exactly as planned. The communication is clear, and the support team is always responsive. Highly recommend.',
-    name: 'Dr. Jong S. Lim',
-    role: 'General Dentist, Elmhurst, NY',
-  },
-]
-
-export function Reviews() {
-  return (
-    <section className="bg-cream px-6 py-16 text-ink lg:px-12">
-      <div className="mx-auto max-w-[1000px]">
-        <p className="text-center text-[12px] font-semibold tracking-[0.3em] text-gold-dark">FROM OUR DENTISTS</p>
-        <h2 className="mt-3 text-center font-display text-[36px] font-medium leading-tight md:text-[42px]">
-          What Dentists <em className="font-normal text-gold-dark">Say</em>
-        </h2>
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {reviews.map((r) => (
-            <figure key={r.name} className="rounded-[3px] border border-gold-dark/30 bg-white/60 p-7">
-              <span aria-hidden="true" className="font-display text-[56px] leading-[0.6] text-gold-dark">“</span>
-              <blockquote className="mt-2 font-display text-[19px] italic leading-[1.5]">{r.quote}</blockquote>
-              <figcaption className="mt-5 text-[14px]">
-                <span className="font-semibold">{r.name}</span>
-                <span className="block text-ink/65">{r.role}</span>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-        <p className="mt-5 text-center text-[13px] italic text-ink/60">
-          Reviews first shared on{' '}
-          <a href="https://toothlab.ai" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-gold-dark">
-            ToothLab.ai
-          </a>
-          .
-        </p>
-      </div>
-    </section>
-  )
-}
-
 // the questions dentists ask before sending a first case; the Mini Steps chat answers from these too, `words` being
 // what a visitor might type to ask each one
 export const partnerFaqs = [

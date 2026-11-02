@@ -2,7 +2,8 @@ import Header from './components/Header.jsx'
 import Button from './components/Button.jsx'
 import PortalGuide from './components/PortalGuide.jsx'
 import PartnerForm from './components/PartnerForm.jsx'
-import { Promises, Reasons, Restorations, CaseFlow, Approach, Reviews, PartnerFAQ } from './components/PartnerSections.jsx'
+import { Promises, Reasons, Restorations, CaseFlow, Approach, PartnerFAQ } from './components/PartnerSections.jsx'
+import Reviews from './components/Reviews.jsx'
 import Footer from './components/Footer.jsx'
 
 export default function PartnershipPage() {
@@ -30,7 +31,7 @@ export default function PartnershipPage() {
       <Reasons />
       <Restorations />
       <CaseFlow />
-      <Reviews />
+      <Reviews page="partnership" eyebrow="FROM OUR DENTISTS" title={['What Dentists', 'Say']} />
       <Approach />
       <PortalGuide />
       <PartnerFAQ />
