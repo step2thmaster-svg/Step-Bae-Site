@@ -1,0 +1,34 @@
+# Deploys the site to Vercel on every push: main goes live at www.stepbae.com, any other branch gets a preview link.
+# Done here rather than through Vercel's GitHub app, which can't reach a repo on someone else's personal account.
+# Needs one repo secret, VERCEL_TOKEN (vercel.com/account/tokens); the IDs below aren't secret.
+name: Deploy to Vercel
+
+on:
+  push:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  VERCEL_ORG_ID: team_D7XOdDYqvsGVDW8AHYXWJqIe
+  VERCEL_PROJECT_ID: prj_f55EyFlNndobWcqWj5eCzHeh518n
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm install --global vercel@latest
+      - name: Deploy
+        env:
+          TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ "$GITHUB_REF" = "refs/heads/main" ]; then ENV=production; PROD=--prod; else ENV=preview; PROD=; fi
+          vercel pull --yes --environment=$ENV --token="$TOKEN"
+          vercel build $PROD --token="$TOKEN"
+          vercel deploy --prebuilt $PROD --token="$TOKEN"
