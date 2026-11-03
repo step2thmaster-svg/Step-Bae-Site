@@ -3,7 +3,7 @@ import { articles } from './cv.js'
 import { EMAIL } from './sendForm.js'
 
 // What the Mini Steps' AI answers are allowed to know and say, for typed questions the scripted chat has no answer
-// for. Read only by the server (functions/api/chat.js), never shipped to the browser. The rules restate STEPBAE's
+// for. Read only by the server (api/chat.js), never shipped to the browser. The rules restate STEPBAE's
 // policies exactly as the site does; the knowledge is every Insights article in full, so a new article is learned
 // on the next deploy. Keep this text stable between deploys: it is cached, and any change re-bills it once.
 

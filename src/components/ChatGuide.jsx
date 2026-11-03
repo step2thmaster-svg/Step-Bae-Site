@@ -19,7 +19,7 @@ import { articleKnowledge, journalArticles, dentistArticles, patientArticles, gl
 // a choice either goes to another step (`next`) or opens a page (`href`), and a step with `lead` starts collecting
 // a lead right in the chat, one question at a time, with a review before anything is sent. Typed questions are matched to a step by keywords. Only facts the site already states are used:
 // no prices, turnaround times or offers are promised here; those go to STEPBAE. A typed question no keyword matches
-// is answered by AI (functions/api/chat.js, held to the same facts in chatKnowledge.js); when that isn't available
+// is answered by AI (api/chat.js, held to the same facts in chatKnowledge.js); when that isn't available
 // (no server, as in local development, or an error), the scripted "unknown" answer is shown instead.
 
 const caseChecklist = [

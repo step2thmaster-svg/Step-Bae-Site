@@ -1,8 +1,8 @@
 import Anthropic from '@anthropic-ai/sdk'
-import { systemPrompt } from '../../src/components/chatKnowledge.js'
+import { systemPrompt } from '../src/components/chatKnowledge.js'
 
-// POST /api/chat: the Mini Steps' AI answer for a typed question the scripted chat can't match. Runs on Cloudflare
-// Pages Functions, where the API key lives as a secret (ANTHROPIC_API_KEY), never in the browser. Kept small and
+// POST /api/chat: the Mini Steps' AI answer for a typed question the scripted chat can't match. Runs as a Vercel
+// Function, where the API key lives as an environment variable (ANTHROPIC_API_KEY), never in the browser. Kept small and
 // cheap on purpose: Claude Haiku 5.5 at low effort, the site knowledge cached, short questions and a short history.
 // The browser falls back to the scripted "we're simple guides" answer whenever this returns anything but an answer.
 
@@ -44,13 +44,14 @@ const readConversation = async (request) => {
   return messages
 }
 
-export async function onRequestPost({ request, env }) {
-  if (!env.ANTHROPIC_API_KEY) return json({ error: 'not configured' }, 503)
+export async function POST(request) {
+  const apiKey = process.env.ANTHROPIC_API_KEY
+  if (!apiKey) return json({ error: 'not configured' }, 503)
   if (!sameSite(request)) return json({ error: 'forbidden' }, 403)
   const messages = await readConversation(request)
   if (!messages) return json({ error: 'bad request' }, 400)
 
-  const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1, timeout: 25_000 })
+  const client = new Anthropic({ apiKey, maxRetries: 1, timeout: 25_000 })
   try {
     const response = await client.messages.create({
       model: MODEL,

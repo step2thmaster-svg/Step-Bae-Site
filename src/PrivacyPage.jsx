@@ -25,7 +25,7 @@ const sections = [
   {
     title: 'The services this site runs on',
     text: [
-      'The site is hosted by Cloudflare, which may record technical details such as your IP address to deliver pages and protect the site from abuse. Fonts load from Google Fonts. We don’t use advertising or tracking cookies, and we don’t sell or share your information for marketing.',
+      'The site is hosted by Vercel, which may record technical details such as your IP address to deliver pages and protect the site from abuse. Fonts load from Google Fonts. We don’t use advertising or tracking cookies, and we don’t sell or share your information for marketing.',
     ],
   },
   {
