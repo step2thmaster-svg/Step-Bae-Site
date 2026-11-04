@@ -12,7 +12,8 @@ const topicLabel = (id) => topics.find((t) => t.id === id)?.label
 const categories = [
   { id: 'dentists', label: 'For Dentists', test: (p) => p.audience !== 'patients' && !p.source },
   { id: 'patients', label: 'For Patients', test: (p) => p.audience !== 'dentists' },
-  { id: 'journal', label: 'Published in Journals', test: (p) => p.source },
+  // journal articles read as a timeline, oldest first (Step's request); the others stay newest first
+  { id: 'journal', label: 'Published in Journals', test: (p) => p.source, oldestFirst: true },
 ]
 const filters = [{ id: 'all', label: 'All', test: () => true }, ...categories]
 const filterDot = { dentists: 'bg-gold', patients: 'bg-teal', journal: 'bg-ink' }
@@ -243,13 +244,13 @@ export default function InsightsPage() {
             browsing ? (
               // browsing: each category in its own side-scrolling row
               categories.map((c) => {
-                const items = shown.filter(c.test)
+                const items = c.oldestFirst ? shown.filter(c.test).reverse() : shown.filter(c.test)
                 return items.length ? <ArticleRow key={c.id} category={c} items={items} total={insights.filter(c.test).length} /> : null
               })
             ) : (
               // filtered or searched: every match as an even grid
               <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
-                {shown.map((p) => (
+                {(categories.find((c) => c.id === filter)?.oldestFirst ? [...shown].reverse() : shown).map((p) => (
                   <ArticleCard key={`${p.date}${p.title}`} p={p} />
                 ))}
               </div>
