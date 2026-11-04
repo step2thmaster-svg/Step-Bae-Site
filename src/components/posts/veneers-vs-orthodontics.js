@@ -12,6 +12,7 @@ export default {
   excerpt:
     'Veneers change how your teeth look. Braces and clear aligners change where your teeth are. Here is how cosmetic reshaping and orthodontic movement compare, and why the right choice starts with your dentist.',
   image: '/images/case-anterior-veneers.jpg',
+  patientThumb: '/images/insights/ortho-braces.jpg', // friendlier thumbnail where patients browse Insights
   imageAlt: 'Close-up of ceramic veneers on the upper front teeth, matched to the patient’s natural smile',
   body: [
     {

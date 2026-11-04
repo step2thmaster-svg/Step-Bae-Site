@@ -18,9 +18,12 @@ const categories = [
 const filters = [{ id: 'all', label: 'All', test: () => true }, ...categories]
 const filterDot = { dentists: 'bg-gold', patients: 'bg-teal', journal: 'bg-ink' }
 
-// one article as a compact card, the band across the top showing who it's for
-function ArticleCard({ p }) {
+// one article as a compact card, the band across the top showing who it's for. Where patients browse (their row or
+// filter, or any patients-only article), a post's `patientThumb` replaces a clinical close-up with a friendlier picture.
+function ArticleCard({ p, forPatients = false }) {
   const Card = p.href ? 'a' : 'article'
+  const image = p.patientThumb && (forPatients || p.audience === 'patients') ? p.patientThumb : p.image
+  const drawing = image?.endsWith('.svg')
   return (
     <Card
       {...(p.href ? { href: p.href } : {})}
@@ -30,14 +33,14 @@ function ArticleCard({ p }) {
     >
       <span className={`absolute inset-x-0 top-0 z-10 h-1 ${audienceColor[p.audience]}`} />
       {/* a journal article's photo is shown whole, on black; an article without one shows its topic */}
-      <div className="aspect-[16/10] overflow-hidden bg-ink">
-        {p.image ? (
+      <div className={`aspect-[16/10] overflow-hidden ${drawing ? 'bg-[#f8f3ea]' : 'bg-ink'}`}>
+        {image ? (
           <img
-            src={p.image}
+            src={image}
             alt=""
             loading="lazy"
-            style={{ objectPosition: p.imagePosition }}
-            className={`h-full w-full transition-transform duration-500 ${p.source ? 'object-contain' : 'object-cover group-hover:scale-105'}`}
+            style={image === p.image ? { objectPosition: p.imagePosition } : undefined}
+            className={`h-full w-full transition-transform duration-500 ${p.source || drawing ? 'object-contain' : 'object-cover'} ${p.source ? '' : 'group-hover:scale-105'} ${drawing ? 'p-2' : ''}`}
           />
         ) : (
           <span className="flex h-full items-center justify-center px-4 text-center font-display text-[18px] italic text-gold/80">
@@ -107,7 +110,7 @@ function ArticleRow({ category, items, total }) {
       >
         {items.map((p) => (
           <div key={`${p.date}${p.title}`} className="w-[70%] shrink-0 snap-start sm:w-[calc((100%-12px)/2)] md:w-[calc((100%-32px)/3)] lg:w-[calc((100%-48px)/4)]">
-            <ArticleCard p={p} />
+            <ArticleCard p={p} forPatients={category.id === 'patients'} />
           </div>
         ))}
       </div>
@@ -251,7 +254,7 @@ export default function InsightsPage() {
               // filtered or searched: every match as an even grid
               <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
                 {(categories.find((c) => c.id === filter)?.oldestFirst ? [...shown].reverse() : shown).map((p) => (
-                  <ArticleCard key={`${p.date}${p.title}`} p={p} />
+                  <ArticleCard key={`${p.date}${p.title}`} p={p} forPatients={filter === 'patients'} />
                 ))}
               </div>
             )

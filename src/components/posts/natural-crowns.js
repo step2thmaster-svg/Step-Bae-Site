@@ -9,6 +9,7 @@ export default {
   excerpt:
     'Two crowns can share the same shade on paper and look nothing alike in the mouth. The difference is color, shape and surface detail, and the care taken by the dentist and the lab.',
   image: '/images/insights/natural-crowns-detail.jpg',
+  patientThumb: '/images/insights/terms2-tooth-color.svg', // friendlier thumbnail where patients browse Insights
   imageAlt:
     'A finished anterior arch of lithium disilicate restorations, with the layering, design and pencil-mapping stages shown below',
   nameNote: true, // photos carry Step's old “bay” watermark

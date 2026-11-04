@@ -8,6 +8,7 @@ export default {
   excerpt:
     'Crowns and veneers can both give you a beautiful smile, but they are made for different jobs. Here is what each one is, how they differ, and why your dentist is the one who decides.',
   image: '/images/insights/crown-veneer-front-crowns.jpg',
+  patientThumb: '/images/insights/terms2-filling-to-crown.svg', // friendlier thumbnail where patients browse Insights
   imageAlt: 'Two crowns on the upper front teeth, matched to the color and texture of the patient’s own teeth',
   nameNote: true, // the main photo carries Step's old “bay” watermark
   body: [

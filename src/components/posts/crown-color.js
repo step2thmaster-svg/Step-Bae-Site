@@ -8,6 +8,7 @@ export default {
   excerpt:
     'A crown that doesn’t quite match can be frustrating. There are several possible reasons, and your dentist is the best person to tell you which one applies to yours.',
   image: '/images/insights/color-matched-centrals.jpg',
+  patientThumb: '/images/insights/shade-chairside.jpg', // friendlier thumbnail where patients browse Insights
   imageAlt: 'Two crowns on the upper front teeth, blending in with the natural teeth beside them',
   nameNote: true, // photos carry Step's old “bay” watermark
   body: [
