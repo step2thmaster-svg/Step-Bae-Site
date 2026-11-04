@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Header from './components/Header.jsx'
 import Button from './components/Button.jsx'
 import Footer from './components/Footer.jsx'
@@ -7,14 +7,113 @@ import { topics, insights, formatDate } from './components/insights.js'
 
 const topicLabel = (id) => topics.find((t) => t.id === id)?.label
 
-// the filters above the list, which double as its color key: who an article is for, or the journal articles
-const filters = [
-  { id: 'all', label: 'All', test: () => true },
-  { id: 'dentists', label: 'For Dentists', test: (p) => p.audience !== 'patients' },
+// the article categories: each is a side-scrolling row while browsing, and a filter above the list (which doubles as
+// its color key). Journal articles get their own row, so the dentists' row holds the blog posts.
+const categories = [
+  { id: 'dentists', label: 'For Dentists', test: (p) => p.audience !== 'patients' && !p.source },
   { id: 'patients', label: 'For Patients', test: (p) => p.audience !== 'dentists' },
   { id: 'journal', label: 'Published in Journals', test: (p) => p.source },
 ]
+const filters = [{ id: 'all', label: 'All', test: () => true }, ...categories]
 const filterDot = { dentists: 'bg-gold', patients: 'bg-teal', journal: 'bg-ink' }
+
+// one article as a compact card, the band across the top showing who it's for
+function ArticleCard({ p }) {
+  const Card = p.href ? 'a' : 'article'
+  return (
+    <Card
+      {...(p.href ? { href: p.href } : {})}
+      {...(p.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      title={p.excerpt}
+      className={`group relative flex h-full flex-col overflow-hidden rounded-[3px] border border-ink/15 bg-white/60 transition-colors ${p.href ? 'hover:border-ink/40' : ''}`}
+    >
+      <span className={`absolute inset-x-0 top-0 z-10 h-1 ${audienceColor[p.audience]}`} />
+      {/* a journal article's photo is shown whole, on black; an article without one shows its topic */}
+      <div className="aspect-[16/10] overflow-hidden bg-ink">
+        {p.image ? (
+          <img
+            src={p.image}
+            alt=""
+            loading="lazy"
+            style={{ objectPosition: p.imagePosition }}
+            className={`h-full w-full transition-transform duration-500 ${p.source ? 'object-contain' : 'object-cover group-hover:scale-105'}`}
+          />
+        ) : (
+          <span className="flex h-full items-center justify-center px-4 text-center font-display text-[18px] italic text-gold/80">
+            {p.topic ? topicLabel(p.topic) : 'Published Article'}
+          </span>
+        )}
+      </div>
+      <div className="flex flex-1 flex-col px-3.5 pb-3.5 pt-3 md:px-4">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+          <AudienceTag audience={p.audience} />
+          <p className="hidden text-[10px] font-semibold tracking-[0.18em] text-gold-dark sm:block">
+            {(p.topic ? topicLabel(p.topic) : p.source ? 'Published Article' : 'Article').toUpperCase()}
+          </p>
+        </div>
+        <h3 className="mt-2 line-clamp-3 font-display text-[16px] font-medium leading-snug md:text-[18px]">{p.title}</h3>
+        <p className="mt-auto pt-2 text-[11.5px] leading-snug text-ink/60">
+          {p.source && <>{p.source} · </>}
+          {formatDate(p.date)}
+          {p.external && <span className="text-gold-dark"> · Read online ↗</span>}
+          {!p.href && p.readIn && (
+            <span className="italic text-gold-dark"> · {/members/.test(p.readIn) ? 'Members only' : p.readIn.replace(`${p.source}, `, '')}</span>
+          )}
+        </p>
+      </div>
+    </Card>
+  )
+}
+
+// a category's articles in one side-scrolling row (`total` counts the featured article too, matching the filter): swipe on phones, arrows on larger screens (as in Reviews)
+function ArticleRow({ category, items, total }) {
+  const row = useRef(null)
+  const [ends, setEnds] = useState({ start: true, end: true })
+  const measure = () => {
+    const el = row.current
+    if (!el) return
+    setEnds({ start: el.scrollLeft < 4, end: el.scrollLeft + el.clientWidth > el.scrollWidth - 4 })
+  }
+  useEffect(() => {
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
+  }, [items.length])
+  // move the row by about one screen of cards
+  const step = (dir) => {
+    const el = row.current
+    el.scrollBy({ left: dir * Math.max(el.firstElementChild.offsetWidth + 12, el.clientWidth - 60), behavior: 'smooth' })
+  }
+  const arrow = 'flex h-9 w-9 items-center justify-center rounded-full border border-gold-dark/40 text-gold-dark transition hover:bg-gold-dark hover:text-white disabled:pointer-events-none disabled:opacity-30'
+  return (
+    <div id={`row-${category.id}`} className="mt-9 scroll-mt-24 first:mt-6">
+      <div className="flex items-center gap-4">
+        <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${filterDot[category.id]}`} />
+        <h3 className="whitespace-nowrap font-display text-[22px] font-medium leading-none md:text-[26px]">{category.label}</h3>
+        <span className="text-[13px] text-ink/45">{total}</span>
+        <span className="hidden h-px flex-1 bg-gold-dark/30 sm:block" />
+        {!(ends.start && ends.end) && (
+          <div className="ml-auto hidden gap-2 sm:flex">
+            <button type="button" aria-label={`Previous ${category.label} articles`} onClick={() => step(-1)} disabled={ends.start} className={arrow}>←</button>
+            <button type="button" aria-label={`More ${category.label} articles`} onClick={() => step(1)} disabled={ends.end} className={arrow}>→</button>
+          </div>
+        )}
+      </div>
+      <div
+        ref={row}
+        onScroll={measure}
+        className="-mx-6 mt-4 flex snap-x snap-mandatory scroll-px-6 gap-3 overflow-x-auto px-6 pb-2 sm:scroll-px-0 [scrollbar-width:none] sm:mx-0 sm:px-0 md:gap-4 [&::-webkit-scrollbar]:hidden"
+      >
+        {items.map((p) => (
+          <div key={`${p.date}${p.title}`} className="w-[70%] shrink-0 snap-start sm:w-[calc((100%-12px)/2)] md:w-[calc((100%-32px)/3)] lg:w-[calc((100%-48px)/4)]">
+            <ArticleCard p={p} />
+          </div>
+        ))}
+      </div>
+      {items.length > 1 && <p className="mt-1 text-[12px] text-ink/45 sm:hidden">Swipe for more →</p>}
+    </div>
+  )
+}
 
 export default function InsightsPage() {
   const [filter, setFilter] = useState('all')
@@ -141,57 +240,20 @@ export default function InsightsPage() {
           )}
 
           {insights.length > 0 ? (
-            // every article as an even, compact card, so the whole library fits in a few rows
-            <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
-              {shown.map((p) => {
-                const Card = p.href ? 'a' : 'article'
-                return (
-                  <Card
-                    key={`${p.date}${p.title}`}
-                    {...(p.href ? { href: p.href } : {})}
-                    {...(p.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    title={p.excerpt}
-                    // the band across the top shows who the article is for
-                    className={`group relative flex flex-col overflow-hidden rounded-[3px] border border-ink/15 bg-white/60 transition-colors ${p.href ? 'hover:border-ink/40' : ''}`}
-                  >
-                    <span className={`absolute inset-x-0 top-0 z-10 h-1 ${audienceColor[p.audience]}`} />
-                    {/* a journal article's photo is shown whole, on black; an article without one shows its topic */}
-                    <div className="aspect-[16/10] overflow-hidden bg-ink">
-                      {p.image ? (
-                        <img
-                          src={p.image}
-                          alt=""
-                          loading="lazy"
-                          style={{ objectPosition: p.imagePosition }}
-                          className={`h-full w-full transition-transform duration-500 ${p.source ? 'object-contain' : 'object-cover group-hover:scale-105'}`}
-                        />
-                      ) : (
-                        <span className="flex h-full items-center justify-center px-4 text-center font-display text-[18px] italic text-gold/80">
-                          {p.topic ? topicLabel(p.topic) : 'Published Article'}
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex flex-1 flex-col px-3.5 pb-3.5 pt-3 md:px-4">
-                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                        <AudienceTag audience={p.audience} />
-                        <p className="hidden text-[10px] font-semibold tracking-[0.18em] text-gold-dark sm:block">
-                          {(p.topic ? topicLabel(p.topic) : p.source ? 'Published Article' : 'Article').toUpperCase()}
-                        </p>
-                      </div>
-                      <h3 className="mt-2 line-clamp-3 font-display text-[16px] font-medium leading-snug md:text-[18px]">{p.title}</h3>
-                      <p className="mt-auto pt-2 text-[11.5px] leading-snug text-ink/60">
-                        {p.source && <>{p.source} · </>}
-                        {formatDate(p.date)}
-                        {p.external && <span className="text-gold-dark"> · Read online ↗</span>}
-                        {!p.href && p.readIn && (
-                          <span className="italic text-gold-dark"> · {/members/.test(p.readIn) ? 'Members only' : p.readIn.replace(`${p.source}, `, '')}</span>
-                        )}
-                      </p>
-                    </div>
-                  </Card>
-                )
-              })}
-            </div>
+            browsing ? (
+              // browsing: each category in its own side-scrolling row
+              categories.map((c) => {
+                const items = shown.filter(c.test)
+                return items.length ? <ArticleRow key={c.id} category={c} items={items} total={insights.filter(c.test).length} /> : null
+              })
+            ) : (
+              // filtered or searched: every match as an even grid
+              <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-4">
+                {shown.map((p) => (
+                  <ArticleCard key={`${p.date}${p.title}`} p={p} />
+                ))}
+              </div>
+            )
           ) : (
             <div className="mt-8 rounded-[3px] border border-dashed border-gold-dark/40 bg-white/40 px-6 py-12 text-center">
               <p className="font-display text-[26px] italic leading-tight">The first articles are on the way.</p>
