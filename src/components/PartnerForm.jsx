@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { ArrowRight } from './Icons.jsx'
 import { EMAIL, sendForm, prefill, useUnfinished } from './sendForm.js'
 
-const portalOptions = ['iTero', '3Shape TRIOS', 'Medit', 'Primescan / CEREC', 'Other scanner', 'No scanner (physical impressions)']
+const portalOptions = ['iTero', '3Shape TRIOS', 'Medit', 'Primescan / CEREC', 'Other scanner']
 // also asked by the Mini Steps chat when a dentist requests the price list
 export const unitOptions = ['1–10', '11–25', '26–50', '51–100', '101–200', '201–300', '301–400', '401–500', '500+']
 

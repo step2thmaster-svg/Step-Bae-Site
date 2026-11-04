@@ -2,7 +2,7 @@ import Button from './Button.jsx'
 import { articles } from './cv.js'
 
 // the Dentist Partnership page's sections, between the opening and the scanner guide. The promises and FAQ answers
-// are STEPBAE's stated policies (10 business days, 5-year warranty, prepaid labels available but not free, price list on
+// are STEPBAE's stated policies (10 business days, 5-year warranty, digital scans only (no physical impressions), prepaid shipping labels available when needed but not free, price list on
 // request); the
 // Mini Steps chat answers from the same `partnerFaqs`
 
@@ -39,7 +39,7 @@ const reasons = [
   ['Matched to your patient', 'Shade, texture and form are matched to the patient’s own teeth and face, not just to a shade tab.'],
   ['Planned before it’s made', 'Complex and esthetic cases are planned with you first, so the result is predictable and remakes are rare.'],
   ['Always learning, always sharing', `We keep learning and pass it on: more than 70 lectures and hands-on courses for fellow technicians and dentists, and ${articles.length} articles in dental journals.`],
-  ['Fits your workflow', 'iTero, 3Shape TRIOS, Medit and Primescan, or physical impressions with prepaid shipping labels.'],
+  ['Fits your workflow', 'We accept scans from every intraoral scanner, including iTero, 3Shape TRIOS, Medit and Primescan.'],
 ]
 
 export function Reasons() {
@@ -144,7 +144,7 @@ export function Restorations() {
 
 // how a case moves from your scanner to your patient
 const flow = [
-  ['Connect once', 'Add STEPBAE in your scanner’s portal, or request prepaid labels for physical impressions.'],
+  ['Connect once', 'Add STEPBAE in your scanner’s portal. It takes about 5 minutes, and you only do it once.'],
   ['Send the case', 'Scans, prescription, shade and photos. If anything is unclear, we call before we start.'],
   ['Handcrafted', 'Your case is designed, built, characterized and photographed for quality control in house.'],
   ['Delivered', 'Standard turnaround is 10 business days, and every restoration is backed by a 5-year warranty.'],
@@ -237,8 +237,8 @@ export const partnerFaqs = [
   },
   {
     id: 'shipping',
-    q: 'How do I send physical impressions or models?',
-    a: 'We provide prepaid shipping labels. Fill out the partnership form, mention that you’ll send physical impressions or models, and we’ll send the labels with our Rx form.',
+    q: 'Do you accept physical impressions?',
+    a: 'No. STEPBAE works from digital scans only, and we accept scans from every intraoral scanner. When a case needs something shipped to us, we can provide a prepaid shipping label.',
     words: /ship|label|fedex|ups|mail|courier|pick ?up|physical|impression|model/,
   },
   {

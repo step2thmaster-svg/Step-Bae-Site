@@ -50,7 +50,7 @@ const portalSteps = Object.fromEntries(
 // patients can't send us a case themselves, so the Mini Steps help them ask their dentist to
 const patientAsk = [
   'That you’d like your crowns or veneers made by STEPBAE Dental Lab',
-  'STEPBAE works with iTero, 3Shape TRIOS, Medit and Primescan, or physical impressions, so your dentist can send the case the way they usually do',
+  'STEPBAE works with iTero, 3Shape TRIOS, Medit, Primescan and other intraoral scanners, so your dentist can send the case the way they usually do',
   'Connecting takes just a few minutes, and STEPBAE will talk with them about your case',
 ]
 // ready-to-send emails the patient fills in with their dentist's address
@@ -60,7 +60,7 @@ const dentistNote = mailNote('Could my case go to STEPBAE?', [
   '',
   'For my upcoming crowns or veneers, I’d love for them to be made by STEPBAE Dental Lab.',
   '',
-  'STEPBAE works with iTero, 3Shape TRIOS, Medit and Primescan, as well as physical impressions, and connecting only takes a few minutes: https://stepbae.com/partnership.html',
+  'STEPBAE works with iTero, 3Shape TRIOS, Medit, Primescan and other intraoral scanners, and connecting only takes a few minutes: https://stepbae.com/partnership.html',
   '',
   'You can see STEPBAE’s work at https://stepbae.com/craftsmanship.html',
   '',
@@ -71,7 +71,7 @@ const workNote = mailNote('Have you seen STEPBAE’s work?', [
   '',
   'I came across STEPBAE Dental Lab and love their work. Here’s their gallery: https://stepbae.com/craftsmanship.html',
   '',
-  'Would you consider sending my crowns or veneers to them? STEPBAE works with iTero, 3Shape TRIOS, Medit and Primescan, as well as physical impressions: https://stepbae.com/partnership.html',
+  'Would you consider sending my crowns or veneers to them? STEPBAE works with iTero, 3Shape TRIOS, Medit, Primescan and other intraoral scanners: https://stepbae.com/partnership.html',
   '',
   'Thank you!',
 ])
@@ -82,7 +82,7 @@ const strengths = [
   'You talk directly with the technician making your case',
   'Shade matched to your patient’s natural teeth, not just a shade tab',
   `Always learning and sharing: more than 70 lectures and hands-on courses for fellow technicians and dentists, and ${articles.length} articles in dental journals`,
-  'Works with iTero, 3Shape TRIOS, Medit and Primescan, or physical impressions',
+  'Works with iTero, 3Shape TRIOS, Medit, Primescan and other intraoral scanners',
 ]
 
 // a light word, as a lead starts, that answers go to STEPBAE (unfinished ones too)
@@ -241,7 +241,7 @@ const steps = {
     say: ['Welcome! How will you be sending the case?'],
     options: [
       { label: 'Digital scan', next: 'scanner' },
-      { label: 'Physical impression or models', next: 'case-physical' },
+      { label: 'I don’t have a scanner', next: 'case-physical' },
     ],
   },
   scanner: {
@@ -273,15 +273,15 @@ const steps = {
       { label: 'Get our price list', next: 'lead-price' },
     ],
   },
+  // STEPBAE works from digital scans only; prepaid shipping labels are still available when a case needs something shipped
   'case-physical': {
-    portal: 'No scanner (physical impressions)',
     say: [
-      'Of course. STEPBAE can provide prepaid shipping labels. Fill out the partnership form and mention that you’ll send physical impressions or models, and we’ll send the labels with our Rx form.',
+      'STEPBAE works from digital scans only, so we don’t accept physical impressions. We accept scans from every intraoral scanner, and if your office is getting one, we’ll gladly help you connect it.',
+      'When a case needs something shipped to us, we can provide a prepaid shipping label.',
     ],
     options: [
-      { label: 'Go to the partnership form', href: '/partnership.html#partner-form' },
-      { label: 'What should I include?', next: 'checklist' },
-      { label: 'Get our price list', next: 'lead-price' },
+      { label: 'See how to connect a scanner', next: 'scanner' },
+      { label: 'Talk to STEPBAE', next: 'lead-talk' },
     ],
   },
   'case-returning': {
